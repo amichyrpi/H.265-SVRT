@@ -1,0 +1,6 @@
+#!/bin/sh
+case "$1" in
+  start) SDL_VIDEODRIVER=kmsdrm /usr/bin/svrt-receiver 9944 >/var/log/svrt.log 2>&1 & echo $! >/var/run/svrt.pid ;;
+  stop) test ! -f /var/run/svrt.pid || kill "$(cat /var/run/svrt.pid)"; rm -f /var/run/svrt.pid ;;
+  restart) "$0" stop; "$0" start ;;
+esac

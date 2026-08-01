@@ -1,0 +1,15 @@
+{
+  "driver_svrt": {
+    "enable": true,
+    "serial_number": "SVRT-PI4-001",
+    "model_number": "SVRT Wi-Fi HMD",
+    "render_width": 1440,
+    "render_height": 1600,
+    "display_frequency": 60,
+    "receiver_host": "ROOT.local",
+    "receiver_port": 9944,
+    "bitrate_mbps": 35,
+    "ffmpeg_path": "ffmpeg.exe",
+    "encoder": "hevc_nvenc"
+  }
+}

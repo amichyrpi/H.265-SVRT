@@ -1,0 +1,4 @@
+find_package(PkgConfig QUIET)
+pkg_check_modules(SDL2KMSDRM QUIET sdl2)
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(SDL2KMSDRM REQUIRED_VARS SDL2KMSDRM_FOUND)

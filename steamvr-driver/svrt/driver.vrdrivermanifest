@@ -1,0 +1,7 @@
+{
+  "alwaysActivate": true,
+  "name": "svrt",
+  "directory": "",
+  "resourceOnly": false,
+  "hmd_presence": ["*.*"]
+}

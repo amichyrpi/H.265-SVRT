@@ -1,0 +1,42 @@
+name: Build
+on:
+  push:
+  pull_request:
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with: {submodules: recursive}
+      - run: sudo apt-get update && sudo apt-get install -y cmake ninja-build libsdl2-dev libavformat-dev libavcodec-dev libavutil-dev libdrm-dev
+      - run: cmake -S . -B build -G Ninja -DSVRT_BUILD_DRIVER=OFF -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build
+      - run: ctest --test-dir build --output-on-failure
+      - uses: actions/upload-artifact@v4
+        with: {name: svrt-linux, path: build/pi-receiver/svrt-receiver}
+  windows-driver:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+        with: {submodules: recursive}
+      - run: cmake -S . -B build -A x64 -DSVRT_BUILD_PI_LIBRARY=OFF -DSVRT_BUILD_RECEIVER=OFF
+      - run: cmake --build build --config Release
+      - uses: actions/upload-artifact@v4
+        with: {name: svrt-steamvr-driver, path: build/svrt}
+  raspberry-pi-4-image:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with: {submodules: recursive}
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/raspberrypi4/Dockerfile
+          tags: svrt-rpi4
+          load: true
+          cache-from: type=gha,scope=svrt-rpi4
+          cache-to: type=gha,scope=svrt-rpi4,mode=max
+      - run: mkdir -p dist && docker run --rm -v "${{ github.workspace }}:/svrt" -v "${{ github.workspace }}/dist:/install" svrt-rpi4
+      - uses: actions/upload-artifact@v4
+        with: {name: svrt-raspberrypi4-image, path: dist/svrt-raspberrypi4.img.gz}

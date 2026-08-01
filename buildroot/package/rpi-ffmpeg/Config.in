@@ -1,0 +1,7 @@
+config BR2_PACKAGE_RPI_FFMPEG
+    bool "Raspberry Pi FFmpeg with V4L2 request HEVC"
+    select BR2_PACKAGE_LIBDRM
+    select BR2_PACKAGE_ZLIB
+    select BR2_PACKAGE_EUDEV
+    help
+      Raspberry Pi downstream FFmpeg containing the stateless V4L2 request decoder.
