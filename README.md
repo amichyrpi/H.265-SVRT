@@ -1,5 +1,9 @@
 # H.265 SVRT
 
+This is a **work in progress**. SteamVR driver and Raspberry Pi 4 receiver. This project is in development and is not stable, consider it as **alpha**.
+
+
+
 H.265 SVRT is a SteamVR direct-mode virtual headset and a Raspberry Pi 4 receiver. SteamVR renders both eyes into D3D11 swap textures owned by the driver. A non-blocking worker sends the stereo frame through FFmpeg's low-latency hardware HEVC encoder as MPEG-TS over TCP. The Pi decodes with its HEVC block and presents DRM PRIME buffers directly on a KMS overlay plane.
 
 ## Layout
@@ -72,7 +76,3 @@ The current sender uses a three-slot D3D11 staging ring, so compositor submissio
 2. Start SteamVR on Windows.
 3. SteamVR loads `driver_svrt.dll`, creates direct-mode textures, and launches FFmpeg when the first frame arrives.
 4. Stop SteamVR before stopping the receiver.
-
-## Licensing
-
-The OpenVR SDK retains Valve's license. The DRM presenter is derived from Vanilla and is marked GPL-2.0-only; binaries incorporating `libsvrt` must follow that license. The remaining original project code is Apache-2.0.

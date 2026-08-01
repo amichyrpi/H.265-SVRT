@@ -13,7 +13,7 @@
 
 class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
  public:
-  SvrtDirectMode(); ~SvrtDirectMode() override;
+  SvrtDirectMode(); ~SvrtDirectMode();
   bool Start(const std::string &host, uint16_t port, unsigned fps,
              unsigned bitrate_mbps, const std::string &ffmpeg,
              const std::string &encoder);
