@@ -1,5 +1,5 @@
 SVRT_VERSION = local
-SVRT_SITE = $(call qstrip,$(BR2_PACKAGE_SVRT_LOCAL_PATH))
+SVRT_SITE = $(if $(call qstrip,$(BR2_PACKAGE_SVRT_LOCAL_PATH)),$(call qstrip,$(BR2_PACKAGE_SVRT_LOCAL_PATH)),/svrt)
 SVRT_SITE_METHOD = local
 SVRT_LICENSE = GPL-2.0
 SVRT_LICENSE_FILES = vanilla-master/LICENSE
