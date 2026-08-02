@@ -2,77 +2,107 @@
 
 This is a **work in progress**. SteamVR driver and Raspberry Pi 4 receiver. This project is in development and is not stable, consider it as **alpha**.
 
+## Usage/Installing
 
+Builds and driver are available on the [Releases](https://github.com/amichyrpi/H.265-SVRT/releases) page.
 
-H.265 SVRT is a SteamVR direct-mode virtual headset and a Raspberry Pi 4 receiver. SteamVR renders both eyes into D3D11 swap textures owned by the driver. A non-blocking worker sends the stereo frame through FFmpeg's low-latency hardware HEVC encoder as MPEG-TS over TCP. The Pi decodes with its HEVC block and presents DRM PRIME buffers directly on a KMS overlay plane.
+### Compiling on Raspberry Pi
 
-## Layout
+Before compilling H.265 SVRT you need to be running a 64-bit Raspberry Pi OS image with KMS enabled and FFmpeg. If you don't have a 64-bit Raspberry Pi OS image, you can install it by using [Raspberry Pi Imager](https://www.raspberrypi.com/software/). You can enable KMS and install FFmpeg using the following commands:
 
-- `steamvr-driver/`: Windows OpenVR driver and D3D11 direct-mode component.
-- `lib/`: reusable C library for HEVC ingest, hardware decode, SDL KMSDRM lifecycle and zero-copy DRM scanout.
-- `pi-receiver/`: small terminal/fullscreen receiver built on `libsvrt`.
-- `pipe/`: transport description.
-- `third_party/openvr/`: pinned OpenVR SDK.
-- `vanilla-master/`: original reference tree. The adapted KMS/DRM lifecycle came from `gui/ui/ui_sdl_drm.c`.
+- **KMS**
+  ```sh
+  config=/boot/firmware/config.txt
+  test -f "$config" || config=/boot/config.txt
+  grep -qxF 'dtoverlay=vc4-kms-v3d' "$config" || \
+    echo 'dtoverlay=vc4-kms-v3d' | sudo tee -a "$config"
+  sudo reboot
+  ```
 
-## Raspberry Pi 4
+- **FFmpeg**
+  ```sh
+  sudo apt update
+  sudo apt install -y ffmpeg
+  ffmpeg -hide_banner -decoders 2>&1 | grep hevc_v4l2request
+  ```
 
-Use a 64-bit Raspberry Pi OS image with KMS enabled (`dtoverlay=vc4-kms-v3d`) and Raspberry Pi's downstream FFmpeg built with `--enable-v4l2-request --enable-sand --enable-libdrm`. The receiver deliberately fails when the HEVC decoder does not return DRM PRIME frames; silently falling back to software would not meet the real-time requirement.
+H.265 SVRT requires the following libraries to be installed:
+
+- **Before dependencies installation**
+  ```sh
+  sudo apt update
+  sudo apt full-upgrade -y
+  ```
+
+- **Dependencies installation**
+  ```sh
+  sudo apt install -y build-essential cmake git ninja-build pkg-config \
+    libsdl2-dev libavformat-dev libavcodec-dev libavutil-dev libdrm-dev
+  ```
+
+The build process is otherwise normal for a CMake program:
 
 ```sh
-sudo apt update
-sudo apt install -y build-essential cmake pkg-config libsdl2-dev \
-  libavformat-dev libavcodec-dev libavutil-dev libdrm-dev
-cmake -S . -B build -DSVRT_BUILD_DRIVER=OFF -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j4
-sudo cmake --install build
-sudo usermod -aG video,render "$USER"
+git clone https://github.com/amichyrpi/H.265-SVRT.git
+cd H.265-SVRT
+mkdir build && cd build
+cmake .. -G Ninja -DSVRT_BUILD_DRIVER=OFF -DCMAKE_BUILD_TYPE=Release
+cmake --build . --parallel
+ctest --output-on-failure
 ```
 
-Log out/in after changing groups, switch away from a graphical desktop to a VT, then run:
+Optionally, to install the program:
 
 ```sh
-./build/pi-receiver/svrt-receiver 9944
+sudo cmake --install .
 ```
 
-If the distribution SDL package reports `kmsdrm not available`, configure with `-DSVRT_BUILD_VENDORED_SDL=ON`; this builds the same SDL KMSDRM backend lifecycle used by Vanilla.
+### SteamVR driver setup
 
-Validate the decoder before SteamVR:
+You can easily install the driver by using the SVRT Utility App on both Windows and Linux, you can find the app in the [Releases](https://github.com/amichyrpi/H.265-SVRT/releases) page.
 
-```sh
-ffmpeg -hide_banner -buildconf | grep -E 'v4l2-request|sand|libdrm'
-modetest -M vc4
-```
+You can also build and install the driver manually by using the following commands:
 
-Pi 4's HEVC block is intended for up to 4K60, but actual 4K60 operation still depends on the firmware/kernel FFmpeg request implementation, compatible stream level/profile, HDMI mode, cooling, and Wi-Fi throughput. Runtime testing on the target is mandatory.
+- **Windows**
+  ```powershell
+  git clone https://github.com/amichyrpi/H.265-SVRT.git
+  Set-Location H.265-SVRT
+  cmake -S . -B build -A x64 `
+    -DSVRT_BUILD_PI_LIBRARY=OFF `
+    -DSVRT_BUILD_RECEIVER=OFF `
+    -DSVRT_BUILD_TESTS=OFF
+  cmake --build build --config Release --parallel
+  $vrpathreg = Join-Path ${env:ProgramFiles(x86)} `
+    'Steam\steamapps\common\SteamVR\bin\win64\vrpathreg.exe'
+  & $vrpathreg adddriver (Resolve-Path 'build\svrt')
+  ```
 
-Run the complete Pi test with `./scripts/test-pi.sh`. KMS scanout requires a connected HDMI display (or a deliberately configured forced HDMI mode); without an active connector SDL correctly refuses to create a KMSDRM window. Headless mode is only for decoder/transport validation.
+- **Linux**
 
-## Windows driver
+  The SteamVR driver currently requires Windows and D3D11. A native Linux driver is not available yet.
 
-Requirements: Visual Studio 2022 C++ workload, CMake, SteamVR, and an FFmpeg build whose executable is either on `PATH` or configured in `default.vrsettings`. The default encoder is NVIDIA `hevc_nvenc`; use `hevc_amf` or `hevc_qsv` when appropriate and adjust encoder options in `direct_mode.cpp` if that encoder does not accept NVIDIA's preset/tune names.
+### Starting order
 
-```powershell
-cmake -S . -B build -A x64 -DSVRT_BUILD_PI_LIBRARY=OFF -DSVRT_BUILD_RECEIVER=OFF
-cmake --build build --config Release
-& "$env:ProgramFiles(x86)\Steam\steamapps\common\SteamVR\bin\win64\vrpathreg.exe" `
-  adddriver "$PWD\build\svrt"
-```
+The Raspberry Pi receiver is started at Raspberry Pi boot, and the SteamVR driver is started at SteamVR boot. The driver automatically detects when the Raspberry Pi receiver becomes available.
 
-Configure `steamvr-driver/svrt/resources/settings/default.vrsettings` before building:
+## Testing stream latency
 
-- `receiver_host`: Pi hostname or IPv4 address.
-- `receiver_port`: MPEG-TS TCP port.
-- `render_width` and `render_height`: resolution per eye.
-- `display_frequency`: requested frame rate.
-- `bitrate_mbps`: HEVC target bitrate.
-- `ffmpeg_path` and `encoder`: sender executable and hardware encoder.
+Stop SteamVR before running the latency tester so it can use the Raspberry Pi video connection.
 
-The current sender uses a three-slot D3D11 staging ring, so compositor submission is bounded and frames are dropped if encoding falls behind. It is functional across vendors through FFmpeg, but it performs a GPU-to-CPU readback. A vendor-specific D3D11/NVENC or D3D11/Media Foundation surface path is required to guarantee high-resolution 60 Hz encoding without that readback.
+- **Windows**
+  ```powershell
+  py -m pip install av
+  py scripts\stream-latency-test.py ROOT.local --frames 30
+  ```
 
-## Stream start order
+- **Linux**
+  ```sh
+  python3 -m pip install --user av
+  python3 scripts/stream-latency-test.py ROOT.local --frames 30
+  ```
 
-1. Start `svrt-receiver` on the Pi from a local terminal.
-2. Start SteamVR on Windows.
-3. SteamVR loads `driver_svrt.dll`, creates direct-mode textures, and launches FFmpeg when the first frame arrives.
-4. Stop SteamVR before stopping the receiver.
+## License
+
+This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+
+This project uses parts of the [Vanilla](https://github.com/vanilla-wiiu/vanilla) code, to handle the DRM scanout and the KMS overlay plane. The Vanilla code is licensed under the GPL-2.0 License. See the [LICENSE](https://github.com/vanilla-wiiu/vanilla/blob/master/LICENSE) file for details.

@@ -76,7 +76,10 @@ int main(int argc, char **argv) {
                            .require_hardware = 1,
                            .require_zero_copy = 1,
                            .fullscreen = 1,
-                           .headless = headless};
+                           .headless = headless,
+                           .packet_event = svrt_status_server_packet_event,
+                           .packet_event_opaque = &status};
+        svrt_status_server_reset_trace(&status);
         if (svrt_open(&running, &cfg)) {
             svrt_status_server_update(&status, SVRT_RECEIVER_ERROR, NULL);
             exit_code = 1;

@@ -9,6 +9,7 @@
 #include <string.h>
 #include <sys/select.h>
 #include <sys/socket.h>
+#include <time.h>
 #include <unistd.h>
 
 static int send_all(int fd, const char *data, size_t size) {
@@ -21,14 +22,74 @@ static int send_all(int fd, const char *data, size_t size) {
     return 0;
 }
 
+static int send_ack(int fd, unsigned long long nonce, const char *stage,
+                    uint64_t pts_us, uint64_t receiver_time_us) {
+    char response[192];
+    int used = snprintf(response, sizeof(response),
+                        "SVRT/1 ACK %llu %s %llu %llu\n", nonce, stage,
+                        (unsigned long long)pts_us,
+                        (unsigned long long)receiver_time_us);
+    return used > 0 && (size_t)used < sizeof(response)
+               ? send_all(fd, response, (size_t)used)
+               : -1;
+}
+
+static void answer_trace(svrt_status_server *server, int fd,
+                         unsigned long long nonce, uint64_t target_pts_us) {
+    struct timeval timeout = {.tv_sec = 10};
+    setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
+    int received_sent = 0;
+    for (int waited_ms = 0; waited_ms < 10000; ++waited_ms) {
+        uint64_t received_pts = atomic_load(&server->received_pts_us);
+        uint64_t processed_pts = atomic_load(&server->processed_pts_us);
+        if (!received_sent && received_pts == target_pts_us) {
+            if (send_ack(fd, nonce, "RECEIVED", received_pts,
+                         atomic_load(&server->received_time_us)))
+                return;
+            received_sent = 1;
+        }
+        if (processed_pts == target_pts_us) {
+            if (!received_sent &&
+                send_ack(fd, nonce, "RECEIVED", target_pts_us,
+                         atomic_load(&server->received_time_us)))
+                return;
+            send_ack(fd, nonce, "PROCESSED", processed_pts,
+                     atomic_load(&server->processed_time_us));
+            return;
+        }
+        struct timespec delay = {.tv_sec = 0, .tv_nsec = 1000000};
+        nanosleep(&delay, NULL);
+    }
+    send_ack(fd, nonce, "TIMEOUT", target_pts_us, 0);
+}
+
 static void answer_client(svrt_status_server *server, int fd) {
     struct timeval timeout = {.tv_sec = 2};
     setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
     setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
     char request[128] = {0};
-    ssize_t length = recv(fd, request, sizeof(request) - 1, 0);
-    unsigned long long nonce = 0;
-    if (length <= 0 || sscanf(request, "SVRT/1 PING %llu", &nonce) != 1) return;
+    size_t length = 0;
+    int complete = 0;
+    while (length < sizeof(request) - 1) {
+        ssize_t received =
+            recv(fd, request + length, sizeof(request) - 1 - length, 0);
+        if (received <= 0) return;
+        char *newline = memchr(request + length, '\n', (size_t)received);
+        length += (size_t)received;
+        if (newline) {
+            length = (size_t)(newline - request) + 1;
+            request[length] = '\0';
+            complete = 1;
+            break;
+        }
+    }
+    if (!complete) return;
+    unsigned long long nonce = 0, target_pts = 0;
+    if (sscanf(request, "SVRT/1 TRACE %llu %llu", &nonce, &target_pts) == 2) {
+        answer_trace(server, fd, nonce, (uint64_t)target_pts);
+        return;
+    }
+    if (sscanf(request, "SVRT/1 PING %llu", &nonce) != 1) return;
     char response[256];
     int used = snprintf(response, sizeof(response),
                         "SVRT/1 STATUS %llu %d %llu %llu %llu %llu\n",
@@ -97,6 +158,27 @@ void svrt_status_server_update(svrt_status_server *server, int state,
         atomic_store(&server->bytes, stats->bytes_received);
     }
     atomic_store(&server->state, state);
+}
+
+void svrt_status_server_packet_event(void *opaque, svrt_packet_event event,
+                                     uint64_t pts_us, uint64_t receiver_time_us) {
+    svrt_status_server *server = opaque;
+    if (!server || pts_us == UINT64_MAX) return;
+    if (event == SVRT_PACKET_RECEIVED) {
+        atomic_store(&server->received_time_us, receiver_time_us);
+        atomic_store(&server->received_pts_us, pts_us);
+    } else if (event == SVRT_PACKET_PROCESSED) {
+        atomic_store(&server->processed_time_us, receiver_time_us);
+        atomic_store(&server->processed_pts_us, pts_us);
+    }
+}
+
+void svrt_status_server_reset_trace(svrt_status_server *server) {
+    if (!server) return;
+    atomic_store(&server->received_pts_us, UINT64_MAX);
+    atomic_store(&server->received_time_us, 0);
+    atomic_store(&server->processed_pts_us, UINT64_MAX);
+    atomic_store(&server->processed_time_us, 0);
 }
 
 void svrt_status_server_stop(svrt_status_server *server) {

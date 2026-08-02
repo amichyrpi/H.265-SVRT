@@ -68,41 +68,9 @@ jobs:
           path: svrt-steamvr-driver-win64.zip
           if-no-files-found: error
 
-  raspberry-pi-4-image:
-    name: Raspberry Pi 4 image
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: docker/setup-buildx-action@v3
-
-      - name: Build Buildroot container
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: docker/raspberrypi4/Dockerfile
-          tags: svrt-rpi4
-          load: true
-          cache-from: type=gha,scope=svrt-rpi4
-          cache-to: type=gha,scope=svrt-rpi4,mode=max
-
-      - name: Build image
-        run: |
-          mkdir -p dist
-          docker run --rm \
-            -v "${{ github.workspace }}:/svrt" \
-            -v "${{ github.workspace }}/dist:/install" \
-            svrt-rpi4
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: release-raspberrypi4
-          path: dist/svrt-raspberrypi4.img.gz
-          if-no-files-found: error
-
   continuous-release:
     name: Continuous build release
-    needs: [linux, windows-driver, raspberry-pi-4-image]
+    needs: [linux, windows-driver]
     if: github.event_name == 'push' && github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-24.04
     permissions:

@@ -9,6 +9,14 @@ extern "C" {
 
 typedef struct svrt_context svrt_context;
 
+typedef enum svrt_packet_event {
+    SVRT_PACKET_RECEIVED = 1,
+    SVRT_PACKET_PROCESSED = 2,
+} svrt_packet_event;
+
+typedef void (*svrt_packet_event_cb)(void *opaque, svrt_packet_event event,
+                                     uint64_t pts_us, uint64_t receiver_time_us);
+
 typedef struct svrt_config {
     uint16_t port;                 /* TCP port; 9944 when zero */
     const char *bind_address;      /* NULL means all interfaces */
@@ -16,6 +24,8 @@ typedef struct svrt_config {
     int require_zero_copy;         /* reject frames that are not DRM PRIME */
     int fullscreen;                /* create a KMSDRM fullscreen window */
     int headless;                  /* decode/measure without opening a display */
+    svrt_packet_event_cb packet_event; /* optional latency instrumentation */
+    void *packet_event_opaque;
 } svrt_config;
 
 typedef struct svrt_stats {
