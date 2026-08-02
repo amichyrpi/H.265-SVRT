@@ -106,7 +106,27 @@ To run it directly without the systemd service:
 
 ```sh
 sudo systemctl stop svrt-receiver.service
-SDL_VIDEODRIVER=kmsdrm svrt-receiver 9944
+cd ~/H.265-SVRT/build
+sudo env SDL_VIDEODRIVER=kmsdrm ./pi-receiver/svrt-receiver 9944
+```
+
+To run at boot without a connected HDMI display:
+
+```sh
+sudo systemctl edit svrt-receiver.service
+```
+
+Enter the following override, save it, and restart the service:
+
+```ini
+[Service]
+ExecStart=
+ExecStart=/usr/local/bin/svrt-receiver --headless 9944
+```
+
+```sh
+sudo systemctl daemon-reload
+sudo systemctl restart svrt-receiver.service
 ```
 
 ## Testing stream latency
