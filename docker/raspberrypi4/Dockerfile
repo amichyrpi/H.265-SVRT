@@ -48,6 +48,7 @@ RUN make -C /buildroot O=/build BR2_EXTERNAL=/external raspberrypi4_64_defconfig
     /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_MESA3D_OPENGL_EGL && \
     /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_MESA3D_GBM && \
     /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_MESA3D_OPENGL_ES && \
+    /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_SDL2 && \
     /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_SDL2_OPENGLES && \
     /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_SDL2_KMSDRM && \
     /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_RPI_FFMPEG && \
@@ -56,15 +57,22 @@ RUN make -C /buildroot O=/build BR2_EXTERNAL=/external raspberrypi4_64_defconfig
     /buildroot/utils/config --file /build/.config --set-str BR2_PACKAGE_RPI_FIRMWARE_CONFIG_FILE /external/board/raspberrypi4/config.txt && \
     /buildroot/utils/config --file /build/.config --set-str BR2_PACKAGE_RPI_FIRMWARE_CMDLINE_FILE /external/board/raspberrypi4/cmdline.txt && \
     make -C /buildroot O=/build BR2_EXTERNAL=/external olddefconfig && \
-    grep -qx 'BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_V3D=y' /build/.config && \
-    grep -qx 'BR2_PACKAGE_MESA3D_OPENGL_EGL=y' /build/.config && \
-    grep -qx 'BR2_PACKAGE_MESA3D_GBM=y' /build/.config && \
-    grep -qx 'BR2_PACKAGE_MESA3D_OPENGL_ES=y' /build/.config && \
-    grep -qx 'BR2_PACKAGE_SDL2_OPENGLES=y' /build/.config && \
-    grep -qx 'BR2_PACKAGE_SDL2_KMSDRM=y' /build/.config && \
-    grep -qx 'BR2_PACKAGE_EUDEV=y' /build/.config && \
-    grep -qx 'BR2_PACKAGE_ZLIB=y' /build/.config && \
-    grep -qx 'BR2_PACKAGE_RPI_FFMPEG=y' /build/.config && \
-    grep -qx 'BR2_PACKAGE_SVRT=y' /build/.config && \
+    for option in \
+        BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_V3D \
+        BR2_PACKAGE_MESA3D_OPENGL_EGL \
+        BR2_PACKAGE_MESA3D_GBM \
+        BR2_PACKAGE_MESA3D_OPENGL_ES \
+        BR2_PACKAGE_SDL2 \
+        BR2_PACKAGE_SDL2_OPENGLES \
+        BR2_PACKAGE_SDL2_KMSDRM \
+        BR2_PACKAGE_EUDEV \
+        BR2_PACKAGE_ZLIB \
+        BR2_PACKAGE_RPI_FFMPEG \
+        BR2_PACKAGE_SVRT; do \
+        grep -qx "${option}=y" /build/.config || { \
+            echo "ERROR: Buildroot dropped required option ${option}" >&2; \
+            exit 1; \
+        }; \
+    done && \
     make -C /buildroot O=/build BR2_EXTERNAL=/external show-info >/dev/null
 ENTRYPOINT ["/bin/sh", "/svrt/docker/raspberrypi4/build.sh"]
