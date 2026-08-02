@@ -1,10 +1,9 @@
 config BR2_PACKAGE_SVRT
     bool "svrt"
     depends on BR2_USE_MMU
+    depends on BR2_PACKAGE_RPI_FFMPEG
+    depends on BR2_PACKAGE_LIBDRM
     depends on BR2_PACKAGE_SDL2_KMSDRM
-    select BR2_PACKAGE_RPI_FFMPEG
-    select BR2_PACKAGE_LIBDRM
-    select BR2_PACKAGE_SDL2
     help
       SteamVR HEVC hardware decoder and KMSDRM receiver.
 
