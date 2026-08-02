@@ -1,6 +1,6 @@
 #ifndef SVRT_DRM_PRESENTER_H
 #define SVRT_DRM_PRESENTER_H
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <libavutil/frame.h>
 typedef struct svrt_drm svrt_drm;
 int svrt_drm_open(svrt_drm **out, SDL_Window *window, char *error, size_t error_size);

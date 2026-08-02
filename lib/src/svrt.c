@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 struct svrt_context {
     svrt_config cfg; atomic_int stopping;

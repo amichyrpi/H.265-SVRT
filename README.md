@@ -39,7 +39,8 @@ H.265 SVRT requires the following libraries to be installed:
 - **Dependencies installation**
   ```sh
   sudo apt install -y build-essential cmake git ninja-build pkg-config \
-    libsdl2-dev libavformat-dev libavcodec-dev libavutil-dev libdrm-dev
+    libsdl2-dev libavformat-dev libavcodec-dev libavutil-dev libdrm-dev \
+    libegl1-mesa-dev libgles2-mesa-dev libgbm-dev libudev-dev
   ```
 
 The build process is otherwise normal for a CMake program:
@@ -48,7 +49,9 @@ The build process is otherwise normal for a CMake program:
 git clone https://github.com/amichyrpi/H.265-SVRT.git
 cd H.265-SVRT
 mkdir build && cd build
-cmake .. -G Ninja -DSVRT_BUILD_DRIVER=OFF -DCMAKE_BUILD_TYPE=Release
+cmake .. -G Ninja -DSVRT_BUILD_DRIVER=OFF \
+  -DSVRT_BUILD_VENDORED_SDL=ON \
+  -DCMAKE_BUILD_TYPE=Release
 cmake --build . --parallel
 ctest --output-on-failure
 ```
@@ -57,13 +60,13 @@ Optionally, to install the program:
 
 ```sh
 sudo useradd --system --no-create-home --shell /usr/sbin/nologin svrt-receiver
-sudo usermod -aG video svrt-receiver
+sudo usermod -aG video,render svrt-receiver
 sudo cmake --install .
 sudo systemctl daemon-reload
 sudo systemctl enable --now svrt-receiver.service
 ```
 
-The service runs as the `svrt-receiver` user with membership in the `video` group, which grants access to `/dev/dri/card0` for `SDL_VIDEODRIVER=kmsdrm` without root.
+The service runs as the `svrt-receiver` user with membership in the `video` and `render` groups, which grants access to the DRM devices for `SDL_VIDEODRIVER=kmsdrm` without root.
 
 ### SteamVR driver setup
 
