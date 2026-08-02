@@ -38,11 +38,26 @@ RUN make -C /buildroot O=/build BR2_EXTERNAL=/external raspberrypi4_64_defconfig
     /buildroot/utils/config --file /build/.config -d BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_DEVTMPFS && \
     /buildroot/utils/config --file /build/.config -d BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_MDEV && \
     /buildroot/utils/config --file /build/.config -e BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_EUDEV && \
+    /buildroot/utils/config --file /build/.config -e BR2_INSTALL_LIBSTDCPP && \
     /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_UTIL_LINUX && \
     /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_UTIL_LINUX_LIBS && \
+    /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_MESA3D && \
+    /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_V3D && \
+    /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_MESA3D_OPENGL_EGL && \
+    /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_MESA3D_GBM && \
+    /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_MESA3D_OPENGL_ES && \
+    /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_SDL2_OPENGLES && \
+    /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_SDL2_KMSDRM && \
     /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_SVRT && \
     /buildroot/utils/config --file /build/.config --set-str BR2_PACKAGE_SVRT_LOCAL_PATH /svrt && \
     /buildroot/utils/config --file /build/.config --set-str BR2_PACKAGE_RPI_FIRMWARE_CONFIG_FILE /external/board/raspberrypi4/config.txt && \
     /buildroot/utils/config --file /build/.config --set-str BR2_PACKAGE_RPI_FIRMWARE_CMDLINE_FILE /external/board/raspberrypi4/cmdline.txt && \
-    make -C /buildroot O=/build BR2_EXTERNAL=/external olddefconfig
+    make -C /buildroot O=/build BR2_EXTERNAL=/external olddefconfig && \
+    grep -qx 'BR2_PACKAGE_MESA3D_GALLIUM_DRIVER_V3D=y' /build/.config && \
+    grep -qx 'BR2_PACKAGE_MESA3D_OPENGL_EGL=y' /build/.config && \
+    grep -qx 'BR2_PACKAGE_MESA3D_GBM=y' /build/.config && \
+    grep -qx 'BR2_PACKAGE_MESA3D_OPENGL_ES=y' /build/.config && \
+    grep -qx 'BR2_PACKAGE_SDL2_OPENGLES=y' /build/.config && \
+    grep -qx 'BR2_PACKAGE_SDL2_KMSDRM=y' /build/.config && \
+    make -C /buildroot O=/build BR2_EXTERNAL=/external show-info >/dev/null
 ENTRYPOINT ["/bin/sh", "/svrt/docker/raspberrypi4/build.sh"]
