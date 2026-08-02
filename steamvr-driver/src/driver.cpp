@@ -1,19 +1,221 @@
 #include "direct_mode.h"
+#include "receiver_link.h"
+
 #include <openvr_driver.h>
-#include <algorithm>
+
+#include <cstdio>
 #include <cstring>
 #include <memory>
 #include <string>
 
-static std::string setting(const char *key,const char *fallback){char v[512]={};vr::VRSettings()->GetString("driver_svrt",key,v,sizeof(v));return v[0]?v:fallback;}
-class SvrtHmd final:public vr::ITrackedDeviceServerDriver,public vr::IVRDisplayComponent{
+namespace {
+std::string setting(const char *key, const char *fallback) {
+  char value[512]{};
+  vr::VRSettings()->GetString("driver_svrt", key, value, sizeof(value));
+  return value[0] ? value : fallback;
+}
+
+int int_setting(const char *key, int fallback) {
+  const int value = vr::VRSettings()->GetInt32("driver_svrt", key);
+  return value > 0 ? value : fallback;
+}
+}  // namespace
+
+class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
+                      public vr::IVRDisplayComponent {
  public:
-  SvrtHmd():serial_(setting("serial_number","SVRT-PI4-001")){} const char *serial()const{return serial_.c_str();}
-  vr::EVRInitError Activate(uint32_t id)override{id_=id;auto p=vr::VRProperties()->TrackedDeviceToPropertyContainer(id);vr::VRProperties()->SetStringProperty(p,vr::Prop_ModelNumber_String,setting("model_number","SVRT Wi-Fi HMD").c_str());vr::VRProperties()->SetStringProperty(p,vr::Prop_ManufacturerName_String,"SVRT");vr::VRProperties()->SetBoolProperty(p,vr::Prop_IsOnDesktop_Bool,false);vr::VRProperties()->SetBoolProperty(p,vr::Prop_HasDriverDirectModeComponent_Bool,true);vr::VRProperties()->SetFloatProperty(p,vr::Prop_DisplayFrequency_Float,(float)fps());vr::VRProperties()->SetFloatProperty(p,vr::Prop_SecondsFromVsyncToPhotons_Float,.020f);direct_.Start(setting("receiver_host","ROOT.local"),(uint16_t)vr::VRSettings()->GetInt32("driver_svrt","receiver_port"),fps(),(unsigned)vr::VRSettings()->GetInt32("driver_svrt","bitrate_mbps"),setting("ffmpeg_path","ffmpeg.exe"),setting("encoder","hevc_nvenc"));return vr::VRInitError_None;}
-  void Deactivate()override{direct_.Stop();id_=vr::k_unTrackedDeviceIndexInvalid;}void EnterStandby()override{}void *GetComponent(const char *v)override{if(!strcmp(v,vr::IVRDisplayComponent_Version))return static_cast<vr::IVRDisplayComponent*>(this);if(!strcmp(v,vr::IVRDriverDirectModeComponent_Version))return static_cast<vr::IVRDriverDirectModeComponent*>(&direct_);return nullptr;}void DebugRequest(const char*,char*out,uint32_t n)override{if(n)out[0]=0;}
-  vr::DriverPose_t GetPose()override{vr::DriverPose_t p{};p.qWorldFromDriverRotation.w=p.qDriverFromHeadRotation.w=p.qRotation.w=1;p.poseIsValid=p.deviceIsConnected=true;p.result=vr::TrackingResult_Running_OK;p.shouldApplyHeadModel=true;return p;}void RunFrame(){if(id_!=vr::k_unTrackedDeviceIndexInvalid)vr::VRServerDriverHost()->TrackedDevicePoseUpdated(id_,GetPose(),sizeof(vr::DriverPose_t));}
-  void GetWindowBounds(int32_t*x,int32_t*y,uint32_t*w,uint32_t*h)override{*x=*y=0;*w=eye_width()*2;*h=eye_height();}bool IsDisplayOnDesktop()override{return false;}bool IsDisplayRealDisplay()override{return false;}void GetRecommendedRenderTargetSize(uint32_t*w,uint32_t*h)override{*w=eye_width();*h=eye_height();}void GetEyeOutputViewport(vr::EVREye e,uint32_t*x,uint32_t*y,uint32_t*w,uint32_t*h)override{*x=e==vr::Eye_Left?0:eye_width();*y=0;*w=eye_width();*h=eye_height();}void GetProjectionRaw(vr::EVREye,float*l,float*r,float*t,float*b)override{*l=-1;*r=1;*t=-1;*b=1;}vr::DistortionCoordinates_t ComputeDistortion(vr::EVREye,float u,float v)override{vr::DistortionCoordinates_t d{};d.rfRed[0]=d.rfGreen[0]=d.rfBlue[0]=u;d.rfRed[1]=d.rfGreen[1]=d.rfBlue[1]=v;return d;}bool ComputeInverseDistortion(vr::HmdVector2_t*,vr::EVREye,uint32_t,float,float)override{return false;}
- private:unsigned eye_width()const{int v=vr::VRSettings()->GetInt32("driver_svrt","render_width");return v>0?(unsigned)v:1440;}unsigned eye_height()const{int v=vr::VRSettings()->GetInt32("driver_svrt","render_height");return v>0?(unsigned)v:1600;}unsigned fps()const{int v=vr::VRSettings()->GetInt32("driver_svrt","display_frequency");return v>0?(unsigned)v:60;}uint32_t id_=vr::k_unTrackedDeviceIndexInvalid;std::string serial_;SvrtDirectMode direct_;
+  SvrtHmd() : serial_(setting("serial_number", "SVRT-PI4-001")) {}
+  const char *serial() const { return serial_.c_str(); }
+
+  vr::EVRInitError Activate(uint32_t id) override {
+    id_ = id;
+    const auto properties =
+        vr::VRProperties()->TrackedDeviceToPropertyContainer(id);
+    vr::VRProperties()->SetStringProperty(properties, vr::Prop_ModelNumber_String,
+                                           setting("model_number", "SVRT Wi-Fi HMD").c_str());
+    vr::VRProperties()->SetStringProperty(properties,
+                                           vr::Prop_ManufacturerName_String, "SVRT");
+    vr::VRProperties()->SetStringProperty(properties,
+                                           vr::Prop_ResourceRoot_String, "svrt");
+    vr::VRProperties()->SetStringProperty(properties,
+        vr::Prop_RegisteredDeviceType_String, "svrt/SVRT-PI4-001");
+    SetIcon(properties, vr::Prop_NamedIconPathDeviceOff_String,
+            "{svrt}/icons/headset_status_off.png");
+    SetIcon(properties, vr::Prop_NamedIconPathDeviceSearching_String,
+            "{svrt}/icons/headset_status_searching.gif");
+    SetIcon(properties, vr::Prop_NamedIconPathDeviceSearchingAlert_String,
+            "{svrt}/icons/headset_status_searching_alert.gif");
+    SetIcon(properties, vr::Prop_NamedIconPathDeviceReady_String,
+            "{svrt}/icons/headset_status_ready.png");
+    SetIcon(properties, vr::Prop_NamedIconPathDeviceReadyAlert_String,
+            "{svrt}/icons/headset_status_ready_alert.png");
+    SetIcon(properties, vr::Prop_NamedIconPathDeviceNotReady_String,
+            "{svrt}/icons/headset_status_error.png");
+    SetIcon(properties, vr::Prop_NamedIconPathDeviceStandby_String,
+            "{svrt}/icons/headset_status_standby.png");
+    SetIcon(properties, vr::Prop_NamedIconPathDeviceStandbyAlert_String,
+            "{svrt}/icons/headset_status_standby_alert.png");
+    vr::VRProperties()->SetBoolProperty(properties, vr::Prop_IsOnDesktop_Bool,
+                                        false);
+    vr::VRProperties()->SetBoolProperty(
+        properties, vr::Prop_HasDriverDirectModeComponent_Bool, true);
+    vr::VRProperties()->SetBoolProperty(properties,
+                                        vr::Prop_DeviceIsWireless_Bool, true);
+    vr::VRProperties()->SetFloatProperty(properties,
+        vr::Prop_DisplayFrequency_Float, static_cast<float>(fps()));
+    vr::VRProperties()->SetFloatProperty(
+        properties, vr::Prop_SecondsFromVsyncToPhotons_Float, .020f);
+
+    const std::string host = setting("receiver_host", "ROOT.local");
+    const uint16_t video_port =
+        static_cast<uint16_t>(int_setting("receiver_port", 9944));
+    direct_.Start(host, video_port, fps(), int_setting("bitrate_mbps", 35),
+                  setting("ffmpeg_path", "ffmpeg.exe"),
+                  setting("encoder", "hevc_nvenc"));
+    receiver_.Start(host,
+                    static_cast<uint16_t>(int_setting("status_port", video_port + 1)),
+                    int_setting("health_poll_ms", 1000),
+                    int_setting("latency_warning_ms", 80));
+    return vr::VRInitError_None;
+  }
+
+  void Deactivate() override {
+    receiver_.Stop();
+    direct_.Stop();
+    id_ = vr::k_unTrackedDeviceIndexInvalid;
+  }
+  void EnterStandby() override {}
+  void *GetComponent(const char *version) override {
+    if (!std::strcmp(version, vr::IVRDisplayComponent_Version))
+      return static_cast<vr::IVRDisplayComponent *>(this);
+    if (!std::strcmp(version, vr::IVRDriverDirectModeComponent_Version))
+      return static_cast<vr::IVRDriverDirectModeComponent *>(&direct_);
+    return nullptr;
+  }
+  void DebugRequest(const char *, char *out, uint32_t size) override {
+    if (!size) return;
+    const SvrtLinkStatus status = receiver_.GetStatus();
+    std::snprintf(out, size,
+                  "receiver=%s latency=%ums decoded=%llu shown=%llu dropped=%llu encoder=%s",
+                  SvrtReceiverLink::StateName(status.state), status.latency_ms,
+                  static_cast<unsigned long long>(status.decoded),
+                  static_cast<unsigned long long>(status.presented),
+                  static_cast<unsigned long long>(status.dropped),
+                  direct_.EncoderFailed() ? "failed" : "ok");
+  }
+
+  vr::DriverPose_t GetPose() override {
+    vr::DriverPose_t pose{};
+    pose.qWorldFromDriverRotation.w = 1;
+    pose.qDriverFromHeadRotation.w = 1;
+    pose.qRotation.w = 1;
+    pose.shouldApplyHeadModel = true;
+    const SvrtLinkStatus status = receiver_.GetStatus();
+    if (status.state == SvrtLinkState::Searching) {
+      pose.deviceIsConnected = false;
+      pose.poseIsValid = false;
+      pose.result = vr::TrackingResult_Uninitialized;
+    } else if (direct_.EncoderFailed() ||
+               status.state == SvrtLinkState::ReceiverError) {
+      pose.deviceIsConnected = true;
+      pose.poseIsValid = false;
+      pose.result = vr::TrackingResult_Running_OutOfRange;
+    } else if (status.state == SvrtLinkState::Degraded) {
+      pose.deviceIsConnected = true;
+      pose.poseIsValid = false;
+      pose.result = vr::TrackingResult_Calibrating_OutOfRange;
+    } else {
+      pose.deviceIsConnected = true;
+      pose.poseIsValid = true;
+      pose.result = vr::TrackingResult_Running_OK;
+    }
+    return pose;
+  }
+
+  void RunFrame() {
+    if (id_ != vr::k_unTrackedDeviceIndexInvalid)
+      vr::VRServerDriverHost()->TrackedDevicePoseUpdated(
+          id_, GetPose(), sizeof(vr::DriverPose_t));
+  }
+
+  void GetWindowBounds(int32_t *x, int32_t *y, uint32_t *width,
+                       uint32_t *height) override {
+    *x = *y = 0;
+    *width = eye_width() * 2;
+    *height = eye_height();
+  }
+  bool IsDisplayOnDesktop() override { return false; }
+  bool IsDisplayRealDisplay() override { return false; }
+  void GetRecommendedRenderTargetSize(uint32_t *width,
+                                      uint32_t *height) override {
+    *width = eye_width();
+    *height = eye_height();
+  }
+  void GetEyeOutputViewport(vr::EVREye eye, uint32_t *x, uint32_t *y,
+                            uint32_t *width, uint32_t *height) override {
+    *x = eye == vr::Eye_Left ? 0 : eye_width();
+    *y = 0;
+    *width = eye_width();
+    *height = eye_height();
+  }
+  void GetProjectionRaw(vr::EVREye, float *left, float *right, float *top,
+                        float *bottom) override {
+    *left = *top = -1;
+    *right = *bottom = 1;
+  }
+  vr::DistortionCoordinates_t ComputeDistortion(vr::EVREye, float u,
+                                                 float v) override {
+    vr::DistortionCoordinates_t result{};
+    result.rfRed[0] = result.rfGreen[0] = result.rfBlue[0] = u;
+    result.rfRed[1] = result.rfGreen[1] = result.rfBlue[1] = v;
+    return result;
+  }
+  bool ComputeInverseDistortion(vr::HmdVector2_t *, vr::EVREye, uint32_t,
+                                float, float) override { return false; }
+
+ private:
+  static void SetIcon(vr::PropertyContainerHandle_t properties,
+                      vr::ETrackedDeviceProperty property, const char *path) {
+    vr::VRProperties()->SetStringProperty(properties, property, path);
+  }
+  unsigned eye_width() const { return int_setting("render_width", 1440); }
+  unsigned eye_height() const { return int_setting("render_height", 1600); }
+  unsigned fps() const { return int_setting("display_frequency", 60); }
+
+  uint32_t id_ = vr::k_unTrackedDeviceIndexInvalid;
+  std::string serial_;
+  SvrtDirectMode direct_;
+  SvrtReceiverLink receiver_;
 };
-class Provider final:public vr::IServerTrackedDeviceProvider{public:vr::EVRInitError Init(vr::IVRDriverContext*c)override{VR_INIT_SERVER_DRIVER_CONTEXT(c);h_=std::make_unique<SvrtHmd>();return vr::VRServerDriverHost()->TrackedDeviceAdded(h_->serial(),vr::TrackedDeviceClass_HMD,h_.get())?vr::VRInitError_None:vr::VRInitError_Driver_Unknown;}void Cleanup()override{h_.reset();}const char*const*GetInterfaceVersions()override{return vr::k_InterfaceVersions;}void RunFrame()override{if(h_)h_->RunFrame();}bool ShouldBlockStandbyMode()override{return false;}void EnterStandby()override{}void LeaveStandby()override{}private:std::unique_ptr<SvrtHmd>h_;};static Provider provider;
-extern "C" __declspec(dllexport) void *HmdDriverFactory(const char*n,int*e){if(!strcmp(n,vr::IServerTrackedDeviceProvider_Version))return &provider;if(e)*e=vr::VRInitError_Init_InterfaceNotFound;return nullptr;}
+
+class Provider final : public vr::IServerTrackedDeviceProvider {
+ public:
+  vr::EVRInitError Init(vr::IVRDriverContext *context) override {
+    VR_INIT_SERVER_DRIVER_CONTEXT(context);
+    hmd_ = std::make_unique<SvrtHmd>();
+    return vr::VRServerDriverHost()->TrackedDeviceAdded(
+               hmd_->serial(), vr::TrackedDeviceClass_HMD, hmd_.get())
+               ? vr::VRInitError_None
+               : vr::VRInitError_Driver_Unknown;
+  }
+  void Cleanup() override { hmd_.reset(); }
+  const char *const *GetInterfaceVersions() override {
+    return vr::k_InterfaceVersions;
+  }
+  void RunFrame() override { if (hmd_) hmd_->RunFrame(); }
+  bool ShouldBlockStandbyMode() override { return false; }
+  void EnterStandby() override {}
+  void LeaveStandby() override {}
+
+ private:
+  std::unique_ptr<SvrtHmd> hmd_;
+};
+
+static Provider provider;
+extern "C" __declspec(dllexport) void *HmdDriverFactory(const char *name,
+                                                         int *error) {
+  if (!std::strcmp(name, vr::IServerTrackedDeviceProvider_Version))
+    return &provider;
+  if (error) *error = vr::VRInitError_Init_InterfaceNotFound;
+  return nullptr;
+}

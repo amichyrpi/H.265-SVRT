@@ -1,3 +1,16 @@
-vanilla-master
 build/
 build-*/
+.directory
+.cache/
+*.AppImage
+squashfs-root/
+
+buildpi/
+
+.gradle/
+.cxx/
+.idea/
+
+third_party/
+
+vanilla-master

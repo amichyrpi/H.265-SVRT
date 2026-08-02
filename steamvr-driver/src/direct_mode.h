@@ -18,6 +18,8 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
              unsigned bitrate_mbps, const std::string &ffmpeg,
              const std::string &encoder);
   void Stop();
+  bool IsRunning() const { return running_.load(); }
+  bool EncoderFailed() const { return encoder_failed_.load(); }
   void CreateSwapTextureSet(uint32_t pid,const SwapTextureSetDesc_t *desc,SwapTextureSet_t *out) override;
   void DestroySwapTextureSet(vr::SharedTextureHandle_t handle) override;
   void DestroyAllSwapTextureSets(uint32_t pid) override;
@@ -36,6 +38,6 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   std::unordered_map<uint64_t,Texture> textures_; std::vector<Slot> slots_;
   vr::SharedTextureHandle_t submitted_[2]{}; uint32_t next_[2]{};
   std::mutex mutex_,d3d_mutex_; std::condition_variable ready_; std::thread worker_;
-  std::atomic<bool> running_{false}; uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=35;
+  std::atomic<bool> running_{false},encoder_failed_{false}; uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=35;
   std::string host_,ffmpeg_,encoder_,pixel_format_="bgra"; uint16_t port_=9944; HANDLE pipe_=INVALID_HANDLE_VALUE,process_=nullptr;
 };
