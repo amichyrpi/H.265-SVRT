@@ -36,6 +36,7 @@ RUN git clone --depth 1 --branch 2025.02.3 https://github.com/buildroot/buildroo
 ENV FORCE_UNSAFE_CONFIGURE=1
 COPY buildroot /external
 RUN make -C /buildroot O=/build BR2_EXTERNAL=/external raspberrypi4_64_defconfig && \
+    /buildroot/utils/config --file /build/.config --set-str BR2_PRIMARY_SITE https://sources.buildroot.net && \
     /buildroot/utils/config --file /build/.config -d BR2_ROOTFS_DEVICE_CREATION_STATIC && \
     /buildroot/utils/config --file /build/.config -d BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_DEVTMPFS && \
     /buildroot/utils/config --file /build/.config -d BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_MDEV && \
