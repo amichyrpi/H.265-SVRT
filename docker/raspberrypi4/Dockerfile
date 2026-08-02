@@ -1,21 +1,33 @@
 FROM debian:bookworm
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    bash \
     bc \
     bison \
     build-essential \
     ca-certificates \
+    coreutils \
     cpio \
+    diffutils \
     file \
+    findutils \
     flex \
+    gawk \
     git \
+    grep \
+    gzip \
     libncurses-dev \
     libssl-dev \
+    patch \
+    perl \
     python3 \
     qemu-user-static \
     rsync \
+    sed \
+    tar \
     unzip \
     wget \
+    which \
     && update-ca-certificates \
     && git ls-remote https://github.com/buildroot/buildroot.git HEAD >/dev/null \
     && rm -rf /var/lib/apt/lists/*
