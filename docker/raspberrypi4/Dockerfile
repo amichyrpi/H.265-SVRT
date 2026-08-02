@@ -1,6 +1,24 @@
 FROM debian:bookworm
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends build-essential git wget cpio unzip rsync file bc bison flex python3 libssl-dev libncurses-dev qemu-user-static && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    bc \
+    bison \
+    build-essential \
+    ca-certificates \
+    cpio \
+    file \
+    flex \
+    git \
+    libncurses-dev \
+    libssl-dev \
+    python3 \
+    qemu-user-static \
+    rsync \
+    unzip \
+    wget \
+    && update-ca-certificates \
+    && git ls-remote https://github.com/buildroot/buildroot.git HEAD >/dev/null \
+    && rm -rf /var/lib/apt/lists/*
 RUN git clone --depth 1 --branch 2025.02.3 https://github.com/buildroot/buildroot.git /buildroot
 COPY buildroot /external
 RUN make -C /buildroot O=/build BR2_EXTERNAL=/external raspberrypi4_64_defconfig && \
