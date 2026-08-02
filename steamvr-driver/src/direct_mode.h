@@ -29,7 +29,7 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   void PostPresent(const Throttling_t *) override {}
   void GetFrameTiming(vr::DriverDirectMode_FrameTiming *timing) override { timing->m_nReprojectionFlags=0; }
  private:
-  struct Texture { uint32_t pid=0; uint64_t group=0; HANDLE shared=nullptr; Microsoft::WRL::ComPtr<ID3D11Texture2D> texture; };
+  struct Texture { uint32_t pid=0; uint64_t group=0; Microsoft::WRL::ComPtr<ID3D11Texture2D> texture; };
   struct Slot { Microsoft::WRL::ComPtr<ID3D11Texture2D> staging; bool pending=false; uint64_t sequence=0; };
   bool EnsureSlots(unsigned eye_width,unsigned height,DXGI_FORMAT format);
   bool StartEncoder(unsigned width,unsigned height);

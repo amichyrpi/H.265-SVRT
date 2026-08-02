@@ -61,6 +61,12 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
         properties, vr::Prop_HasDriverDirectModeComponent_Bool, true);
     vr::VRProperties()->SetBoolProperty(properties,
                                         vr::Prop_DeviceIsWireless_Bool, true);
+    vr::VRProperties()->SetBoolProperty(properties,
+                                        vr::Prop_ContainsProximitySensor_Bool, false);
+    vr::VRProperties()->SetBoolProperty(properties,
+                                        vr::Prop_DeviceCanPowerOff_Bool, false);
+    vr::VRProperties()->SetBoolProperty(properties,
+                                        vr::Prop_NeverTracked_Bool, false);
     vr::VRProperties()->SetFloatProperty(properties,
         vr::Prop_DisplayFrequency_Float, static_cast<float>(fps()));
     vr::VRProperties()->SetFloatProperty(
@@ -110,25 +116,10 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     pose.qDriverFromHeadRotation.w = 1;
     pose.qRotation.w = 1;
     pose.shouldApplyHeadModel = true;
-    const SvrtLinkStatus status = receiver_.GetStatus();
-    if (status.state == SvrtLinkState::Searching) {
-      pose.deviceIsConnected = false;
-      pose.poseIsValid = false;
-      pose.result = vr::TrackingResult_Uninitialized;
-    } else if (direct_.EncoderFailed() ||
-               status.state == SvrtLinkState::ReceiverError) {
-      pose.deviceIsConnected = true;
-      pose.poseIsValid = false;
-      pose.result = vr::TrackingResult_Running_OutOfRange;
-    } else if (status.state == SvrtLinkState::Degraded) {
-      pose.deviceIsConnected = true;
-      pose.poseIsValid = false;
-      pose.result = vr::TrackingResult_Calibrating_OutOfRange;
-    } else {
-      pose.deviceIsConnected = true;
-      pose.poseIsValid = true;
-      pose.result = vr::TrackingResult_Running_OK;
-    }
+    pose.deviceIsConnected = true;
+    pose.poseIsValid = true;
+    pose.willDriftInYaw = false;
+    pose.result = vr::TrackingResult_Running_OK;
     return pose;
   }
 
@@ -178,8 +169,8 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
                       vr::ETrackedDeviceProperty property, const char *path) {
     vr::VRProperties()->SetStringProperty(properties, property, path);
   }
-  unsigned eye_width() const { return int_setting("render_width", 1440); }
-  unsigned eye_height() const { return int_setting("render_height", 1600); }
+  unsigned eye_width() const { return int_setting("render_width", 1280); }
+  unsigned eye_height() const { return int_setting("render_height", 1440); }
   unsigned fps() const { return int_setting("display_frequency", 60); }
 
   uint32_t id_ = vr::k_unTrackedDeviceIndexInvalid;
@@ -203,7 +194,7 @@ class Provider final : public vr::IServerTrackedDeviceProvider {
     return vr::k_InterfaceVersions;
   }
   void RunFrame() override { if (hmd_) hmd_->RunFrame(); }
-  bool ShouldBlockStandbyMode() override { return false; }
+  bool ShouldBlockStandbyMode() override { return true; }
   void EnterStandby() override {}
   void LeaveStandby() override {}
 
