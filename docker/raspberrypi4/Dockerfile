@@ -77,4 +77,15 @@ RUN make -C /buildroot O=/build BR2_EXTERNAL=/external raspberrypi4_64_defconfig
         }; \
     done && \
     make -C /buildroot O=/build BR2_EXTERNAL=/external show-info >/dev/null
+
+# Match Vanilla's lifecycle: cache the cross-toolchain, kernel, graphics stack,
+# FFmpeg and root filesystem in the Docker image.  The mounted local SVRT source
+# is enabled again only after the cacheable base build has completed.
+RUN /buildroot/utils/config --file /build/.config -d BR2_PACKAGE_SVRT && \
+    make -C /buildroot O=/build BR2_EXTERNAL=/external olddefconfig && \
+    make -C /buildroot O=/build BR2_EXTERNAL=/external && \
+    /buildroot/utils/config --file /build/.config -e BR2_PACKAGE_SVRT && \
+    /buildroot/utils/config --file /build/.config --set-str BR2_PACKAGE_SVRT_LOCAL_PATH /svrt && \
+    make -C /buildroot O=/build BR2_EXTERNAL=/external olddefconfig && \
+    grep -qx 'BR2_PACKAGE_SVRT=y' /build/.config
 ENTRYPOINT ["/bin/sh", "/svrt/docker/raspberrypi4/build.sh"]
