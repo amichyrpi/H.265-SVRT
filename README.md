@@ -1,3 +1,5 @@
+[![Build](https://github.com/amichyrpi/H.265-SVRT/actions/workflows/build.yml/badge.svg)](https://github.com/amichyrpi/H.265-SVRT/actions/workflows/build.yml)
+
 # H.265 SVRT
 
 This is a **work in progress**. SteamVR driver and Raspberry Pi 4 receiver. This project is in development and is not stable, consider it as **alpha**.
@@ -54,8 +56,14 @@ ctest --output-on-failure
 Optionally, to install the program:
 
 ```sh
+sudo useradd --system --no-create-home --shell /usr/sbin/nologin svrt-receiver
+sudo usermod -aG video svrt-receiver
 sudo cmake --install .
+sudo systemctl daemon-reload
+sudo systemctl enable --now svrt-receiver.service
 ```
+
+The service runs as the `svrt-receiver` user with membership in the `video` group, which grants access to `/dev/dri/card0` for `SDL_VIDEODRIVER=kmsdrm` without root.
 
 ### SteamVR driver setup
 
@@ -84,6 +92,19 @@ You can also build and install the driver manually by using the following comman
 ### Starting order
 
 The Raspberry Pi receiver is started at Raspberry Pi boot, and the SteamVR driver is started at SteamVR boot. The driver automatically detects when the Raspberry Pi receiver becomes available.
+
+To start the installed Raspberry Pi receiver manually:
+
+```sh
+sudo systemctl start svrt-receiver.service
+```
+
+To run it directly without the systemd service:
+
+```sh
+sudo systemctl stop svrt-receiver.service
+SDL_VIDEODRIVER=kmsdrm svrt-receiver 9944
+```
 
 ## Testing stream latency
 

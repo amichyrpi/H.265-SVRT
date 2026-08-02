@@ -1,0 +1,17 @@
+[Unit]
+Description=H.265 SVRT Raspberry Pi receiver
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=svrt-receiver
+Group=svrt-receiver
+SupplementaryGroups=video
+Environment=SDL_VIDEODRIVER=kmsdrm
+ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/svrt-receiver 9944
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
