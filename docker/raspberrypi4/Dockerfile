@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     bash \
     bc \
     bison \
+    bzip2 \
     build-essential \
     ca-certificates \
     coreutils \
@@ -32,6 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && git ls-remote https://github.com/buildroot/buildroot.git HEAD >/dev/null \
     && rm -rf /var/lib/apt/lists/*
 RUN git clone --depth 1 --branch 2025.02.3 https://github.com/buildroot/buildroot.git /buildroot
+ENV FORCE_UNSAFE_CONFIGURE=1
 COPY buildroot /external
 RUN make -C /buildroot O=/build BR2_EXTERNAL=/external raspberrypi4_64_defconfig && \
     /buildroot/utils/config --file /build/.config -d BR2_ROOTFS_DEVICE_CREATION_STATIC && \
