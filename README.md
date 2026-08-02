@@ -16,6 +16,7 @@ This is a **work in progress**. SteamVR driver and Raspberry Pi 4 receiver. This
   - [ ] Longest session time measurements
   - [ ] Start steamvr button that load the driver in steamvr otherwise it will not be loaded
   - [ ] Tracking support to pair a vive tracker to the headset
+  - [ ] SVRT Firmware updater
 - [ ] SteamVR driver for Linux with Utility App
 
 ## Usage/Installing
