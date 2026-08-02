@@ -9,6 +9,7 @@
     "receiver_host": "ROOT.local",
     "receiver_port": 9944,
     "status_port": 9945,
+    "audio_port": 9946,
     "health_poll_ms": 1000,
     "latency_warning_ms": 80,
     "bitrate_mbps": 35,

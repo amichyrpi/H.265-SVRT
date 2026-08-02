@@ -18,11 +18,12 @@ endif()
 
 add_library(driver_svrt SHARED
   src/driver.cpp
+  src/audio_transport.cpp src/audio_transport.h
   src/direct_mode.cpp src/direct_mode.h
   src/receiver_link.cpp src/receiver_link.h)
 target_compile_features(driver_svrt PRIVATE cxx_std_17)
 target_include_directories(driver_svrt PRIVATE "${SVRT_OPENVR_INCLUDE}")
-target_link_libraries(driver_svrt PRIVATE d3d11 dxgi ws2_32)
+target_link_libraries(driver_svrt PRIVATE d3d11 dxgi ws2_32 ole32 uuid)
 target_compile_definitions(driver_svrt PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
 set_target_properties(driver_svrt PROPERTIES
   PREFIX ""

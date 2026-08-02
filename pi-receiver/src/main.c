@@ -1,6 +1,7 @@
 #include <svrt/svrt.h>
 
 #include "status_server.h"
+#include "audio_receiver.h"
 
 #include <pthread.h>
 #include <signal.h>
@@ -46,20 +47,24 @@ int main(int argc, char **argv) {
     int headless = 0;
     uint16_t port = 9944;
     uint16_t status_port = 0;
+    uint16_t audio_port = 0;
     for (int i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--help") || !strcmp(argv[i], "-h")) {
-            puts("usage: svrt-receiver [--headless] [--status-port PORT] [video-port]");
+            puts("usage: svrt-receiver [--headless] [--status-port PORT] [--audio-port PORT] [video-port]");
             return 0;
         }
         if (!strcmp(argv[i], "--headless")) {
             headless = 1;
         } else if (!strcmp(argv[i], "--status-port") && i + 1 < argc) {
             status_port = (uint16_t)atoi(argv[++i]);
+        } else if (!strcmp(argv[i], "--audio-port") && i + 1 < argc) {
+            audio_port = (uint16_t)atoi(argv[++i]);
         } else {
             port = (uint16_t)atoi(argv[i]);
         }
     }
     if (!status_port) status_port = (uint16_t)(port + 1);
+    if (!audio_port) audio_port = (uint16_t)(port + 2);
 
     svrt_status_server status;
     if (svrt_status_server_start(&status, status_port)) {
@@ -69,6 +74,11 @@ int main(int argc, char **argv) {
     }
     signal(SIGINT, stop);
     signal(SIGTERM, stop);
+
+    svrt_audio_receiver audio;
+    int audio_started = svrt_audio_receiver_start(&audio, audio_port) == 0;
+    if (!audio_started)
+        fprintf(stderr, "SVRT audio: failed to start receiver\n");
 
     int exit_code = 0;
     while (!quitting) {
@@ -120,5 +130,6 @@ int main(int argc, char **argv) {
         }
     }
     svrt_status_server_stop(&status);
+    if (audio_started) svrt_audio_receiver_stop(&audio);
     return exit_code;
 }

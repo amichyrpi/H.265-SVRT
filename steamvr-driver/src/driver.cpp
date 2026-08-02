@@ -1,8 +1,11 @@
+#include "audio_transport.h"
 #include "direct_mode.h"
 #include "receiver_link.h"
 
 #include <openvr_driver.h>
 
+#include <chrono>
+#include <cmath>
 #include <cstdio>
 #include <cstring>
 #include <memory>
@@ -62,15 +65,23 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     vr::VRProperties()->SetBoolProperty(properties,
                                         vr::Prop_DeviceIsWireless_Bool, true);
     vr::VRProperties()->SetBoolProperty(properties,
-                                        vr::Prop_ContainsProximitySensor_Bool, false);
+                                        vr::Prop_ContainsProximitySensor_Bool, true);
     vr::VRProperties()->SetBoolProperty(properties,
                                         vr::Prop_DeviceCanPowerOff_Bool, false);
     vr::VRProperties()->SetBoolProperty(properties,
                                         vr::Prop_NeverTracked_Bool, false);
+    vr::VRProperties()->SetBoolProperty(
+        properties, vr::Prop_IgnoreMotionForStandby_Bool, false);
     vr::VRProperties()->SetFloatProperty(properties,
         vr::Prop_DisplayFrequency_Float, static_cast<float>(fps()));
     vr::VRProperties()->SetFloatProperty(
         properties, vr::Prop_SecondsFromVsyncToPhotons_Float, .020f);
+    const vr::EVRInputError proximity_error =
+        vr::VRDriverInput()->CreateBooleanComponent(
+            properties, "/proximity", &proximity_);
+    if (proximity_error != vr::VRInputError_None)
+      return vr::VRInitError_Driver_Unknown;
+    vr::VRDriverInput()->UpdateBooleanComponent(proximity_, true, 0.0);
 
     const std::string host = setting("receiver_host", "ROOT.local");
     const uint16_t video_port =
@@ -78,6 +89,8 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     direct_.Start(host, video_port, fps(), int_setting("bitrate_mbps", 35),
                   setting("ffmpeg_path", "ffmpeg.exe"),
                   setting("encoder", "hevc_nvenc"));
+    audio_.Start(host, static_cast<uint16_t>(
+                           int_setting("audio_port", video_port + 2)));
     receiver_.Start(host,
                     static_cast<uint16_t>(int_setting("status_port", video_port + 1)),
                     int_setting("health_poll_ms", 1000),
@@ -87,7 +100,9 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
 
   void Deactivate() override {
     receiver_.Stop();
+    audio_.Stop();
     direct_.Stop();
+    proximity_ = vr::k_ulInvalidInputComponentHandle;
     id_ = vr::k_unTrackedDeviceIndexInvalid;
   }
   void EnterStandby() override {}
@@ -120,13 +135,21 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     pose.poseIsValid = true;
     pose.willDriftInYaw = false;
     pose.result = vr::TrackingResult_Running_OK;
+    // Keep a sub-millimetre pose heartbeat so SteamVR sees continuously valid
+    // tracking in addition to the software proximity signal above.
+    const double seconds = std::chrono::duration<double>(
+        std::chrono::steady_clock::now().time_since_epoch()).count();
+    pose.vecPosition[0] = 0.0001 * std::sin(seconds);
     return pose;
   }
 
   void RunFrame() {
-    if (id_ != vr::k_unTrackedDeviceIndexInvalid)
+    if (id_ != vr::k_unTrackedDeviceIndexInvalid) {
       vr::VRServerDriverHost()->TrackedDevicePoseUpdated(
           id_, GetPose(), sizeof(vr::DriverPose_t));
+      if (proximity_ != vr::k_ulInvalidInputComponentHandle)
+        vr::VRDriverInput()->UpdateBooleanComponent(proximity_, true, 0.0);
+    }
   }
 
   void GetWindowBounds(int32_t *x, int32_t *y, uint32_t *width,
@@ -174,8 +197,11 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
   unsigned fps() const { return int_setting("display_frequency", 60); }
 
   uint32_t id_ = vr::k_unTrackedDeviceIndexInvalid;
+  vr::VRInputComponentHandle_t proximity_ =
+      vr::k_ulInvalidInputComponentHandle;
   std::string serial_;
   SvrtDirectMode direct_;
+  SvrtAudioTransport audio_;
   SvrtReceiverLink receiver_;
 };
 

@@ -4,6 +4,20 @@
 
 This is a **work in progress**. SteamVR driver and Raspberry Pi 4 receiver. This project is in development and is not stable, consider it as **alpha**.
 
+## TODO
+
+- [ ] Add support for steamvr vr view
+- [ ] Finish receiver and driver optimizations to reduce latency on the decoder and get a 60fps framerate
+- [ ] Create the SVRT Utility App
+  - [ ] Framerate and latency measurements
+  - [ ] Framerate changer with 30fps and 60fps presets
+  - [ ] SteamVr driver installer with sync with latest version and automatic updates
+  - [ ] Usage time measurements
+  - [ ] Longest session time measurements
+  - [ ] Start steamvr button that load the driver in steamvr otherwise it will not be loaded
+  - [ ] Tracking support to pair a vive tracker to the headset
+- [ ] SteamVR driver for Linux with Utility App
+
 ## Usage/Installing
 
 Builds and driver are available on the [Releases](https://github.com/amichyrpi/H.265-SVRT/releases) page.
@@ -40,7 +54,7 @@ H.265 SVRT requires the following libraries to be installed:
   ```sh
   sudo apt install -y build-essential cmake git ninja-build pkg-config \
     libsdl2-dev libavformat-dev libavcodec-dev libavutil-dev libdrm-dev \
-    libegl1-mesa-dev libgles2-mesa-dev libgbm-dev libudev-dev
+    libegl1-mesa-dev libgles2-mesa-dev libgbm-dev libudev-dev libasound2-dev
   ```
 
 The build process is otherwise normal for a CMake program:
