@@ -3,5 +3,6 @@
   "name": "svrt",
   "directory": "",
   "resourceOnly": false,
+  "redirectsDisplay": true,
   "hmd_presence": ["*.*"]
 }

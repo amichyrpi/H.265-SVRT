@@ -46,9 +46,28 @@ SOCKET connect_audio(const std::string &host, uint16_t port) {
   SOCKET result = INVALID_SOCKET;
   for (addrinfo *it = addresses; it; it = it->ai_next) {
     result = socket(it->ai_family, it->ai_socktype, it->ai_protocol);
-    if (result != INVALID_SOCKET &&
-        connect(result, it->ai_addr, static_cast<int>(it->ai_addrlen)) == 0)
-      break;
+    if (result != INVALID_SOCKET) {
+      u_long nonblocking = 1;
+      ioctlsocket(result, FIONBIO, &nonblocking);
+      const int connected = connect(result, it->ai_addr,
+                                    static_cast<int>(it->ai_addrlen));
+      if (connected == 0 || WSAGetLastError() == WSAEWOULDBLOCK) {
+        fd_set writes;
+        FD_ZERO(&writes); FD_SET(result, &writes);
+        timeval timeout{0, 750000};
+        int error = 0; int length = sizeof(error);
+        if (select(0, nullptr, &writes, nullptr, &timeout) > 0 &&
+            !getsockopt(result, SOL_SOCKET, SO_ERROR,
+                        reinterpret_cast<char *>(&error), &length) && !error) {
+          nonblocking = 0;
+          ioctlsocket(result, FIONBIO, &nonblocking);
+          DWORD io_timeout = 500;
+          setsockopt(result, SOL_SOCKET, SO_SNDTIMEO,
+                     reinterpret_cast<const char *>(&io_timeout), sizeof(io_timeout));
+          break;
+        }
+      }
+    }
     if (result != INVALID_SOCKET) closesocket(result);
     result = INVALID_SOCKET;
   }

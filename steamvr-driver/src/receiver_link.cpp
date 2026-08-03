@@ -47,6 +47,7 @@ bool SvrtReceiverLink::Start(std::string host, uint16_t port, unsigned poll_ms,
   port_ = port ? port : 9945;
   poll_ms_ = std::max(250u, poll_ms);
   latency_warning_ms_ = std::max(1u, latency_warning_ms);
+  state_ = static_cast<int>(SvrtLinkState::Starting);
   running_ = true;
   thread_ = std::thread(&SvrtReceiverLink::Run, this);
   return true;
@@ -65,6 +66,7 @@ SvrtLinkStatus SvrtReceiverLink::GetStatus() const {
 
 const char *SvrtReceiverLink::StateName(SvrtLinkState state) {
   switch (state) {
+    case SvrtLinkState::Starting: return "starting";
     case SvrtLinkState::Ready: return "ready";
     case SvrtLinkState::Degraded: return "degraded";
     case SvrtLinkState::ReceiverError: return "receiver error";
@@ -151,6 +153,8 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
   status.bytes = bytes;
   if (receiver_state == 3)
     status.state = SvrtLinkState::ReceiverError;
+  else if (receiver_state == 0)
+    status.state = SvrtLinkState::Starting;
   else if (status.latency_ms > latency_warning_ms_)
     status.state = SvrtLinkState::Degraded;
   else

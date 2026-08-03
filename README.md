@@ -7,6 +7,7 @@ This is a **work in progress**. SteamVR driver and Raspberry Pi 4 receiver. This
 ## TODO
 
 - [ ] Add support for steamvr vr view
+- [ ] Optimize and fix steamvr driver freezing the pc
 - [ ] Finish receiver and driver optimizations to reduce latency on the decoder and get a 60fps framerate
 - [ ] Create the SVRT Utility App
   - [ ] Framerate and latency measurements
@@ -17,7 +18,6 @@ This is a **work in progress**. SteamVR driver and Raspberry Pi 4 receiver. This
   - [ ] Start steamvr button that load the driver in steamvr otherwise it will not be loaded
   - [ ] Tracking support to pair a vive tracker to the headset
   - [ ] SVRT Firmware updater
-- [ ] SteamVR driver for Linux with Utility App
 
 ## Usage/Installing
 
@@ -102,10 +102,6 @@ You can also build and install the driver manually by using the following comman
     'Steam\steamapps\common\SteamVR\bin\win64\vrpathreg.exe'
   & $vrpathreg adddriver (Resolve-Path 'build\svrt')
   ```
-
-- **Linux**
-
-  The SteamVR driver currently requires Windows and D3D11. A native Linux driver is not available yet.
 
 ### Starting order
 

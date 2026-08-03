@@ -6,6 +6,7 @@
 #include <thread>
 
 enum class SvrtLinkState : int {
+  Starting,
   Searching,
   Ready,
   Degraded,

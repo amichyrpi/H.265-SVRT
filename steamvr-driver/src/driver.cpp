@@ -61,7 +61,9 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     vr::VRProperties()->SetBoolProperty(properties, vr::Prop_IsOnDesktop_Bool,
                                         false);
     vr::VRProperties()->SetBoolProperty(
-        properties, vr::Prop_HasDriverDirectModeComponent_Bool, true);
+        properties, vr::Prop_HasDriverDirectModeComponent_Bool, false);
+    vr::VRProperties()->SetBoolProperty(properties,
+        vr::Prop_ReportsTimeSinceVSync_Bool, false);
     vr::VRProperties()->SetBoolProperty(properties,
                                         vr::Prop_DeviceIsWireless_Bool, true);
     vr::VRProperties()->SetBoolProperty(properties,
@@ -71,7 +73,7 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     vr::VRProperties()->SetBoolProperty(properties,
                                         vr::Prop_NeverTracked_Bool, false);
     vr::VRProperties()->SetBoolProperty(
-        properties, vr::Prop_IgnoreMotionForStandby_Bool, false);
+        properties, vr::Prop_IgnoreMotionForStandby_Bool, true);
     vr::VRProperties()->SetFloatProperty(properties,
         vr::Prop_DisplayFrequency_Float, static_cast<float>(fps()));
     vr::VRProperties()->SetFloatProperty(
@@ -82,7 +84,6 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     if (proximity_error != vr::VRInputError_None)
       return vr::VRInitError_Driver_Unknown;
     vr::VRDriverInput()->UpdateBooleanComponent(proximity_, true, 0.0);
-
     const std::string host = setting("receiver_host", "ROOT.local");
     const uint16_t video_port =
         static_cast<uint16_t>(int_setting("receiver_port", 9944));
@@ -109,8 +110,6 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
   void *GetComponent(const char *version) override {
     if (!std::strcmp(version, vr::IVRDisplayComponent_Version))
       return static_cast<vr::IVRDisplayComponent *>(this);
-    if (!std::strcmp(version, vr::IVRDriverDirectModeComponent_Version))
-      return static_cast<vr::IVRDriverDirectModeComponent *>(&direct_);
     return nullptr;
   }
   void DebugRequest(const char *, char *out, uint32_t size) override {
@@ -126,20 +125,22 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
   }
 
   vr::DriverPose_t GetPose() override {
+    const SvrtLinkStatus status = receiver_.GetStatus();
     vr::DriverPose_t pose{};
     pose.qWorldFromDriverRotation.w = 1;
     pose.qDriverFromHeadRotation.w = 1;
     pose.qRotation.w = 1;
     pose.shouldApplyHeadModel = true;
-    pose.deviceIsConnected = true;
-    pose.poseIsValid = true;
+    const bool receiver_available = status.state != SvrtLinkState::Searching &&
+                                    status.state != SvrtLinkState::ReceiverError;
+    pose.deviceIsConnected = receiver_available;
+    pose.poseIsValid = receiver_available;
     pose.willDriftInYaw = false;
-    pose.result = vr::TrackingResult_Running_OK;
-    // Keep a sub-millimetre pose heartbeat so SteamVR sees continuously valid
-    // tracking in addition to the software proximity signal above.
-    const double seconds = std::chrono::duration<double>(
-        std::chrono::steady_clock::now().time_since_epoch()).count();
-    pose.vecPosition[0] = 0.0001 * std::sin(seconds);
+    pose.result = receiver_available
+                      ? (status.state == SvrtLinkState::Degraded
+                             ? vr::TrackingResult_Running_OutOfRange
+                             : vr::TrackingResult_Running_OK)
+                      : vr::TrackingResult_Uninitialized;
     return pose;
   }
 
@@ -147,10 +148,15 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     if (id_ != vr::k_unTrackedDeviceIndexInvalid) {
       vr::VRServerDriverHost()->TrackedDevicePoseUpdated(
           id_, GetPose(), sizeof(vr::DriverPose_t));
+      const SvrtLinkStatus status = receiver_.GetStatus();
+      const bool receiver_available = status.state != SvrtLinkState::Searching &&
+                                      status.state != SvrtLinkState::ReceiverError;
       if (proximity_ != vr::k_ulInvalidInputComponentHandle)
-        vr::VRDriverInput()->UpdateBooleanComponent(proximity_, true, 0.0);
+        vr::VRDriverInput()->UpdateBooleanComponent(proximity_, receiver_available, 0.0);
     }
   }
+
+  SvrtDirectMode &direct() { return direct_; }
 
   void GetWindowBounds(int32_t *x, int32_t *y, uint32_t *width,
                        uint32_t *height) override {
@@ -205,17 +211,34 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
   SvrtReceiverLink receiver_;
 };
 
+class SvrtDisplayRedirect final : public vr::ITrackedDeviceServerDriver, public vr::IVRVirtualDisplay {
+ public:
+  explicit SvrtDisplayRedirect(SvrtDirectMode &direct) : direct_(direct) {}
+  vr::EVRInitError Activate(uint32_t id) override { id_ = id; return vr::VRInitError_None; }
+  void Deactivate() override { id_ = vr::k_unTrackedDeviceIndexInvalid; }
+  void EnterStandby() override {}
+  void *GetComponent(const char *version) override { return !std::strcmp(version, vr::IVRVirtualDisplay_Version) ? static_cast<vr::IVRVirtualDisplay *>(this) : nullptr; }
+  void DebugRequest(const char *, char *out, uint32_t size) override { if (size) out[0] = '\0'; }
+  vr::DriverPose_t GetPose() override { vr::DriverPose_t pose{}; pose.deviceIsConnected = pose.poseIsValid = true; pose.result = vr::TrackingResult_Running_OK; pose.qWorldFromDriverRotation.w = pose.qDriverFromHeadRotation.w = pose.qRotation.w = 1; return pose; }
+  void Present(const vr::PresentInfo_t *info, uint32_t size) override { if (!info || size < sizeof(*info)) return; direct_.PresentVirtual(info->backbufferTextureHandle); vsync_ = std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count(); frame_ = info->nFrameId; }
+  void WaitForPresent() override {}
+  bool GetTimeSinceLastVsync(float *seconds, uint64_t *frame) override { if (!seconds || !frame || vsync_ <= 0) return false; const double now = std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count(); *seconds = static_cast<float>(now - vsync_); *frame = frame_; return true; }
+ private:
+  SvrtDirectMode &direct_; uint32_t id_ = vr::k_unTrackedDeviceIndexInvalid; double vsync_ = 0; uint64_t frame_ = 0;
+};
+
 class Provider final : public vr::IServerTrackedDeviceProvider {
  public:
   vr::EVRInitError Init(vr::IVRDriverContext *context) override {
     VR_INIT_SERVER_DRIVER_CONTEXT(context);
     hmd_ = std::make_unique<SvrtHmd>();
-    return vr::VRServerDriverHost()->TrackedDeviceAdded(
-               hmd_->serial(), vr::TrackedDeviceClass_HMD, hmd_.get())
-               ? vr::VRInitError_None
-               : vr::VRInitError_Driver_Unknown;
+    if (!vr::VRServerDriverHost()->TrackedDeviceAdded(
+        hmd_->serial(), vr::TrackedDeviceClass_HMD, hmd_.get())) return vr::VRInitError_Driver_Unknown;
+    redirect_ = std::make_unique<SvrtDisplayRedirect>(hmd_->direct());
+    return vr::VRServerDriverHost()->TrackedDeviceAdded("SVRT-PI4-001-display", vr::TrackedDeviceClass_DisplayRedirect, redirect_.get()) ? vr::VRInitError_None : vr::VRInitError_Driver_Unknown;
   }
-  void Cleanup() override { hmd_.reset(); }
+
+  void Cleanup() override { redirect_.reset(); hmd_.reset(); }
   const char *const *GetInterfaceVersions() override {
     return vr::k_InterfaceVersions;
   }
@@ -226,6 +249,7 @@ class Provider final : public vr::IServerTrackedDeviceProvider {
 
  private:
   std::unique_ptr<SvrtHmd> hmd_;
+  std::unique_ptr<SvrtDisplayRedirect> redirect_;
 };
 
 static Provider provider;

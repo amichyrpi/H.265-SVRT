@@ -36,10 +36,13 @@ static int send_ack(int fd, unsigned long long nonce, const char *stage,
 
 static void answer_trace(svrt_status_server *server, int fd,
                          unsigned long long nonce, uint64_t target_pts_us) {
-    struct timeval timeout = {.tv_sec = 10};
+    /* Never monopolize the single status listener for a stale trace request.
+     * PING is the driver's connection/liveness path, so it must remain
+     * responsive while a stream is reconnecting or has stopped. */
+    struct timeval timeout = {.tv_sec = 1};
     setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
     int received_sent = 0;
-    for (int waited_ms = 0; waited_ms < 10000; ++waited_ms) {
+    for (int waited_ms = 0; waited_ms < 1000; ++waited_ms) {
         uint64_t received_pts = atomic_load(&server->received_pts_us);
         uint64_t processed_pts = atomic_load(&server->processed_pts_us);
         if (!received_sent && received_pts == target_pts_us) {
