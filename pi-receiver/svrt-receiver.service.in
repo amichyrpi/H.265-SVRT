@@ -9,6 +9,8 @@ User=svrt-receiver
 Group=svrt-receiver
 SupplementaryGroups=video render
 Environment=SDL_VIDEODRIVER=kmsdrm
+Environment=SVRT_PAIRING_FILE=/var/lib/svrt-receiver/pairing
+StateDirectory=svrt-receiver
 ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/svrt-receiver 9944
 Restart=on-failure
 RestartSec=2

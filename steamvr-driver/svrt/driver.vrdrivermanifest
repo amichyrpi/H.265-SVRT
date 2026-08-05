@@ -3,6 +3,8 @@
   "name": "svrt",
   "directory": "",
   "resourceOnly": false,
-  "redirectsDisplay": true,
-  "hmd_presence": ["*.*"]
+  "hmd_presence": [
+    "*.*"
+  ],
+  "redirectsDisplay": true
 }

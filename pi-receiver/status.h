@@ -2,8 +2,10 @@
 #define SVRT_STATUS_SERVER_H
 
 #include <stdatomic.h>
+#include <pthread.h>
 #include <stdint.h>
-#include <svrt/svrt.h>
+#include <time.h>
+#include <svrt.h>
 
 enum svrt_receiver_state {
     SVRT_RECEIVER_STARTING = 0,
@@ -24,6 +26,11 @@ typedef struct svrt_status_server {
     atomic_uint_fast64_t received_time_us;
     atomic_uint_fast64_t processed_pts_us;
     atomic_uint_fast64_t processed_time_us;
+    pthread_mutex_t pairing_lock;
+    char pairing_code[5];
+    char paired_client[65];
+    time_t pairing_code_started;
+    time_t pairing_started;
     void *thread;
 } svrt_status_server;
 
@@ -33,6 +40,10 @@ void svrt_status_server_update(svrt_status_server *server, int state,
 void svrt_status_server_packet_event(void *opaque, svrt_packet_event event,
                                      uint64_t pts_us, uint64_t receiver_time_us);
 void svrt_status_server_reset_trace(svrt_status_server *server);
+/* Returns the current four-digit code while unpaired, otherwise an empty string. */
+void svrt_status_server_pairing_code(svrt_status_server *server, char out[5]);
+int svrt_status_server_is_paired(svrt_status_server *server);
+int svrt_status_server_pairing_in_progress(svrt_status_server *server);
 void svrt_status_server_stop(svrt_status_server *server);
 
 #endif

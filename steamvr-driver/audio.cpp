@@ -1,4 +1,4 @@
-#include "audio_transport.h"
+#include "audio.h"
 
 #include <audioclient.h>
 #include <ksmedia.h>
@@ -152,6 +152,11 @@ void SvrtAudioTransport::Run() {
   SOCKET socket = INVALID_SOCKET;
   std::vector<uint8_t> silence;
   while (running_ && SUCCEEDED(hr)) {
+    if (!receiver_available_) {
+      if (socket != INVALID_SOCKET) { closesocket(socket); socket = INVALID_SOCKET; }
+      std::this_thread::sleep_for(std::chrono::milliseconds(50));
+      continue;
+    }
     if (socket == INVALID_SOCKET) {
       socket = connect_audio(host_, port_);
       if (socket == INVALID_SOCKET) {

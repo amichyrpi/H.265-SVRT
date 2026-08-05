@@ -1,0 +1,16 @@
+add_executable(svrt-utility WIN32
+  main.cpp
+  ui.cpp ui.h
+  ui_util.cpp ui_util.h
+  pairing.cpp pairing.h
+  steamvr.cpp steamvr.h
+  network.cpp network.h
+  config.cpp config.h)
+target_compile_features(svrt-utility PRIVATE cxx_std_17)
+target_compile_definitions(svrt-utility PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN NOMINMAX)
+target_link_libraries(svrt-utility PRIVATE ws2_32 shell32)
+set_target_properties(svrt-utility PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY "$<1:${CMAKE_BINARY_DIR}/svrt-utility>")
+add_custom_command(TARGET svrt-utility POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
+    "${CMAKE_CURRENT_SOURCE_DIR}/assets" "$<TARGET_FILE_DIR:svrt-utility>/assets")

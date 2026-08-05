@@ -18,6 +18,8 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
              unsigned bitrate_mbps, const std::string &ffmpeg,
              const std::string &encoder);
   void Stop();
+  void SetReceiverAvailable(bool available);
+  bool ReceiverAvailable() const { return receiver_available_.load(); }
   bool IsRunning() const { return running_.load(); }
   bool EncoderFailed() const { return encoder_failed_.load(); }
   void CreateSwapTextureSet(uint32_t pid,const SwapTextureSetDesc_t *desc,SwapTextureSet_t *out) override;
@@ -36,13 +38,24 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   struct Slot { Microsoft::WRL::ComPtr<ID3D11Texture2D> staging; bool pending=false; uint64_t sequence=0; };
   bool EnsureSlots(unsigned eye_width,unsigned height,DXGI_FORMAT format);
   bool EnsureVirtualSlots(unsigned width,unsigned height,DXGI_FORMAT format);
+  bool CopyVirtualFrame(vr::SharedTextureHandle_t handle);
   bool StartEncoder(unsigned width,unsigned height);
   void EncoderThread(); void CloseEncoder();
   Microsoft::WRL::ComPtr<ID3D11Device> device_; Microsoft::WRL::ComPtr<ID3D11DeviceContext> context_;
   std::unordered_map<uint64_t,Texture> textures_; std::vector<Slot> slots_;
+  std::unordered_map<uintptr_t, Microsoft::WRL::ComPtr<ID3D11Texture2D>> virtual_textures_;
   vr::SharedTextureHandle_t submitted_[2]{}; uint32_t next_[2]{};
+  // lifecycle_mutex_ serializes the short callback-side access to the D3D
+  // objects with Stop().  OpenVR may deliver a final Present while the
+  // provider is being cleaned up, so checking a raw ComPtr without this gate
+  // is a use-after-reset race.
+  mutable std::mutex lifecycle_mutex_;
   std::mutex mutex_,d3d_mutex_; std::condition_variable ready_; std::thread worker_;
   std::vector<uint8_t> frame_;
-  std::atomic<bool> running_{false},encoder_failed_{false}; uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=35;
+  std::atomic<bool> running_{false},accepting_{false},encoder_failed_{false},receiver_available_{false};
+  std::atomic<uintptr_t> latest_virtual_handle_{0};
+  uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=35;
+  unsigned logged_virtual_width_=0,logged_virtual_height_=0;
+  DXGI_FORMAT logged_virtual_format_=DXGI_FORMAT_UNKNOWN;
   std::string host_,ffmpeg_,encoder_,pixel_format_="bgra"; uint16_t port_=9944; HANDLE pipe_=INVALID_HANDLE_VALUE,process_=nullptr;
 };

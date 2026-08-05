@@ -1,5 +1,5 @@
-#include <svrt/svrt.h>
-#include <svrt/pipe.h>
+#include <svrt.h>
+#include <pipe.h>
 #include "drm_presenter.h"
 #include <errno.h>
 #include <libavcodec/avcodec.h>

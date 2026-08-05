@@ -36,6 +36,51 @@ bool connect_with_timeout(SOCKET socket, const sockaddr *address, int size) {
              reinterpret_cast<const char *>(&io_timeout), sizeof(io_timeout));
   return true;
 }
+
+bool resolve_with_timeout(const std::string &host, const char *service,
+                          const std::atomic<bool> &running,
+                          PADDRINFOEXA *addresses) {
+  ADDRINFOEXA hints{};
+  hints.ai_family = AF_UNSPEC;
+  hints.ai_socktype = SOCK_STREAM;
+  hints.ai_protocol = IPPROTO_TCP;
+  // The utility stores a numeric address when pairing.  Mark it as numeric so
+  // Winsock never sends this health poll through the asynchronous name
+  // resolver (which can remain pending even though the Pi is reachable).
+  IN_ADDR ipv4{};
+  IN6_ADDR ipv6{};
+  if (InetPtonA(AF_INET, host.c_str(), &ipv4) == 1 ||
+      InetPtonA(AF_INET6, host.c_str(), &ipv6) == 1)
+    hints.ai_flags |= AI_NUMERICHOST;
+  OVERLAPPED overlapped{};
+  overlapped.hEvent = CreateEventW(nullptr, TRUE, FALSE, nullptr);
+  if (!overlapped.hEvent) return false;
+  HANDLE cancellation = nullptr;
+  int result = GetAddrInfoExA(host.c_str(), service, NS_ALL, nullptr, &hints,
+                              addresses, nullptr, &overlapped, nullptr,
+                              &cancellation);
+  if (result == WSA_IO_PENDING) {
+    DWORD elapsed = 0;
+    while (running && elapsed < 750) {
+      if (WaitForSingleObject(overlapped.hEvent, 50) == WAIT_OBJECT_0) break;
+      elapsed += 50;
+    }
+    if (WaitForSingleObject(overlapped.hEvent, 0) != WAIT_OBJECT_0) {
+      if (cancellation) GetAddrInfoExCancel(&cancellation);
+      // The OVERLAPPED structure and event must remain alive until Winsock
+      // signals completion. Returning after an arbitrary timeout leaves the
+      // resolver writing into dead stack memory during driver teardown.
+      WaitForSingleObject(overlapped.hEvent, INFINITE);
+    }
+    result = GetAddrInfoExOverlappedResult(&overlapped);
+  }
+  CloseHandle(overlapped.hEvent);
+  if (result != 0 && *addresses) {
+    FreeAddrInfoExA(*addresses);
+    *addresses = nullptr;
+  }
+  return result == 0 && *addresses;
+}
 }  // namespace
 
 SvrtReceiverLink::~SvrtReceiverLink() { Stop(); }
@@ -80,6 +125,9 @@ void SvrtReceiverLink::Run() {
     running_ = false;
     return;
   }
+  SvrtLinkStatus last_good{};
+  unsigned missed_polls = 0;
+  bool have_last_good = false;
   while (running_) {
     SvrtLinkStatus status;
     const uint64_t previous_dropped = dropped_.load();
@@ -87,10 +135,30 @@ void SvrtReceiverLink::Run() {
         std::chrono::duration_cast<std::chrono::milliseconds>(
             Clock::now().time_since_epoch()).count());
     if (!Poll(nonce, status)) {
-      status.state = SvrtLinkState::Searching;
+      // A single lost health probe is normal while the Pi is decoding or
+      // accepting a new stream. Do not withdraw the HMD pose for one missed
+      // TCP request: SteamVR interprets that as a physical unplug and clears
+      // the scene/mirror. Require several consecutive failures before going
+      // offline, while still reporting a real shutdown promptly.
+      ++missed_polls;
+      if (have_last_good && missed_polls < 4) {
+        status = last_good;
+        status.state = SvrtLinkState::Degraded;
+      } else {
+        status.state = SvrtLinkState::Searching;
+      }
     } else if (status.state == SvrtLinkState::Ready &&
                status.dropped > previous_dropped) {
       status.state = SvrtLinkState::Degraded;
+      missed_polls = 0;
+      last_good = status;
+      have_last_good = true;
+    } else {
+      missed_polls = 0;
+      if (status.state != SvrtLinkState::ReceiverError) {
+        last_good = status;
+        have_last_good = true;
+      }
     }
     state_ = static_cast<int>(status.state);
     latency_ms_ = status.latency_ms;
@@ -105,27 +173,49 @@ void SvrtReceiverLink::Run() {
 }
 
 bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
-  addrinfo hints{};
-  hints.ai_family = AF_UNSPEC;
-  hints.ai_socktype = SOCK_STREAM;
-  hints.ai_protocol = IPPROTO_TCP;
   char service[16];
   std::snprintf(service, sizeof(service), "%u", port_);
-  addrinfo *addresses = nullptr;
-  if (getaddrinfo(host_.c_str(), service, &hints, &addresses)) return false;
-
   SOCKET socket = INVALID_SOCKET;
   const auto started = Clock::now();
-  for (addrinfo *it = addresses; it; it = it->ai_next) {
-    socket = WSASocketW(it->ai_family, it->ai_socktype, it->ai_protocol,
-                        nullptr, 0, 0);
-    if (socket != INVALID_SOCKET &&
-        connect_with_timeout(socket, it->ai_addr, static_cast<int>(it->ai_addrlen)))
-      break;
-    if (socket != INVALID_SOCKET) closesocket(socket);
-    socket = INVALID_SOCKET;
+  // Pairing stores literal addresses in the utility.  Avoid the asynchronous
+  // resolver for those addresses; it is unnecessary and can leave the first
+  // health poll in SEARCHING while the Pi is already accepting connections.
+  sockaddr_in numeric4{};
+  sockaddr_in6 numeric6{};
+  if (InetPtonA(AF_INET, host_.c_str(), &numeric4.sin_addr) == 1) {
+    numeric4.sin_family = AF_INET;
+    numeric4.sin_port = htons(port_);
+    socket = WSASocketW(AF_INET, SOCK_STREAM, IPPROTO_TCP, nullptr, 0, 0);
+    if (socket == INVALID_SOCKET ||
+        !connect_with_timeout(socket, reinterpret_cast<const sockaddr *>(&numeric4),
+                              sizeof(numeric4))) {
+      if (socket != INVALID_SOCKET) closesocket(socket);
+      socket = INVALID_SOCKET;
+    }
+  } else if (InetPtonA(AF_INET6, host_.c_str(), &numeric6.sin6_addr) == 1) {
+    numeric6.sin6_family = AF_INET6;
+    numeric6.sin6_port = htons(port_);
+    socket = WSASocketW(AF_INET6, SOCK_STREAM, IPPROTO_TCP, nullptr, 0, 0);
+    if (socket == INVALID_SOCKET ||
+        !connect_with_timeout(socket, reinterpret_cast<const sockaddr *>(&numeric6),
+                              sizeof(numeric6))) {
+      if (socket != INVALID_SOCKET) closesocket(socket);
+      socket = INVALID_SOCKET;
+    }
+  } else {
+    PADDRINFOEXA addresses = nullptr;
+    if (!resolve_with_timeout(host_, service, running_, &addresses)) return false;
+    for (PADDRINFOEXA it = addresses; it; it = it->ai_next) {
+      socket = WSASocketW(it->ai_family, it->ai_socktype, it->ai_protocol,
+                          nullptr, 0, 0);
+      if (socket != INVALID_SOCKET &&
+          connect_with_timeout(socket, it->ai_addr, static_cast<int>(it->ai_addrlen)))
+        break;
+      if (socket != INVALID_SOCKET) closesocket(socket);
+      socket = INVALID_SOCKET;
+    }
+    FreeAddrInfoExA(addresses);
   }
-  freeaddrinfo(addresses);
   if (socket == INVALID_SOCKET) return false;
 
   char request[64];

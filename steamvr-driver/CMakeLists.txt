@@ -17,10 +17,10 @@ if(NOT EXISTS "${SVRT_OPENVR_INCLUDE}/openvr_driver.h")
 endif()
 
 add_library(driver_svrt SHARED
-  src/driver.cpp
-  src/audio_transport.cpp src/audio_transport.h
-  src/direct_mode.cpp src/direct_mode.h
-  src/receiver_link.cpp src/receiver_link.h)
+  driver.cpp
+  audio.cpp audio.h
+  direct_mode.cpp direct_mode.h
+  receiver_link.cpp receiver_link.h)
 target_compile_features(driver_svrt PRIVATE cxx_std_17)
 target_include_directories(driver_svrt PRIVATE "${SVRT_OPENVR_INCLUDE}")
 target_link_libraries(driver_svrt PRIVATE d3d11 dxgi ws2_32 ole32 uuid)

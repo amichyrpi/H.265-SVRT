@@ -1,7 +1,8 @@
-#include <svrt/svrt.h>
+#include <svrt.h>
 
-#include "status_server.h"
-#include "audio_receiver.h"
+#include "status.h"
+#include "audio.h"
+#include "pairing.h"
 
 #include <pthread.h>
 #include <signal.h>
@@ -82,6 +83,11 @@ int main(int argc, char **argv) {
 
     int exit_code = 0;
     while (!quitting) {
+        /* The video TCP listener is not open while the boot/pairing GUI owns
+           the display. Do not advertise READY and make the PC start FFmpeg. */
+        svrt_status_server_update(&status, SVRT_RECEIVER_STARTING, NULL);
+        svrt_pairing_gui_show(&status, &quitting);
+        if (quitting) break;
         svrt_config cfg = {.port = port,
                            .require_hardware = 1,
                            .require_zero_copy = 1,
