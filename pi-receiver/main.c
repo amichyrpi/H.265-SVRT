@@ -18,7 +18,6 @@ static volatile sig_atomic_t quitting;
 static void stop(int sig) {
     (void)sig;
     quitting = 1;
-    if (running) svrt_stop(running);
 }
 
 typedef struct monitor_args {
@@ -26,6 +25,19 @@ typedef struct monitor_args {
     svrt_status_server *server;
     atomic_int stopping;
 } monitor_args;
+
+typedef struct run_args {
+    svrt_context *context;
+    atomic_int done;
+    int result;
+} run_args;
+
+static void *run_receiver(void *opaque) {
+    run_args *args = opaque;
+    args->result = svrt_run(args->context);
+    atomic_store(&args->done, 1);
+    return NULL;
+}
 
 static void *monitor_receiver(void *opaque) {
     monitor_args *args = opaque;
@@ -109,7 +121,24 @@ int main(int argc, char **argv) {
         pthread_t monitor_thread;
         int monitoring = pthread_create(&monitor_thread, NULL, monitor_receiver,
                                         &monitor) == 0;
-        int rc = svrt_run(running);
+        run_args runner = {.context = running, .result = 0};
+        pthread_t run_thread;
+        int running_in_thread = pthread_create(&run_thread, NULL, run_receiver,
+                                               &runner) == 0;
+        int rc;
+        if (running_in_thread) {
+            while (!quitting && !atomic_load(&runner.done)) {
+                struct timespec delay = {.tv_sec = 0, .tv_nsec = 50000000};
+                nanosleep(&delay, NULL);
+            }
+            if (quitting) svrt_stop(running);
+            pthread_join(run_thread, NULL);
+            rc = runner.result;
+        } else {
+            fprintf(stderr, "SVRT: failed to start video worker thread\n");
+            rc = -1;
+            exit_code = 1;
+        }
         if (monitoring) {
             atomic_store(&monitor.stopping, 1);
             pthread_join(monitor_thread, NULL);

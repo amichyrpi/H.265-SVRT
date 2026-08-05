@@ -23,8 +23,14 @@ pkg_check_modules(SVRT_SDL_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
 pkg_check_modules(SVRT_SDL_IMAGE REQUIRED IMPORTED_TARGET SDL2_image)
 target_link_libraries(svrt-receiver PRIVATE svrt::svrt Threads::Threads ALSA::ALSA PkgConfig::SVRT_SDL_TTF PkgConfig::SVRT_SDL_IMAGE m)
 if(SVRT_BUILD_TESTS)
-  add_executable(svrt-gui-loadtest ../gui/tests/latencytest.c)
+  pkg_check_modules(SVRT_SDL REQUIRED IMPORTED_TARGET sdl2)
+  add_executable(svrt-gui-loadtest ../gui/tests/loadtest.c)
+  target_include_directories(svrt-gui-loadtest PRIVATE
+    ../gui ${SVRT_SDL_INCLUDE_DIRS} ${SVRT_SDL_TTF_INCLUDE_DIRS}
+    ${SVRT_SDL_IMAGE_INCLUDE_DIRS})
   target_compile_features(svrt-gui-loadtest PRIVATE c_std_11)
+  target_link_libraries(svrt-gui-loadtest PRIVATE
+    PkgConfig::SVRT_SDL PkgConfig::SVRT_SDL_TTF PkgConfig::SVRT_SDL_IMAGE m)
   add_test(NAME svrt-gui-loadtest COMMAND svrt-gui-loadtest)
 endif()
 install(TARGETS svrt-receiver RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

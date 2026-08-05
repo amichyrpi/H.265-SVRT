@@ -6,6 +6,7 @@
 #include <regex>
 #include <stdexcept>
 #include <cstdio>
+#include <cctype>
 
 static std::wstring ini_path() { wchar_t path[MAX_PATH]; GetEnvironmentVariableW(L"APPDATA",path,MAX_PATH); std::wstring dir=std::wstring(path)+L"\\SVRT Utility"; CreateDirectoryW(dir.c_str(),nullptr); return dir+L"\\settings.ini"; }
 static std::wstring widen(const std::string &value) { if(value.empty())return {};const int count=MultiByteToWideChar(CP_UTF8,0,value.data(),static_cast<int>(value.size()),nullptr,0);std::wstring out(count,L'\0');MultiByteToWideChar(CP_UTF8,0,value.data(),static_cast<int>(value.size()),out.data(),count);return out; }
@@ -15,25 +16,133 @@ static int get_int(const wchar_t *key,int fallback){try{return std::stoi(get(key
 UtilitySettings load_settings(){ UtilitySettings s;s.host=get(L"host",L"ROOT.local");s.client_id=get(L"client_id");s.refresh=get_int(L"refresh",60);s.width=get_int(L"width",1920);s.height=get_int(L"height",1080);s.verbose=get(L"verbose",L"0")=="1";if(s.refresh!=30&&s.refresh!=60)s.refresh=60;if(s.width!=1920&&s.width!=3840)s.width=1920;s.height=s.width==1920?1080:2160;return s; }
 static void put(const wchar_t *key,const std::wstring &value){const auto path=ini_path();WritePrivateProfileStringW(L"svrt",key,value.c_str(),path.c_str());}
 void save_settings(const UtilitySettings&s){put(L"host",widen(s.host));put(L"client_id",widen(s.client_id));put(L"refresh",std::to_wstring(s.refresh));put(L"width",std::to_wstring(s.width));put(L"height",std::to_wstring(s.height));put(L"verbose",s.verbose?L"1":L"0");}
-static void set_value(std::string &section, const char *key, const std::string &value) {
-  std::regex pattern("(\\\"" + std::string(key) + "\\\"\\s*:\\s*)[^,\\r\\n}]+");
-  std::smatch match;
-  if (std::regex_search(section, match, pattern)) {
-    // Do not construct a regex replacement such as "$1" + "30": "$130"
-    // is parsed as capture group 130 and corrupts the JSON.
-    section.replace(static_cast<size_t>(match.position()),
-                    static_cast<size_t>(match.length()), match.str(1) + value);
-    return;
+static size_t matching_brace(const std::string &json, size_t open) {
+  int depth = 0;
+  bool quoted = false;
+  bool escaped = false;
+  for (size_t i = open; i < json.size(); ++i) {
+    const char ch = json[i];
+    if (quoted) {
+      if (escaped) escaped = false;
+      else if (ch == '\\') escaped = true;
+      else if (ch == '"') quoted = false;
+      continue;
+    }
+    if (ch == '"') { quoted = true; continue; }
+    if (ch == '{') ++depth;
+    else if (ch == '}' && --depth == 0) return i;
   }
-  const auto close = section.find_last_of('}');
+  return std::string::npos;
+}
+
+static bool find_object(const std::string &json, const char *key,
+                        size_t &begin, size_t &end) {
+  const std::string token = "\"" + std::string(key) + "\"";
+  int depth = 0;
+  bool quoted = false;
+  bool escaped = false;
+  for (size_t i = 0; i < json.size(); ++i) {
+    const char ch = json[i];
+    if (quoted) {
+      if (escaped) escaped = false;
+      else if (ch == '\\') escaped = true;
+      else if (ch == '"') quoted = false;
+      continue;
+    }
+    if (ch == '"') {
+      if (depth == 1 && json.compare(i, token.size(), token) == 0) {
+        size_t colon = i + token.size();
+        while (colon < json.size() && std::isspace(static_cast<unsigned char>(json[colon]))) ++colon;
+        if (colon < json.size() && json[colon] == ':') {
+          ++colon;
+          while (colon < json.size() && std::isspace(static_cast<unsigned char>(json[colon]))) ++colon;
+          if (colon < json.size() && json[colon] == '{') {
+            const size_t close = matching_brace(json, colon);
+            if (close != std::string::npos) { begin = i; end = close; return true; }
+          }
+        }
+      }
+      quoted = true;
+    } else if (ch == '{') ++depth;
+    else if (ch == '}') --depth;
+  }
+  return false;
+}
+
+static void set_value(std::string &section, const char *key, const std::string &value) {
+  const std::string token = "\"" + std::string(key) + "\"";
+  size_t open = section.find('{');
+  const size_t close = open == std::string::npos ? std::string::npos : matching_brace(section, open);
   if (close == std::string::npos) return;
-  const auto open = section.find('{');
+  bool quoted = false, escaped = false;
+  int depth = 0;
+  for (size_t i = open; i < close; ++i) {
+    const char ch = section[i];
+    if (quoted) {
+      if (escaped) escaped = false;
+      else if (ch == '\\') escaped = true;
+      else if (ch == '"') quoted = false;
+      continue;
+    }
+    if (ch == '"') {
+      if (depth == 1 && section.compare(i, token.size(), token) == 0) {
+        size_t colon = i + token.size();
+        while (colon < close && std::isspace(static_cast<unsigned char>(section[colon]))) ++colon;
+        if (colon >= close || section[colon] != ':') continue;
+        size_t first = ++colon;
+        while (first < close && std::isspace(static_cast<unsigned char>(section[first]))) ++first;
+        size_t last = first;
+        bool value_quoted = false, value_escaped = false;
+        int nested = 0;
+        for (; last < close; ++last) {
+          const char value_ch = section[last];
+          if (value_quoted) {
+            if (value_escaped) value_escaped = false;
+            else if (value_ch == '\\') value_escaped = true;
+            else if (value_ch == '"') value_quoted = false;
+          } else if (value_ch == '"') value_quoted = true;
+          else if (value_ch == '{' || value_ch == '[') ++nested;
+          else if (value_ch == '}' || value_ch == ']') { if (nested) --nested; }
+          else if (!nested && value_ch == ',') break;
+        }
+        size_t replacement_end = last;
+        while (replacement_end > first && std::isspace(static_cast<unsigned char>(section[replacement_end - 1]))) --replacement_end;
+        section.replace(first, replacement_end - first, value);
+        return;
+      }
+      quoted = true;
+    } else if (ch == '{') ++depth;
+    else if (ch == '}') --depth;
+  }
   const auto content = section.find_last_not_of(" \t\r\n", close - 1);
   const bool empty = content == std::string::npos || content == open;
-  const bool needs_comma = !empty && section[content] != ',';
-  section.insert(close, std::string(needs_comma ? ",\n      " : "\n      ") +
-                        "\"" + key + "\" : " + value + "\n");
+  section.insert(close, std::string(empty ? "\n      " : ",\n      ") +
+                         "\"" + key + "\" : " + value + "\n");
 }
+
+#ifdef SVRT_CONFIG_TESTING
+bool config_json_regression_test() {
+  const std::string json =
+      "{\n"
+      "  \"steamvr\" : { \"nested\" : { \"text\" : \"brace } in string\" }, "
+      "\"supersampleScale\" : 0.5 },\n"
+      "  \"power\" : { \"message\" : \"{ still a string }\", "
+      "\"turnOffScreensTimeout\" : 10.0 }\n"
+      "}";
+  size_t begin = 0, end = 0;
+  if (!find_object(json, "steamvr", begin, end)) return false;
+  std::string steamvr = json.substr(begin, end - begin + 1);
+  set_value(steamvr, "supersampleScale", "1.0");
+  if (steamvr.find("\"nested\" : { \"text\" : \"brace } in string\" }") == std::string::npos ||
+      steamvr.find("\"supersampleScale\" : 1.0") == std::string::npos)
+    return false;
+  if (!find_object(json, "power", begin, end)) return false;
+  std::string power = json.substr(begin, end - begin + 1);
+  set_value(power, "turnOffScreensTimeout", "0.0");
+  return power.find("\"message\" : \"{ still a string }\"") != std::string::npos &&
+         power.find("\"turnOffScreensTimeout\" : 0.0") != std::string::npos;
+}
+#endif
 
 static std::string json_string(const std::string &value) {
   std::string escaped;
@@ -107,25 +216,22 @@ bool write_steamvr_settings(const UtilitySettings &settings, bool enabled) {
   // Windows cannot atomically replace a file while our CRT stream still owns
   // a non-delete-sharing handle to it.
   in.close();
-  const auto begin = json.find("\"driver_svrt\"");
-  if (begin == std::string::npos) {
-    const auto closing = json.find_last_of('}');
+  size_t begin = 0, end = 0;
+  if (!find_object(json, "driver_svrt", begin, end)) {
+    const size_t root = json.find('{');
+    const size_t closing = root == std::string::npos ? std::string::npos : matching_brace(json, root);
     if (closing == std::string::npos) return false;
     const auto previous = json.find_last_not_of(" \t\r\n", closing - 1);
-    if (previous == std::string::npos || json[previous] != '{') json.insert(closing, ",\n  ");
-    else json.insert(closing, "\n  ");
-    json.insert(closing + (previous == std::string::npos || json[previous] != '{' ? 4 : 3), driver_section(settings, enabled));
+    const bool empty = previous == std::string::npos || previous == root;
+    json.insert(closing, std::string(empty ? "\n  " : ",\n  ") + driver_section(settings, enabled) + "\n");
   } else {
-    const auto end = json.find('}', begin);
-    if (end == std::string::npos) return false;
     // This section belongs exclusively to SVRT, so replacing it atomically is
     // safer than retaining stale or malformed values from an interrupted save.
     json.replace(begin, end - begin + 1, driver_section(settings, enabled));
   }
-  const auto steamvr_begin = json.find("\"steamvr\"");
-  if (steamvr_begin != std::string::npos) {
-    const auto steamvr_end = json.find('}', steamvr_begin);
-    if (steamvr_end != std::string::npos) {
+  if (find_object(json, "steamvr", begin, end)) {
+    {
+      const size_t steamvr_begin = begin, steamvr_end = end;
       std::string section = json.substr(steamvr_begin, steamvr_end - steamvr_begin + 1);
       // Repair files written by the old "$1" regex replacement bug.
       section = std::regex_replace(section, std::regex("\\n[ \\t]*\\.0[ \\t]*"), "");
@@ -136,10 +242,9 @@ bool write_steamvr_settings(const UtilitySettings &settings, bool enabled) {
       json.replace(steamvr_begin, steamvr_end - steamvr_begin + 1, section);
     }
   }
-  const auto power_begin = json.find("\"power\"");
-  if (power_begin != std::string::npos) {
-    const auto power_end = json.find('}', power_begin);
-    if (power_end != std::string::npos) {
+  if (find_object(json, "power", begin, end)) {
+    {
+      const size_t power_begin = begin, power_end = end;
       std::string section = json.substr(power_begin, power_end - power_begin + 1);
       set_value(section, "turnOffScreensTimeout", "0.0");
       json.replace(power_begin, power_end - power_begin + 1, section);

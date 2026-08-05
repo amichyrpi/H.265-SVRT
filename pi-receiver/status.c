@@ -10,6 +10,8 @@
 #include <string.h>
 #include <sys/select.h>
 #include <sys/socket.h>
+#include <fcntl.h>
+#include <limits.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -22,17 +24,51 @@ static void refresh_pairing_code_locked(svrt_status_server *server) {
     time_t now = time(NULL);
     if (server->paired_client[0] || now - server->pairing_code_started < 30)
         return;
-    unsigned value = (unsigned)(now ^ (uintptr_t)server ^ (unsigned)getpid()) % 10000;
+    uint32_t random_value = 0;
+    size_t received = 0;
+    int random_fd = open("/dev/urandom", O_RDONLY | O_CLOEXEC);
+    if (random_fd >= 0) {
+        while (received < sizeof(random_value)) {
+            ssize_t count = read(random_fd, (char *)&random_value + received,
+                                 sizeof(random_value) - received);
+            if (count > 0) received += (size_t)count;
+            else if (count < 0 && errno == EINTR) continue;
+            else break;
+        }
+        close(random_fd);
+    }
+    if (received != sizeof(random_value)) {
+        server->pairing_code[0] = '\0';
+        return;
+    }
+    unsigned value = random_value % 10000;
     snprintf(server->pairing_code, sizeof(server->pairing_code), "%04u", value);
     server->pairing_code_started = now;
+    server->pairing_failures = 0;
 }
 
-static void save_pairing_locked(const svrt_status_server *server) {
-    FILE *file = fopen(pairing_file(), "w");
-    if (!file) return;
-    fputs(server->paired_client, file);
-    fputc('\n', file);
-    fclose(file);
+static int save_pairing_locked(const svrt_status_server *server) {
+    char temporary[PATH_MAX];
+    int used = snprintf(temporary, sizeof(temporary), "%s.tmp.XXXXXX",
+                        pairing_file());
+    if (used < 0 || (size_t)used >= sizeof(temporary)) return -1;
+    int fd = mkstemp(temporary);
+    if (fd < 0) return -1;
+    FILE *file = fdopen(fd, "w");
+    if (!file) {
+        close(fd);
+        unlink(temporary);
+        return -1;
+    }
+    int ok = fputs(server->paired_client, file) >= 0 && fputc('\n', file) != EOF;
+    if (ok) ok = fflush(file) == 0;
+    if (ok) ok = fsync(fileno(file)) == 0;
+    if (fclose(file) != 0) ok = 0;
+    if (!ok || rename(temporary, pairing_file()) != 0) {
+        unlink(temporary);
+        return -1;
+    }
+    return 0;
 }
 
 static void load_pairing_locked(svrt_status_server *server) {
@@ -82,6 +118,7 @@ static void answer_trace(svrt_status_server *server, int fd,
     setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
     int received_sent = 0;
     for (int waited_ms = 0; waited_ms < 1000; ++waited_ms) {
+        if (atomic_load(&server->stopping)) return;
         uint64_t received_pts = atomic_load(&server->received_pts_us);
         uint64_t processed_pts = atomic_load(&server->processed_pts_us);
         if (!received_sent && received_pts == target_pts_us) {
@@ -144,8 +181,14 @@ static void answer_client(svrt_status_server *server, int fd) {
         refresh_pairing_code_locked(server);
         if (!server->paired_client[0] && valid_client_id(client) && !strcmp(code, server->pairing_code)) {
             snprintf(server->paired_client, sizeof(server->paired_client), "%s", client);
-            save_pairing_locked(server);
-            accepted = 1;
+            if (save_pairing_locked(server) == 0) accepted = 1;
+            else server->paired_client[0] = '\0';
+        } else if (!server->paired_client[0] && server->pairing_code[0]) {
+            if (++server->pairing_failures >= 5) {
+                server->pairing_code_started = 0;
+                server->pairing_code[0] = '\0';
+                refresh_pairing_code_locked(server);
+            }
         }
         pthread_mutex_unlock(&server->pairing_lock);
         send_all(fd, accepted ? "SVRT/1 PAIRED\n" : "SVRT/1 PAIR_FAILED\n",
@@ -181,6 +224,24 @@ static void answer_client(svrt_status_server *server, int fd) {
         send_all(fd, response, (size_t)used);
 }
 
+typedef struct status_client {
+    svrt_status_server *server;
+    int fd;
+} status_client;
+
+static void *status_client_thread(void *opaque) {
+    status_client *client = opaque;
+    svrt_status_server *server = client->server;
+    answer_client(server, client->fd);
+    close(client->fd);
+    pthread_mutex_lock(&server->clients_lock);
+    --server->active_clients;
+    pthread_cond_broadcast(&server->clients_done);
+    pthread_mutex_unlock(&server->clients_lock);
+    free(client);
+    return NULL;
+}
+
 static void *status_thread(void *opaque) {
     svrt_status_server *server = opaque;
     int listener = socket(AF_INET6, SOCK_STREAM, 0);
@@ -205,8 +266,27 @@ static void *status_thread(void *opaque) {
         if (ready <= 0) continue;
         int client = accept(listener, NULL, NULL);
         if (client >= 0) {
-            answer_client(server, client);
-            close(client);
+            status_client *connection = malloc(sizeof(*connection));
+            if (!connection) {
+                close(client);
+                continue;
+            }
+            connection->server = server;
+            connection->fd = client;
+            pthread_mutex_lock(&server->clients_lock);
+            ++server->active_clients;
+            pthread_mutex_unlock(&server->clients_lock);
+            pthread_t thread;
+            if (pthread_create(&thread, NULL, status_client_thread, connection)) {
+                pthread_mutex_lock(&server->clients_lock);
+                --server->active_clients;
+                pthread_cond_broadcast(&server->clients_done);
+                pthread_mutex_unlock(&server->clients_lock);
+                close(client);
+                free(connection);
+            } else {
+                pthread_detach(thread);
+            }
         }
     }
     close(listener);
@@ -218,6 +298,8 @@ int svrt_status_server_start(svrt_status_server *server, uint16_t port) {
     memset(server, 0, sizeof(*server));
     server->port = port ? port : 9945;
     pthread_mutex_init(&server->pairing_lock, NULL);
+    pthread_mutex_init(&server->clients_lock, NULL);
+    pthread_cond_init(&server->clients_done, NULL);
     pthread_mutex_lock(&server->pairing_lock);
     load_pairing_locked(server);
     refresh_pairing_code_locked(server);
@@ -226,6 +308,9 @@ int svrt_status_server_start(svrt_status_server *server, uint16_t port) {
     pthread_t *thread = malloc(sizeof(*thread));
     if (!thread || pthread_create(thread, NULL, status_thread, server)) {
         free(thread);
+        pthread_cond_destroy(&server->clients_done);
+        pthread_mutex_destroy(&server->clients_lock);
+        pthread_mutex_destroy(&server->pairing_lock);
         return -1;
     }
     server->thread = thread;
@@ -299,5 +384,11 @@ void svrt_status_server_stop(svrt_status_server *server) {
     pthread_join(*thread, NULL);
     free(thread);
     server->thread = NULL;
+    pthread_mutex_lock(&server->clients_lock);
+    while (server->active_clients) pthread_cond_wait(&server->clients_done,
+                                                       &server->clients_lock);
+    pthread_mutex_unlock(&server->clients_lock);
+    pthread_cond_destroy(&server->clients_done);
+    pthread_mutex_destroy(&server->clients_lock);
     pthread_mutex_destroy(&server->pairing_lock);
 }

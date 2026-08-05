@@ -4,8 +4,11 @@
 #include <ws2tcpip.h>
 
 #include <algorithm>
+#include <atomic>
 #include <chrono>
 #include <cstdio>
+#include <string>
+#include <windows.h>
 
 namespace {
 using Clock = std::chrono::steady_clock;
@@ -37,49 +40,83 @@ bool connect_with_timeout(SOCKET socket, const sockaddr *address, int size) {
   return true;
 }
 
+struct ResolveContext {
+  OVERLAPPED overlapped{};
+  HANDLE event = nullptr;
+  HANDLE cancellation = nullptr;
+  PADDRINFOEXW addresses = nullptr;
+  std::atomic<DWORD> result{WSA_E_CANCELLED};
+  std::atomic<long> references{2};
+};
+
+void release_resolve_context(ResolveContext *context) {
+  if (context->references.fetch_sub(1) != 1) return;
+  if (context->addresses) FreeAddrInfoExW(context->addresses);
+  CloseHandle(context->event);
+  delete context;
+}
+
+void CALLBACK resolve_complete(DWORD error, DWORD, LPWSAOVERLAPPED overlapped) {
+  auto *context = reinterpret_cast<ResolveContext *>(overlapped);
+  context->result = error;
+  SetEvent(context->event);
+  release_resolve_context(context);
+}
+
+std::wstring wide(const std::string &value) {
+  const int size = MultiByteToWideChar(CP_UTF8, 0, value.data(),
+                                       static_cast<int>(value.size()), nullptr, 0);
+  if (size <= 0) return {};
+  std::wstring result(size, L'\0');
+  MultiByteToWideChar(CP_UTF8, 0, value.data(), static_cast<int>(value.size()),
+                      result.data(), size);
+  return result;
+}
+
 bool resolve_with_timeout(const std::string &host, const char *service,
                           const std::atomic<bool> &running,
-                          PADDRINFOEXA *addresses) {
-  ADDRINFOEXA hints{};
+                          PADDRINFOEXW *addresses) {
+  const std::wstring wide_host = wide(host);
+  const std::wstring wide_service = wide(service);
+  if (wide_host.empty() || wide_service.empty()) return false;
+  ADDRINFOEXW hints{};
   hints.ai_family = AF_UNSPEC;
   hints.ai_socktype = SOCK_STREAM;
   hints.ai_protocol = IPPROTO_TCP;
-  // The utility stores a numeric address when pairing.  Mark it as numeric so
-  // Winsock never sends this health poll through the asynchronous name
-  // resolver (which can remain pending even though the Pi is reachable).
-  IN_ADDR ipv4{};
-  IN6_ADDR ipv6{};
-  if (InetPtonA(AF_INET, host.c_str(), &ipv4) == 1 ||
-      InetPtonA(AF_INET6, host.c_str(), &ipv6) == 1)
-    hints.ai_flags |= AI_NUMERICHOST;
-  OVERLAPPED overlapped{};
-  overlapped.hEvent = CreateEventW(nullptr, TRUE, FALSE, nullptr);
-  if (!overlapped.hEvent) return false;
-  HANDLE cancellation = nullptr;
-  int result = GetAddrInfoExA(host.c_str(), service, NS_ALL, nullptr, &hints,
-                              addresses, nullptr, &overlapped, nullptr,
-                              &cancellation);
+  auto *context = new ResolveContext;
+  context->event = CreateEventW(nullptr, TRUE, FALSE, nullptr);
+  if (!context->event) { delete context; return false; }
+  context->overlapped.hEvent = context->event;
+  int result = GetAddrInfoExW(wide_host.c_str(), wide_service.c_str(), NS_ALL,
+                              nullptr, &hints, &context->addresses, nullptr,
+                              &context->overlapped, resolve_complete,
+                              &context->cancellation);
+  const bool asynchronous = result == WSA_IO_PENDING;
   if (result == WSA_IO_PENDING) {
     DWORD elapsed = 0;
     while (running && elapsed < 750) {
-      if (WaitForSingleObject(overlapped.hEvent, 50) == WAIT_OBJECT_0) break;
+      if (WaitForSingleObject(context->event, 50) == WAIT_OBJECT_0) break;
       elapsed += 50;
     }
-    if (WaitForSingleObject(overlapped.hEvent, 0) != WAIT_OBJECT_0) {
-      if (cancellation) GetAddrInfoExCancel(&cancellation);
-      // The OVERLAPPED structure and event must remain alive until Winsock
-      // signals completion. Returning after an arbitrary timeout leaves the
-      // resolver writing into dead stack memory during driver teardown.
-      WaitForSingleObject(overlapped.hEvent, INFINITE);
+    if (WaitForSingleObject(context->event, 0) != WAIT_OBJECT_0) {
+      if (context->cancellation) GetAddrInfoExCancel(&context->cancellation);
+      release_resolve_context(context);
+      return false;
     }
-    result = GetAddrInfoExOverlappedResult(&overlapped);
+    result = static_cast<int>(context->result.load());
+  } else if (result == 0) {
+    context->result = 0;
+  } else {
+    context->result = static_cast<DWORD>(result);
   }
-  CloseHandle(overlapped.hEvent);
-  if (result != 0 && *addresses) {
-    FreeAddrInfoExA(*addresses);
-    *addresses = nullptr;
+  if (result == 0) {
+    *addresses = context->addresses;
+    context->addresses = nullptr;
   }
-  return result == 0 && *addresses;
+  const bool success = result == 0 && *addresses;
+  release_resolve_context(context);
+  if (!asynchronous) release_resolve_context(context);
+  return success;
 }
 }  // namespace
 
@@ -203,9 +240,9 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
       socket = INVALID_SOCKET;
     }
   } else {
-    PADDRINFOEXA addresses = nullptr;
+    PADDRINFOEXW addresses = nullptr;
     if (!resolve_with_timeout(host_, service, running_, &addresses)) return false;
-    for (PADDRINFOEXA it = addresses; it; it = it->ai_next) {
+    for (PADDRINFOEXW it = addresses; it; it = it->ai_next) {
       socket = WSASocketW(it->ai_family, it->ai_socktype, it->ai_protocol,
                           nullptr, 0, 0);
       if (socket != INVALID_SOCKET &&
@@ -214,7 +251,7 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
       if (socket != INVALID_SOCKET) closesocket(socket);
       socket = INVALID_SOCKET;
     }
-    FreeAddrInfoExA(addresses);
+    FreeAddrInfoExW(addresses);
   }
   if (socket == INVALID_SOCKET) return false;
 

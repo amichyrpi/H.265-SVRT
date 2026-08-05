@@ -31,7 +31,8 @@ struct AudioHeader {
 void log(const char *message) {
   char line[512];
   std::snprintf(line, sizeof(line), "SVRT audio: %s", message);
-  vr::VRDriverLog()->Log(line);
+  vr::IVRDriverLog *driver_log = vr::VRDriverLog();
+  if (driver_log) driver_log->Log(line);
 }
 
 SOCKET connect_audio(const std::string &host, uint16_t port) {
@@ -112,30 +113,42 @@ void SvrtAudioTransport::Run() {
   ComPtr<IAudioClient> client;
   ComPtr<IAudioCaptureClient> capture;
   WAVEFORMATEX *mix = nullptr;
+  uint32_t wire_format = 0;
+  auto initialize_capture = [&]() -> HRESULT {
+    capture.Reset();
+    client.Reset();
+    endpoint.Reset();
+    if (mix) { CoTaskMemFree(mix); mix = nullptr; }
+    wire_format = 0;
+    HRESULT result = enumerator->GetDefaultAudioEndpoint(eRender, eConsole,
+                                                          &endpoint);
+    if (SUCCEEDED(result))
+      result = endpoint->Activate(__uuidof(IAudioClient), CLSCTX_ALL, nullptr,
+                                  &client);
+    if (SUCCEEDED(result)) result = client->GetMixFormat(&mix);
+    if (SUCCEEDED(result) && mix) {
+      if (mix->wFormatTag == WAVE_FORMAT_IEEE_FLOAT) wire_format = 3;
+      else if (mix->wFormatTag == WAVE_FORMAT_PCM) wire_format = 1;
+      else if (mix->wFormatTag == WAVE_FORMAT_EXTENSIBLE) {
+        const auto *extended = reinterpret_cast<WAVEFORMATEXTENSIBLE *>(mix);
+        if (extended->SubFormat == KSDATAFORMAT_SUBTYPE_IEEE_FLOAT) wire_format = 3;
+        else if (extended->SubFormat == KSDATAFORMAT_SUBTYPE_PCM) wire_format = 1;
+      }
+    }
+    if (SUCCEEDED(result) &&
+        (!wire_format || !mix ||
+         (mix->wBitsPerSample != 16 && mix->wBitsPerSample != 32)))
+      result = AUDCLNT_E_UNSUPPORTED_FORMAT;
+    if (SUCCEEDED(result))
+      result = client->Initialize(AUDCLNT_SHAREMODE_SHARED,
+          AUDCLNT_STREAMFLAGS_LOOPBACK, 1000000, 0, mix, nullptr);
+    if (SUCCEEDED(result)) result = client->GetService(IID_PPV_ARGS(&capture));
+    if (SUCCEEDED(result)) result = client->Start();
+    return result;
+  };
   HRESULT hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), nullptr,
       CLSCTX_ALL, IID_PPV_ARGS(&enumerator));
-  if (SUCCEEDED(hr))
-    hr = enumerator->GetDefaultAudioEndpoint(eRender, eConsole, &endpoint);
-  if (SUCCEEDED(hr)) hr = endpoint->Activate(__uuidof(IAudioClient), CLSCTX_ALL,
-                                              nullptr, &client);
-  if (SUCCEEDED(hr)) hr = client->GetMixFormat(&mix);
-  uint32_t wire_format = 0;
-  if (SUCCEEDED(hr) && mix) {
-    if (mix->wFormatTag == WAVE_FORMAT_IEEE_FLOAT) wire_format = 3;
-    else if (mix->wFormatTag == WAVE_FORMAT_PCM) wire_format = 1;
-    else if (mix->wFormatTag == WAVE_FORMAT_EXTENSIBLE) {
-      const auto *extended = reinterpret_cast<WAVEFORMATEXTENSIBLE *>(mix);
-      if (extended->SubFormat == KSDATAFORMAT_SUBTYPE_IEEE_FLOAT) wire_format = 3;
-      else if (extended->SubFormat == KSDATAFORMAT_SUBTYPE_PCM) wire_format = 1;
-    }
-  }
-  if (!wire_format || (mix->wBitsPerSample != 16 && mix->wBitsPerSample != 32))
-    hr = AUDCLNT_E_UNSUPPORTED_FORMAT;
-  if (SUCCEEDED(hr))
-    hr = client->Initialize(AUDCLNT_SHAREMODE_SHARED,
-        AUDCLNT_STREAMFLAGS_LOOPBACK, 1000000, 0, mix, nullptr);
-  if (SUCCEEDED(hr)) hr = client->GetService(IID_PPV_ARGS(&capture));
-  if (SUCCEEDED(hr)) hr = client->Start();
+  if (SUCCEEDED(hr)) hr = initialize_capture();
   if (FAILED(hr)) {
     char message[128];
     std::snprintf(message, sizeof(message),
@@ -174,7 +187,26 @@ void SvrtAudioTransport::Run() {
       log("connected to Raspberry Pi audio receiver");
     }
     UINT32 packets = 0;
-    if (FAILED(capture->GetNextPacketSize(&packets))) break;
+    const HRESULT packet_size_result = capture->GetNextPacketSize(&packets);
+    if (FAILED(packet_size_result)) {
+      if (packet_size_result != AUDCLNT_E_DEVICE_INVALIDATED) break;
+      char message[160];
+      std::snprintf(message, sizeof(message),
+                    "WASAPI device invalidated while reading packet size (0x%08lx); reinitializing",
+                    static_cast<unsigned long>(packet_size_result));
+      log(message);
+      if (socket != INVALID_SOCKET) { closesocket(socket); socket = INVALID_SOCKET; }
+      hr = initialize_capture();
+      if (FAILED(hr)) {
+        char message[128];
+        std::snprintf(message, sizeof(message),
+                      "WASAPI reinitialization failed (0x%08lx)",
+                      static_cast<unsigned long>(hr));
+        log(message);
+        break;
+      }
+      continue;
+    }
     if (!packets) {
       std::this_thread::sleep_for(std::chrono::milliseconds(3));
       continue;
@@ -182,8 +214,26 @@ void SvrtAudioTransport::Run() {
     BYTE *data = nullptr;
     UINT32 frames = 0;
     DWORD flags = 0;
-    if (FAILED(capture->GetBuffer(&data, &frames, &flags, nullptr, nullptr)))
-      break;
+    const HRESULT buffer_result =
+        capture->GetBuffer(&data, &frames, &flags, nullptr, nullptr);
+    if (FAILED(buffer_result)) {
+      if (buffer_result != AUDCLNT_E_DEVICE_INVALIDATED) break;
+      char message[160];
+      std::snprintf(message, sizeof(message),
+                    "WASAPI device invalidated while getting buffer (0x%08lx); reinitializing",
+                    static_cast<unsigned long>(buffer_result));
+      log(message);
+      if (socket != INVALID_SOCKET) { closesocket(socket); socket = INVALID_SOCKET; }
+      hr = initialize_capture();
+      if (FAILED(hr)) {
+        std::snprintf(message, sizeof(message),
+                      "WASAPI reinitialization failed (0x%08lx)",
+                      static_cast<unsigned long>(hr));
+        log(message);
+        break;
+      }
+      continue;
+    }
     const size_t bytes = static_cast<size_t>(frames) * mix->nBlockAlign;
     if (flags & AUDCLNT_BUFFERFLAGS_SILENT) {
       silence.assign(bytes, 0);

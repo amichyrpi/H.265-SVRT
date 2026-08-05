@@ -31,6 +31,10 @@ typedef struct svrt_status_server {
     char paired_client[65];
     time_t pairing_code_started;
     time_t pairing_started;
+    unsigned pairing_failures;
+    pthread_mutex_t clients_lock;
+    pthread_cond_t clients_done;
+    unsigned active_clients;
     void *thread;
 } svrt_status_server;
 

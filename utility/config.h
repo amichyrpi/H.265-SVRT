@@ -4,6 +4,9 @@ struct UtilitySettings { std::string host="ROOT.local", client_id; int refresh=6
 UtilitySettings load_settings();
 void save_settings(const UtilitySettings &settings);
 bool write_steamvr_settings(const UtilitySettings &settings, bool enabled);
+#ifdef SVRT_CONFIG_TESTING
+bool config_json_regression_test();
+#endif
 bool steamvr_is_running();
 bool stop_steamvr();
 bool install_steamvr_driver(const std::wstring &driver_directory);

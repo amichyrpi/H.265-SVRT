@@ -100,12 +100,22 @@ static void play_client(int fd, svrt_audio_receiver *receiver) {
     fprintf(stderr, "SVRT audio: playing %u Hz, %u channels through %s\n",
             rate, channels, output);
     const size_t frame_size = channels * (bits / 8);
-    unsigned char buffer[32768];
+    if (!frame_size || frame_size > SIZE_MAX - 32768) {
+        snd_pcm_close(pcm);
+        return;
+    }
+    unsigned char *buffer = malloc(32768 + frame_size);
+    if (!buffer) {
+        snd_pcm_close(pcm);
+        return;
+    }
+    size_t remainder_length = 0;
     while (!atomic_load(&receiver->stopping)) {
-        ssize_t bytes = recv(fd, buffer, sizeof(buffer), 0);
+        ssize_t bytes = recv(fd, buffer + remainder_length, 32768, 0);
         if (bytes < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) continue;
         if (bytes <= 0) break;
-        snd_pcm_sframes_t frames = (snd_pcm_sframes_t)((size_t)bytes / frame_size);
+        const size_t total = remainder_length + (size_t)bytes;
+        snd_pcm_sframes_t frames = (snd_pcm_sframes_t)(total / frame_size);
         unsigned char *cursor = buffer;
         while (frames > 0) {
             snd_pcm_sframes_t written = snd_pcm_writei(pcm, cursor, frames);
@@ -121,7 +131,11 @@ static void play_client(int fd, svrt_audio_receiver *receiver) {
             cursor += (size_t)written * frame_size;
             frames -= written;
         }
+        remainder_length = total % frame_size;
+        if (remainder_length) memmove(buffer, buffer + total - remainder_length,
+                                      remainder_length);
     }
+    free(buffer);
     snd_pcm_drop(pcm);
     snd_pcm_close(pcm);
     fprintf(stderr, "SVRT audio: stream disconnected\n");

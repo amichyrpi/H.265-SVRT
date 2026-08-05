@@ -17,10 +17,15 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   bool Start(const std::string &host, uint16_t port, unsigned fps,
              unsigned bitrate_mbps, const std::string &ffmpeg,
              const std::string &encoder);
+  bool EnsureDevice();
   void Stop();
   void SetReceiverAvailable(bool available);
   bool ReceiverAvailable() const { return receiver_available_.load(); }
   bool IsRunning() const { return running_.load(); }
+  // LUID of the adapter that owns the D3D device. SteamVR uses this on a
+  // display-redirect device to route the compositor backbuffer to the same
+  // GPU that the driver opens with OpenSharedResource.
+  uint64_t GraphicsAdapterLuid() const;
   bool EncoderFailed() const { return encoder_failed_.load(); }
   void CreateSwapTextureSet(uint32_t pid,const SwapTextureSetDesc_t *desc,SwapTextureSet_t *out) override;
   void DestroySwapTextureSet(vr::SharedTextureHandle_t handle) override;
@@ -31,12 +36,14 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   // IVRVirtualDisplay supplies the final compositor backbuffer through this
   // path. Unlike driver-direct mode, it preserves SteamVR's mirror/VR View.
   void PresentVirtual(vr::SharedTextureHandle_t backbuffer);
+  void WaitForVirtualPresent();
   void PostPresent(const Throttling_t *) override {}
   void GetFrameTiming(vr::DriverDirectMode_FrameTiming *timing) override { timing->m_nReprojectionFlags=0; }
  private:
   struct Texture { uint32_t pid=0; uint64_t group=0; Microsoft::WRL::ComPtr<ID3D11Texture2D> texture; };
   struct Slot { Microsoft::WRL::ComPtr<ID3D11Texture2D> staging; bool pending=false; uint64_t sequence=0; };
   bool EnsureSlots(unsigned eye_width,unsigned height,DXGI_FORMAT format);
+  bool EnsureDeviceLocked();
   bool EnsureVirtualSlots(unsigned width,unsigned height,DXGI_FORMAT format);
   bool CopyVirtualFrame(vr::SharedTextureHandle_t handle);
   bool StartEncoder(unsigned width,unsigned height);
@@ -53,7 +60,6 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   std::mutex mutex_,d3d_mutex_; std::condition_variable ready_; std::thread worker_;
   std::vector<uint8_t> frame_;
   std::atomic<bool> running_{false},accepting_{false},encoder_failed_{false},receiver_available_{false};
-  std::atomic<uintptr_t> latest_virtual_handle_{0};
   uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=35;
   unsigned logged_virtual_width_=0,logged_virtual_height_=0;
   DXGI_FORMAT logged_virtual_format_=DXGI_FORMAT_UNKNOWN;

@@ -37,14 +37,36 @@ LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM w, LPARAM l) {
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int show) {
   fonts = ui_fonts_create();
   WNDCLASSW type{}; type.hInstance = instance; type.lpszClassName = L"SvrtUtility"; type.lpfnWndProc = window_proc;
-  type.hCursor = LoadCursor(nullptr, IDC_ARROW); type.hbrBackground = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH)); RegisterClassW(&type);
+  type.hCursor = LoadCursor(nullptr, IDC_ARROW); type.hbrBackground = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
+  if (!RegisterClassW(&type) && GetLastError() != ERROR_CLASS_ALREADY_EXISTS) {
+    ui_fonts_destroy(fonts);
+    MessageBoxW(nullptr, L"The utility window class could not be registered.",
+                L"SVRT Utility", MB_OK | MB_ICONERROR);
+    return 1;
+  }
   HWND window = CreateWindowExW(0, type.lpszClassName, L"SVRT Utility", WS_CAPTION | WS_SYSMENU, 200, 140, kWindowWidth, kWindowHeight, nullptr, nullptr, instance, nullptr);
+  if (!window) {
+    ui_fonts_destroy(fonts);
+    MessageBoxW(nullptr, L"The utility window could not be created.",
+                L"SVRT Utility", MB_OK | MB_ICONERROR);
+    return 1;
+  }
   ui_create_controls(window, instance);
   settings = load_settings();
   ui_select(window, settings.refresh == 60 ? ID_REFRESH_60 : ID_REFRESH_30, settings.refresh == 60 ? ID_REFRESH_30 : ID_REFRESH_60);
   ui_select(window, settings.width <= 1920 ? ID_RESOLUTION_HD : ID_RESOLUTION_4K, settings.width <= 1920 ? ID_RESOLUTION_4K : ID_RESOLUTION_HD);
   if (settings.verbose) ui_toggle_verbose(window);
   ShowWindow(window, show); UpdateWindow(window);
-  MSG message; while (GetMessageW(&message, nullptr, 0, 0)) { TranslateMessage(&message); DispatchMessageW(&message); }
+  MSG message;
+  for (;;) {
+    const int result = GetMessageW(&message, nullptr, 0, 0);
+    if (result > 0) { TranslateMessage(&message); DispatchMessageW(&message); }
+    else if (result == 0) break;
+    else {
+      MessageBoxW(window, L"The utility message loop failed.",
+                  L"SVRT Utility", MB_OK | MB_ICONERROR);
+      return 1;
+    }
+  }
   return 0;
 }
