@@ -75,10 +75,6 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
                                         false);
     vr::VRProperties()->SetBoolProperty(
         properties, vr::Prop_HasDriverDirectModeComponent_Bool, false);
-    vr::VRProperties()->SetBoolProperty(
-        properties, vr::Prop_HasDisplayComponent_Bool, true);
-    vr::VRProperties()->SetBoolProperty(
-        properties, vr::Prop_HasVirtualDisplayComponent_Bool, true);
     vr::VRProperties()->SetBoolProperty(properties,
         vr::Prop_ReportsTimeSinceVSync_Bool, false);
     vr::VRProperties()->SetBoolProperty(properties,
@@ -126,10 +122,6 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
   void *GetComponent(const char *version) override {
     if (!std::strcmp(version, vr::IVRDisplayComponent_Version))
       return static_cast<vr::IVRDisplayComponent *>(this);
-    // Keep the component on the HMD as a compatibility path for SteamVR
-    // builds that deliver virtual-display callbacks to the active HMD rather
-    // than the auxiliary DisplayRedirect device. The redirect device remains
-    // registered for current runtimes and for the desktop mirror path.
     if (!std::strcmp(version, vr::IVRVirtualDisplay_Version))
       return static_cast<vr::IVRVirtualDisplay *>(this);
     return nullptr;
@@ -330,124 +322,6 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
   uint64_t frame_ = 0;
 };
 
-// SteamVR routes the final composited backbuffer through a DisplayRedirect
-// device. Keeping this component separate from the HMD is required by
-// IVRVirtualDisplay and also makes the compositor's desktop mirror use the
-// same image that is sent to the wireless receiver.
-class SvrtDisplayRedirect final : public vr::ITrackedDeviceServerDriver,
-                                  public vr::IVRVirtualDisplay {
- public:
-  explicit SvrtDisplayRedirect(SvrtHmd *hmd)
-      : hmd_(hmd), serial_(hmd ? std::string(hmd->serial()) + "-redirect"
-                               : "SVRT-redirect") {}
-  const char *serial() const { return serial_.c_str(); }
-
-  vr::EVRInitError Activate(uint32_t id) override {
-    id_.store(id);
-    properties_.store(vr::VRProperties()->TrackedDeviceToPropertyContainer(id));
-    const auto properties = properties_.load();
-    vr::VRProperties()->SetStringProperty(
-        properties, vr::Prop_ModelNumber_String, "SVRT Display Redirect");
-    vr::VRProperties()->SetStringProperty(properties,
-                                           vr::Prop_ManufacturerName_String,
-                                           "SVRT");
-    vr::VRProperties()->SetStringProperty(properties,
-                                           vr::Prop_ResourceRoot_String, "svrt");
-    vr::VRProperties()->SetBoolProperty(properties,
-                                        vr::Prop_IsOnDesktop_Bool, false);
-    vr::VRProperties()->SetBoolProperty(properties,
-                                        vr::Prop_DeviceIsWireless_Bool, true);
-    vr::VRProperties()->SetBoolProperty(
-        properties, vr::Prop_HasVirtualDisplayComponent_Bool, true);
-    // A redirect device must identify the adapter that owns its shared
-    // textures. Without this property SteamVR can register the device but
-    // never route composited frames to IVRVirtualDisplay::Present, leaving VR
-    // View on the static gray fallback.
-    vr::VRProperties()->SetUint64Property(
-        properties, vr::Prop_GraphicsAdapterLuid_Uint64,
-        hmd_ ? hmd_->direct().GraphicsAdapterLuid() : 0);
-    vr::VRProperties()->SetFloatProperty(
-        properties, vr::Prop_SecondsFromVsyncToPhotons_Float, .020f);
-    vr::VRProperties()->SetBoolProperty(
-        properties, vr::Prop_ReportsTimeSinceVSync_Bool, true);
-    return vr::VRInitError_None;
-  }
-
-  void Deactivate() override {
-    id_.store(vr::k_unTrackedDeviceIndexInvalid);
-    properties_.store(vr::k_ulInvalidPropertyContainer);
-  }
-
-  void *GetComponent(const char *version) override {
-    if (!std::strcmp(version, vr::IVRVirtualDisplay_Version))
-      return static_cast<vr::IVRVirtualDisplay *>(this);
-    return nullptr;
-  }
-
-  void EnterStandby() override {}
-  void DebugRequest(const char *, char *out, uint32_t size) override {
-    if (size) out[0] = 0;
-  }
-  vr::DriverPose_t GetPose() override {
-    vr::DriverPose_t pose{};
-    pose.poseIsValid = true;
-    pose.deviceIsConnected = true;
-    pose.result = vr::TrackingResult_Running_OK;
-    pose.qWorldFromDriverRotation.w = 1;
-    pose.qDriverFromHeadRotation.w = 1;
-    pose.qRotation.w = 1;
-    return pose;
-  }
-
-  void Present(const vr::PresentInfo_t *info, uint32_t size) override {
-    if (!hmd_ || !info || size < sizeof(*info) ||
-        id_.load() == vr::k_unTrackedDeviceIndexInvalid ||
-        !hmd_->direct().ReceiverAvailable())
-      return;
-    static std::atomic<uint64_t> callback_count{0};
-    const uint64_t count = ++callback_count;
-    if ((count == 1 || count % 120 == 0) && vr::VRDriverLog()) {
-      char message[128];
-      std::snprintf(message, sizeof(message),
-                    "SVRT: display redirect Present callback=%llu",
-                    static_cast<unsigned long long>(count));
-      vr::VRDriverLog()->Log(message);
-    }
-    hmd_->direct().PresentVirtual(info->backbufferTextureHandle);
-    std::lock_guard<std::mutex> lock(vsync_mutex_);
-    vsync_ = std::chrono::duration<double>(
-        std::chrono::steady_clock::now().time_since_epoch()).count();
-    frame_ = info->nFrameId;
-  }
-
-  void WaitForPresent() override {
-    if (hmd_) hmd_->direct().WaitForVirtualPresent();
-  }
-
-  bool GetTimeSinceLastVsync(float *seconds, uint64_t *frame) override {
-    if (!seconds || !frame ||
-        id_.load() == vr::k_unTrackedDeviceIndexInvalid)
-      return false;
-    std::lock_guard<std::mutex> lock(vsync_mutex_);
-    if (vsync_ <= 0) return false;
-    const double now = std::chrono::duration<double>(
-        std::chrono::steady_clock::now().time_since_epoch()).count();
-    *seconds = static_cast<float>(now - vsync_);
-    *frame = frame_;
-    return true;
-  }
-
- private:
-  SvrtHmd *hmd_ = nullptr;
-  std::string serial_;
-  std::atomic<uint32_t> id_{vr::k_unTrackedDeviceIndexInvalid};
-  std::atomic<vr::PropertyContainerHandle_t> properties_{
-      vr::k_ulInvalidPropertyContainer};
-  mutable std::mutex vsync_mutex_;
-  double vsync_ = 0;
-  uint64_t frame_ = 0;
-};
-
 class Provider final : public vr::IServerTrackedDeviceProvider {
  public:
   vr::EVRInitError Init(vr::IVRDriverContext *context) override {
@@ -459,7 +333,6 @@ class Provider final : public vr::IServerTrackedDeviceProvider {
     // which the old runtime has finished dispatching callbacks.
     VR_INIT_SERVER_DRIVER_CONTEXT(context);
     hmd_.reset();
-    redirect_.reset();
     hmd_ = std::make_unique<SvrtHmd>();
     if (!hmd_->direct().EnsureDevice()) {
       hmd_.reset();
@@ -468,16 +341,6 @@ class Provider final : public vr::IServerTrackedDeviceProvider {
     }
     if (!vr::VRServerDriverHost()->TrackedDeviceAdded(
             hmd_->serial(), vr::TrackedDeviceClass_HMD, hmd_.get())) {
-      hmd_.reset();
-      VR_CLEANUP_SERVER_DRIVER_CONTEXT();
-      return vr::VRInitError_Driver_Unknown;
-    }
-    redirect_ = std::make_unique<SvrtDisplayRedirect>(hmd_.get());
-    if (!vr::VRServerDriverHost()->TrackedDeviceAdded(
-            redirect_->serial(), vr::TrackedDeviceClass_DisplayRedirect,
-            redirect_.get())) {
-      redirect_.reset();
-      hmd_->Deactivate();
       hmd_.reset();
       VR_CLEANUP_SERVER_DRIVER_CONTEXT();
       return vr::VRInitError_Driver_Unknown;
@@ -494,7 +357,6 @@ class Provider final : public vr::IServerTrackedDeviceProvider {
     // (or DLL unload): vrserver can still dispatch a final callback while it
     // is removing the device records, and deleting the vtables here causes
     // the exit-time access violation seen in vrserver.exe.
-    if (redirect_) redirect_->Deactivate();
     if (hmd_) hmd_->Deactivate();
     VR_CLEANUP_SERVER_DRIVER_CONTEXT();
   }
@@ -513,7 +375,6 @@ class Provider final : public vr::IServerTrackedDeviceProvider {
   std::mutex lifecycle_mutex_;
   bool active_ = false;
   std::unique_ptr<SvrtHmd> hmd_;
-  std::unique_ptr<SvrtDisplayRedirect> redirect_;
 };
 
 static Provider provider;
