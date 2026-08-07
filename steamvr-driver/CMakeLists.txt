@@ -31,4 +31,6 @@ set_target_properties(driver_svrt PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY "$<1:${CMAKE_BINARY_DIR}/svrt/bin/win64>"
   LIBRARY_OUTPUT_DIRECTORY "$<1:${CMAKE_BINARY_DIR}/svrt/bin/win64>")
 add_custom_command(TARGET driver_svrt POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E remove_directory
+          ${CMAKE_BINARY_DIR}/svrt/resources
   COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/svrt ${CMAKE_BINARY_DIR}/svrt)

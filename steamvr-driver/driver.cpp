@@ -26,13 +26,47 @@ int int_setting(const char *key, int fallback) {
 }
 
 bool receiver_connected_state(SvrtLinkState state) {
-  return state != SvrtLinkState::Searching &&
-         state != SvrtLinkState::ReceiverError;
+  // Searching means the receiver is absent.  Starting and ReceiverError mean
+  // the link/device is still present but not currently trackable.
+  return state != SvrtLinkState::Searching;
 }
 
 bool receiver_stream_ready(SvrtLinkState state) {
   return state == SvrtLinkState::Ready || state == SvrtLinkState::Degraded;
 }
+
+// The Pi pose is expressed in raw driver space with Y=0 at the floor.  A
+// driver-provided universe keeps SteamVR from falling into Room Setup (C200)
+// when the first valid pose arrives.
+constexpr char kChaperoneJson[] = R"svrt({
+  "json_id": "chaperone_info",
+  "version": 5,
+  "time": "2026-08-07T00:00:00Z",
+  "universes": [
+    {
+      "universeID": 1,
+      "collision_bounds": [
+        [[-1.5, 0.0, -1.5], [1.5, 0.0, -1.5], [1.5, 2.5, -1.5], [-1.5, 2.5, -1.5]],
+        [[1.5, 0.0, -1.5], [1.5, 0.0, 1.5], [1.5, 2.5, 1.5], [1.5, 2.5, -1.5]],
+        [[1.5, 0.0, 1.5], [-1.5, 0.0, 1.5], [-1.5, 2.5, 1.5], [1.5, 2.5, 1.5]],
+        [[-1.5, 0.0, 1.5], [-1.5, 0.0, -1.5], [-1.5, 2.5, -1.5], [-1.5, 2.5, 1.5]]
+      ],
+      "play_area": [3.0, 3.0],
+      "seated": {
+        "translation": [0.0, 0.0, 0.0],
+        "yaw": 0.0
+      },
+      "standing": {
+        "translation": [0.0, 0.0, 0.0],
+        "yaw": 0.0
+      },
+      "setup_standing2": {
+        "translation": [0.0, 0.0, 0.0],
+        "yaw": 0.0
+      }
+    }
+  ]
+})svrt";
 }  // namespace
 
 class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
@@ -45,16 +79,28 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
   vr::EVRInitError Activate(uint32_t id) override {
     std::lock_guard<std::mutex> lifecycle(lifecycle_mutex_);
     id_.store(id);
+    tracking_seen_ = false;
     properties_.store(vr::VRProperties()->TrackedDeviceToPropertyContainer(id));
     const auto properties = properties_.load();
     vr::VRProperties()->SetStringProperty(properties, vr::Prop_ModelNumber_String,
                                            setting("model_number", "SVRT Wi-Fi HMD").c_str());
     vr::VRProperties()->SetStringProperty(properties,
                                            vr::Prop_ManufacturerName_String, "SVRT");
+    // Keep the device identity explicit while SteamVR activates the virtual
+    // display and builds its status entry.
+    vr::VRProperties()->SetStringProperty(
+        properties, vr::Prop_TrackingSystemName_String, "svrt");
+    vr::VRProperties()->SetStringProperty(
+        properties, vr::Prop_SerialNumber_String, serial_.c_str());
     vr::VRProperties()->SetStringProperty(properties,
                                            vr::Prop_ResourceRoot_String, "svrt");
     vr::VRProperties()->SetStringProperty(properties,
-        vr::Prop_RegisteredDeviceType_String, "svrt/SVRT-PI4-001");
+                                           vr::Prop_RegisteredDeviceType_String, "svrt/SVRT-PI4-001");
+    vr::VRProperties()->SetUint64Property(
+        properties, vr::Prop_CurrentUniverseId_Uint64, 1);
+    vr::VRProperties()->SetStringProperty(
+        properties, vr::Prop_DriverProvidedChaperoneJson_String,
+        kChaperoneJson);
     SetIcon(properties, vr::Prop_NamedIconPathDeviceOff_String,
             "{svrt}/icons/headset_status_off.png");
     SetIcon(properties, vr::Prop_NamedIconPathDeviceSearching_String,
@@ -75,8 +121,12 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
                                         false);
     vr::VRProperties()->SetBoolProperty(
         properties, vr::Prop_HasDriverDirectModeComponent_Bool, false);
+    vr::VRProperties()->SetBoolProperty(
+        properties, vr::Prop_HasDisplayComponent_Bool, true);
+    vr::VRProperties()->SetBoolProperty(
+        properties, vr::Prop_HasVirtualDisplayComponent_Bool, true);
     vr::VRProperties()->SetBoolProperty(properties,
-        vr::Prop_ReportsTimeSinceVSync_Bool, false);
+        vr::Prop_ReportsTimeSinceVSync_Bool, true);
     vr::VRProperties()->SetBoolProperty(properties,
                                         vr::Prop_DeviceIsWireless_Bool, true);
     vr::VRProperties()->SetBoolProperty(properties,
@@ -91,6 +141,10 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
         vr::Prop_DisplayFrequency_Float, static_cast<float>(fps()));
     vr::VRProperties()->SetFloatProperty(
         properties, vr::Prop_SecondsFromVsyncToPhotons_Float, .020f);
+    vr::VRDriverInput()->CreateBooleanComponent(
+        properties, "/input/system/touch", &system_touch_);
+    vr::VRDriverInput()->CreateBooleanComponent(
+        properties, "/input/system/click", &system_click_);
     // Apply this after all static properties so the offline proximity and icon
     // state cannot be overwritten by activation defaults above.
     icons_receiver_available_ = true;
@@ -115,6 +169,7 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     receiver_.Stop();
     audio_.Stop();
     direct_.Stop();
+    tracking_seen_ = false;
     properties_.store(vr::k_ulInvalidPropertyContainer);
     id_.store(vr::k_unTrackedDeviceIndexInvalid);
   }
@@ -143,22 +198,45 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     vr::DriverPose_t pose{};
     pose.qWorldFromDriverRotation.w = 1;
     pose.qDriverFromHeadRotation.w = 1;
-    pose.qRotation.w = 1;
-    pose.shouldApplyHeadModel = true;
+    // The Pi supplies a complete 6DoF pose.  Do not add SteamVR's neck/head
+    // model translation on top of the supplied position.
+    pose.shouldApplyHeadModel = false;
     // A reachable status service means the HMD is present even while the Pi
     // is still opening its video listener.  Treating STARTING as disconnected
     // makes SteamVR report HmdNotFound during the normal boot transition.
     const bool receiver_connected = receiver_connected_state(status.state);
     pose.deviceIsConnected = receiver_connected;
-    pose.poseIsValid = receiver_connected;
+    if (status.pose.fresh) tracking_seen_ = true;
+    const bool pose_available = receiver_connected && status.pose.connected &&
+                                status.pose.valid && status.pose.fresh;
+    pose.poseIsValid = pose_available;
+    if (pose_available) {
+      pose.vecPosition[0] = status.pose.position[0];
+      pose.vecPosition[1] = status.pose.position[1];
+      pose.vecPosition[2] = status.pose.position[2];
+      pose.vecVelocity[0] = status.pose.velocity[0];
+      pose.vecVelocity[1] = status.pose.velocity[1];
+      pose.vecVelocity[2] = status.pose.velocity[2];
+      pose.qRotation.x = status.pose.quaternion[0];
+      pose.qRotation.y = status.pose.quaternion[1];
+      pose.qRotation.z = status.pose.quaternion[2];
+      pose.qRotation.w = status.pose.quaternion[3];
+      pose.vecAngularVelocity[0] = status.pose.angular_velocity[0];
+      pose.vecAngularVelocity[1] = status.pose.angular_velocity[1];
+      pose.vecAngularVelocity[2] = status.pose.angular_velocity[2];
+    } else {
+      pose.qRotation.w = 1;
+    }
     pose.willDriftInYaw = false;
-    // The receiver has no optical/tracker source; its stable identity and
-    // zero pose are intentional. Reporting OutOfRange for ordinary latency
-    // warnings makes SteamVR repeatedly invalidate the scene and mirror. Keep
-    // a connected HMD in Running_OK and reserve Uninitialized for a real loss
-    // of the status link.
-    pose.result = receiver_connected ? vr::TrackingResult_Running_OK
-                                     : vr::TrackingResult_Uninitialized;
+    if (pose_available) {
+      pose.result = vr::TrackingResult_Running_OK;
+    } else if (!receiver_connected) {
+      pose.result = vr::TrackingResult_Uninitialized;
+    } else if (tracking_seen_) {
+      pose.result = vr::TrackingResult_Running_OutOfRange;
+    } else {
+      pose.result = vr::TrackingResult_Calibrating_OutOfRange;
+    }
     return pose;
   }
 
@@ -174,10 +252,13 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
         last_pose_state_ = state;
         if (vr::VRDriverLog()) {
           char message[160];
+          const vr::DriverPose_t pose = GetPose();
           std::snprintf(message, sizeof(message),
-                        "SVRT: pose state=%s connected=%d stream=%d",
+                        "SVRT: pose state=%s connected=%d valid=%d result=%d stream=%d",
                         SvrtReceiverLink::StateName(status.state),
-                        receiver_connected ? 1 : 0,
+                        pose.deviceIsConnected ? 1 : 0,
+                        pose.poseIsValid ? 1 : 0,
+                        static_cast<int>(pose.result),
                         receiver_available ? 1 : 0);
           vr::VRDriverLog()->Log(message);
         }
@@ -192,6 +273,17 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
       }
       pose_receiver_available_ = receiver_connected;
       UpdateConnectionIcons(receiver_connected);
+
+      if (system_touch_ != vr::k_ulInvalidInputComponentHandle) {
+          vr::VRDriverInput()->UpdateBooleanComponent(
+              system_touch_, false, 0.0);
+      }
+      
+      if (system_click_ != vr::k_ulInvalidInputComponentHandle) {
+          vr::VRDriverInput()->UpdateBooleanComponent(
+              system_click_, false, 0.0);
+      }
+      
       direct_.SetReceiverAvailable(receiver_available);
       audio_.SetReceiverAvailable(receiver_available);
     }
@@ -271,20 +363,6 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     if (available == icons_receiver_available_ ||
         properties == vr::k_ulInvalidPropertyContainer) return;
     icons_receiver_available_ = available;
-    // An offline wireless receiver is not a sleeping/worn HMD. Disabling the
-    // proximity capability while it is absent prevents SteamVR from replacing
-    // the correct searching/offline state with its inactivity standby state.
-    if (!available) {
-      vr::VRProperties()->SetBoolProperty(
-          properties, vr::Prop_ContainsProximitySensor_Bool, false);
-      vr::VRProperties()->SetBoolProperty(
-          properties, vr::Prop_IgnoreMotionForStandby_Bool, false);
-    } else {
-      vr::VRProperties()->SetBoolProperty(
-          properties, vr::Prop_ContainsProximitySensor_Bool, false);
-      vr::VRProperties()->SetBoolProperty(
-          properties, vr::Prop_IgnoreMotionForStandby_Bool, true);
-    }
     const char *off = "{svrt}/icons/headset_status_off.png";
     SetIcon(properties, vr::Prop_NamedIconPathDeviceOff_String, off);
     SetIcon(properties, vr::Prop_NamedIconPathDeviceSearching_String,
@@ -312,6 +390,13 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
   mutable std::mutex lifecycle_mutex_;
   bool icons_receiver_available_ = false;
   bool pose_receiver_available_ = true;
+  bool tracking_seen_ = false;
+  vr::VRInputComponentHandle_t proximity_ =
+      vr::k_ulInvalidInputComponentHandle;
+  vr::VRInputComponentHandle_t system_touch_ =
+      vr::k_ulInvalidInputComponentHandle;
+  vr::VRInputComponentHandle_t system_click_ =
+      vr::k_ulInvalidInputComponentHandle;
   int last_pose_state_ = -1;
   std::string serial_;
   SvrtDirectMode direct_;

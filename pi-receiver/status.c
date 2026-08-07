@@ -12,6 +12,7 @@
 #include <sys/socket.h>
 #include <fcntl.h>
 #include <limits.h>
+#include <math.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -45,6 +46,87 @@ static void refresh_pairing_code_locked(svrt_status_server *server) {
     snprintf(server->pairing_code, sizeof(server->pairing_code), "%04u", value);
     server->pairing_code_started = now;
     server->pairing_failures = 0;
+}
+
+static uint64_t monotonic_us(void) {
+    struct timespec now;
+    if (clock_gettime(CLOCK_MONOTONIC, &now)) return 0;
+    return (uint64_t)now.tv_sec * 1000000u +
+           (uint64_t)now.tv_nsec / 1000u;
+}
+
+void svrt_status_server_get_pose(svrt_status_server *server, int state,
+                                 svrt_synthetic_pose *pose) {
+    if (!server || !pose) return;
+    memset(pose, 0, sizeof(*pose));
+    pose->sequence = atomic_fetch_add(&server->pose_sequence, 1) + 1;
+    pose->timestamp_us = monotonic_us();
+    pose->connected = state == SVRT_RECEIVER_READY ||
+                      state == SVRT_RECEIVER_STREAMING;
+    pose->valid = pose->connected;
+    pose->result = pose->valid ? 200 /* TrackingResult_Running_OK */
+                               : 101 /* TrackingResult_Calibrating_OutOfRange */;
+    const char *disabled = getenv("SVRT_DISABLE_SYNTHETIC_POSE");
+    if (disabled && disabled[0] && strcmp(disabled, "0")) {
+        pose->valid = 0;
+        pose->result = 101;
+    }
+    if (!pose->valid) {
+        pose->quaternion[3] = 1.0;
+        return;
+    }
+
+    /* Small, slow, deterministic motion exercises all six pose degrees of
+       freedom while remaining safe for a seated test session. */
+    const double t = (double)pose->timestamp_us / 1000000.0;
+    const double x_frequency = 0.45;
+    const double y_frequency = 0.35;
+    const double z_frequency = 0.30;
+    const double yaw_frequency = 0.25;
+    const double pitch_frequency = 0.31;
+    const double roll_frequency = 0.37;
+    const double x_phase = x_frequency * t;
+    const double y_phase = y_frequency * t + 0.7;
+    const double z_phase = z_frequency * t + 1.3;
+    const double yaw_phase = yaw_frequency * t;
+    const double pitch_phase = pitch_frequency * t + 0.4;
+    const double roll_phase = roll_frequency * t + 1.1;
+    const double x_amplitude = 0.025;
+    const double y_amplitude = 0.018;
+    const double z_amplitude = 0.020;
+    const double yaw_amplitude = 0.12;
+    const double pitch_amplitude = 0.06;
+    const double roll_amplitude = 0.05;
+
+    pose->position[0] = x_amplitude * sin(x_phase);
+    // Raw driver space uses Y=0 as the floor.  Keep the synthetic head at a
+    // plausible standing height while retaining a small vertical movement.
+    pose->position[1] = 1.65 + y_amplitude * sin(y_phase);
+    pose->position[2] = z_amplitude * sin(z_phase);
+    pose->velocity[0] = x_amplitude * x_frequency * cos(x_phase);
+    pose->velocity[1] = y_amplitude * y_frequency * cos(y_phase);
+    pose->velocity[2] = z_amplitude * z_frequency * cos(z_phase);
+
+    const double yaw = yaw_amplitude * sin(yaw_phase);
+    const double pitch = pitch_amplitude * sin(pitch_phase);
+    const double roll = roll_amplitude * sin(roll_phase);
+    const double yaw_rate = yaw_amplitude * yaw_frequency * cos(yaw_phase);
+    const double pitch_rate = pitch_amplitude * pitch_frequency * cos(pitch_phase);
+    const double roll_rate = roll_amplitude * roll_frequency * cos(roll_phase);
+    pose->angular_velocity[0] = roll_rate;
+    pose->angular_velocity[1] = pitch_rate;
+    pose->angular_velocity[2] = yaw_rate;
+
+    const double cy = cos(yaw * 0.5);
+    const double sy = sin(yaw * 0.5);
+    const double cp = cos(pitch * 0.5);
+    const double sp = sin(pitch * 0.5);
+    const double cr = cos(roll * 0.5);
+    const double sr = sin(roll * 0.5);
+    pose->quaternion[0] = sr * cp * cy - cr * sp * sy;
+    pose->quaternion[1] = cr * sp * cy + sr * cp * sy;
+    pose->quaternion[2] = cr * cp * sy - sr * sp * cy;
+    pose->quaternion[3] = cr * cp * cy + sr * sp * sy;
 }
 
 static int save_pairing_locked(const svrt_status_server *server) {
@@ -212,14 +294,30 @@ static void answer_client(svrt_status_server *server, int fd) {
         return;
     }
     if (sscanf(request, "SVRT/1 PING %llu", &nonce) != 1) return;
-    char response[256];
+    svrt_synthetic_pose pose;
+    svrt_status_server_get_pose(server, atomic_load(&server->state), &pose);
+    char response[768];
     int used = snprintf(response, sizeof(response),
-                        "SVRT/1 STATUS %llu %d %llu %llu %llu %llu\n",
+                        "SVRT/1 STATUS %llu %d %llu %llu %llu %llu "
+                        "%d %d %d %llu %llu "
+                        "%.9f %.9f %.9f "
+                        "%.9f %.9f %.9f %.9f "
+                        "%.9f %.9f %.9f "
+                        "%.9f %.9f %.9f\n",
                         nonce, atomic_load(&server->state),
                         (unsigned long long)atomic_load(&server->decoded),
                         (unsigned long long)atomic_load(&server->presented),
                         (unsigned long long)atomic_load(&server->dropped),
-                        (unsigned long long)atomic_load(&server->bytes));
+                        (unsigned long long)atomic_load(&server->bytes),
+                        pose.valid, pose.connected, pose.result,
+                        (unsigned long long)pose.sequence,
+                        (unsigned long long)pose.timestamp_us,
+                        pose.position[0], pose.position[1], pose.position[2],
+                        pose.quaternion[0], pose.quaternion[1],
+                        pose.quaternion[2], pose.quaternion[3],
+                        pose.velocity[0], pose.velocity[1], pose.velocity[2],
+                        pose.angular_velocity[0], pose.angular_velocity[1],
+                        pose.angular_velocity[2]);
     if (used > 0 && (size_t)used < sizeof(response))
         send_all(fd, response, (size_t)used);
 }

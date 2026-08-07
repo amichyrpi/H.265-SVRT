@@ -40,6 +40,35 @@ bool connect_with_timeout(SOCKET socket, const sockaddr *address, int size) {
   return true;
 }
 
+bool send_all(SOCKET socket, const char *data, size_t size) {
+  while (size) {
+    const int sent = send(socket, data,
+                          static_cast<int>(std::min<size_t>(size, 1u << 20)),
+                          0);
+    if (sent <= 0) return false;
+    data += sent;
+    size -= static_cast<size_t>(sent);
+  }
+  return true;
+}
+
+bool receive_line(SOCKET socket, char *buffer, size_t capacity) {
+  if (!buffer || capacity < 2) return false;
+  size_t used = 0;
+  while (used + 1 < capacity) {
+    const int received = recv(
+        socket, buffer + used,
+        static_cast<int>(std::min<size_t>(capacity - used - 1, 1u << 20)), 0);
+    if (received <= 0) return false;
+    used += static_cast<size_t>(received);
+    if (std::memchr(buffer, '\n', used)) {
+      buffer[used] = '\0';
+      return true;
+    }
+  }
+  return false;
+}
+
 struct ResolveContext {
   OVERLAPPED overlapped{};
   HANDLE event = nullptr;
@@ -127,7 +156,7 @@ bool SvrtReceiverLink::Start(std::string host, uint16_t port, unsigned poll_ms,
   Stop();
   host_ = std::move(host);
   port_ = port ? port : 9945;
-  poll_ms_ = std::max(250u, poll_ms);
+  poll_ms_ = std::max(50u, poll_ms);
   latency_warning_ms_ = std::max(1u, latency_warning_ms);
   state_ = static_cast<int>(SvrtLinkState::Starting);
   running_ = true;
@@ -142,8 +171,18 @@ void SvrtReceiverLink::Stop() {
 }
 
 SvrtLinkStatus SvrtReceiverLink::GetStatus() const {
-  return {static_cast<SvrtLinkState>(state_.load()), latency_ms_.load(),
-          decoded_.load(), presented_.load(), dropped_.load(), bytes_.load()};
+  SvrtLinkStatus status{static_cast<SvrtLinkState>(state_.load()),
+                        latency_ms_.load(), decoded_.load(), presented_.load(),
+                        dropped_.load(), bytes_.load()};
+  std::lock_guard<std::mutex> lock(pose_mutex_);
+  status.pose = pose_;
+  const uint64_t now_ms = static_cast<uint64_t>(
+      std::chrono::duration_cast<std::chrono::milliseconds>(
+          Clock::now().time_since_epoch()).count());
+  status.pose.fresh = status.pose.valid && pose_received_ms_ != 0 &&
+                      now_ms >= pose_received_ms_ &&
+                      now_ms - pose_received_ms_ <= 200;
+  return status;
 }
 
 const char *SvrtReceiverLink::StateName(SvrtLinkState state) {
@@ -171,14 +210,17 @@ void SvrtReceiverLink::Run() {
     const auto nonce = static_cast<uint64_t>(
         std::chrono::duration_cast<std::chrono::milliseconds>(
             Clock::now().time_since_epoch()).count());
-    if (!Poll(nonce, status)) {
+    const bool poll_succeeded = Poll(nonce, status);
+  if (!poll_succeeded) {
       // A single lost health probe is normal while the Pi is decoding or
       // accepting a new stream. Do not withdraw the HMD pose for one missed
       // TCP request: SteamVR interprets that as a physical unplug and clears
       // the scene/mirror. Require several consecutive failures before going
-      // offline, while still reporting a real shutdown promptly.
+      // offline, while still reporting a real shutdown promptly.  The health
+      // request is a new TCP connection each time, so allow roughly 600 ms
+      // for DNS, Wi-Fi scheduling, or one delayed Pi response.
       ++missed_polls;
-      if (have_last_good && missed_polls < 4) {
+      if (have_last_good && missed_polls < 12) {
         status = last_good;
         status.state = SvrtLinkState::Degraded;
       } else {
@@ -203,6 +245,15 @@ void SvrtReceiverLink::Run() {
     presented_ = status.presented;
     dropped_ = status.dropped;
     bytes_ = status.bytes;
+    {
+      std::lock_guard<std::mutex> lock(pose_mutex_);
+      pose_ = status.pose;
+      if (poll_succeeded && status.pose.valid && status.pose.sequence != 0) {
+        pose_received_ms_ = static_cast<uint64_t>(
+            std::chrono::duration_cast<std::chrono::milliseconds>(
+                Clock::now().time_since_epoch()).count());
+      }
+    }
     for (unsigned waited = 0; running_ && waited < poll_ms_; waited += 50)
       Sleep(std::min(50u, poll_ms_ - waited));
   }
@@ -258,18 +309,33 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
   char request[64];
   int request_size = std::snprintf(request, sizeof(request), "SVRT/1 PING %llu\n",
                                    static_cast<unsigned long long>(nonce));
-  bool ok = send(socket, request, request_size, 0) == request_size;
-  char response[256]{};
-  int received = ok ? recv(socket, response, sizeof(response) - 1, 0) : -1;
+  bool ok = send_all(socket, request, static_cast<size_t>(request_size));
+  char response[768]{};
+  const bool received = ok && receive_line(socket, response, sizeof(response));
   closesocket(socket);
-  if (received <= 0) return false;
+  if (!received) return false;
 
   unsigned long long reply_nonce = 0, decoded = 0, presented = 0, dropped = 0,
-                     bytes = 0;
+                     bytes = 0, pose_sequence = 0, pose_timestamp = 0;
   int receiver_state = 0;
-  if (std::sscanf(response, "SVRT/1 STATUS %llu %d %llu %llu %llu %llu",
-                  &reply_nonce, &receiver_state, &decoded, &presented, &dropped,
-                  &bytes) != 6 || reply_nonce != nonce)
+  int pose_valid = 0, pose_connected = 0, pose_result = 101;
+  double px = 0, py = 0, pz = 0;
+  double qx = 0, qy = 0, qz = 0, qw = 1;
+  double vx = 0, vy = 0, vz = 0;
+  double avx = 0, avy = 0, avz = 0;
+  const int fields = std::sscanf(
+      response,
+      "SVRT/1 STATUS %llu %d %llu %llu %llu %llu "
+      "%d %d %d %llu %llu "
+      "%lf %lf %lf "
+      "%lf %lf %lf %lf "
+      "%lf %lf %lf "
+      "%lf %lf %lf",
+      &reply_nonce, &receiver_state, &decoded, &presented, &dropped, &bytes,
+      &pose_valid, &pose_connected, &pose_result, &pose_sequence,
+      &pose_timestamp,
+      &px, &py, &pz, &qx, &qy, &qz, &qw, &vx, &vy, &vz, &avx, &avy, &avz);
+  if ((fields != 6 && fields != 24) || reply_nonce != nonce)
     return false;
   status.latency_ms = static_cast<unsigned>(
       std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - started)
@@ -278,6 +344,26 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
   status.presented = presented;
   status.dropped = dropped;
   status.bytes = bytes;
+  if (fields == 24) {
+    status.pose.valid = pose_valid != 0;
+    status.pose.connected = pose_connected != 0;
+    status.pose.result = pose_result;
+    status.pose.sequence = pose_sequence;
+    status.pose.timestamp_us = pose_timestamp;
+    status.pose.position[0] = px;
+    status.pose.position[1] = py;
+    status.pose.position[2] = pz;
+    status.pose.quaternion[0] = qx;
+    status.pose.quaternion[1] = qy;
+    status.pose.quaternion[2] = qz;
+    status.pose.quaternion[3] = qw;
+    status.pose.velocity[0] = vx;
+    status.pose.velocity[1] = vy;
+    status.pose.velocity[2] = vz;
+    status.pose.angular_velocity[0] = avx;
+    status.pose.angular_velocity[1] = avy;
+    status.pose.angular_velocity[2] = avz;
+  }
   if (receiver_state == 3)
     status.state = SvrtLinkState::ReceiverError;
   else if (receiver_state == 0)

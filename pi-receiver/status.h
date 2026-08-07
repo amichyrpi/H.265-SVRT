@@ -14,6 +14,21 @@ enum svrt_receiver_state {
     SVRT_RECEIVER_ERROR = 3
 };
 
+/* Wire-compatible synthetic 6DoF pose returned with SVRT/1 STATUS. The
+   Raspberry Pi currently has no lighthouse sensor, so this is deliberately
+   bounded test motion rather than a claim of physical tracking. */
+typedef struct svrt_synthetic_pose {
+    int valid;
+    int connected;
+    int result;
+    uint64_t sequence;
+    uint64_t timestamp_us;
+    double position[3];
+    double quaternion[4]; /* x, y, z, w */
+    double velocity[3];
+    double angular_velocity[3];
+} svrt_synthetic_pose;
+
 typedef struct svrt_status_server {
     uint16_t port;
     atomic_int stopping;
@@ -26,6 +41,7 @@ typedef struct svrt_status_server {
     atomic_uint_fast64_t received_time_us;
     atomic_uint_fast64_t processed_pts_us;
     atomic_uint_fast64_t processed_time_us;
+    atomic_uint_fast64_t pose_sequence;
     pthread_mutex_t pairing_lock;
     char pairing_code[5];
     char paired_client[65];
@@ -41,6 +57,8 @@ typedef struct svrt_status_server {
 int svrt_status_server_start(svrt_status_server *server, uint16_t port);
 void svrt_status_server_update(svrt_status_server *server, int state,
                                const svrt_stats *stats);
+void svrt_status_server_get_pose(svrt_status_server *server, int state,
+                                 svrt_synthetic_pose *pose);
 void svrt_status_server_packet_event(void *opaque, svrt_packet_event event,
                                      uint64_t pts_us, uint64_t receiver_time_us);
 void svrt_status_server_reset_trace(svrt_status_server *server);

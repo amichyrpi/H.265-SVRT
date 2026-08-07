@@ -6,8 +6,6 @@ This is a **work in progress**. SteamVR driver and Raspberry Pi 4 receiver. This
 
 ## TODO
 
-- [ ] Add support for steamvr vr view
-- [ ] Optimize and fix steamvr driver freezing the pc
 - [ ] Finish receiver and driver optimizations to reduce latency on the decoder and get a 60fps framerate
 - [ ] Create the SVRT Utility App
   - [ ] Framerate and latency measurements
