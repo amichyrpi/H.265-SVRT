@@ -4,6 +4,7 @@
 
 #include <openvr_driver.h>
 
+#include <algorithm>
 #include <chrono>
 #include <atomic>
 #include <cmath>
@@ -23,6 +24,11 @@ std::string setting(const char *key, const char *fallback) {
 int int_setting(const char *key, int fallback) {
   const int value = vr::VRSettings()->GetInt32("driver_svrt", key);
   return value > 0 ? value : fallback;
+}
+
+float float_setting(const char *key, float fallback) {
+  const float value = vr::VRSettings()->GetFloat("driver_svrt", key);
+  return std::isfinite(value) && value > 0.0f ? value : fallback;
 }
 
 bool receiver_connected_state(SvrtLinkState state) {
@@ -316,8 +322,16 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
   }
   void GetProjectionRaw(vr::EVREye, float *left, float *right, float *top,
                         float *bottom) override {
-    *left = *top = -1;
-    *right = *bottom = 1;
+    // SteamVR applies late rotational reprojection after the eye image has
+    // been rendered. With an exactly edge-to-edge projection, that rotation
+    // exposes pixels outside the rectangular source texture as mirrored black
+    // triangles in the outer top corners (and a strip at the opposite edge).
+    // Render a modest symmetric guard band so the reprojected visible area
+    // remains covered. This does not alter the streamed output dimensions.
+    const float tangent = std::clamp(
+        float_setting("projection_tangent", 1.15f), 1.0f, 1.5f);
+    *left = *top = -tangent;
+    *right = *bottom = tangent;
   }
   vr::DistortionCoordinates_t ComputeDistortion(vr::EVREye, float u,
                                                  float v) override {

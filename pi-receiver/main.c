@@ -101,6 +101,7 @@ int main(int argc, char **argv) {
         svrt_pairing_gui_show(&status, &quitting);
         if (quitting) break;
         svrt_config cfg = {.port = port,
+                           .extra_port = (uint16_t)(port + 3),
                            .require_hardware = 1,
                            .require_zero_copy = 1,
                            .fullscreen = 1,

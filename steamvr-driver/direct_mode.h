@@ -46,6 +46,7 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
     Microsoft::WRL::ComPtr<ID3D11Texture2D> input, converted, staging;
     Microsoft::WRL::ComPtr<ID3D11VideoProcessorInputView> input_view;
     Microsoft::WRL::ComPtr<ID3D11VideoProcessorOutputView> output_view;
+    Microsoft::WRL::ComPtr<ID3D11Query> source_copied;
     bool pending=false; uint64_t sequence=0;
   };
   bool EnsureSlots(unsigned eye_width,unsigned height,DXGI_FORMAT format);
@@ -53,6 +54,7 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   bool EnsureVirtualSlots(unsigned width,unsigned height,DXGI_FORMAT format);
   bool EnsureGpuConversion(unsigned width,unsigned height,DXGI_FORMAT format);
   bool ConvertSlot(Slot &slot);
+  bool WaitForSourceCopy(Slot &slot);
   bool CopyVirtualFrame(vr::SharedTextureHandle_t handle);
   bool StartEncoder(unsigned width,unsigned height);
   void EncoderThread(); void CloseEncoder();
@@ -62,7 +64,6 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   Microsoft::WRL::ComPtr<ID3D11VideoProcessorEnumerator> video_enumerator_;
   Microsoft::WRL::ComPtr<ID3D11VideoProcessor> video_processor_;
   std::unordered_map<uint64_t,Texture> textures_; std::vector<Slot> slots_;
-  std::unordered_map<uintptr_t, Microsoft::WRL::ComPtr<ID3D11Texture2D>> virtual_textures_;
   vr::SharedTextureHandle_t submitted_[2]{}; uint32_t next_[2]{};
   // lifecycle_mutex_ serializes the short callback-side access to the D3D
   // objects with Stop().  OpenVR may deliver a final Present while the
@@ -70,12 +71,14 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   // is a use-after-reset race.
   mutable std::mutex lifecycle_mutex_;
   std::mutex mutex_,d3d_mutex_; std::condition_variable ready_; std::thread worker_;
-  std::vector<uint8_t> frame_;
+  std::vector<uint8_t> frame_,extra_frame_;
   bool gpu_nv12_=false;
   std::atomic<bool> running_{false},accepting_{false},encoder_failed_{false},receiver_available_{false},disconnect_requested_{false};
   uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=20;
   std::chrono::steady_clock::time_point next_capture_{};
   unsigned logged_virtual_width_=0,logged_virtual_height_=0;
   DXGI_FORMAT logged_virtual_format_=DXGI_FORMAT_UNKNOWN;
-  std::string host_,ffmpeg_,encoder_,pixel_format_="bgra"; uint16_t port_=9944; HANDLE pipe_=INVALID_HANDLE_VALUE,process_=nullptr;
+  std::string host_,ffmpeg_,encoder_,pixel_format_="bgra"; uint16_t port_=9944;
+  HANDLE pipe_=INVALID_HANDLE_VALUE,process_=nullptr;
+  HANDLE extra_pipe_=INVALID_HANDLE_VALUE,extra_process_=nullptr;
 };

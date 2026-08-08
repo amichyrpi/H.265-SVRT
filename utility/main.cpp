@@ -54,7 +54,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int show) {
   ui_create_controls(window, instance);
   settings = load_settings();
   ui_select(window, settings.refresh == 60 ? ID_REFRESH_60 : ID_REFRESH_30, settings.refresh == 60 ? ID_REFRESH_30 : ID_REFRESH_60);
-  ui_select(window, settings.width <= 1920 ? ID_RESOLUTION_HD : ID_RESOLUTION_4K, settings.width <= 1920 ? ID_RESOLUTION_4K : ID_RESOLUTION_HD);
+  ui_select(window, settings.width <= 2160 ? ID_RESOLUTION_HD : ID_RESOLUTION_4K, settings.width <= 2160 ? ID_RESOLUTION_4K : ID_RESOLUTION_HD);
   if (settings.verbose) ui_toggle_verbose(window);
   ShowWindow(window, show); UpdateWindow(window);
   MSG message;

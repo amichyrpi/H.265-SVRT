@@ -3,6 +3,7 @@ if(NOT SVRT_BUILD_PI_LIBRARY OR NOT UNIX)
 endif()
 
 find_package(PkgConfig REQUIRED)
+find_package(Threads REQUIRED)
 pkg_check_modules(SVRT_AV REQUIRED IMPORTED_TARGET libavformat libavcodec libavutil)
 pkg_check_modules(SVRT_DRM REQUIRED IMPORTED_TARGET libdrm)
 
@@ -26,7 +27,7 @@ add_library(svrt STATIC svrt.c drm_presenter.c drm_geometry.c)
 add_library(svrt::svrt ALIAS svrt)
 target_compile_features(svrt PUBLIC c_std_11)
 target_include_directories(svrt PUBLIC include PRIVATE .)
-target_link_libraries(svrt PUBLIC svrt::pipe PkgConfig::SVRT_AV ${SVRT_SDL_TARGET} PkgConfig::SVRT_DRM)
+target_link_libraries(svrt PUBLIC svrt::pipe PkgConfig::SVRT_AV ${SVRT_SDL_TARGET} PkgConfig::SVRT_DRM Threads::Threads)
 target_compile_definitions(svrt PRIVATE _POSIX_C_SOURCE=200809L)
 
 install(TARGETS svrt ARCHIVE DESTINATION lib)

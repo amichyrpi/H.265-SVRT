@@ -14,8 +14,8 @@ std::wstring driver_directory() {
 
 void steamvr_save(HWND window, UtilitySettings &settings, bool start) {
   settings.refresh = ui_is_selected(ID_REFRESH_60) ? 60 : 30;
-  settings.width = ui_is_selected(ID_RESOLUTION_HD) ? 1920 : 3840;
-  settings.height = settings.width == 1920 ? 1080 : 2160;
+  settings.width = ui_is_selected(ID_RESOLUTION_HD) ? 2160 : 4320;
+  settings.height = settings.width == 2160 ? 1080 : 2160;
   settings.verbose = ui_is_selected(ID_VERBOSE);
   const bool was_running = steamvr_is_running();
   const bool should_run = start || was_running;

@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <poll.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <time.h>
@@ -20,7 +21,7 @@
 #include <drm_mode.h>
 
 #define SVRT_MAX_PLANES 4
-#define SVRT_FB_CACHE_SIZE 16
+#define SVRT_FB_CACHE_SIZE 32
 typedef struct svrt_cached_fb {
     uint64_t object_ids[SVRT_MAX_PLANES];
     uint32_t width,height,format,fb,handles[SVRT_MAX_PLANES];
@@ -41,6 +42,18 @@ struct svrt_drm {
     uint64_t present_calls,present_total_ns,present_max_ns;
     uint32_t atomic_props[10];
     int atomic_ready;
+    uint32_t dual_planes[6],dual_props[6][10];
+    int dual_ready;
+    struct {
+        uint32_t handles[4],pitches[4],fb;
+        uint8_t *maps[3];size_t sizes[3];
+    } extra[3];
+    unsigned extra_index;
+    /* Stateless V4L2 capture buffers remain owned by the decoder.  A cloned
+       AVFrame is the reference which prevents FFmpeg from queueing a buffer
+       back to rpivid while KMS is still scanning it out. */
+    AVFrame *displayed_main,*pending_main;
+    int page_flip_pending;
 };
 
 /* A dependency-free 5x7 font. Bits 4..0 are the pixels in each row. */
@@ -104,12 +117,13 @@ static int atomic_present(svrt_drm *c,uint32_t fb,int32_t dx,int32_t dy,uint32_t
     const uint64_t values[]={fb,c->crtc,(uint64_t)(int64_t)dx,(uint64_t)(int64_t)dy,dw,dh,0,0,(uint64_t)sw<<16,(uint64_t)sh<<16};drmModeAtomicReqPtr req=drmModeAtomicAlloc();if(!req)return -1;
     int rc=0;for(unsigned i=0;i<10;i++)if(drmModeAtomicAddProperty(req,c->plane,c->atomic_props[i],values[i])<0){rc=-1;break;}if(!rc)rc=drmModeAtomicCommit(c->fd,req,DRM_MODE_ATOMIC_NONBLOCK,NULL);drmModeAtomicFree(req);return rc;
 }
+static int used_by_dual(const svrt_drm *c,uint32_t plane){for(unsigned i=0;i<6;i++)if(c->dual_planes[i]==plane)return 1;return 0;}
 static int open_hud(svrt_drm *c) {
     drmModePlaneResPtr rs=drmModeGetPlaneResources(c->fd);if(!rs)return -1;
     uint64_t best_z=0;uint32_t best=0;
     for(uint32_t i=0;i<rs->count_planes;i++){drmModePlanePtr p=drmModeGetPlane(c->fd,rs->planes[i]);if(!p)continue;
         uint64_t type=property(c->fd,p->plane_id,DRM_MODE_OBJECT_PLANE,"type"),z=property(c->fd,p->plane_id,DRM_MODE_OBJECT_PLANE,"zpos");
-        if(p->plane_id!=c->plane&&(p->possible_crtcs&(1u<<c->crtc_index))&&supports_format(p,DRM_FORMAT_ARGB8888)&&(!type||type==DRM_PLANE_TYPE_OVERLAY)&&(!best||z>=best_z)){best=p->plane_id;best_z=z;}
+        if(p->plane_id!=c->plane&&!used_by_dual(c,p->plane_id)&&(p->possible_crtcs&(1u<<c->crtc_index))&&supports_format(p,DRM_FORMAT_ARGB8888)&&(!type||type==DRM_PLANE_TYPE_OVERLAY)&&(!best||z>=best_z)){best=p->plane_id;best_z=z;}
         drmModeFreePlane(p);
     }drmModeFreePlaneResources(rs);if(!best)return -1;c->hud_plane=best;
     c->hud_height=c->crtc_h<720?32:48;struct drm_mode_create_dumb create={0};create.width=c->crtc_w;create.height=c->hud_height;create.bpp=32;
@@ -160,4 +174,110 @@ int svrt_drm_present(svrt_drm *c,const AVFrame *frame,char *error,size_t error_s
     if(!c->atomic_ready)c->atomic_ready=prepare_atomic(c)?-1:1;int commit_rc;if(c->atomic_ready>0){commit_rc=atomic_present(c,entry->fb,dx,dy,dw,dh,frame->width,frame->height);for(int retry=0;commit_rc&&errno==EBUSY&&retry<20;retry++){struct timespec delay={.tv_sec=0,.tv_nsec=1000000};nanosleep(&delay,NULL);commit_rc=atomic_present(c,entry->fb,dx,dy,dw,dh,frame->width,frame->height);}}else commit_rc=drmModeSetPlane(c->fd,c->plane,c->crtc,entry->fb,0,dx,dy,dw,dh,0,0,(uint32_t)frame->width<<16,(uint32_t)frame->height<<16);if(commit_rc){if(c->atomic_ready>0&&errno==EBUSY){if(error&&error_size)error[0]='\0';return 1;}fail(error,error_size,c->atomic_ready>0?"atomic KMS commit":"drmModeSetPlane");return -1;}
     if(!c->hud_state){c->hud_state=open_hud(c)?-1:1;if(c->hud_state<0)fprintf(stderr,"SVRT: FPS overlay unavailable: %s\n",strerror(errno));}if(c->hud_state>0)count_presented_frame(c);uint64_t elapsed=monotonic_ns()-present_started;c->present_calls++;c->present_total_ns+=elapsed;if(elapsed>c->present_max_ns)c->present_max_ns=elapsed;if(c->present_calls%60==0){fprintf(stderr,"SVRT: KMS average=%.3fms max=%.3fms cached_buffers=%u\n",c->present_total_ns/(double)c->present_calls/1000000.0,c->present_max_ns/1000000.0,c->cache_count);c->present_calls=0;c->present_total_ns=0;c->present_max_ns=0;}return 0;
 }
-void svrt_drm_close(svrt_drm **ptr){if(!ptr||!*ptr)return;svrt_drm *c=*ptr;*ptr=NULL;if(c->plane)drmModeSetPlane(c->fd,c->plane,c->crtc,0,0,0,0,0,0,0,0,0,0);release_old(c);release_cache(c);if(c->hud_plane)drmModeSetPlane(c->fd,c->hud_plane,c->crtc,0,0,0,0,0,0,0,0,0,0);if(c->hud_pixels)munmap(c->hud_pixels,c->hud_size);if(c->hud_fb)drmModeRmFB(c->fd,c->hud_fb);if(c->hud_handle){struct drm_mode_destroy_dumb destroy={.handle=c->hud_handle};drmIoctl(c->fd,DRM_IOCTL_MODE_DESTROY_DUMB,&destroy);}free(c);}
+
+static int create_extra_buffers(svrt_drm *c){
+    for(unsigned n=0;n<3;n++){
+        uint32_t widths[3]={960,480,480},heights[3]={1080,540,540};
+        for(int p=0;p<3;p++){
+            struct drm_mode_create_dumb create={0};create.width=widths[p];create.height=heights[p];create.bpp=8;
+            if(drmIoctl(c->fd,DRM_IOCTL_MODE_CREATE_DUMB,&create))return -1;
+            c->extra[n].handles[p]=create.handle;c->extra[n].pitches[p]=create.pitch;c->extra[n].sizes[p]=create.size;
+            struct drm_mode_map_dumb map={0};map.handle=create.handle;
+            if(drmIoctl(c->fd,DRM_IOCTL_MODE_MAP_DUMB,&map))return -1;
+            c->extra[n].maps[p]=mmap(NULL,create.size,PROT_READ|PROT_WRITE,MAP_SHARED,c->fd,map.offset);
+            if(c->extra[n].maps[p]==MAP_FAILED)return -1;
+        }
+        uint32_t offsets[4]={0};
+        if(drmModeAddFB2(c->fd,960,1080,DRM_FORMAT_YUV420,c->extra[n].handles,
+                         c->extra[n].pitches,offsets,&c->extra[n].fb,0))return -1;
+    }
+    return 0;
+}
+static int prepare_dual(svrt_drm *c,uint32_t main_format){
+    drmModePlaneResPtr rs=drmModeGetPlaneResources(c->fd);if(!rs)return -1;unsigned found=0;
+    for(uint32_t i=0;i<rs->count_planes&&found<4;i++){
+        drmModePlanePtr p=drmModeGetPlane(c->fd,rs->planes[i]);if(!p)continue;
+        uint64_t type=property(c->fd,p->plane_id,DRM_MODE_OBJECT_PLANE,"type");
+        uint32_t wanted=found<2?main_format:DRM_FORMAT_YUV420;
+        if((p->possible_crtcs&(1u<<c->crtc_index))&&supports_format(p,wanted)&&
+           (!type||type==DRM_PLANE_TYPE_OVERLAY)&&p->plane_id!=c->hud_plane){
+            c->dual_planes[found++]=p->plane_id;
+        }
+        drmModeFreePlane(p);
+    }
+    drmModeFreePlaneResources(rs);if(found<4)return -1;
+    static const char *names[]={"FB_ID","CRTC_ID","CRTC_X","CRTC_Y","CRTC_W","CRTC_H","SRC_X","SRC_Y","SRC_W","SRC_H"};
+    if(drmSetClientCap(c->fd,DRM_CLIENT_CAP_ATOMIC,1))return -1;
+    for(unsigned p=0;p<4;p++)for(unsigned i=0;i<10;i++){
+        c->dual_props[p][i]=property_id(c->fd,c->dual_planes[p],DRM_MODE_OBJECT_PLANE,names[i],NULL);
+        if(!c->dual_props[p][i])return -1;
+    }
+    if(create_extra_buffers(c))return -1;
+    for(unsigned p=0;p<4;p++)set_zpos(c,c->dual_planes[p],p+1);
+    return 0;
+}
+static int dual_add(drmModeAtomicReqPtr req,svrt_drm *c,unsigned plane,uint32_t fb,
+                    int x,int y,unsigned w,unsigned h,unsigned sx,unsigned sy,
+                    unsigned sw,unsigned sh){
+    uint64_t v[]={fb,c->crtc,(uint64_t)(int64_t)x,(uint64_t)(int64_t)y,w,h,
+                  (uint64_t)sx<<16,(uint64_t)sy<<16,(uint64_t)sw<<16,(uint64_t)sh<<16};
+    for(unsigned i=0;i<10;i++)if(drmModeAtomicAddProperty(req,c->dual_planes[plane],c->dual_props[plane][i],v[i])<0)return -1;
+    return 0;
+}
+static void dual_page_flip(int fd,unsigned sequence,unsigned sec,unsigned usec,void *opaque){
+    (void)fd;(void)sequence;(void)sec;(void)usec;svrt_drm *c=opaque;
+    av_frame_free(&c->displayed_main);c->displayed_main=c->pending_main;c->pending_main=NULL;c->page_flip_pending=0;
+}
+static int wait_dual_page_flip(svrt_drm *c,char *error,size_t error_size){
+    if(!c->page_flip_pending)return 0;
+    struct pollfd pfd={.fd=c->fd,.events=POLLIN};
+    int rc;do rc=poll(&pfd,1,250);while(rc<0&&errno==EINTR);
+    if(rc<=0){if(error&&error_size){if(rc==0)snprintf(error,error_size,"timed out waiting for KMS page flip");else snprintf(error,error_size,"waiting for KMS page flip: %s",strerror(errno));}return -1;}
+    drmEventContext event={0};event.version=DRM_EVENT_CONTEXT_VERSION;event.page_flip_handler=dual_page_flip;
+    if(drmHandleEvent(c->fd,&event)){fail(error,error_size,"handling KMS page flip");return -1;}
+    if(c->page_flip_pending){if(error&&error_size)snprintf(error,error_size,"KMS page flip event did not complete the native frame");return -1;}
+    return 0;
+}
+int svrt_drm_present_dual(svrt_drm *c,const AVFrame *main,const AVFrame *extra,
+                          char *error,size_t error_size){
+    uint64_t present_started=monotonic_ns();
+    if(!c||!main||!extra||main->format!=AV_PIX_FMT_DRM_PRIME||extra->width!=960||extra->height!=1080)return -1;
+    /* There may be one asynchronous commit in flight.  Waiting here pipelines
+       KMS with decode/copy while also giving us the exact point at which the
+       previously displayed rpivid buffer is safe to release. */
+    if(wait_dual_page_flip(c,error,error_size))return -1;
+    const AVDRMFrameDescriptor *d=(const AVDRMFrameDescriptor*)main->data[0];uint32_t fmt=d->layers[0].format;
+    svrt_cached_fb *entry=cached_fb(c,d,main,fmt,error,error_size);if(!entry)return -1;
+    if(!c->dual_ready){c->dual_ready=prepare_dual(c,fmt)?-1:1;if(c->dual_ready<0){fail(error,error_size,"prepare dual KMS planes");return -1;}if(!c->hud_state){c->hud_state=open_hud(c)?-1:1;if(c->hud_state<0)fprintf(stderr,"SVRT: FPS overlay unavailable in native mode: %s\n",strerror(errno));}}
+    unsigned bi=c->extra_index++%3;
+    for(int p=0;p<3;p++){
+        unsigned rows=p?540:1080,bytes=p?480:960;
+        for(unsigned y=0;y<rows;y++)memcpy(c->extra[bi].maps[p]+(size_t)y*c->extra[bi].pitches[p],extra->data[p]+(size_t)y*extra->linesize[p],bytes);
+    }
+    AVFrame *scanout_ref=av_frame_clone(main);if(!scanout_ref){if(error&&error_size)snprintf(error,error_size,"could not retain decoded frame for KMS");return -1;}
+    drmModeAtomicReqPtr req=drmModeAtomicAlloc();if(!req){av_frame_free(&scanout_ref);return -1;}
+    uint32_t fitted_w,fitted_h;int32_t fitted_x,fitted_y;
+    svrt_fit_geometry(c->crtc_w,c->crtc_h,4320,2160,&fitted_x,&fitted_y,&fitted_w,&fitted_h);
+    unsigned half=fitted_w/2,main_w=(half*7)/9,extra_w=half-main_w,half_h=fitted_h/2;
+    int rc=dual_add(req,c,0,entry->fb,fitted_x,fitted_y,half,fitted_h,0,0,2160,2160)||
+           dual_add(req,c,1,entry->fb,fitted_x+half,fitted_y,main_w,fitted_h,2160,0,1680,2160)||
+           dual_add(req,c,2,c->extra[bi].fb,fitted_x+half+main_w,fitted_y,extra_w,half_h,0,0,480,1080)||
+           dual_add(req,c,3,c->extra[bi].fb,fitted_x+half+main_w,fitted_y+half_h,extra_w,fitted_h-half_h,480,0,480,1080);
+    if(!rc)rc=drmModeAtomicCommit(c->fd,req,DRM_MODE_ATOMIC_NONBLOCK|DRM_MODE_PAGE_FLIP_EVENT,c);drmModeAtomicFree(req);
+    if(rc){av_frame_free(&scanout_ref);if(errno==EBUSY){if(error&&error_size)error[0]='\0';return 1;}fail(error,error_size,"dual atomic KMS commit");return -1;}
+    c->pending_main=scanout_ref;c->page_flip_pending=1;
+    if(c->hud_state>0)count_presented_frame(c);
+    uint64_t elapsed=monotonic_ns()-present_started;c->present_calls++;c->present_total_ns+=elapsed;if(elapsed>c->present_max_ns)c->present_max_ns=elapsed;
+    if(c->present_calls%60==0){fprintf(stderr,"SVRT: dual KMS average=%.3fms max=%.3fms cached_buffers=%u\n",c->present_total_ns/(double)c->present_calls/1000000.0,c->present_max_ns/1000000.0,c->cache_count);c->present_calls=0;c->present_total_ns=0;c->present_max_ns=0;}
+    return 0;
+}
+void svrt_drm_close(svrt_drm **ptr){if(!ptr||!*ptr)return;svrt_drm *c=*ptr;*ptr=NULL;
+    if(c->page_flip_pending){char ignored[1];wait_dual_page_flip(c,ignored,sizeof(ignored));}
+    if(c->dual_ready>0)for(unsigned p=0;p<6;p++)if(c->dual_planes[p])drmModeSetPlane(c->fd,c->dual_planes[p],c->crtc,0,0,0,0,0,0,0,0,0,0);
+    av_frame_free(&c->pending_main);av_frame_free(&c->displayed_main);
+    if(c->plane)drmModeSetPlane(c->fd,c->plane,c->crtc,0,0,0,0,0,0,0,0,0,0);release_old(c);release_cache(c);
+    if(c->hud_plane)drmModeSetPlane(c->fd,c->hud_plane,c->crtc,0,0,0,0,0,0,0,0,0,0);
+    if(c->hud_pixels)munmap(c->hud_pixels,c->hud_size);if(c->hud_fb)drmModeRmFB(c->fd,c->hud_fb);if(c->hud_handle){struct drm_mode_destroy_dumb destroy={.handle=c->hud_handle};drmIoctl(c->fd,DRM_IOCTL_MODE_DESTROY_DUMB,&destroy);}
+    for(unsigned n=0;n<3;n++){if(c->extra[n].fb)drmModeRmFB(c->fd,c->extra[n].fb);for(unsigned p=0;p<3;p++){if(c->extra[n].maps[p]&&c->extra[n].maps[p]!=MAP_FAILED)munmap(c->extra[n].maps[p],c->extra[n].sizes[p]);if(c->extra[n].handles[p]){struct drm_mode_destroy_dumb destroy={.handle=c->extra[n].handles[p]};drmIoctl(c->fd,DRM_IOCTL_MODE_DESTROY_DUMB,&destroy);}}}
+    free(c);
+}

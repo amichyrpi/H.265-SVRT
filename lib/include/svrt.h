@@ -19,6 +19,7 @@ typedef void (*svrt_packet_event_cb)(void *opaque, svrt_packet_event event,
 
 typedef struct svrt_config {
     uint16_t port;                 /* TCP port; 9944 when zero */
+    uint16_t extra_port;           /* native-mode H.264 port; port + 3 when zero */
     const char *bind_address;      /* NULL means all interfaces */
     int require_hardware;          /* fail instead of software fallback */
     int require_zero_copy;         /* reject frames that are not DRM PRIME */
