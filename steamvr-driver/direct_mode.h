@@ -5,6 +5,7 @@
 #include <atomic>
 #include <cstdint>
 #include <condition_variable>
+#include <chrono>
 #include <mutex>
 #include <string>
 #include <thread>
@@ -41,14 +42,25 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   void GetFrameTiming(vr::DriverDirectMode_FrameTiming *timing) override { timing->m_nReprojectionFlags=0; }
  private:
   struct Texture { uint32_t pid=0; uint64_t group=0; Microsoft::WRL::ComPtr<ID3D11Texture2D> texture; };
-  struct Slot { Microsoft::WRL::ComPtr<ID3D11Texture2D> staging; bool pending=false; uint64_t sequence=0; };
+  struct Slot {
+    Microsoft::WRL::ComPtr<ID3D11Texture2D> input, converted, staging;
+    Microsoft::WRL::ComPtr<ID3D11VideoProcessorInputView> input_view;
+    Microsoft::WRL::ComPtr<ID3D11VideoProcessorOutputView> output_view;
+    bool pending=false; uint64_t sequence=0;
+  };
   bool EnsureSlots(unsigned eye_width,unsigned height,DXGI_FORMAT format);
   bool EnsureDeviceLocked();
   bool EnsureVirtualSlots(unsigned width,unsigned height,DXGI_FORMAT format);
+  bool EnsureGpuConversion(unsigned width,unsigned height,DXGI_FORMAT format);
+  bool ConvertSlot(Slot &slot);
   bool CopyVirtualFrame(vr::SharedTextureHandle_t handle);
   bool StartEncoder(unsigned width,unsigned height);
   void EncoderThread(); void CloseEncoder();
   Microsoft::WRL::ComPtr<ID3D11Device> device_; Microsoft::WRL::ComPtr<ID3D11DeviceContext> context_;
+  Microsoft::WRL::ComPtr<ID3D11VideoDevice> video_device_;
+  Microsoft::WRL::ComPtr<ID3D11VideoContext> video_context_;
+  Microsoft::WRL::ComPtr<ID3D11VideoProcessorEnumerator> video_enumerator_;
+  Microsoft::WRL::ComPtr<ID3D11VideoProcessor> video_processor_;
   std::unordered_map<uint64_t,Texture> textures_; std::vector<Slot> slots_;
   std::unordered_map<uintptr_t, Microsoft::WRL::ComPtr<ID3D11Texture2D>> virtual_textures_;
   vr::SharedTextureHandle_t submitted_[2]{}; uint32_t next_[2]{};
@@ -59,8 +71,10 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   mutable std::mutex lifecycle_mutex_;
   std::mutex mutex_,d3d_mutex_; std::condition_variable ready_; std::thread worker_;
   std::vector<uint8_t> frame_;
-  std::atomic<bool> running_{false},accepting_{false},encoder_failed_{false},receiver_available_{false};
-  uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=35;
+  bool gpu_nv12_=false;
+  std::atomic<bool> running_{false},accepting_{false},encoder_failed_{false},receiver_available_{false},disconnect_requested_{false};
+  uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=20;
+  std::chrono::steady_clock::time_point next_capture_{};
   unsigned logged_virtual_width_=0,logged_virtual_height_=0;
   DXGI_FORMAT logged_virtual_format_=DXGI_FORMAT_UNKNOWN;
   std::string host_,ffmpeg_,encoder_,pixel_format_="bgra"; uint16_t port_=9944; HANDLE pipe_=INVALID_HANDLE_VALUE,process_=nullptr;

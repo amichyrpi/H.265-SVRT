@@ -152,14 +152,14 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     const std::string host = setting("receiver_host", "ROOT.local");
     const uint16_t video_port =
         static_cast<uint16_t>(int_setting("receiver_port", 9944));
-    direct_.Start(host, video_port, fps(), int_setting("bitrate_mbps", 35),
+    direct_.Start(host, video_port, fps(), int_setting("bitrate_mbps", 12),
                   setting("ffmpeg_path", "ffmpeg.exe"),
                   setting("encoder", "hevc_nvenc"));
     audio_.Start(host, static_cast<uint16_t>(
                            int_setting("audio_port", video_port + 2)));
     receiver_.Start(host,
                     static_cast<uint16_t>(int_setting("status_port", video_port + 1)),
-                    int_setting("health_poll_ms", 1000),
+                    int_setting("tracking_poll_ms", 10),
                     int_setting("latency_warning_ms", 80));
     return vr::VRInitError_None;
   }

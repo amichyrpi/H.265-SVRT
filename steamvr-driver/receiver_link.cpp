@@ -156,7 +156,17 @@ bool SvrtReceiverLink::Start(std::string host, uint16_t port, unsigned poll_ms,
   Stop();
   host_ = std::move(host);
   port_ = port ? port : 9945;
-  poll_ms_ = std::max(50u, poll_ms);
+  // This request carries the tracking pose as well as receiver statistics.
+  // A health-style one second cadence makes SteamVR hold each pose for a
+  // second and then jump to the next one.  Permit a tracking-rate cadence.
+  poll_ms_ = std::max(10u, poll_ms);
+  // A pose arrives in the status reply, so it cannot be fresher than the
+  // health-poll cadence. Keep it valid across ordinary scheduling jitter and
+  // one delayed poll; disconnect handling still uses consecutive failures.
+  // Retain a valid sample through an isolated Wi-Fi scheduling spike.  New
+  // samples still replace it at tracking rate; this only controls when a
+  // real sustained outage becomes lost tracking.
+  pose_freshness_ms_ = std::max(3000u, poll_ms_ * 3u);
   latency_warning_ms_ = std::max(1u, latency_warning_ms);
   state_ = static_cast<int>(SvrtLinkState::Starting);
   running_ = true;
@@ -181,7 +191,7 @@ SvrtLinkStatus SvrtReceiverLink::GetStatus() const {
           Clock::now().time_since_epoch()).count());
   status.pose.fresh = status.pose.valid && pose_received_ms_ != 0 &&
                       now_ms >= pose_received_ms_ &&
-                      now_ms - pose_received_ms_ <= 200;
+                      now_ms - pose_received_ms_ <= pose_freshness_ms_;
   return status;
 }
 
@@ -203,6 +213,8 @@ void SvrtReceiverLink::Run() {
   }
   SvrtLinkStatus last_good{};
   unsigned missed_polls = 0;
+  const unsigned missed_poll_limit =
+      std::max(12u, (3000u + poll_ms_ - 1u) / poll_ms_);
   bool have_last_good = false;
   while (running_) {
     SvrtLinkStatus status;
@@ -211,7 +223,7 @@ void SvrtReceiverLink::Run() {
         std::chrono::duration_cast<std::chrono::milliseconds>(
             Clock::now().time_since_epoch()).count());
     const bool poll_succeeded = Poll(nonce, status);
-  if (!poll_succeeded) {
+    if (!poll_succeeded) {
       // A single lost health probe is normal while the Pi is decoding or
       // accepting a new stream. Do not withdraw the HMD pose for one missed
       // TCP request: SteamVR interprets that as a physical unplug and clears
@@ -220,7 +232,7 @@ void SvrtReceiverLink::Run() {
       // request is a new TCP connection each time, so allow roughly 600 ms
       // for DNS, Wi-Fi scheduling, or one delayed Pi response.
       ++missed_polls;
-      if (have_last_good && missed_polls < 12) {
+      if (have_last_good && missed_polls < missed_poll_limit) {
         status = last_good;
         status.state = SvrtLinkState::Degraded;
       } else {
@@ -247,11 +259,19 @@ void SvrtReceiverLink::Run() {
     bytes_ = status.bytes;
     {
       std::lock_guard<std::mutex> lock(pose_mutex_);
-      pose_ = status.pose;
-      if (poll_succeeded && status.pose.valid && status.pose.sequence != 0) {
+      // A health reply and a tracking sample are independent.  Keep the last
+      // valid tracking sample when one otherwise healthy reply briefly lacks
+      // pose data; GetPose() applies the freshness timeout if tracking really
+      // remains absent.  Replacing it here made SteamVR show its grey lost-
+      // tracking background for a single transient receiver response.
+      if (poll_succeeded && status.pose.connected && status.pose.valid &&
+          status.pose.sequence != 0) {
+        pose_ = status.pose;
         pose_received_ms_ = static_cast<uint64_t>(
             std::chrono::duration_cast<std::chrono::milliseconds>(
                 Clock::now().time_since_epoch()).count());
+      } else if (pose_received_ms_ == 0) {
+        pose_ = status.pose;
       }
     }
     for (unsigned waited = 0; running_ && waited < poll_ms_; waited += 50)
@@ -368,8 +388,6 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
     status.state = SvrtLinkState::ReceiverError;
   else if (receiver_state == 0)
     status.state = SvrtLinkState::Starting;
-  else if (status.latency_ms > latency_warning_ms_)
-    status.state = SvrtLinkState::Degraded;
   else
     status.state = SvrtLinkState::Ready;
   return true;

@@ -10,9 +10,9 @@
     "receiver_port": 9944,
     "status_port": 9945,
     "audio_port": 9946,
-    "health_poll_ms": 1000,
+    "tracking_poll_ms": 10,
     "latency_warning_ms": 80,
-    "bitrate_mbps": 35,
+    "bitrate_mbps": 12,
     "ffmpeg_path": "ffmpeg.exe",
     "encoder": "hevc_nvenc"
   }

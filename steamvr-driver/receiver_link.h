@@ -54,6 +54,7 @@ class SvrtReceiverLink {
   std::string host_;
   uint16_t port_ = 9945;
   unsigned poll_ms_ = 50;
+  unsigned pose_freshness_ms_ = 1000;
   unsigned latency_warning_ms_ = 80;
   std::atomic<bool> running_{false};
   std::atomic<int> state_{static_cast<int>(SvrtLinkState::Searching)};

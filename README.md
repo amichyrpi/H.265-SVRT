@@ -41,6 +41,25 @@ Before compilling H.265 SVRT you need to be running a 64-bit Raspberry Pi OS ima
   ffmpeg -hide_banner -decoders 2>&1 | grep hevc_v4l2request
   ```
 
+- **Disable Wi-Fi power saving**
+
+  Wi-Fi power saving can introduce periodic latency spikes, bitrate stalls,
+  and dropped stream frames. Disable it persistently for the active `wlan0`
+  NetworkManager connection, then reboot to apply the radio setting:
+
+  ```sh
+  wifi_connection="$(nmcli -g GENERAL.CONNECTION device show wlan0)"
+  sudo nmcli connection modify "$wifi_connection" 802-11-wireless.powersave 2
+  sudo reboot
+  ```
+
+  After reconnecting, verify that the profile reports `disable`:
+
+  ```sh
+  wifi_connection="$(nmcli -g GENERAL.CONNECTION device show wlan0)"
+  nmcli -g 802-11-wireless.powersave connection show "$wifi_connection"
+  ```
+
 H.265 SVRT requires the following libraries to be installed:
 
 - **Before dependencies installation**

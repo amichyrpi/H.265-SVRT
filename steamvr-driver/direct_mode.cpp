@@ -37,7 +37,7 @@ uint64_t SvrtDirectMode::GraphicsAdapterLuid() const{
 bool SvrtDirectMode::Start(const std::string &host,uint16_t port,unsigned fps,unsigned bitrate,const std::string &ffmpeg,const std::string &encoder){
   std::lock_guard<std::mutex> lifecycle(lifecycle_mutex_);
   if (running_) return true;
-  host_=host;port_=port;fps_=fps?fps:60;bitrate_=bitrate?bitrate:35;ffmpeg_=ffmpeg.empty()?"ffmpeg.exe":ffmpeg;encoder_=encoder.empty()?"hevc_nvenc":encoder;
+  host_=host;port_=port;fps_=fps?fps:60;bitrate_=bitrate?bitrate:12;ffmpeg_=ffmpeg.empty()?"ffmpeg.exe":ffmpeg;encoder_=encoder.empty()?"hevc_nvenc":encoder;
   encoder_failed_=false; accepting_=false;if(!EnsureDeviceLocked()){encoder_failed_=true;return false;}debugf("direct mode ready: receiver=%s:%u fps=%u bitrate=%uM encoder=%s",host_.c_str(),port_,fps_,bitrate_,encoder_.c_str());running_=true;accepting_=true;worker_=std::thread(&SvrtDirectMode::EncoderThread,this);return true;
 }
 void SvrtDirectMode::SetReceiverAvailable(bool available){
@@ -45,6 +45,7 @@ void SvrtDirectMode::SetReceiverAvailable(bool available){
   const bool was_available=receiver_available_.exchange(available);
   if(available&&!was_available)encoder_failed_=false;
   if(!available){
+    disconnect_requested_=true;
     // Cancel a pipe write immediately when the receiver disappears. Without
     // this, vrserver can wait forever for FFmpeg and make the desktop appear
     // frozen during disconnect or SteamVR shutdown.
@@ -74,12 +75,47 @@ void SvrtDirectMode::DestroySwapTextureSet(vr::SharedTextureHandle_t h){std::loc
 void SvrtDirectMode::DestroyAllSwapTextureSets(uint32_t pid){std::lock_guard<std::mutex> l(mutex_);for(auto p=textures_.begin();p!=textures_.end();){if(p->second.pid==pid)p=textures_.erase(p);else ++p;}}
 void SvrtDirectMode::GetNextSwapTextureSetIndex(vr::SharedTextureHandle_t[2],uint32_t (*indices)[2]){std::lock_guard<std::mutex> l(mutex_);next_[0]=(next_[0]+1)%3;next_[1]=(next_[1]+1)%3;(*indices)[0]=next_[0];(*indices)[1]=next_[1];}
 void SvrtDirectMode::SubmitLayer(const SubmitLayerPerEye_t (&eyes)[2]){std::lock_guard<std::mutex> l(mutex_);submitted_[0]=eyes[0].hTexture;submitted_[1]=eyes[1].hTexture;}
-bool SvrtDirectMode::EnsureSlots(unsigned ew,unsigned h,DXGI_FORMAT fmt){if(!slots_.empty())return true;width_=std::min(ew,1920u)*2;height_=std::min(h,2160u);pixel_format_=(fmt==DXGI_FORMAT_R8G8B8A8_UNORM||fmt==DXGI_FORMAT_R8G8B8A8_UNORM_SRGB)?"rgba":"bgra";debugf("preparing fixed stream: source=%ux%u output=%ux%u pixel_format=%s",ew,h,width_,height_,pixel_format_.c_str());D3D11_TEXTURE2D_DESC d{};d.Width=width_;d.Height=height_;d.MipLevels=d.ArraySize=1;d.Format=fmt;d.SampleDesc.Count=1;d.Usage=D3D11_USAGE_STAGING;d.CPUAccessFlags=D3D11_CPU_ACCESS_READ;Slot s;if(FAILED(device_->CreateTexture2D(&d,nullptr,&s.staging))){debug("failed to create CPU staging texture");return false;}slots_.push_back(std::move(s));frame_.resize((size_t)width_*height_*4);return StartEncoder(width_,height_);}
-bool SvrtDirectMode::EnsureVirtualSlots(unsigned w,unsigned h,DXGI_FORMAT fmt){if(!slots_.empty())return true;width_=std::min(w,4096u);height_=std::min(h,2160u);pixel_format_=(fmt==DXGI_FORMAT_R8G8B8A8_UNORM||fmt==DXGI_FORMAT_R8G8B8A8_UNORM_SRGB)?"rgba":"bgra";debugf("preparing virtual-display stream: %ux%u pixel_format=%s",width_,height_,pixel_format_.c_str());D3D11_TEXTURE2D_DESC d{};d.Width=width_;d.Height=height_;d.MipLevels=d.ArraySize=1;d.Format=fmt;d.SampleDesc.Count=1;d.Usage=D3D11_USAGE_STAGING;d.CPUAccessFlags=D3D11_CPU_ACCESS_READ;Slot s;if(FAILED(device_->CreateTexture2D(&d,nullptr,&s.staging))){debug("failed to create CPU staging texture");return false;}slots_.push_back(std::move(s));frame_.resize((size_t)width_*height_*4);return StartEncoder(width_,height_);}
+static constexpr unsigned kStagingSlots=3;
+bool SvrtDirectMode::EnsureGpuConversion(unsigned w,unsigned h,DXGI_FORMAT fmt){
+  if(FAILED(device_.As(&video_device_))||FAILED(context_.As(&video_context_)))return false;
+  D3D11_VIDEO_PROCESSOR_CONTENT_DESC content{};
+  content.InputFrameFormat=D3D11_VIDEO_FRAME_FORMAT_PROGRESSIVE;
+  content.InputWidth=content.OutputWidth=w;content.InputHeight=content.OutputHeight=h;
+  content.InputFrameRate={fps_,1};content.OutputFrameRate={fps_,1};
+  content.Usage=D3D11_VIDEO_USAGE_PLAYBACK_NORMAL;
+  if(FAILED(video_device_->CreateVideoProcessorEnumerator(&content,&video_enumerator_))||
+     FAILED(video_device_->CreateVideoProcessor(video_enumerator_.Get(),0,&video_processor_)))return false;
+  D3D11_TEXTURE2D_DESC input{};input.Width=w;input.Height=h;input.MipLevels=input.ArraySize=1;
+  input.Format=fmt;input.SampleDesc.Count=1;input.Usage=D3D11_USAGE_DEFAULT;
+  D3D11_TEXTURE2D_DESC output=input;output.Format=DXGI_FORMAT_NV12;output.BindFlags=D3D11_BIND_RENDER_TARGET;
+  D3D11_TEXTURE2D_DESC staging=output;staging.BindFlags=0;staging.Usage=D3D11_USAGE_STAGING;staging.CPUAccessFlags=D3D11_CPU_ACCESS_READ;
+  for(unsigned i=0;i<kStagingSlots;i++){
+    Slot s;
+    if(FAILED(device_->CreateTexture2D(&input,nullptr,&s.input))||
+       FAILED(device_->CreateTexture2D(&output,nullptr,&s.converted))||
+       FAILED(device_->CreateTexture2D(&staging,nullptr,&s.staging)))return false;
+    D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC iv{};iv.ViewDimension=D3D11_VPIV_DIMENSION_TEXTURE2D;iv.Texture2D.MipSlice=0;iv.Texture2D.ArraySlice=0;
+    D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC ov{};ov.ViewDimension=D3D11_VPOV_DIMENSION_TEXTURE2D;ov.Texture2D.MipSlice=0;
+    if(FAILED(video_device_->CreateVideoProcessorInputView(s.input.Get(),video_enumerator_.Get(),&iv,&s.input_view))||
+       FAILED(video_device_->CreateVideoProcessorOutputView(s.converted.Get(),video_enumerator_.Get(),&ov,&s.output_view)))return false;
+    slots_.push_back(std::move(s));
+  }
+  video_context_->VideoProcessorSetStreamFrameFormat(video_processor_.Get(),0,D3D11_VIDEO_FRAME_FORMAT_PROGRESSIVE);
+  pixel_format_="nv12";gpu_nv12_=true;frame_.resize((size_t)w*h*3/2);
+  debug("D3D11 GPU BGRA-to-NV12 conversion enabled");
+  return true;
+}
+bool SvrtDirectMode::ConvertSlot(Slot &slot){
+  D3D11_VIDEO_PROCESSOR_STREAM stream{};stream.Enable=TRUE;stream.pInputSurface=slot.input_view.Get();
+  if(FAILED(video_context_->VideoProcessorBlt(video_processor_.Get(),slot.output_view.Get(),0,1,&stream)))return false;
+  context_->CopyResource(slot.staging.Get(),slot.converted.Get());return true;
+}
+bool SvrtDirectMode::EnsureSlots(unsigned ew,unsigned h,DXGI_FORMAT fmt){if(!slots_.empty())return true;width_=std::min(ew,1920u)*2;height_=std::min(h,2160u);debugf("preparing fixed stream: source=%ux%u output=%ux%u",ew,h,width_,height_);if(!EnsureGpuConversion(width_,height_,fmt)){debug("D3D11 NV12 conversion unavailable");slots_.clear();return false;}return StartEncoder(width_,height_);}
+bool SvrtDirectMode::EnsureVirtualSlots(unsigned w,unsigned h,DXGI_FORMAT fmt){if(!slots_.empty())return true;width_=std::min(w,4096u);height_=std::min(h,2160u);debugf("preparing virtual-display stream: %ux%u",width_,height_);if(!EnsureGpuConversion(width_,height_,fmt)){debug("D3D11 NV12 conversion unavailable");slots_.clear();return false;}return StartEncoder(width_,height_);}
 void SvrtDirectMode::Present(vr::SharedTextureHandle_t){
   std::lock_guard<std::mutex> lifecycle(lifecycle_mutex_);
   if(!accepting_) return;
-  std::unique_lock<std::mutex> l(mutex_);auto a=textures_.find((uint64_t)submitted_[0]),b=textures_.find((uint64_t)submitted_[1]);if(a==textures_.end()||b==textures_.end())return;D3D11_TEXTURE2D_DESC d{};a->second.texture->GetDesc(&d);std::lock_guard<std::mutex> dl(d3d_mutex_);if(!EnsureSlots(d.Width,d.Height,d.Format))return;auto slot=std::find_if(slots_.begin(),slots_.end(),[](const Slot&s){return !s.pending;});if(slot==slots_.end())return;unsigned eye_width=width_/2,copy_width=std::min(d.Width,eye_width),copy_height=std::min(d.Height,height_),source_x=(d.Width-copy_width)/2,source_y=(d.Height-copy_height)/2;D3D11_BOX box{source_x,source_y,0,source_x+copy_width,source_y+copy_height,1};context_->CopySubresourceRegion(slot->staging.Get(),0,0,0,0,a->second.texture.Get(),0,&box);context_->CopySubresourceRegion(slot->staging.Get(),0,eye_width,0,0,b->second.texture.Get(),0,&box);context_->Flush();slot->pending=true;slot->sequence=++sequence_;l.unlock();ready_.notify_one();}
+  std::unique_lock<std::mutex> l(mutex_);auto a=textures_.find((uint64_t)submitted_[0]),b=textures_.find((uint64_t)submitted_[1]);if(a==textures_.end()||b==textures_.end())return;D3D11_TEXTURE2D_DESC d{};a->second.texture->GetDesc(&d);std::lock_guard<std::mutex> dl(d3d_mutex_);if(!EnsureSlots(d.Width,d.Height,d.Format))return;auto slot=std::find_if(slots_.begin(),slots_.end(),[](const Slot&s){return !s.pending;});if(slot==slots_.end())return;unsigned eye_width=width_/2,copy_width=std::min(d.Width,eye_width),copy_height=std::min(d.Height,height_),source_x=(d.Width-copy_width)/2,source_y=(d.Height-copy_height)/2;D3D11_BOX box{source_x,source_y,0,source_x+copy_width,source_y+copy_height,1};context_->CopySubresourceRegion(slot->input.Get(),0,0,0,0,a->second.texture.Get(),0,&box);context_->CopySubresourceRegion(slot->input.Get(),0,eye_width,0,0,b->second.texture.Get(),0,&box);if(!ConvertSlot(*slot))return;context_->Flush();slot->pending=true;slot->sequence=++sequence_;l.unlock();ready_.notify_one();}
 void SvrtDirectMode::PresentVirtual(vr::SharedTextureHandle_t handle){
   std::lock_guard<std::mutex> lifecycle(lifecycle_mutex_);
   if(!accepting_||!device_||!handle||!receiver_available_||encoder_failed_)return;
@@ -105,6 +141,11 @@ void SvrtDirectMode::WaitForVirtualPresent(){
 bool SvrtDirectMode::CopyVirtualFrame(vr::SharedTextureHandle_t handle){
   ComPtr<ID3D11Texture2D> source;
   std::unique_lock<std::mutex> l(mutex_);
+  const auto now=std::chrono::steady_clock::now();
+  const auto interval=std::chrono::nanoseconds(1000000000ull/std::max(1u,fps_));
+  if(next_capture_.time_since_epoch().count()&&now<next_capture_)return false;
+  if(!next_capture_.time_since_epoch().count()||now-next_capture_>interval*2)next_capture_=now+interval;
+  else next_capture_+=interval;
   auto cached=virtual_textures_.find(static_cast<uintptr_t>(handle));
   if(cached!=virtual_textures_.end()) source=cached->second;
   if(!source && SUCCEEDED(device_->OpenSharedResource(
@@ -150,7 +191,11 @@ bool SvrtDirectMode::CopyVirtualFrame(vr::SharedTextureHandle_t handle){
       if(slot!=slots_.end()){
         // CopyResource has no HRESULT; a device-removal check catches the
         // only asynchronous failure that can invalidate the copy.
-        context_->CopyResource(slot->staging.Get(),source.Get());
+        context_->CopyResource(slot->input.Get(),source.Get());
+        if(!ConvertSlot(*slot)){
+          if(has_keyed_mutex) keyed->ReleaseSync(0);
+          return false;
+        }
         context_->Flush();
         const HRESULT device_status=device_->GetDeviceRemovedReason();
         if(SUCCEEDED(device_status)){
@@ -171,9 +216,9 @@ bool SvrtDirectMode::CopyVirtualFrame(vr::SharedTextureHandle_t handle){
 }
 static bool valid_encoder(const std::string &encoder){return encoder=="hevc_nvenc"||encoder=="hevc_qsv"||encoder=="hevc_amf"||encoder=="libx265"||encoder=="hevc_v4l2request";}
 static bool valid_host(const std::string &host){if(host.empty()||host.size()>253||host.find('"')!=std::string::npos||host.find(' ')!=std::string::npos)return false;if(host.find(':')!=std::string::npos){int groups=0;size_t group_size=0;bool compressed=false;bool digit=false;for(size_t i=0;i<host.size();++i){const char ch=host[i];if(ch==':'){if(i+1<host.size()&&host[i+1]==':'){if(compressed)return false;compressed=true;++i;group_size=0;continue;}if(!group_size)return false;++groups;group_size=0;continue;}if(std::isxdigit(static_cast<unsigned char>(ch))){if(++group_size>4)return false;digit=true;continue;}if(ch=='.')continue;return false;}if(group_size)++groups;return digit&&compressed?groups<=8:(groups==8);}bool label_start=true;for(char ch:host){if(std::isalnum(static_cast<unsigned char>(ch))||ch=='_'){label_start=false;continue;}if(ch=='.'||ch=='-'){if(label_start)return false;label_start=true;continue;}return false;}return !label_start;}
-bool SvrtDirectMode::StartEncoder(unsigned w,unsigned h){if(pipe_!=INVALID_HANDLE_VALUE)return true;if(w>4096){debugf("refusing %ux%u stream: Raspberry Pi 4 HEVC width limit is 4096",w,h);encoder_failed_=true;return false;}if(!valid_encoder(encoder_)||!valid_host(host_)||ffmpeg_.empty()||ffmpeg_.find('"')!=std::string::npos){debug("refusing unsafe FFmpeg command values");encoder_failed_=true;return false;}std::string endpoint=host_.find(':')==std::string::npos?host_:"["+host_+"]";char cmd[2048];int command_size=std::snprintf(cmd,sizeof(cmd),"\"%s\" -hide_banner -loglevel warning -fflags nobuffer -f rawvideo -pix_fmt %s -video_size %ux%u -framerate %u -i pipe:0 -an -c:v %s -preset p1 -tune ull -rc cbr -b:v %uM -maxrate %uM -bufsize %uM -g %u -bf 0 -muxdelay 0 -f mpegts \"tcp://%s:%u?tcp_nodelay=1\"",ffmpeg_.c_str(),pixel_format_.c_str(),w,h,fps_,encoder_.c_str(),bitrate_,bitrate_,std::max(1u,bitrate_/2),fps_,endpoint.c_str(),port_);if(command_size<0||static_cast<size_t>(command_size)>=sizeof(cmd)){debug("refusing truncated FFmpeg command");encoder_failed_=true;return false;}SECURITY_ATTRIBUTES sa{sizeof(sa),nullptr,TRUE};HANDLE read_pipe=nullptr;if(!CreatePipe(&read_pipe,&pipe_,&sa,1<<20)){encoder_failed_=true;debugf("CreatePipe failed: %lu",GetLastError());return false;}SetHandleInformation(pipe_,HANDLE_FLAG_INHERIT,0);STARTUPINFOA si{};si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=read_pipe;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);PROCESS_INFORMATION pi{};BOOL ok=CreateProcessA(nullptr,cmd,nullptr,nullptr,TRUE,CREATE_NO_WINDOW,nullptr,nullptr,&si,&pi);CloseHandle(read_pipe);if(!ok){CloseHandle(pipe_);pipe_=INVALID_HANDLE_VALUE;encoder_failed_=true;debugf("failed to launch FFmpeg '%s': error %lu",ffmpeg_.c_str(),GetLastError());return false;}CloseHandle(pi.hThread);process_=pi.hProcess;encoder_failed_=false;debugf("FFmpeg started: pid=%lu stream=%ux%u",pi.dwProcessId,w,h);return true;}
+bool SvrtDirectMode::StartEncoder(unsigned w,unsigned h){if(pipe_!=INVALID_HANDLE_VALUE)return true;if(w>4096){debugf("refusing %ux%u stream: Raspberry Pi 4 HEVC width limit is 4096",w,h);encoder_failed_=true;return false;}if(!valid_encoder(encoder_)||!valid_host(host_)||ffmpeg_.empty()||ffmpeg_.find('"')!=std::string::npos){debug("refusing unsafe FFmpeg command values");encoder_failed_=true;return false;}std::string endpoint=host_.find(':')==std::string::npos?host_:"["+host_+"]";char cmd[2048];int command_size=std::snprintf(cmd,sizeof(cmd),"\"%s\" -hide_banner -loglevel warning -fflags nobuffer -f rawvideo -pix_fmt %s -video_size %ux%u -framerate %u -i pipe:0 -an -c:v %s -preset p1 -tune ull -zerolatency 1 -delay 0 -rc-lookahead 0 -rc cbr -b:v %uM -maxrate %uM -bufsize %uM -g %u -bf 0 -muxdelay 0 -flush_packets 1 -f mpegts \"tcp://%s:%u?tcp_nodelay=1\"",ffmpeg_.c_str(),pixel_format_.c_str(),w,h,fps_,encoder_.c_str(),bitrate_,bitrate_,std::max(1u,bitrate_/12),fps_,endpoint.c_str(),port_);if(command_size<0||static_cast<size_t>(command_size)>=sizeof(cmd)){debug("refusing truncated FFmpeg command");encoder_failed_=true;return false;}SECURITY_ATTRIBUTES sa{sizeof(sa),nullptr,TRUE};HANDLE read_pipe=nullptr;if(!CreatePipe(&read_pipe,&pipe_,&sa,1<<20)){encoder_failed_=true;debugf("CreatePipe failed: %lu",GetLastError());return false;}SetHandleInformation(pipe_,HANDLE_FLAG_INHERIT,0);STARTUPINFOA si{};si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=read_pipe;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);PROCESS_INFORMATION pi{};BOOL ok=CreateProcessA(nullptr,cmd,nullptr,nullptr,TRUE,CREATE_NO_WINDOW,nullptr,nullptr,&si,&pi);CloseHandle(read_pipe);if(!ok){CloseHandle(pipe_);pipe_=INVALID_HANDLE_VALUE;encoder_failed_=true;debugf("failed to launch FFmpeg '%s': error %lu",ffmpeg_.c_str(),GetLastError());return false;}CloseHandle(pi.hThread);process_=pi.hProcess;encoder_failed_=false;debugf("FFmpeg started: pid=%lu stream=%ux%u",pi.dwProcessId,w,h);return true;}
 void SvrtDirectMode::CloseEncoder(){if(pipe_!=INVALID_HANDLE_VALUE){CloseHandle(pipe_);pipe_=INVALID_HANDLE_VALUE;}if(process_){WaitForSingleObject(process_,2000);CloseHandle(process_);process_=nullptr;}}
-void SvrtDirectMode::EncoderThread(){while(running_){std::unique_lock<std::mutex> l(mutex_);ready_.wait(l,[this]{return !running_||std::any_of(slots_.begin(),slots_.end(),[](const Slot&s){return s.pending;});});if(!running_)break;if(!receiver_available_){for(auto &slot:slots_)slot.pending=false;virtual_textures_.clear();l.unlock();CloseEncoder();l.lock();continue;}auto it=std::find_if(slots_.begin(),slots_.end(),[](const Slot&s){return s.pending;});if(it==slots_.end())continue;Slot *slot=&*it;unsigned w=width_,h=height_;uint64_t frame=slot->sequence;l.unlock();D3D11_MAPPED_SUBRESOURCE map{};bool ok=false;bool gpu_busy=false;
+void SvrtDirectMode::EncoderThread(){uint64_t transmitted=0;while(running_){std::unique_lock<std::mutex> l(mutex_);ready_.wait(l,[this]{return !running_||disconnect_requested_||std::any_of(slots_.begin(),slots_.end(),[](const Slot&s){return s.pending;});});if(!running_)break;if(disconnect_requested_.exchange(false)||!receiver_available_){for(auto &slot:slots_)slot.pending=false;virtual_textures_.clear();next_capture_={};l.unlock();CloseEncoder();l.lock();slots_.clear();encoder_failed_=false;continue;}auto it=std::max_element(slots_.begin(),slots_.end(),[](const Slot&a,const Slot&b){return (!a.pending?0:a.sequence)<(!b.pending?0:b.sequence);});if(it==slots_.end()||!it->pending)continue;Slot *slot=&*it;for(auto &queued:slots_)if(&queued!=slot&&queued.pending&&queued.sequence<slot->sequence)queued.pending=false;unsigned w=width_,h=height_;uint64_t frame=slot->sequence;l.unlock();D3D11_MAPPED_SUBRESOURCE map{};bool ok=false;bool gpu_busy=false;const auto started=std::chrono::steady_clock::now();
   // The immediate context must be serialized, but the CPU copy itself does
   // not.  Keeping this lock during a full stereo-frame memcpy made Present()
   // wait behind the encoder worker and produced visible compositor hitches.
@@ -185,13 +230,21 @@ void SvrtDirectMode::EncoderThread(){while(running_){std::unique_lock<std::mutex
     ok=SUCCEEDED(mapped);
   }
   if(gpu_busy){Sleep(1);continue;}
-  if(ok){
-    for(unsigned y=0;y<h;y++)std::memcpy(frame_.data()+(size_t)y*w*4,(uint8_t*)map.pData+(size_t)y*map.RowPitch,(size_t)w*4);
+  auto mapped_at=std::chrono::steady_clock::now();if(ok){
+    if(gpu_nv12_){
+      const auto *source=static_cast<const uint8_t*>(map.pData);
+      for(unsigned y=0;y<h;y++)std::memcpy(frame_.data()+(size_t)y*w,source+(size_t)y*map.RowPitch,w);
+      const auto *uv=source+(size_t)map.RowPitch*h;
+      auto *uv_out=frame_.data()+(size_t)w*h;
+      for(unsigned y=0;y<h/2;y++)std::memcpy(uv_out+(size_t)y*w,uv+(size_t)y*map.RowPitch,w);
+    }else{
+      for(unsigned y=0;y<h;y++)std::memcpy(frame_.data()+(size_t)y*w*4,(uint8_t*)map.pData+(size_t)y*map.RowPitch,(size_t)w*4);
+    }
     std::lock_guard<std::mutex> dl(d3d_mutex_);
     context_->Unmap(slot->staging.Get(),0);
   }
-  HANDLE pipe=pipe_;if(ok&&pipe!=INVALID_HANDLE_VALUE){for(unsigned y=0;y<h&&ok&&running_;y++){DWORD n=0;ok=WriteFile(pipe,frame_.data()+(size_t)y*w*4,w*4,&n,nullptr)&&n==w*4;}}
+  auto copied_at=std::chrono::steady_clock::now();HANDLE pipe=pipe_;if(ok&&pipe!=INVALID_HANDLE_VALUE){const uint8_t *data=frame_.data();size_t remaining=frame_.size();while(remaining&&ok&&running_){DWORD n=0;const DWORD chunk=(DWORD)std::min<size_t>(remaining,0x7fffffffu);ok=WriteFile(pipe,data,chunk,&n,nullptr)&&n>0;data+=n;remaining-=n;}ok=ok&&!remaining;}
+  const auto written_at=std::chrono::steady_clock::now();
   l.lock();slot->pending=false;
-  if(ok&&(frame==1||frame%fps_==0))
-    debugf("encoded frame=%llu size=%ux%u",(unsigned long long)frame,w,h);
+  if(ok){transmitted++;if(transmitted==1||transmitted%fps_==0){const auto map_us=std::chrono::duration_cast<std::chrono::microseconds>(mapped_at-started).count(),copy_us=std::chrono::duration_cast<std::chrono::microseconds>(copied_at-mapped_at).count(),write_us=std::chrono::duration_cast<std::chrono::microseconds>(written_at-copied_at).count();debugf("transmitted frame=%llu source_sequence=%llu size=%ux%u map=%.2fms copy=%.2fms pipe=%.2fms",(unsigned long long)transmitted,(unsigned long long)frame,w,h,map_us/1000.0,copy_us/1000.0,write_us/1000.0);}}
   if(!ok&&running_&&!gpu_busy){const bool first_failure=!encoder_failed_.exchange(true);l.unlock();if(first_failure)debug("encoder pipe write failed; pausing before retry");CloseEncoder();l.lock();slots_.clear();l.unlock();Sleep(1000);if(running_&&receiver_available_)encoder_failed_=false;l.lock();}}}

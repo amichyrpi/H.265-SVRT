@@ -182,6 +182,7 @@ void SvrtAudioTransport::Run() {
       if (!send_all(socket, &header, sizeof(header))) {
         closesocket(socket);
         socket = INVALID_SOCKET;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         continue;
       }
       log("connected to Raspberry Pi audio receiver");
@@ -244,6 +245,9 @@ void SvrtAudioTransport::Run() {
     if (!sent) {
       closesocket(socket);
       socket = INVALID_SOCKET;
+      // A receiver without an ALSA output closes the connection immediately.
+      // Do not turn that permanent condition into a tight reconnect/log loop.
+      std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
   }
   if (socket != INVALID_SOCKET) closesocket(socket);
