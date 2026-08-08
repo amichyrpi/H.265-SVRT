@@ -2,7 +2,7 @@ if(NOT SVRT_BUILD_DRIVER OR NOT WIN32)
   return()
 endif()
 
-set(SVRT_OPENVR_INCLUDE "${CMAKE_SOURCE_DIR}/third_party/openvr/headers")
+set(SVRT_OPENVR_INCLUDE "${CMAKE_SOURCE_DIR}/openvr/headers")
 if(NOT EXISTS "${SVRT_OPENVR_INCLUDE}/openvr_driver.h")
   include(FetchContent)
   FetchContent_Declare(openvr_sdk
