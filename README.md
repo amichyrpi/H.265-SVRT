@@ -6,7 +6,6 @@ This is a **work in progress**. SteamVR driver and Raspberry Pi 4 receiver. This
 
 ## TODO
 
-- [ ] Finish receiver and driver optimizations to reduce latency on the decoder and get a 60fps framerate
 - [ ] Create the SVRT Utility App
   - [ ] Framerate and latency measurements
   - [ ] Framerate changer with 30fps and 60fps presets
@@ -53,7 +52,7 @@ Before compilling H.265 SVRT you need to be running a 64-bit Raspberry Pi OS ima
   sudo reboot
   ```
 
-  After reconnecting, verify that the profile reports `disable`:
+  After reconnecting, verify that the profile reports the raw value `2`:
 
   ```sh
   wifi_connection="$(nmcli -g GENERAL.CONNECTION device show wlan0)"
@@ -209,6 +208,8 @@ Stop SteamVR before running the latency tester so it can use the Raspberry Pi vi
 
 ## License
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the Functional Source License, Version 1.1,
+with Apache License 2.0 as the Future License (`FSL-1.1-ALv2`). See the
+[LICENSE](LICENSE) file for details.
 
 This project uses parts of the [Vanilla](https://github.com/vanilla-wiiu/vanilla) code, to handle the DRM scanout and the KMS overlay plane. The Vanilla code is licensed under the GPL-2.0 License. See the [LICENSE](https://github.com/vanilla-wiiu/vanilla/blob/master/LICENSE) file for details.

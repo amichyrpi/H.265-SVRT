@@ -394,8 +394,8 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     SetIcon(properties, vr::Prop_NamedIconPathDeviceStandbyAlert_String,
             available ? "{svrt}/icons/headset_status_standby_alert.png" : off);
   }
-  unsigned eye_width() const { return int_setting("render_width", 1280); }
-  unsigned eye_height() const { return int_setting("render_height", 1440); }
+  unsigned eye_width() const { return int_setting("render_width", 1080); }
+  unsigned eye_height() const { return int_setting("render_height", 1080); }
   unsigned fps() const { return int_setting("display_frequency", 60); }
 
   std::atomic<uint32_t> id_{vr::k_unTrackedDeviceIndexInvalid};

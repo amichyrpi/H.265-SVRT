@@ -212,27 +212,27 @@ void SvrtReceiverLink::Run() {
     return;
   }
   SvrtLinkStatus last_good{};
-  unsigned missed_polls = 0;
-  const unsigned missed_poll_limit =
-      std::max(12u, (3000u + poll_ms_ - 1u) / poll_ms_);
+  Clock::time_point failure_deadline{};
+  constexpr auto failure_tolerance=std::chrono::seconds(3);
   bool have_last_good = false;
   while (running_) {
     SvrtLinkStatus status;
     const uint64_t previous_dropped = dropped_.load();
+    const auto poll_started=Clock::now();
     const auto nonce = static_cast<uint64_t>(
         std::chrono::duration_cast<std::chrono::milliseconds>(
-            Clock::now().time_since_epoch()).count());
+            poll_started.time_since_epoch()).count());
     const bool poll_succeeded = Poll(nonce, status);
     if (!poll_succeeded) {
       // A single lost health probe is normal while the Pi is decoding or
       // accepting a new stream. Do not withdraw the HMD pose for one missed
       // TCP request: SteamVR interprets that as a physical unplug and clears
       // the scene/mirror. Require several consecutive failures before going
-      // offline, while still reporting a real shutdown promptly.  The health
-      // request is a new TCP connection each time, so allow roughly 600 ms
-      // for DNS, Wi-Fi scheduling, or one delayed Pi response.
-      ++missed_polls;
-      if (have_last_good && missed_polls < missed_poll_limit) {
+      // offline, while still reporting a real shutdown promptly. Use a
+      // monotonic deadline based on when the first failed poll began so a
+      // blocking DNS/socket call counts toward the three-second tolerance.
+      if(failure_deadline==Clock::time_point{})failure_deadline=poll_started+failure_tolerance;
+      if (have_last_good && Clock::now()<failure_deadline) {
         status = last_good;
         status.state = SvrtLinkState::Degraded;
       } else {
@@ -241,11 +241,11 @@ void SvrtReceiverLink::Run() {
     } else if (status.state == SvrtLinkState::Ready &&
                status.dropped > previous_dropped) {
       status.state = SvrtLinkState::Degraded;
-      missed_polls = 0;
+      failure_deadline={};
       last_good = status;
       have_last_good = true;
     } else {
-      missed_polls = 0;
+      failure_deadline={};
       if (status.state != SvrtLinkState::ReceiverError) {
         last_good = status;
         have_last_good = true;

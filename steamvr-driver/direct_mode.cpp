@@ -6,6 +6,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cctype>
+#include <limits>
 
 using Microsoft::WRL::ComPtr;
 static void debug(const char *s){char line[2304];std::snprintf(line,sizeof(line),"SVRT: %s",s);OutputDebugStringA(line);OutputDebugStringA("\n");if(vr::VRDriverLog())vr::VRDriverLog()->Log(line);}
@@ -124,6 +125,9 @@ bool SvrtDirectMode::WaitForSourceCopy(Slot &slot){
   context_->End(slot.source_copied.Get());
   context_->Flush();
   const auto started=std::chrono::steady_clock::now();
+  const unsigned capture_fps=width_==4320?std::min(fps_,kNativeStreamFps):fps_;
+  const auto timeout=std::chrono::nanoseconds(1000000000ull/std::max(1u,capture_fps));
+  unsigned polls=0;
   for(;;){
     const HRESULT ready=context_->GetData(slot.source_copied.Get(),nullptr,0,D3D11_ASYNC_GETDATA_DONOTFLUSH);
     if(ready==S_OK){
@@ -132,11 +136,11 @@ bool SvrtDirectMode::WaitForSourceCopy(Slot &slot){
       return true;
     }
     if(ready!=S_FALSE){debugf("virtual display: source copy fence failed: 0x%08lx",static_cast<unsigned long>(ready));return false;}
-    if(std::chrono::steady_clock::now()-started>std::chrono::milliseconds(100)){
+    if(std::chrono::steady_clock::now()-started>=timeout){
       debugf("virtual display: source copy fence timed out; device=0x%08lx",static_cast<unsigned long>(device_->GetDeviceRemovedReason()));
       return false;
     }
-    Sleep(0);
+    Sleep(polls++<4?0:1);
   }
 }
 bool SvrtDirectMode::EnsureSlots(unsigned ew,unsigned h,DXGI_FORMAT fmt){if(!slots_.empty())return true;width_=std::min(ew,1920u)*2;height_=std::min(h,2160u);debugf("preparing fixed stream: source=%ux%u output=%ux%u",ew,h,width_,height_);if(!EnsureGpuConversion(width_,height_,fmt)){debug("D3D11 NV12 conversion unavailable");slots_.clear();return false;}return StartEncoder(width_,height_);}
@@ -243,11 +247,26 @@ bool SvrtDirectMode::CopyVirtualFrame(vr::SharedTextureHandle_t handle){
   return copied;
 }
 static bool valid_encoder(const std::string &encoder){return encoder=="hevc_nvenc"||encoder=="hevc_qsv"||encoder=="hevc_amf"||encoder=="libx265"||encoder=="hevc_v4l2request";}
+struct CompanionEncoder {
+  const char *codec;
+  const char *low_latency_options;
+};
+static CompanionEncoder companion_encoder(const std::string &encoder){
+  if(encoder=="hevc_nvenc")return {"h264_nvenc","-preset p1 -tune ull -zerolatency 1 -delay 0 -rc-lookahead 0 -rc cbr"};
+  if(encoder=="hevc_qsv")return {"h264_qsv","-preset veryfast -low_delay_brc 1 -look_ahead 0"};
+  if(encoder=="hevc_amf")return {"h264_amf","-usage ultralowlatency -quality speed -rc cbr"};
+  /* Software HEVC, or a backend without a matching H.264 encoder, uses the
+     portable software fallback rather than assuming NVIDIA hardware. */
+  return {"libx264","-preset ultrafast -tune zerolatency"};
+}
 static bool valid_host(const std::string &host){if(host.empty()||host.size()>253||host.find('"')!=std::string::npos||host.find(' ')!=std::string::npos)return false;if(host.find(':')!=std::string::npos){int groups=0;size_t group_size=0;bool compressed=false;bool digit=false;for(size_t i=0;i<host.size();++i){const char ch=host[i];if(ch==':'){if(i+1<host.size()&&host[i+1]==':'){if(compressed)return false;compressed=true;++i;group_size=0;continue;}if(!group_size)return false;++groups;group_size=0;continue;}if(std::isxdigit(static_cast<unsigned char>(ch))){if(++group_size>4)return false;digit=true;continue;}if(ch=='.')continue;return false;}if(group_size)++groups;return digit&&compressed?groups<=8:(groups==8);}bool label_start=true;for(char ch:host){if(std::isalnum(static_cast<unsigned char>(ch))||ch=='_'){label_start=false;continue;}if(ch=='.'||ch=='-'){if(label_start)return false;label_start=true;continue;}return false;}return !label_start;}
 bool SvrtDirectMode::StartEncoder(unsigned w,unsigned h){
     if(pipe_!=INVALID_HANDLE_VALUE)return true;
     if(w>4320){debugf("refusing %ux%u stream: maximum packed width is 4320",w,h);encoder_failed_=true;return false;}
     if(!valid_encoder(encoder_)||!valid_host(host_)||ffmpeg_.empty()||ffmpeg_.find('"')!=std::string::npos){debug("refusing unsafe FFmpeg command values");encoder_failed_=true;return false;}
+    constexpr unsigned kCompanionPortOffset=3;
+    const bool native=w==4320&&h==2160;
+    if(native&&port_>std::numeric_limits<uint16_t>::max()-kCompanionPortOffset){debugf("refusing native stream: video port %u cannot add companion offset %u",port_,kCompanionPortOffset);encoder_failed_=true;return false;}
     std::string endpoint=host_.find(':')==std::string::npos?host_:"["+host_+"]";
     auto launch=[&](const char *cmd,HANDLE &write_pipe,HANDLE &process,DWORD &pid)->bool{
       SECURITY_ATTRIBUTES sa{sizeof(sa),nullptr,TRUE};HANDLE read_pipe=nullptr;
@@ -268,14 +287,16 @@ bool SvrtDirectMode::StartEncoder(unsigned w,unsigned h){
     if(command_size<0||static_cast<size_t>(command_size)>=sizeof(main_cmd)){debug("refusing truncated FFmpeg command");encoder_failed_=true;return false;}
     DWORD main_pid=0;if(!launch(main_cmd,pipe_,process_,main_pid)){encoder_failed_=true;debugf("failed to launch main FFmpeg: error %lu",GetLastError());return false;}
     DWORD extra_pid=0;
-    if(w==4320&&h==2160){
-      const unsigned extra_bitrate=std::max(2u,bitrate_/8);char extra_cmd[4096];
+    if(native){
+      const unsigned extra_bitrate=std::max(2u,bitrate_/8),extra_port=static_cast<unsigned>(port_)+kCompanionPortOffset;char extra_cmd[4096];
+      const CompanionEncoder extra_encoder=companion_encoder(encoder_);
       command_size=std::snprintf(extra_cmd,sizeof(extra_cmd),
         "\"%s\" -hide_banner -loglevel warning -rw_timeout 500000 -fflags nobuffer -flags low_delay "
-        "-f rawvideo -pix_fmt nv12 -video_size 960x1080 -framerate %u -i pipe:0 -an -c:v h264_nvenc "
-        "-preset p1 -tune ull -zerolatency 1 -delay 0 -rc-lookahead 0 -rc cbr -b:v %uM -maxrate %uM "
+        "-f rawvideo -pix_fmt nv12 -video_size 960x1080 -framerate %u -i pipe:0 -an -c:v %s %s "
+        "-b:v %uM -maxrate %uM "
         "-bufsize 1M -g %u -bf 0 -muxdelay 0 -muxpreload 0 -flush_packets 1 -f mpegts \"tcp://%s:%u?tcp_nodelay=1&send_buffer_size=65536\"",
-        ffmpeg_.c_str(),encode_fps,extra_bitrate,extra_bitrate,keyint,endpoint.c_str(),port_+3);
+        ffmpeg_.c_str(),encode_fps,extra_encoder.codec,extra_encoder.low_latency_options,
+        extra_bitrate,extra_bitrate,keyint,endpoint.c_str(),extra_port);
       if(command_size<0||static_cast<size_t>(command_size)>=sizeof(extra_cmd)||!launch(extra_cmd,extra_pipe_,extra_process_,extra_pid)){
         debugf("failed to launch extra FFmpeg: error %lu",GetLastError());CloseEncoder();encoder_failed_=true;return false;
       }
@@ -313,13 +334,11 @@ void SvrtDirectMode::EncoderThread(){uint64_t transmitted=0;while(running_){std:
         std::memcpy(extra_uv+(size_t)y*extra_w,uv+(size_t)y*map.RowPitch+main_w,480);
         std::memcpy(extra_uv+(size_t)y*extra_w+480,uv+(size_t)(y+half_h/2)*map.RowPitch+main_w,480);
       }
-    }else if(gpu_nv12_){
+    }else{
       const auto *source=static_cast<const uint8_t*>(map.pData);
       for(unsigned y=0;y<h;y++)std::memcpy(frame_.data()+(size_t)y*w,source+(size_t)y*map.RowPitch,w);
       const auto *uv=source+(size_t)map.RowPitch*h;auto *uv_out=frame_.data()+(size_t)w*h;
       for(unsigned y=0;y<h/2;y++)std::memcpy(uv_out+(size_t)y*w,uv+(size_t)y*map.RowPitch,w);
-    }else{
-      for(unsigned y=0;y<h;y++)std::memcpy(frame_.data()+(size_t)y*w*4,(uint8_t*)map.pData+(size_t)y*map.RowPitch,(size_t)w*4);
     }
     std::lock_guard<std::mutex> dl(d3d_mutex_);
     context_->Unmap(slot->staging.Get(),0);

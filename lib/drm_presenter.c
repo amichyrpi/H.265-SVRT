@@ -22,6 +22,16 @@
 
 #define SVRT_MAX_PLANES 4
 #define SVRT_FB_CACHE_SIZE 32
+
+/*
+ * DEBUGGING ONLY: enables the FPS counter drawn at the top-left of each eye.
+ *
+ * The value measures frames successfully submitted to the Raspberry Pi KMS
+ * presentation path; it is not SteamVR's configured refresh rate. Keep this
+ * disabled in normal/user builds so diagnostic graphics are not visible in
+ * the headset. Set it to 1 temporarily when profiling display performance.
+ */
+#define SVRT_ENABLE_DEBUG_FPS_OVERLAY 0
 typedef struct svrt_cached_fb {
     uint64_t object_ids[SVRT_MAX_PLANES];
     uint32_t width,height,format,fb,handles[SVRT_MAX_PLANES];
@@ -172,7 +182,10 @@ int svrt_drm_present(svrt_drm *c,const AVFrame *frame,char *error,size_t error_s
     svrt_cached_fb *entry=cached_fb(c,d,frame,fmt,error,error_size);if(!entry)return -1;
     uint32_t dw,dh;int32_t dx,dy;svrt_fit_geometry(c->crtc_w,c->crtc_h,(uint32_t)frame->width,(uint32_t)frame->height,&dx,&dy,&dw,&dh);
     if(!c->atomic_ready)c->atomic_ready=prepare_atomic(c)?-1:1;int commit_rc;if(c->atomic_ready>0){commit_rc=atomic_present(c,entry->fb,dx,dy,dw,dh,frame->width,frame->height);for(int retry=0;commit_rc&&errno==EBUSY&&retry<20;retry++){struct timespec delay={.tv_sec=0,.tv_nsec=1000000};nanosleep(&delay,NULL);commit_rc=atomic_present(c,entry->fb,dx,dy,dw,dh,frame->width,frame->height);}}else commit_rc=drmModeSetPlane(c->fd,c->plane,c->crtc,entry->fb,0,dx,dy,dw,dh,0,0,(uint32_t)frame->width<<16,(uint32_t)frame->height<<16);if(commit_rc){if(c->atomic_ready>0&&errno==EBUSY){if(error&&error_size)error[0]='\0';return 1;}fail(error,error_size,c->atomic_ready>0?"atomic KMS commit":"drmModeSetPlane");return -1;}
-    if(!c->hud_state){c->hud_state=open_hud(c)?-1:1;if(c->hud_state<0)fprintf(stderr,"SVRT: FPS overlay unavailable: %s\n",strerror(errno));}if(c->hud_state>0)count_presented_frame(c);uint64_t elapsed=monotonic_ns()-present_started;c->present_calls++;c->present_total_ns+=elapsed;if(elapsed>c->present_max_ns)c->present_max_ns=elapsed;if(c->present_calls%60==0){fprintf(stderr,"SVRT: KMS average=%.3fms max=%.3fms cached_buffers=%u\n",c->present_total_ns/(double)c->present_calls/1000000.0,c->present_max_ns/1000000.0,c->cache_count);c->present_calls=0;c->present_total_ns=0;c->present_max_ns=0;}return 0;
+#if SVRT_ENABLE_DEBUG_FPS_OVERLAY
+    if(!c->hud_state){c->hud_state=open_hud(c)?-1:1;if(c->hud_state<0)fprintf(stderr,"SVRT: FPS overlay unavailable: %s\n",strerror(errno));}if(c->hud_state>0)count_presented_frame(c);
+#endif
+    uint64_t elapsed=monotonic_ns()-present_started;c->present_calls++;c->present_total_ns+=elapsed;if(elapsed>c->present_max_ns)c->present_max_ns=elapsed;if(c->present_calls%60==0){fprintf(stderr,"SVRT: KMS average=%.3fms max=%.3fms cached_buffers=%u\n",c->present_total_ns/(double)c->present_calls/1000000.0,c->present_max_ns/1000000.0,c->cache_count);c->present_calls=0;c->present_total_ns=0;c->present_max_ns=0;}return 0;
 }
 
 static int create_extra_buffers(svrt_drm *c){
@@ -248,7 +261,11 @@ int svrt_drm_present_dual(svrt_drm *c,const AVFrame *main,const AVFrame *extra,
     if(wait_dual_page_flip(c,error,error_size))return -1;
     const AVDRMFrameDescriptor *d=(const AVDRMFrameDescriptor*)main->data[0];uint32_t fmt=d->layers[0].format;
     svrt_cached_fb *entry=cached_fb(c,d,main,fmt,error,error_size);if(!entry)return -1;
-    if(!c->dual_ready){c->dual_ready=prepare_dual(c,fmt)?-1:1;if(c->dual_ready<0){fail(error,error_size,"prepare dual KMS planes");return -1;}if(!c->hud_state){c->hud_state=open_hud(c)?-1:1;if(c->hud_state<0)fprintf(stderr,"SVRT: FPS overlay unavailable in native mode: %s\n",strerror(errno));}}
+    if(!c->dual_ready){c->dual_ready=prepare_dual(c,fmt)?-1:1;if(c->dual_ready<0){fail(error,error_size,"prepare dual KMS planes");return -1;}
+#if SVRT_ENABLE_DEBUG_FPS_OVERLAY
+        if(!c->hud_state){c->hud_state=open_hud(c)?-1:1;if(c->hud_state<0)fprintf(stderr,"SVRT: FPS overlay unavailable in native mode: %s\n",strerror(errno));}
+#endif
+    }
     unsigned bi=c->extra_index++%3;
     for(int p=0;p<3;p++){
         unsigned rows=p?540:1080,bytes=p?480:960;
@@ -266,7 +283,9 @@ int svrt_drm_present_dual(svrt_drm *c,const AVFrame *main,const AVFrame *extra,
     if(!rc)rc=drmModeAtomicCommit(c->fd,req,DRM_MODE_ATOMIC_NONBLOCK|DRM_MODE_PAGE_FLIP_EVENT,c);drmModeAtomicFree(req);
     if(rc){av_frame_free(&scanout_ref);if(errno==EBUSY){if(error&&error_size)error[0]='\0';return 1;}fail(error,error_size,"dual atomic KMS commit");return -1;}
     c->pending_main=scanout_ref;c->page_flip_pending=1;
+#if SVRT_ENABLE_DEBUG_FPS_OVERLAY
     if(c->hud_state>0)count_presented_frame(c);
+#endif
     uint64_t elapsed=monotonic_ns()-present_started;c->present_calls++;c->present_total_ns+=elapsed;if(elapsed>c->present_max_ns)c->present_max_ns=elapsed;
     if(c->present_calls%60==0){fprintf(stderr,"SVRT: dual KMS average=%.3fms max=%.3fms cached_buffers=%u\n",c->present_total_ns/(double)c->present_calls/1000000.0,c->present_max_ns/1000000.0,c->cache_count);c->present_calls=0;c->present_total_ns=0;c->present_max_ns=0;}
     return 0;
