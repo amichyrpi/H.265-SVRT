@@ -158,7 +158,7 @@ static void *present_worker(void *opaque){
         c->present_main=NULL;c->present_extra=NULL;pthread_mutex_unlock(&c->present_mutex);
         if(!main)continue;char error[256]={0};int rc=svrt_drm_present_dual(c->drm,main,extra,error,sizeof(error));
         if(rc<0)fprintf(stderr,"SVRT: native presentation failed: %s\n",error[0]?error:"KMS error");
-        else if(rc==0)packet_event(c,SVRT_PACKET_PROCESSED,pts);
+        else packet_event(c,SVRT_PACKET_PROCESSED,pts);
         av_frame_free(&main);av_frame_free(&extra);
     }
     return NULL;
