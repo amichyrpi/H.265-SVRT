@@ -4,6 +4,17 @@
 #include <SDL_image.h>
 #include <string.h>
 
+static void disable_local_input(void) {
+    static const Uint32 events[] = {
+        SDL_KEYDOWN, SDL_KEYUP, SDL_TEXTEDITING, SDL_TEXTINPUT,
+        SDL_KEYMAPCHANGED, SDL_MOUSEMOTION, SDL_MOUSEBUTTONDOWN,
+        SDL_MOUSEBUTTONUP, SDL_MOUSEWHEEL, SDL_FINGERDOWN, SDL_FINGERUP,
+        SDL_FINGERMOTION};
+    SDL_ShowCursor(SDL_DISABLE);
+    for (size_t i = 0; i < sizeof(events) / sizeof(events[0]); ++i)
+        SDL_EventState(events[i], SDL_IGNORE);
+}
+
 static void draw_text(SDL_Renderer *renderer, TTF_Font *font, const char *value, int center_x, int y, uint8_t alpha) {
     SDL_Color color = {255, 255, 255, alpha};
     SDL_Surface *surface = TTF_RenderUTF8_Blended(font, value, color);
@@ -17,6 +28,7 @@ static void draw_text(SDL_Renderer *renderer, TTF_Font *font, const char *value,
 int svrt_ui_open(svrt_ui *ui) {
     memset(ui, 0, sizeof(*ui));
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) || TTF_Init() || !IMG_Init(IMG_INIT_PNG)) return -1;
+    disable_local_input();
     ui->window = SDL_CreateWindow("SVRT", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_FULLSCREEN_DESKTOP);
     ui->renderer = ui->window ? SDL_CreateRenderer(ui->window, -1, SDL_RENDERER_ACCELERATED) : NULL;
     ui->font = TTF_OpenFont(SVRT_GUI_FONT_PATH, 42);

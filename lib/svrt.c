@@ -42,6 +42,14 @@ static uint64_t monotonic_us(void){struct timespec t;if(clock_gettime(CLOCK_MONO
 static void packet_event(svrt_context *c,svrt_packet_event event,uint64_t pts_us){if(c->cfg.packet_event)c->cfg.packet_event(c->cfg.packet_event_opaque,event,pts_us,monotonic_us());}
 static enum AVPixelFormat choose_format(AVCodecContext *unused,const enum AVPixelFormat *fmts){(void)unused;for(const enum AVPixelFormat *p=fmts;*p!=AV_PIX_FMT_NONE;p++)if(*p==AV_PIX_FMT_DRM_PRIME)return *p;return fmts[0];}
 static const AVCodec *find_decoder(int require_hw){(void)require_hw;return avcodec_find_decoder(AV_CODEC_ID_HEVC);}
+static void disable_local_input(void){
+    const Uint32 events[]={SDL_KEYDOWN,SDL_KEYUP,SDL_TEXTEDITING,SDL_TEXTINPUT,
+        SDL_KEYMAPCHANGED,SDL_MOUSEMOTION,SDL_MOUSEBUTTONDOWN,
+        SDL_MOUSEBUTTONUP,SDL_MOUSEWHEEL,SDL_FINGERDOWN,SDL_FINGERUP,
+        SDL_FINGERMOTION};
+    SDL_ShowCursor(SDL_DISABLE);
+    for(size_t i=0;i<sizeof(events)/sizeof(events[0]);i++)SDL_EventState(events[i],SDL_IGNORE);
+}
 static int open_video(svrt_context *c,const AVCodecParameters *parameters){
     const AVCodec *codec=find_decoder(c->cfg.require_hardware);if(!codec){set_error(c,"HEVC decoder not found");return -1;}
     if(parameters)fprintf(stderr,"SVRT: stream=%dx%d codec=%s\n",parameters->width,parameters->height,avcodec_get_name(parameters->codec_id));
@@ -56,8 +64,14 @@ static int open_video(svrt_context *c,const AVCodecParameters *parameters){
 }
 static int open_display(svrt_context *c){
     SDL_setenv("SDL_VIDEODRIVER","kmsdrm",0);SDL_SetHint(SDL_HINT_RENDER_VSYNC,"0");if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_EVENTS)){set_error(c,"SDL_Init: %s",SDL_GetError());return -1;}
+    disable_local_input();
     fprintf(stderr,"SVRT: SDL video=%s displays=%d\n",SDL_GetCurrentVideoDriver(),SDL_GetNumVideoDisplays());
     uint32_t flags=SDL_WINDOW_SHOWN|SDL_WINDOW_BORDERLESS;if(c->cfg.fullscreen)flags|=SDL_WINDOW_FULLSCREEN_DESKTOP;c->window=SDL_CreateWindow("SVRT HEVC",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,640,480,flags);if(!c->window){set_error(c,"SDL_CreateWindow: %s",SDL_GetError());return -1;}
+    /* Direct KMS video uses overlay planes. Paint the SDL-owned primary plane
+       black once so square video leaves black borders instead of revealing
+       boot or login-console text underneath. */
+    SDL_Surface *background=SDL_GetWindowSurface(c->window);
+    if(background){SDL_FillRect(background,NULL,SDL_MapRGB(background->format,0,0,0));SDL_UpdateWindowSurface(c->window);}
     int drm_rc=svrt_drm_open(&c->drm,c->window,c->error,sizeof(c->error));if(drm_rc&&c->cfg.require_zero_copy)return -1;
     if(!c->drm){c->renderer=SDL_CreateRenderer(c->window,-1,SDL_RENDERER_ACCELERATED);if(!c->renderer){set_error(c,"SDL_CreateRenderer: %s",SDL_GetError());return -1;}c->error[0]='\0';}
     return 0;
@@ -176,7 +190,7 @@ int svrt_run(svrt_context *c){
     if(!rc){
         AVRational time_base=svrt_pipe_time_base(c->pipe);c->decoder->pkt_timebase=time_base;
         while(!atomic_load(&c->stopping)){
-            SDL_Event e;while(!c->cfg.headless&&SDL_PollEvent(&e))if(e.type==SDL_QUIT||e.type==SDL_KEYDOWN)atomic_store(&c->stopping,1);
+            SDL_Event e;while(!c->cfg.headless&&SDL_PollEvent(&e))if(e.type==SDL_QUIT)atomic_store(&c->stopping,1);
             rc=svrt_pipe_read(c->pipe,c->packet);if(rc<0)break;
             atomic_fetch_add(&c->stats.access_units,1);atomic_fetch_add(&c->stats.bytes_received,(uint64_t)c->packet->size);
             uint64_t pts_us=c->packet->pts==AV_NOPTS_VALUE?UINT64_MAX:(uint64_t)av_rescale_q(c->packet->pts,time_base,AV_TIME_BASE_Q);
