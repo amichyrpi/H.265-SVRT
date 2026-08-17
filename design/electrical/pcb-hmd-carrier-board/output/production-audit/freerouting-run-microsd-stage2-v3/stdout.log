@@ -1,0 +1,24 @@
+2026-08-15 22:32:43.269 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 22:32:44.825 INFO   [CA5C18\DB14F9] Loading board file 'pcb-hmd-carrier-board2-microsd-stage2-v3.dsn'...
+2026-08-15 22:32:45.082 WARN   DSN file 'pcb-hmd-carrier-board2-microsd-stage2-v3.dsn' was loaded with 3 warning(s).
+2026-08-15 22:32:45.140 INFO   [CA5C18\DB14F9] Job 'CA5C18\DB14F9' started at 2026-08-15T20:32:45.140034500Z.
+2026-08-15 22:32:45.394 INFO   [CA5C18\DB14F9] Fanout stage started on board 'd19f86cb403a7751824ef6376840c10e' with 33 of 1581 SMD pins needing fanout (258 already connected, 1290 netless).
+2026-08-15 22:32:47.269 INFO   [CA5C18\DB14F9] Fanout pass #1 on board '061f31a93b70ffc64cc36e42ff6f72fa' completed in 1.66 seconds with 10 SMD pins fanouted, 19 not routed, 0 insert errors, +5 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-08-15 22:32:48.256 INFO   [CA5C18\DB14F9] Fanout pass #2 on board '11b36582d2bc41791867c0667cec9690' completed in 0.87 seconds with 8 SMD pins fanouted, 16 not routed, 0 insert errors, +2 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-08-15 22:32:49.130 INFO   [CA5C18\DB14F9] Fanout pass #3 on board 'd916597c2eb6f805f868b3b4d538f031' completed in 0.77 seconds with 5 SMD pins fanouted, 16 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=300).
+2026-08-15 22:32:50.008 INFO   [CA5C18\DB14F9] Fanout pass #4 on board '11b36582d2bc41791867c0667cec9690' completed in 0.76 seconds with 5 SMD pins fanouted, 16 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=400).
+2026-08-15 22:32:50.897 INFO   [CA5C18\DB14F9] Fanout pass #5 on board 'e3ff7f851f92effe1ac7253a41aacb58' completed in 0.76 seconds with 5 SMD pins fanouted, 16 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=500).
+2026-08-15 22:32:51.748 INFO   [CA5C18\DB14F9] Fanout pass #6 on board '11b36582d2bc41791867c0667cec9690' completed in 0.76 seconds with 5 SMD pins fanouted, 16 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=600).
+2026-08-15 22:32:51.749 INFO   Fanout stopped after 6 passes: no progress for 3 consecutive passes.
+2026-08-15 22:32:51.873 INFO   [CA5C18\DB14F9] Fanout stage completed: started with 291 total SMD pins, completed in 6.39 seconds, escaped pins: 64/291 (22.0%), using 6.38 total CPU seconds, 9.49 GB total allocated, and 303.8 MB peak heap usage.
+2026-08-15 22:32:51.932 INFO   [CA5C18\DB14F9] Auto-routing stage started on board '11b36582d2bc41791867c0667cec9690' for 18 unrouted items.
+2026-08-15 22:36:28.233 INFO   [CA5C18\DB14F9] Auto-routing pass #1 on board '11b36582d2bc41791867c0667cec9690' was completed in 207.98 seconds with the score of 0.00 (11 unrouted and 304 violations), using 218.47 CPU seconds and the job allocated 271.74 GB of memory so far.
+2026-08-15 22:39:14.330 INFO   [CA5C18\DB14F9] Auto-routing pass #2 on board '6f2da89d8761b2aa319bf58d393095c7' was completed in 157.75 seconds with the score of 0.00 (10 unrouted and 304 violations), using 381.56 CPU seconds and the job allocated 480.21 GB of memory so far.
+2026-08-15 22:41:46.448 INFO   [CA5C18\DB14F9] Auto-routing pass #3 on board '1d2beab09890f4bf13466d8b4d42fed7' was completed in 144.72 seconds with the score of 0.00 (7 unrouted and 304 violations), using 531.11 CPU seconds and the job allocated 682.37 GB of memory so far.
+2026-08-15 22:41:54.680 INFO   [CA5C18\DB14F9] Auto-routing stage completed: started with 19 unrouted nets, completed in 545.31 seconds, final score: 0.00 (7 unrouted and 304 violations), using 539.89 total CPU seconds, 692.32 GB total allocated, and 661.9 MB peak heap usage.
+2026-08-15 22:41:58.821 INFO   [CA5C18\DB14F9] Optimization stage started on board '6bdd979fb9c1cee5f7addf46097dff69' with score 0.00 (7 unrouted and 304 violations).
+2026-08-15 22:42:19.541 INFO   [CA5C18\DB14F9] Optimizer pass #1 on board '90846ff69fe3c6c85a5acea09d57ba93' was completed in 8.26 seconds with the score of 0.00 (7 unrouted and 304 violations).
+2026-08-15 22:42:44.146 INFO   [CA5C18\DB14F9] Optimizer pass #2 on board '90846ff69fe3c6c85a5acea09d57ba93' was completed in 7.94 seconds with the score of 0.00 (7 unrouted and 304 violations).
+2026-08-15 22:42:48.137 INFO   [CA5C18\DB14F9] Stopping optimizer because the improvement in this pass (0.0000%) is below the threshold (1.00%).
+2026-08-15 22:42:52.216 INFO   [CA5C18\DB14F9] Optimization stage completed: started with score 0.00 (7 unrouted and 304 violations), completed in 49.32 seconds, final score: 0.00 (7 unrouted and 304 violations), using 48.64 total CPU seconds, 83.25 GB total allocated, and 385.4 MB peak heap usage.
+2026-08-15 22:42:52.219 INFO   [CA5C18\DB14F9] Job 'CA5C18\DB14F9' finished with state: COMPLETED (elapsed: 10 minutes 7.08 seconds, finished at UTC: 2026-08-15T20:42:52.217166400Z).

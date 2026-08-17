@@ -1,0 +1,131 @@
+(footprint "Texas_DMQ0006A_VSON-HR-6_1.5x1.5mm"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "TI DMQ0006A VSON-HR; TPS6282x datasheet land pattern 4222645/E")
+	(tags "TPS62825 VSON-HR DMQ0006A")
+	(property "Reference" "U1"
+		(at 0 -1.4 0)
+		(layer "F.Fab")
+		(uuid "4787d758-f341-49c5-8ef9-dab46c9df478")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "TPS62825DMQR"
+		(at 0 1.4 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "cf499308-9e74-4e1f-a56f-0dbc85563712")
+		(effects
+			(font
+				(size 0.55 0.55)
+				(thickness 0.08)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e526432d-d306-45c9-b7df-d29bfaa8099d")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "cceb3879-7739-4870-927b-4df64ec6238a")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start -1.05 -1)
+		(end 1.05 1)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "907be518-7782-40a1-8d14-d3cbeb7245d1")
+	)
+	(fp_rect
+		(start -0.85 -0.85)
+		(end 0.85 0.85)
+		(stroke
+			(width 0.08)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "6ed06601-0b43-4e1d-9f95-05af1bc0ba94")
+	)
+	(pad "1" smd roundrect
+		(at -0.65 -0.5)
+		(size 0.6 0.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.2)
+		(uuid "2f42d0ce-7fa6-480d-8a97-a89d6f2a6bda")
+	)
+	(pad "2" smd roundrect
+		(at -0.65 0)
+		(size 0.6 0.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.2)
+		(uuid "aa711eda-0fe0-4b37-b606-6502e51c5ad8")
+	)
+	(pad "3" smd roundrect
+		(at -0.65 0.5)
+		(size 0.6 0.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.2)
+		(uuid "29a9ef55-8a9b-42f5-a333-7905f1257a24")
+	)
+	(pad "4" smd roundrect
+		(at 0.45 0.5)
+		(size 1 0.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.2)
+		(uuid "bb877ece-4435-41e6-9345-95d02622c2ca")
+	)
+	(pad "5" smd roundrect
+		(at 0.45 0)
+		(size 1 0.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.2)
+		(uuid "23e7e35a-2e58-4ac6-a984-7d4d56bb7f7f")
+	)
+	(pad "6" smd roundrect
+		(at 0.45 -0.5)
+		(size 1 0.2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.2)
+		(uuid "ec804b54-3c0b-4d43-8a1d-982b707c3962")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/libraries/3dmodels/exact/UltraLibrarian/TPS62825DMQR.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

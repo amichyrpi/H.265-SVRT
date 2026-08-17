@@ -1,0 +1,61 @@
+﻿References,Quantity,Value / MPN,Footprint,Manufacturer,Supplier part,Lifecycle / assembly note,3D model
+"C2010,C2011,C2012,C2013,C20130,C20131,C20132,C2014,C2015,C2016,C2017,C2020,C2021,C2022,C2023,C20230,C20231,C20232,C2024,C2025,C2026,C2027,C290,C291",24,100n,C_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"C20120,C20121,C20220,C20221",4,1u,C_0603_1608Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"C20122,C20123,C20222,C20223",4,2.2u,C_0603_1608Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"C2031,C2041,C2051,C2061,C270,C272,C273",7,4.7uF 10V,C_0603_1608Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"C2032,C2042,C2052,C2062",4,10uF 6.3V,C_0603_1608Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"C260,C265",2,2.2uF,C_0603_1608Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"C261,C262,C266,C267",4,1uF 10V,C_0603_1608Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+C271,1,2.2uF 10V,C_0603_1608Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+C274,1,1uF,C_0603_1608Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+C280,1,68n COMP,C_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+C281,1,10uF 10V,C_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"C282,C283",2,10uF 16V,C_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+D201,1,DFLS160-7,D_SOD-123,Diodes Incorporated,,Active,yes
+"FB2011,FB2012,FB2013,FB2014,FB2015,FB2016,FB2017,FB2021,FB2022,FB2023,FB2024,FB2025,FB2026,FB2027",14,600R@100MHz,L_0603_1608Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+J201,1,J_DISPLAY_LEFT 245863050104829+,Kyocera_245863050104829_50P_P0.35,KYOCERA AVX,,Active; official drawing and STEP,yes
+J202,1,J_DISPLAY_RIGHT 245863050104829+,Kyocera_245863050104829_50P_P0.35,KYOCERA AVX,,Active; official drawing and STEP,yes
+"L203,L204,L205,L206",4,2.2uH,L_Abracon_ASPI-4030S,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+L207,1,4.7uH 1.6A DFE252010,L_APV_ANR252010,TOKO/Murata,,Verify current stock,yes
+L208,1,10uH >=2.5A WLED,L_Abracon_ASPI-4030S,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"R2010,R2020",2,2.00k 1%,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"R2011,R2021,R294,R295",4,10k,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R2012,1,10k ADDR 0x0F,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R2022,1,10k ADDR 0x1F,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R2031,1,453k 1%,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"R2032,R2042,R2051,R2052,R2062",5,100k 1%,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R2041,1,200k 1%,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R2061,1,91k 1%,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"R260,R265",2,100k RESET pulldown,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"R261,R266",2,0R DNP to BL_PWM,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R280,1,37.4k 1% ISET=33.2mA,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R281,1,49.9k 1% 1.25MHz,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R282,1,147k 1% OVP,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R283,1,20k 1% OVP,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+R284,1,3k COMP,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+"R290,R291,R292,R293",4,2.2k I2C,R_0402_1005Metric,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,yes
+TP201,1,DISPLAY_5V,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP202,1,DISPLAY_3V3,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP203,1,DISPLAY_1V8,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP204,1,DISPLAY_1V2,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP205,1,DISPLAY_1V15,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP206,1,LCD_VSP +5V5,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP207,1,LCD_VSN -5V5,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP208,1,BL_EN,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP209,1,BL_PWM GPIO12,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP210,1,I2C_SDA_1V8,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP211,1,I2C_SCL_1V8,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP260,1,L S1_TEST NC,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP261,1,L TE,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP262,1,L LEDPWM,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP265,1,R S1_TEST NC,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP266,1,R TE,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+TP267,1,R LEDPWM,TestPoint_Pad_D1.0mm,Qualified generic,JLCPCB/LCSC TBD,Exact passive MPN to freeze before assembly,test-pad/no physical model
+"U201,U202",2,TC358870XBG(NOK) C3008712,Toshiba_P-VFBGA80_7x7mm_P0.65,Toshiba,C3008712,Obsolete/legacy; prototype stock only,yes
+"U203,U204,U205,U206",4,TLV62569DBVR,SOT-23-5,Texas Instruments,C141836,Active,yes
+U207,1,TPS65132B5YFFR,TI_DSBGA15_YFF_2.108x1.514mm_P0.4,Texas Instruments,,Active,yes
+U208,1,MP3387AGRT-P,TQFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm,Monolithic Power Systems,,Active,yes
+U209,1,PCA9306DCTR C123752,TSSOP-8_3x3mm_P0.65mm,Texas Instruments,C123752,Active,yes
+U210,1,TCA9539PWR 1V8 DISPLAY GPIO,TSSOP-24_4.4x7.8mm_P0.65mm,Texas Instruments,,Active,yes
+"Y201,Y202",2,SIT8008ACE73-18E-48.000000E,Oscillator_SMD_SiT_PQFN-4Pin_2.0x1.6mm,SiTime,C1507821,Active,yes
+"PANEL_L,PANEL_R",2,VS025ZSM-NV0-69P0,External panel; mates with J201/J202,BOE,Display supplier TBD,External 1440x1600 NT57860 dual-DSI panel; controlled full specification required,external assembly item

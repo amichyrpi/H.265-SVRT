@@ -1,0 +1,243 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "8d3db462-9f09-4554-ade0-6f6d79468434")
+	(paper "A3")
+	(title_block
+		(rev "A")
+		(company "Stearlight")
+		(comment 1 "Architecture and review hierarchy")
+		(comment 2 "NOT A FABRICATION RELEASE")
+	)
+	(lib_symbols)
+	(text "Architecture and review hierarchy"
+		(exclude_from_sim no)
+		(at 55 22 0)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+		(uuid "796b9cd2-5c9c-43d9-a85f-56f178548298")
+	)
+	(text "Official CM4 sheets are preserved derivatives of Raspberry Pi CM4 IO v5."
+		(exclude_from_sim no)
+		(at 25 28 0)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+		(uuid "ab18ea18-a595-46ad-9b37-c8709a1fd6b1")
+	)
+	(text ""
+		(exclude_from_sim no)
+		(at 55 18 0)
+		(effects
+			(font
+				(size 2 2)
+				(thickness 0.15)
+				(bold yes)
+			)
+		)
+		(uuid "cddc8174-0d7e-489d-8823-5c0b41238d0f")
+	)
+	(sheet
+		(at 190 40)
+		(size 45 28)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.2)
+			(type solid)
+			(color 132 0 132 1)
+		)
+		(fill
+			(color 255 255 255 0)
+		)
+		(uuid "0c5c65d7-0e1d-4aef-abad-035c6362f141")
+		(property "Sheetname" "AUDIO / MICS"
+			(at 190 38.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.1 1.1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sheetfile" "sheets/Audio.kicad_sch"
+			(at 190 69.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 0.8 0.8)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25 40)
+		(size 45 28)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.2)
+			(type solid)
+			(color 132 0 132 1)
+		)
+		(fill
+			(color 255 255 255 0)
+		)
+		(uuid "1cd8592c-196d-4d7d-bc1a-f61cb84e0f37")
+		(property "Sheetname" "CM4 GPIO / HIGH-SPEED"
+			(at 25 38.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.1 1.1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sheetfile" "sheets/CM4.kicad_sch"
+			(at 25 69.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 0.8 0.8)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25 85)
+		(size 45 28)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.2)
+			(type solid)
+			(color 132 0 132 1)
+		)
+		(fill
+			(color 255 255 255 0)
+		)
+		(uuid "1e5cb458-0afb-4814-8926-09f7e2226bbb")
+		(property "Sheetname" "TRACKING / SENSORS / DISPLAYS"
+			(at 25 83.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.1 1.1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sheetfile" "sheets/Interfaces.kicad_sch"
+			(at 25 114.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 0.8 0.8)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 135 40)
+		(size 45 28)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.2)
+			(type solid)
+			(color 132 0 132 1)
+		)
+		(fill
+			(color 255 255 255 0)
+		)
+		(uuid "67fc35ac-8b45-4d19-96ac-e089261f9633")
+		(property "Sheetname" "PCIE / USB3"
+			(at 135 38.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.1 1.1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sheetfile" "sheets/USB3.kicad_sch"
+			(at 135 69.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 0.8 0.8)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+	(sheet
+		(at 80 40)
+		(size 45 28)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.2)
+			(type solid)
+			(color 132 0 132 1)
+		)
+		(fill
+			(color 255 255 255 0)
+		)
+		(uuid "97857ad0-9169-4d6b-bbd6-2569ff699bcf")
+		(property "Sheetname" "POWER / USB-PD"
+			(at 80 38.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.1 1.1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Sheetfile" "sheets/Power.kicad_sch"
+			(at 80 69.5 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 0.8 0.8)
+					(thickness 0.15)
+				)
+			)
+		)
+	)
+)

@@ -1,0 +1,159 @@
+(footprint "TOGIALED_TJ-S3227SW1TCGLCCYRGB-A5"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "TOGIALED TJ-S3227SW1TCGLCCYRGB-A5 common-anode RGB LED, 3.2x2.7x1.1 mm; C601674")
+	(tags "RGB LED common anode SMD3227 JLCPCB C601674")
+	(property "Reference" "D11"
+		(at 0 -2.25 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c9f7b3e9-6272-4cc7-8dcc-29daa7d66b4b")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "TJ-S3227 RGB COMMON ANODE C601674"
+		(at 0 2.25 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "63cb3eb4-d06c-43ab-8df1-b6b3147d779a")
+		(effects
+			(font
+				(size 0.55 0.55)
+				(thickness 0.08)
+			)
+		)
+	)
+	(property "Datasheet" "${KIPRJMOD}/reference/TOGIALED_TJ-S3227SW1TCGLCCYRGB-A5.pdf"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0a44e66c-c891-4061-9585-1c741558bf89")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0650d9ba-64dc-405e-822b-94405b54b8a1")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.6 -1.35)
+		(end -0.5 -1.35)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "8a01e1ca-6c84-41d3-b590-8d9132d22cc9")
+	)
+	(fp_line
+		(start -1.6 1.35)
+		(end 1.6 1.35)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "f9bc2c61-fe2b-4733-982c-f326dcb00e57")
+	)
+	(fp_line
+		(start 0.5 -1.35)
+		(end 1.6 -1.35)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "23a145ea-5fa2-4136-867e-7fa7537ebc09")
+	)
+	(fp_circle
+		(center 1.75 -1.4)
+		(end 1.85 -1.4)
+		(stroke
+			(width 0.08)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.SilkS")
+		(uuid "bce6c609-64b8-44ea-b55a-efa2efdc1d2a")
+	)
+	(fp_rect
+		(start -2.15 -1.7)
+		(end 2.15 1.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "51c11fbc-259f-400b-ada0-257339087a73")
+	)
+	(fp_rect
+		(start -1.6 -1.35)
+		(end 1.6 1.35)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "34ab4fc5-69f7-4400-8ce2-ad5b5c993c46")
+	)
+	(pad "1" smd roundrect
+		(at 1.4 -0.725)
+		(size 1.2 0.9)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.12)
+		(uuid "aaad0e85-0387-477c-81d9-f17ee2389dcd")
+	)
+	(pad "2" smd roundrect
+		(at -1.4 -0.725)
+		(size 1.2 0.9)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.12)
+		(uuid "1d0acf71-a72a-40df-8b2a-32b2d5e42c8e")
+	)
+	(pad "3" smd roundrect
+		(at -1.4 0.725)
+		(size 1.2 0.9)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.12)
+		(uuid "f9969313-2216-4feb-baae-adbc067a4744")
+	)
+	(pad "4" smd roundrect
+		(at 1.4 0.725)
+		(size 1.2 0.9)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.12)
+		(uuid "c3b2188e-20e3-4e4b-9b33-99f045abd442")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/libraries/3dmodels/Button_Status/TOGIALED_TJ-S3227_RGB.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

@@ -1,0 +1,85 @@
+19269008528723
+CM4IO
+BarrelJack_Horizontal
+DC Barrel Jack
+Power Jack
+0
+3
+3
+CM4IO
+EDAC 690-019-298-412
+
+
+0
+23
+23
+CM4IO
+Hirose_FH12-22S-0.5SH_1x22-1MP_P0.50mm_Horizontal
+Molex FH12, FFC/FPC connector, FH12-22S-0.5SH, 22 Pins per row (https://www.hirose.com/product/en/products/FH12/FH12-24S-0.5SH(55)/), generated with kicad-footprint-generator
+connector Hirose  top entry
+0
+24
+23
+CM4IO
+L_Bourns_SRN6045TA
+http://www.bourns.com/docs/product-datasheets/srn6045ta.pdf
+Semi-shielded Power Inductor
+0
+2
+2
+CM4IO
+MOLEX_USB_67298-4090
+
+
+0
+12
+12
+CM4IO
+MTCONN_UBAF30-D2011
+USB3 Stacked type A socket
+USB3 TypeA
+0
+22
+19
+CM4IO
+PCIex1-36
+
+
+0
+38
+37
+CM4IO
+Raspberry-Pi-4-Compute-Module
+Raspberry Pi 4 Compute Module
+Raspberry Pi 4 Compute Module
+0
+200
+200
+CM4IO
+SDCARD_MOLEX_503398-1892
+
+
+0
+14
+11
+CM4IO
+SOIC-8-1EP_3.9x4.9mm_P1.27mm_EP2.95x4.9mm_Mask2.71x3.4mm_ThermalVias
+SOIC, 8 Pin (http://www.ti.com/lit/ds/symlink/lm5017.pdf#page=31), generated with kicad-footprint-generator ipc_gullwing_generator.py
+SOIC SO
+0
+23
+9
+CM4IO
+TRJG0926HENL
+https://p.globalsources.com/IMAGES/PDT/SPEC/690/K1160305690.pdf
+RJ45 Magjack
+0
+20
+20
+CM4IO
+USB_Micro-B_EDAC_UCON00686
+Micro USB Type B 10103594-0001LF, http://cdn.amphenol-icc.com/media/wysiwyg/files/drawing/10103594.pdf
+USB USB_B USB_micro USB_OTG
+0
+17
+6

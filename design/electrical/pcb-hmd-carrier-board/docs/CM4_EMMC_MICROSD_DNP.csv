@@ -1,0 +1,7 @@
+Reference,Assembly variant,State,Reason
+J301,CM4 eMMC,DNP,CM4 native SD interface is consumed by eMMC
+U301,CM4 eMMC,DNP,CM4 native SD interface is consumed by eMMC
+C301,CM4 eMMC,DNP,CM4 native SD interface is consumed by eMMC
+R301,CM4 eMMC,DNP,CM4 native SD interface is consumed by eMMC
+R302,CM4 eMMC,DNP,Card-detect option not used
+R303,CM4 eMMC,DNP,Card-detect option not used

@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "Stearlight_Proximity")(type "KiCad")(uri "${KIPRJMOD}/libraries/symbols/Stearlight_Proximity.kicad_sym")(options "")(descr "Local proximity sensor symbols"))
+)

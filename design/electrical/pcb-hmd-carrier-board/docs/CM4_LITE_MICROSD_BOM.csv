@@ -1,0 +1,6 @@
+Reference,Quantity,Manufacturer,MPN,Description,Assembly variant,Default state
+J301,1,Molex,503398-1892,microSD push-pull socket,CM4 Lite,Fitted
+U301,1,Richtek,RT9742GGJ5,SD power load switch SOT-23-5,CM4 Lite,Fitted
+C301,1,Qualified source TBD,10uF 6.3V X5R 0603,SD power output capacitor,CM4 Lite,Fitted
+R301,1,Qualified source TBD,12k 1% 0402,SD_PWR_ON pull-up,CM4 Lite,Fitted
+R302-R303,2,Qualified source TBD,0R 0402,optional card-detect links,CM4 Lite,DNP

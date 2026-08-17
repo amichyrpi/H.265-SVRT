@@ -1,0 +1,415 @@
+2026-08-15 22:40:35.325 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 22:40:35.331 DEBUG  [startup] user-data path : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-mipi-left-stage2  (source: CLI argument --user_data_path)
+2026-08-15 22:40:35.331 DEBUG  [startup] log file       : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-mipi-left-stage2\freerouting.log
+2026-08-15 22:40:35.332 DEBUG  No freerouting.json found at 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-mipi-left-stage2\freerouting.json' — will create one with default settings.
+2026-08-15 22:40:35.381 DEBUG  Default settings saved to 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-mipi-left-stage2\freerouting.json'.
+2026-08-15 22:40:35.382 DEBUG  Version: 2.3.0,2026-08-07
+2026-08-15 22:40:35.382 DEBUG  Command line arguments: '-de C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-mipi-left-stage2.dsn -do C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-mipi-left-stage2.ses -mp 3 -mt 0 --router.fanout.enabled=false --router.optimizer.enabled=true --router.layers.routable=true,false,true,true,false,true --router.layers.preferred_direction_horizontal=true,false,false,true,false,true --api_server.enabled=false --gui.enabled=false --logging.console.level=INFO --user_data_path=C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-mipi-left-stage2 -l en'
+2026-08-15 22:40:35.382 DEBUG  Architecture: Windows 11,amd64,10.0
+2026-08-15 22:40:35.382 DEBUG  Java: 25.0.4,Eclipse Adoptium
+2026-08-15 22:40:35.382 DEBUG  System Language: fr,fr_FR
+2026-08-15 22:40:35.383 DEBUG  Hardware: 12 CPU cores,4044 MB RAM
+2026-08-15 22:40:35.383 DEBUG  UTC Time: 2026-08-15T20:40:35.381255100Z
+2026-08-15 22:40:35.385 DEBUG  GUI Language: en
+2026-08-15 22:40:35.385 DEBUG  Host: N/A
+2026-08-15 22:40:36.439 DEBUG  Loaded router settings from: C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-mipi-left-stage2\freerouting.json
+2026-08-15 22:40:36.440 DEBUG  Applied CLI router setting: router.max_passes = 3
+2026-08-15 22:40:36.440 DEBUG  Applied CLI router setting: router.max_threads = 0
+2026-08-15 22:40:36.440 DEBUG  Applied CLI router setting: router.fanout.enabled = false
+2026-08-15 22:40:36.441 DEBUG  Applied CLI router setting: router.optimizer.enabled = true
+2026-08-15 22:40:36.441 DEBUG  Applied CLI router setting: router.layers.routable = true,false,true,true,false,true
+2026-08-15 22:40:36.441 DEBUG  Applied CLI router setting: router.layers.preferred_direction_horizontal = true,false,false,true,false,true
+2026-08-15 22:40:36.441 DEBUG  Applied CLI router setting: router.enabled = true (implicit from -de/-do batch mode)
+2026-08-15 22:40:36.441 DEBUG  No router settings found in environment variables
+2026-08-15 22:40:36.511 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:40:36.516 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:40:36.518 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:40:36.613 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-mipi-left-stage2.dsn (6 layers)
+2026-08-15 22:40:36.625 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:40:36.625 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:40:36.626 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:40:36.652 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-mipi-left-stage2.dsn (6 layers)
+2026-08-15 22:40:36.654 DEBUG  Merging settings from 5 sources:
+2026-08-15 22:40:36.654 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 22:40:36.656 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 22:40:36.656 DEBUG    - DSN file: pcb-hmd-carrier-board2-mipi-left-stage2.dsn (priority 20): 8 fields changed
+2026-08-15 22:40:36.656 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 22:40:36.656 DEBUG    - CLI Arguments (priority 60): 9 fields changed
+2026-08-15 22:40:36.656 DEBUG  Settings merged successfully from 5 source(s)
+2026-08-15 22:40:36.786 DEBUG  No new version available. Current version is up to date: v2.3.0
+2026-08-15 22:40:36.869 INFO   [BADA92\9933CB] Loading board file 'pcb-hmd-carrier-board2-mipi-left-stage2.dsn'...
+2026-08-15 22:40:36.877 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:40:36.877 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:40:36.877 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:40:37.029 DEBUG  Wiring: degenerate wire trace skipped (all 1 corners are identical — zero-length trace) on layer 'B.Cu'. This is likely a DSN export issue in your EDA tool.
+2026-08-15 22:40:37.031 DEBUG  Wiring: degenerate wire trace skipped (all 1 corners are identical — zero-length trace) on layer 'PWR_SIG2'. This is likely a DSN export issue in your EDA tool.
+2026-08-15 22:40:37.038 DEBUG  Wiring: degenerate wire trace skipped (all 1 corners are identical — zero-length trace) on layer 'PWR_SIG2'. This is likely a DSN export issue in your EDA tool.
+2026-08-15 22:40:37.128 WARN   DSN file 'pcb-hmd-carrier-board2-mipi-left-stage2.dsn' was loaded with 3 warning(s).
+2026-08-15 22:40:37.132 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 22:40:37.148 DEBUG  Applied copper-to-edge clearance override: 500.0 um (5000 board units).
+2026-08-15 22:40:37.160 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:40:37.160 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:40:37.160 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:40:37.183 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-mipi-left-stage2.dsn (6 layers)
+2026-08-15 22:40:37.184 DEBUG  Merging settings from 6 sources:
+2026-08-15 22:40:37.184 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 22:40:37.184 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 22:40:37.184 DEBUG    - DSN file: pcb-hmd-carrier-board2-mipi-left-stage2.dsn (priority 20): 8 fields changed
+2026-08-15 22:40:37.184 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 22:40:37.185 DEBUG    - CLI Arguments (priority 60): 9 fields changed
+2026-08-15 22:40:37.185 DEBUG    - API Settings (priority 70): 28 fields changed
+2026-08-15 22:40:37.185 DEBUG  Settings merged successfully from 6 source(s)
+2026-08-15 22:40:37.185 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 22:40:37.188 INFO   [BADA92\9933CB] Job 'BADA92\9933CB' started at 2026-08-15T20:40:37.188940Z.
+2026-08-15 22:40:37.386 DEBUG  [BADA92\9933CB] Checking fanout pre-pass. settings.fanout.enabled=false, smd_pins=1581
+2026-08-15 22:40:37.463 INFO   [BADA92\9933CB] Auto-routing stage started on board '29a36e074a6bc7482ae76f406f79cd71' for 26 unrouted items.
+2026-08-15 22:40:45.599 DEBUG  Queuing item for routing: Via on net 'TYPEC_INT_N' (connected: 14/16)
+2026-08-15 22:40:45.601 DEBUG  Queuing item for routing: Via on net 'HP_R_CODEC' (connected: 9/10)
+2026-08-15 22:40:45.602 DEBUG  Queuing item for routing: Via on net 'MIC_L_N' (connected: 9/10)
+2026-08-15 22:40:45.602 DEBUG  Queuing item for routing: Via on net 'MIC_L_P' (connected: 8/9)
+2026-08-15 22:40:45.605 DEBUG  Queuing item for routing: Via on net 'JACK_MIC' (connected: 13/14)
+2026-08-15 22:40:45.606 DEBUG  Queuing item for routing: Via on net 'R_LCD_LEDPWM' (connected: 12/14)
+2026-08-15 22:40:45.606 DEBUG  Queuing item for routing: Via on net 'R_1V15_HDMI' (connected: 18/20)
+2026-08-15 22:40:45.607 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 3/11)
+2026-08-15 22:40:45.607 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 8/11)
+2026-08-15 22:40:45.628 DEBUG  Queuing item for routing: PolylineTrace on net 'TYPEC_INT_N' (connected: 2/16)
+2026-08-15 22:40:45.629 DEBUG  Queuing item for routing: PolylineTrace on net 'HP_L_CODEC' (connected: 2/3)
+2026-08-15 22:40:45.629 DEBUG  Queuing item for routing: PolylineTrace on net 'JACK_MIC' (connected: 1/14)
+2026-08-15 22:40:45.629 DEBUG  Queuing item for routing: PolylineTrace on net 'R_LCD_LEDPWM' (connected: 2/14)
+2026-08-15 22:40:45.630 DEBUG  Queuing item for routing: PolylineTrace on net 'R_1V15_HDMI' (connected: 2/20)
+2026-08-15 22:40:45.630 DEBUG  Queuing item for routing: PolylineTrace on net 'GND' (connected: 14/27)
+2026-08-15 22:40:45.638 DEBUG  Queuing item for routing: Pin on net 'HP_R_CODEC' (connected: 1/10)
+2026-08-15 22:40:45.638 DEBUG  Queuing item for routing: Pin on net 'HP_L_CODEC' (connected: 1/3)
+2026-08-15 22:40:45.638 DEBUG  Queuing item for routing: Pin on net 'MIC_L_N' (connected: 1/10)
+2026-08-15 22:40:45.638 DEBUG  Queuing item for routing: Pin on net 'MIC_L_P' (connected: 1/9)
+2026-08-15 22:40:45.641 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 22:40:45.641 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 22:40:45.641 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 22:40:45.641 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 22:40:45.641 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 22:40:45.641 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 22:40:45.642 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 22:40:45.642 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 22:40:45.642 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 22:40:45.642 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 22:40:45.642 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:40:45.643 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:40:45.643 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:40:45.643 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_N' (connected: 1/2)
+2026-08-15 22:40:45.643 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 22:40:45.643 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 22:40:45.643 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 22:40:45.643 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 22:40:45.644 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:40:45.644 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:40:45.644 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:40:45.645 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 22:40:45.645 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 22:40:45.645 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:40:45.645 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:40:45.645 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:40:45.645 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 22:40:45.645 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 22:40:45.645 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 22:40:45.645 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_N' (connected: 1/2)
+2026-08-15 22:40:45.646 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 22:40:45.646 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:40:45.646 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 22:40:45.646 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 22:40:45.646 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 22:40:45.646 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 22:40:45.646 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 22:40:45.646 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 22:40:45.646 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 22:40:45.647 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 22:40:45.649 DEBUG  Queuing item for routing: Pin on net 'GND' (connected: 1/27)
+2026-08-15 22:40:49.731 DEBUG  [BADA92\9933CB] Pass #1: 26 incompletes across 60 items to route
+2026-08-15 22:40:49.731 DEBUG  [BADA92\9933CB]   Net 'GND' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D0_N' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D3_N' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D0_P' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D3_P' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D1_N' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_CLK_N' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D1_P' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_CLK_P' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D2_P' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D2_N' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D2_N' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D2_P' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_CLK_P' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D1_P' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_CLK_N' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D1_N' has 1 incomplete(s)
+2026-08-15 22:40:49.732 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D3_P' has 1 incomplete(s)
+2026-08-15 22:40:49.733 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D0_P' has 1 incomplete(s)
+2026-08-15 22:40:49.733 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D3_N' has 1 incomplete(s)
+2026-08-15 22:40:49.733 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D0_N' has 1 incomplete(s)
+2026-08-15 22:40:49.733 DEBUG  [BADA92\9933CB]   Net 'nPI_LED_PWR' has 1 incomplete(s)
+2026-08-15 22:40:49.733 DEBUG  [BADA92\9933CB]   Net 'MIC_L_P' has 1 incomplete(s)
+2026-08-15 22:40:49.733 DEBUG  [BADA92\9933CB]   Net 'MIC_L_N' has 1 incomplete(s)
+2026-08-15 22:40:49.733 DEBUG  [BADA92\9933CB]   Net 'HP_R_CODEC' has 1 incomplete(s)
+2026-08-15 22:40:49.733 DEBUG  [BADA92\9933CB]   Net 'TYPEC_INT_N' has 1 incomplete(s)
+2026-08-15 22:41:06.861 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:41:10.937 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:41:10.947 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #89 at corner 3/3 on layer 0, trace width: 750, from corner: 0, ok_point: (2159500,-1048580), target: (2159500,-1049410)
+2026-08-15 22:41:10.996 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between polylinetrace, polylinetrace and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin of component #4, because the new connection could not be inserted.
+2026-08-15 22:41:15.116 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:41:27.712 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:27.742 DEBUG  PolylineTrace.normalize: max normalization depth (16) reached for trace #3852 on net 192 — stopping recursion, trace kept as-is.
+2026-08-15 22:41:31.972 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:41:36.169 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:41:36.172 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:36.174 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:36.174 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:36.177 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #92 at corner 1/1 on layer 0, trace width: 750, from corner: 0, ok_point: (1225000,-1242837), target: (1225000,-1237630)
+2026-08-15 22:41:36.239 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin #3 of component #156 and polylinetrace, because the new connection could not be inserted.
+2026-08-15 22:41:40.318 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:41:40.321 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:40.322 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:40.323 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:40.324 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:44.564 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:41:44.569 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:44.570 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:44.570 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:41:48.686 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:41:51.011 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #1 at corner 24/24 on layer 3, trace width: 1250, from corner: 5, ok_point: (2306547,-1079933), target: (2118000,-1176220)
+2026-08-15 22:41:51.065 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin #1 of component #1, conductionarea, conductionarea, because the new connection could not be inserted.
+2026-08-15 22:41:59.490 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:42:03.634 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:42:03.635 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:42:03.635 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:42:07.935 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:42:07.935 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:42:07.935 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:43:13.570 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #43 at corner 22/22 on layer 3, trace width: 450, from corner: 9, ok_point: (1337770,-1002974), target: (1269933,-1020890)
+2026-08-15 22:43:13.615 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #36 of component #81 and pin #14 of component #82, because the new connection could not be inserted.
+2026-08-15 22:43:17.709 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #42 at corner 44/44 on layer 3, trace width: 450, from corner: 26, ok_point: (1337770,-1002974), target: (1269933,-1020890)
+2026-08-15 22:43:17.756 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #35 of component #81 and pin #8 of component #82, because the new connection could not be inserted.
+2026-08-15 22:43:21.776 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #38 at corner 33/33 on layer 3, trace width: 450, from corner: 27, ok_point: (1339943,-1000801), target: (1280952,-1020208)
+2026-08-15 22:43:21.836 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #29 of component #81 and pin #7 of component #82, because the new connection could not be inserted.
+2026-08-15 22:43:26.202 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #37 at corner 16/16 on layer 3, trace width: 450, from corner: 10, ok_point: (1339943,-1000801), target: (1280952,-1020208)
+2026-08-15 22:43:26.249 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #28 of component #81 and pin #6 of component #82, because the new connection could not be inserted.
+2026-08-15 22:43:30.695 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #33 at corner 17/17 on layer 3, trace width: 450, from corner: 8, ok_point: (1345819,-1011717), target: (1300713,-1052579)
+2026-08-15 22:43:30.760 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #22 of component #81 and pin #5 of component #82, because the new connection could not be inserted.
+2026-08-15 22:43:34.771 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #41 at corner 21/21 on layer 3, trace width: 450, from corner: 8, ok_point: (1339943,-1000801), target: (1265856,-1019302)
+2026-08-15 22:43:34.814 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #34 of component #81 and pin #4 of component #82, because the new connection could not be inserted.
+2026-08-15 22:43:38.768 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #44 at corner 32/32 on layer 3, trace width: 450, from corner: 10, ok_point: (1320884,-1025998), target: (1422952,-1015028)
+2026-08-15 22:43:38.814 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #18 of component #82 and pin #37 of component #81, because the new connection could not be inserted.
+2026-08-15 22:43:42.916 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #43 at corner 30/30 on layer 3, trace width: 450, from corner: 13, ok_point: (1320868,-1026014), target: (1402257,-1010767)
+2026-08-15 22:43:42.957 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #14 of component #82 and pin #36 of component #81, because the new connection could not be inserted.
+2026-08-15 22:45:14.452 INFO   [BADA92\9933CB] Auto-routing pass #1 on board '29a36e074a6bc7482ae76f406f79cd71' was completed in 268.86 seconds with the score of 0.00 (18 unrouted and 274 violations), using 273.14 CPU seconds and the job allocated 323.83 GB of memory so far.
+2026-08-15 22:45:23.683 DEBUG  Queuing item for routing: Via on net 'TYPEC_INT_N' (connected: 14/16)
+2026-08-15 22:45:23.689 DEBUG  Queuing item for routing: Via on net 'JACK_MIC' (connected: 13/14)
+2026-08-15 22:45:23.689 DEBUG  Queuing item for routing: Via on net 'R_LCD_LEDPWM' (connected: 12/14)
+2026-08-15 22:45:23.690 DEBUG  Queuing item for routing: Via on net 'R_1V15_HDMI' (connected: 18/20)
+2026-08-15 22:45:23.690 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 3/11)
+2026-08-15 22:45:23.690 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 8/11)
+2026-08-15 22:45:23.710 DEBUG  Queuing item for routing: PolylineTrace on net 'TYPEC_INT_N' (connected: 2/16)
+2026-08-15 22:45:23.711 DEBUG  Queuing item for routing: PolylineTrace on net 'HP_L_CODEC' (connected: 2/3)
+2026-08-15 22:45:23.711 DEBUG  Queuing item for routing: PolylineTrace on net 'JACK_MIC' (connected: 1/14)
+2026-08-15 22:45:23.711 DEBUG  Queuing item for routing: PolylineTrace on net 'R_LCD_LEDPWM' (connected: 2/14)
+2026-08-15 22:45:23.711 DEBUG  Queuing item for routing: PolylineTrace on net 'R_1V15_HDMI' (connected: 2/20)
+2026-08-15 22:45:23.712 DEBUG  Queuing item for routing: PolylineTrace on net 'GND' (connected: 14/27)
+2026-08-15 22:45:23.720 DEBUG  Queuing item for routing: Pin on net 'HP_L_CODEC' (connected: 1/3)
+2026-08-15 22:45:23.723 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 22:45:23.723 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 22:45:23.723 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 22:45:23.723 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 22:45:23.723 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 22:45:23.724 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 22:45:23.724 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 22:45:23.725 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:45:23.725 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:45:23.725 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:45:23.725 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 22:45:23.726 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 22:45:23.726 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 22:45:23.726 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:45:23.726 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:45:23.727 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:45:23.727 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 22:45:23.727 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 22:45:23.727 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:45:23.727 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:45:23.727 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:45:23.727 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 22:45:23.728 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 22:45:23.728 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:45:23.728 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 22:45:23.728 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 22:45:23.728 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 22:45:23.728 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 22:45:23.728 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 22:45:23.728 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 22:45:23.730 DEBUG  Queuing item for routing: Pin on net 'GND' (connected: 1/27)
+2026-08-15 22:45:28.145 DEBUG  [BADA92\9933CB] Pass #2: 18 incompletes across 44 items to route
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'GND' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D3_N' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D0_P' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D1_N' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_CLK_N' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D1_P' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_CLK_P' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D2_P' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D2_N' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D1_P' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_CLK_N' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D1_N' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D3_P' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D0_P' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D3_N' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D0_N' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'nPI_LED_PWR' has 1 incomplete(s)
+2026-08-15 22:45:28.146 DEBUG  [BADA92\9933CB]   Net 'TYPEC_INT_N' has 1 incomplete(s)
+2026-08-15 22:45:32.409 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:45:36.451 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:45:36.453 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #89 at corner 3/3 on layer 0, trace width: 750, from corner: 0, ok_point: (2159500,-1048580), target: (2159500,-1049410)
+2026-08-15 22:45:36.496 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between polylinetrace, polylinetrace and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin of component #4, because the new connection could not be inserted.
+2026-08-15 22:45:40.504 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:45:52.728 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:45:52.735 DEBUG  PolylineTrace.normalize: max normalization depth (16) reached for trace #12910 on net 192 — stopping recursion, trace kept as-is.
+2026-08-15 22:45:56.922 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:46:00.891 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:46:00.894 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:00.894 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:00.894 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:00.895 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #92 at corner 1/1 on layer 0, trace width: 750, from corner: 0, ok_point: (1225000,-1243437), target: (1225000,-1237630)
+2026-08-15 22:46:00.943 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin #3 of component #156 and polylinetrace, because the new connection could not be inserted.
+2026-08-15 22:46:04.723 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:46:04.725 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:04.725 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:04.726 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:04.726 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:08.817 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:46:08.821 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:08.822 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:08.822 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:46:13.081 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:46:14.581 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #1 at corner 24/24 on layer 3, trace width: 1250, from corner: 5, ok_point: (2306547,-1079933), target: (2118000,-1176220)
+2026-08-15 22:46:14.629 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin #1 of component #1, conductionarea, conductionarea, because the new connection could not be inserted.
+2026-08-15 22:46:18.784 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:47:20.182 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #38 at corner 24/24 on layer 3, trace width: 450, from corner: 7, ok_point: (1346457,-1012355), target: (1285000,-1024311)
+2026-08-15 22:47:20.237 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #29 of component #81 and pin #7 of component #82, because the new connection could not be inserted.
+2026-08-15 22:47:29.152 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #41 at corner 33/33 on layer 3, trace width: 450, from corner: 15, ok_point: (1336966,-1003510), target: (1275974,-1024359)
+2026-08-15 22:47:29.200 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #34 of component #81 and pin #4 of component #82, because the new connection could not be inserted.
+2026-08-15 22:47:47.017 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #41 at corner 29/29 on layer 3, trace width: 450, from corner: 20, ok_point: (1307908,-1004680), target: (1396306,-1009111)
+2026-08-15 22:47:47.071 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #4 of component #82 and pin #34 of component #81, because the new connection could not be inserted.
+2026-08-15 22:47:51.646 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #40 at corner 32/32 on layer 3, trace width: 450, from corner: 13, ok_point: (1307908,-1004680), target: (1424356,-1013984)
+2026-08-15 22:47:51.694 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between pin #17 of component #82 and pin #31 of component #81, because the new connection could not be inserted.
+2026-08-15 22:48:53.567 INFO   [BADA92\9933CB] Auto-routing pass #2 on board 'b283cf2c2e961c2477fafb53fdfbe740' was completed in 209.89 seconds with the score of 0.00 (12 unrouted and 274 violations), using 485.95 CPU seconds and the job allocated 568.30 GB of memory so far.
+2026-08-15 22:49:01.912 DEBUG  Queuing item for routing: Via on net 'TYPEC_INT_N' (connected: 14/16)
+2026-08-15 22:49:01.917 DEBUG  Queuing item for routing: Via on net 'JACK_MIC' (connected: 13/14)
+2026-08-15 22:49:01.917 DEBUG  Queuing item for routing: Via on net 'R_LCD_LEDPWM' (connected: 12/14)
+2026-08-15 22:49:01.918 DEBUG  Queuing item for routing: Via on net 'R_1V15_HDMI' (connected: 18/20)
+2026-08-15 22:49:01.919 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 3/11)
+2026-08-15 22:49:01.919 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 8/11)
+2026-08-15 22:49:01.938 DEBUG  Queuing item for routing: PolylineTrace on net 'TYPEC_INT_N' (connected: 2/16)
+2026-08-15 22:49:01.938 DEBUG  Queuing item for routing: PolylineTrace on net 'HP_L_CODEC' (connected: 2/3)
+2026-08-15 22:49:01.939 DEBUG  Queuing item for routing: PolylineTrace on net 'JACK_MIC' (connected: 1/14)
+2026-08-15 22:49:01.939 DEBUG  Queuing item for routing: PolylineTrace on net 'R_LCD_LEDPWM' (connected: 2/14)
+2026-08-15 22:49:01.939 DEBUG  Queuing item for routing: PolylineTrace on net 'R_1V15_HDMI' (connected: 2/20)
+2026-08-15 22:49:01.940 DEBUG  Queuing item for routing: PolylineTrace on net 'GND' (connected: 14/27)
+2026-08-15 22:49:01.948 DEBUG  Queuing item for routing: Pin on net 'HP_L_CODEC' (connected: 1/3)
+2026-08-15 22:49:01.951 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 22:49:01.952 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 22:49:01.952 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 22:49:01.953 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:49:01.953 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:49:01.953 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:49:01.954 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 22:49:01.954 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:49:01.954 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:49:01.955 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:49:01.955 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:49:01.956 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:49:01.956 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:49:01.956 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 22:49:01.956 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 22:49:01.956 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:49:01.956 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 22:49:01.956 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 22:49:01.958 DEBUG  Queuing item for routing: Pin on net 'GND' (connected: 1/27)
+2026-08-15 22:49:06.152 DEBUG  [BADA92\9933CB] Pass #3: 12 incompletes across 32 items to route
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'GND' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D0_N' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D3_P' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D2_P' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'L_DSIA_D2_P' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_CLK_P' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_CLK_N' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D1_N' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D3_P' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'L_DSIB_D0_N' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'nPI_LED_PWR' has 1 incomplete(s)
+2026-08-15 22:49:06.153 DEBUG  [BADA92\9933CB]   Net 'TYPEC_INT_N' has 1 incomplete(s)
+2026-08-15 22:49:10.419 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:49:14.663 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:49:14.665 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #89 at corner 3/3 on layer 0, trace width: 750, from corner: 0, ok_point: (2159500,-1048580), target: (2159500,-1049410)
+2026-08-15 22:49:14.722 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between polylinetrace, polylinetrace and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin of component #4, because the new connection could not be inserted.
+2026-08-15 22:49:14.725 DEBUG  [BADA92\9933CB] Pass #3: Failed to route Via on net 'R_LCD_LEDPWM' (30 items remaining, 3 failures). State: FAILED
+2026-08-15 22:49:18.973 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:49:31.793 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:31.799 DEBUG  PolylineTrace.normalize: max normalization depth (16) reached for trace #21010 on net 192 — stopping recursion, trace kept as-is.
+2026-08-15 22:49:36.141 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:49:40.339 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:49:40.341 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:40.342 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:40.342 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:40.343 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #92 at corner 1/1 on layer 0, trace width: 750, from corner: 0, ok_point: (1225000,-1243437), target: (1225000,-1237630)
+2026-08-15 22:49:40.396 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin #3 of component #156 and polylinetrace, because the new connection could not be inserted.
+2026-08-15 22:49:40.397 DEBUG  [BADA92\9933CB] Pass #3: Failed to route PolylineTrace on net 'JACK_MIC' (24 items remaining, 3 failures). State: FAILED
+2026-08-15 22:49:44.692 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:49:44.694 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:44.694 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:44.695 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:44.695 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:49.049 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:49:49.053 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:49.053 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:49.053 DEBUG  ShapeSearchTree45Degree.complete_shape: non-IntOctagon contained shape, using bounding octagon approximation
+2026-08-15 22:49:53.345 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:49:54.797 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #1 at corner 24/24 on layer 3, trace width: 1250, from corner: 5, ok_point: (2306547,-1079933), target: (2118000,-1176220)
+2026-08-15 22:49:54.848 DEBUG  [BADA92\9933CB] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin #1 of component #1, conductionarea, conductionarea, because the new connection could not be inserted.
+2026-08-15 22:49:54.848 DEBUG  [BADA92\9933CB] Pass #3: Failed to route PolylineTrace on net 'GND' (21 items remaining, 3 failures). State: FAILED
+2026-08-15 22:49:59.085 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:50:13.597 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 22:51:42.388 INFO   [BADA92\9933CB] Auto-routing pass #3 on board '10075b741f5182597c165f2934bfa785' was completed in 160.48 seconds with the score of 0.00 (9 unrouted and 274 violations), using 652.36 CPU seconds and the job allocated 760.38 GB of memory so far.
+2026-08-15 22:51:46.552 DEBUG  === Performance Profile ===
+2026-08-15 22:51:46.552 DEBUG  === Routing Parameters ===
+2026-08-15 22:51:46.555 DEBUG    Via Costs: 50, Plane Via Costs: 5
+2026-08-15 22:51:46.555 DEBUG    Layer Costs (Preferred / Against):
+2026-08-15 22:51:46.555 DEBUG      Layer 1: 2,2 / 5,1
+2026-08-15 22:51:46.555 DEBUG      Layer 2: 1,0 / 1,3
+2026-08-15 22:51:46.555 DEBUG      Layer 3: 1,0 / 3,9
+2026-08-15 22:51:46.555 DEBUG      Layer 4: 1,0 / 1,3
+2026-08-15 22:51:46.555 DEBUG      Layer 5: 1,0 / 3,9
+2026-08-15 22:51:46.556 DEBUG      Layer 6: 2,2 / 2,5
+2026-08-15 22:51:46.556 DEBUG  
+2026-08-15 22:51:46.557 DEBUG    autoroute_item                          :    33776 ms total,      136 calls,    248 ms avg
+2026-08-15 22:51:46.557 DEBUG  
+2026-08-15 22:51:46.557 DEBUG  === Pass History ===
+2026-08-15 22:51:46.557 DEBUG    Pass 1  :   18 unrouted items,   265,12 s,   100 ripup cost
+2026-08-15 22:51:46.558 DEBUG    Pass 2  :   12 unrouted items,   205,75 s,   200 ripup cost
+2026-08-15 22:51:46.558 DEBUG    Pass 3  :    9 unrouted items,   156,39 s,   300 ripup cost
+2026-08-15 22:51:46.558 DEBUG  ===========================
+2026-08-15 22:51:50.776 INFO   [BADA92\9933CB] Auto-routing stage completed: started with 26 unrouted nets, completed in 669.30 seconds, final score: 0.00 (9 unrouted and 274 violations), using 661.25 total CPU seconds, 769.53 GB total allocated, and 528.1 MB peak heap usage.
+2026-08-15 22:51:50.781 DEBUG  [BADA92\9933CB] Before optimization: Via count: 166, trace length: 21691512
+2026-08-15 22:51:54.969 INFO   [BADA92\9933CB] Optimization stage started on board 'ab1c65ccf4c0b562ba483a25ebb2e4a3' with score 0.00 (9 unrouted and 274 violations).
+2026-08-15 22:52:23.429 INFO   [BADA92\9933CB] Optimizer pass #1 on board '0ff37e888f3d172c9ee42578d465324d' was completed in 15.63 seconds with the score of 0.00 (9 unrouted and 274 violations).
+2026-08-15 22:52:27.485 INFO   [BADA92\9933CB] Stopping optimizer because the improvement in this pass (0.0000%) is below the threshold (1.00%).
+2026-08-15 22:52:31.559 INFO   [BADA92\9933CB] Optimization stage completed: started with score 0.00 (9 unrouted and 274 violations), completed in 32.52 seconds, final score: 0.00 (9 unrouted and 274 violations), using 32.03 total CPU seconds, 62.48 GB total allocated, and 387.7 MB peak heap usage.
+2026-08-15 22:52:31.561 INFO   [BADA92\9933CB] Job 'BADA92\9933CB' finished with state: COMPLETED (elapsed: 11 minutes 54.37 seconds, finished at UTC: 2026-08-15T20:52:31.560767700Z).

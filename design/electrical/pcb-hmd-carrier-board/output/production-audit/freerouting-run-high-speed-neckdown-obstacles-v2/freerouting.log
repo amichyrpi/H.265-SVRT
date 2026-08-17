@@ -1,0 +1,372 @@
+2026-08-15 22:24:47.919 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 22:24:47.923 DEBUG  [startup] user-data path : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-neckdown-obstacles-v2  (source: CLI argument --user_data_path)
+2026-08-15 22:24:47.924 DEBUG  [startup] log file       : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-neckdown-obstacles-v2\freerouting.log
+2026-08-15 22:24:47.925 DEBUG  No freerouting.json found at 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-neckdown-obstacles-v2\freerouting.json' — will create one with default settings.
+2026-08-15 22:24:47.978 DEBUG  Default settings saved to 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-neckdown-obstacles-v2\freerouting.json'.
+2026-08-15 22:24:47.979 DEBUG  Version: 2.3.0,2026-08-07
+2026-08-15 22:24:47.979 DEBUG  Command line arguments: '-de C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-high-speed-neckdown-obstacles-v2.dsn -do C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-high-speed-neckdown-obstacles-v2.ses -mp 1 -mt 0 --router.fanout.enabled=true --router.optimizer.enabled=false --router.layers.routable=true,false,true,true,false,true --router.layers.preferred_direction_horizontal=true,false,false,true,false,true --api_server.enabled=false --gui.enabled=false --logging.console.level=INFO --user_data_path=C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-neckdown-obstacles-v2 -l en'
+2026-08-15 22:24:47.979 DEBUG  Architecture: Windows 11,amd64,10.0
+2026-08-15 22:24:47.979 DEBUG  Java: 25.0.4,Eclipse Adoptium
+2026-08-15 22:24:47.980 DEBUG  System Language: fr,fr_FR
+2026-08-15 22:24:47.980 DEBUG  Hardware: 12 CPU cores,4044 MB RAM
+2026-08-15 22:24:47.980 DEBUG  UTC Time: 2026-08-15T20:24:47.979362600Z
+2026-08-15 22:24:47.982 DEBUG  GUI Language: en
+2026-08-15 22:24:47.982 DEBUG  Host: N/A
+2026-08-15 22:24:49.056 DEBUG  Loaded router settings from: C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-neckdown-obstacles-v2\freerouting.json
+2026-08-15 22:24:49.057 DEBUG  Applied CLI router setting: router.max_passes = 1
+2026-08-15 22:24:49.057 DEBUG  Applied CLI router setting: router.max_threads = 0
+2026-08-15 22:24:49.057 DEBUG  Applied CLI router setting: router.fanout.enabled = true
+2026-08-15 22:24:49.057 DEBUG  Applied CLI router setting: router.optimizer.enabled = false
+2026-08-15 22:24:49.058 DEBUG  Applied CLI router setting: router.layers.routable = true,false,true,true,false,true
+2026-08-15 22:24:49.058 DEBUG  Applied CLI router setting: router.layers.preferred_direction_horizontal = true,false,false,true,false,true
+2026-08-15 22:24:49.058 DEBUG  Applied CLI router setting: router.enabled = true (implicit from -de/-do batch mode)
+2026-08-15 22:24:49.058 DEBUG  No router settings found in environment variables
+2026-08-15 22:24:49.158 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:24:49.167 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:24:49.169 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:24:49.277 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-high-speed-neckdown-obstacles-v2.dsn (6 layers)
+2026-08-15 22:24:49.292 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:24:49.293 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:24:49.293 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:24:49.293 DEBUG  No new version available. Current version is up to date: v2.3.0
+2026-08-15 22:24:49.327 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-high-speed-neckdown-obstacles-v2.dsn (6 layers)
+2026-08-15 22:24:49.329 DEBUG  Merging settings from 5 sources:
+2026-08-15 22:24:49.329 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 22:24:49.331 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 22:24:49.331 DEBUG    - DSN file: pcb-hmd-carrier-board2-high-speed-neckdown-obstacles-v2.dsn (priority 20): 8 fields changed
+2026-08-15 22:24:49.331 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 22:24:49.332 DEBUG    - CLI Arguments (priority 60): 9 fields changed
+2026-08-15 22:24:49.332 DEBUG  Settings merged successfully from 5 source(s)
+2026-08-15 22:24:49.537 INFO   [E34270\2345C9] Loading board file 'pcb-hmd-carrier-board2-high-speed-neckdown-obstacles-v2.dsn'...
+2026-08-15 22:24:49.547 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:24:49.548 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:24:49.548 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:24:49.796 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 22:24:49.820 DEBUG  Applied copper-to-edge clearance override: 500.0 um (5000 board units).
+2026-08-15 22:24:49.831 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:24:49.832 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:24:49.832 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:24:49.853 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-high-speed-neckdown-obstacles-v2.dsn (6 layers)
+2026-08-15 22:24:49.854 DEBUG  Merging settings from 6 sources:
+2026-08-15 22:24:49.854 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 22:24:49.854 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 22:24:49.855 DEBUG    - DSN file: pcb-hmd-carrier-board2-high-speed-neckdown-obstacles-v2.dsn (priority 20): 8 fields changed
+2026-08-15 22:24:49.855 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 22:24:49.855 DEBUG    - CLI Arguments (priority 60): 9 fields changed
+2026-08-15 22:24:49.856 DEBUG    - API Settings (priority 70): 28 fields changed
+2026-08-15 22:24:49.856 DEBUG  Settings merged successfully from 6 source(s)
+2026-08-15 22:24:49.856 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 22:24:49.880 INFO   [E34270\2345C9] Job 'E34270\2345C9' started at 2026-08-15T20:24:49.879330100Z.
+2026-08-15 22:24:50.096 DEBUG  [E34270\2345C9] Checking fanout pre-pass. settings.fanout.enabled=true, smd_pins=1581
+2026-08-15 22:24:50.164 INFO   [E34270\2345C9] Fanout stage started on board 'bdfa5a304691063523a4bceffe544cf0' with 179 of 1581 SMD pins needing fanout (195 already connected, 1207 netless).
+2026-08-15 22:24:51.163 DEBUG  ShapeSearchTree45Degree.restrain_shape: p_shape_to_be_contained is empty
+2026-08-15 22:24:56.252 INFO   [E34270\2345C9] Fanout pass #1 on board '6dbd4fd927441754550e833ad3aa1628' completed in 5.89 seconds with 44 SMD pins fanouted, 133 not routed, 0 insert errors, +24 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-08-15 22:24:59.756 INFO   [E34270\2345C9] Fanout pass #2 on board '8ae7dbf858a016e6e83950e4cbd2967d' completed in 3.42 seconds with 21 SMD pins fanouted, 135 not routed, 0 insert errors, +10 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-08-15 22:25:02.837 INFO   [E34270\2345C9] Fanout pass #3 on board '012385d4dc3b5a47f1a701427acbdf0c' completed in 3.01 seconds with 12 SMD pins fanouted, 133 not routed, 0 insert errors, +1 extra via (0 SMD pins still to check in pass, ripup costs=300).
+2026-08-15 22:25:05.865 INFO   [E34270\2345C9] Fanout pass #4 on board '3fa6207fe3fde0596d1317edc6c30ce4' completed in 2.96 seconds with 9 SMD pins fanouted, 135 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=400).
+2026-08-15 22:25:08.767 INFO   [E34270\2345C9] Fanout pass #5 on board 'fd1f7c46b9a1da46db19a5317d5eafa5' completed in 2.84 seconds with 9 SMD pins fanouted, 135 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=500).
+2026-08-15 22:25:11.608 INFO   [E34270\2345C9] Fanout pass #6 on board 'bff8e119a3066d69e3f38019d21d609d' completed in 2.77 seconds with 9 SMD pins fanouted, 135 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=600).
+2026-08-15 22:25:14.428 INFO   [E34270\2345C9] Fanout pass #7 on board 'c588665c1a4aad12a7ea4e808408ff82' completed in 2.76 seconds with 9 SMD pins fanouted, 135 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=700).
+2026-08-15 22:25:14.429 INFO   Fanout stopped after 7 passes: no progress for 3 consecutive passes.
+2026-08-15 22:25:14.498 INFO   [E34270\2345C9] Fanout stage completed: started with 374 total SMD pins, completed in 24.24 seconds, escaped pins: 70/374 (18.7%), using 23.70 total CPU seconds, 43.62 GB total allocated, and 313.6 MB peak heap usage.
+2026-08-15 22:25:14.533 INFO   [E34270\2345C9] Auto-routing stage started on board 'c588665c1a4aad12a7ea4e808408ff82' for 87 unrouted items.
+2026-08-15 22:25:22.498 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 3/11)
+2026-08-15 22:25:22.499 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 8/11)
+2026-08-15 22:25:22.500 DEBUG  Queuing item for routing: Via on net '+3V3' (connected: 10/11)
+2026-08-15 22:25:22.510 DEBUG  Queuing item for routing: PolylineTrace on net 'GND' (connected: 14/27)
+2026-08-15 22:25:22.511 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/5)
+2026-08-15 22:25:22.511 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/5)
+2026-08-15 22:25:22.515 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_N' (connected: 4/7)
+2026-08-15 22:25:22.516 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_P' (connected: 3/6)
+2026-08-15 22:25:22.516 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.516 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_P' (connected: 3/6)
+2026-08-15 22:25:22.516 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.516 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_P' (connected: 4/7)
+2026-08-15 22:25:22.516 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_N' (connected: 4/7)
+2026-08-15 22:25:22.516 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_P' (connected: 3/8)
+2026-08-15 22:25:22.517 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_N' (connected: 3/4)
+2026-08-15 22:25:22.517 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_P' (connected: 4/5)
+2026-08-15 22:25:22.517 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_N' (connected: 4/7)
+2026-08-15 22:25:22.517 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.517 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_N' (connected: 3/6)
+2026-08-15 22:25:22.518 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_P' (connected: 4/5)
+2026-08-15 22:25:22.518 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_N' (connected: 3/6)
+2026-08-15 22:25:22.518 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_P' (connected: 4/7)
+2026-08-15 22:25:22.518 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_N' (connected: 3/6)
+2026-08-15 22:25:22.518 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_P' (connected: 4/7)
+2026-08-15 22:25:22.519 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_N' (connected: 3/6)
+2026-08-15 22:25:22.519 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_P' (connected: 4/8)
+2026-08-15 22:25:22.519 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_N' (connected: 4/7)
+2026-08-15 22:25:22.519 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_P' (connected: 4/7)
+2026-08-15 22:25:22.520 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/5)
+2026-08-15 22:25:22.520 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/5)
+2026-08-15 22:25:22.523 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/7)
+2026-08-15 22:25:22.523 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 22:25:22.524 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_N' (connected: 1/2)
+2026-08-15 22:25:22.524 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_P' (connected: 1/2)
+2026-08-15 22:25:22.524 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_P' (connected: 1/2)
+2026-08-15 22:25:22.525 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_N' (connected: 3/6)
+2026-08-15 22:25:22.525 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_P' (connected: 4/8)
+2026-08-15 22:25:22.525 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_N' (connected: 1/2)
+2026-08-15 22:25:22.525 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_P' (connected: 1/2)
+2026-08-15 22:25:22.526 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_N' (connected: 3/7)
+2026-08-15 22:25:22.526 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_P' (connected: 3/7)
+2026-08-15 22:25:22.527 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.527 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_N' (connected: 1/2)
+2026-08-15 22:25:22.527 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.527 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:25:22.527 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.528 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:25:22.528 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_P' (connected: 1/2)
+2026-08-15 22:25:22.528 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 22:25:22.528 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_P' (connected: 1/2)
+2026-08-15 22:25:22.528 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_N' (connected: 1/2)
+2026-08-15 22:25:22.528 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_N' (connected: 1/2)
+2026-08-15 22:25:22.529 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:25:22.529 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 22:25:22.529 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_P' (connected: 1/2)
+2026-08-15 22:25:22.529 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 22:25:22.529 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.529 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_P' (connected: 1/2)
+2026-08-15 22:25:22.530 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.530 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_N' (connected: 1/2)
+2026-08-15 22:25:22.530 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.530 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/7)
+2026-08-15 22:25:22.530 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 22:25:22.531 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_N' (connected: 3/4)
+2026-08-15 22:25:22.531 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_P' (connected: 3/4)
+2026-08-15 22:25:22.531 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_N' (connected: 3/4)
+2026-08-15 22:25:22.531 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_P' (connected: 3/4)
+2026-08-15 22:25:22.531 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.531 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_P' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_N' (connected: 3/6)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_P' (connected: 3/7)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_P' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_N' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_N' (connected: 3/6)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_P' (connected: 1/5)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_P' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_N' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_N' (connected: 3/7)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_N' (connected: 1/4)
+2026-08-15 22:25:22.532 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_P' (connected: 1/5)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_N' (connected: 1/2)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_N' (connected: 1/2)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_P' (connected: 1/2)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:25:22.533 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_P' (connected: 1/4)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_N' (connected: 1/4)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 5/7)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_N' (connected: 1/5)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_P' (connected: 1/5)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_P' (connected: 1/5)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_N' (connected: 1/5)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_N' (connected: 1/4)
+2026-08-15 22:25:22.534 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_P' (connected: 1/4)
+2026-08-15 22:25:22.535 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 3/5)
+2026-08-15 22:25:22.535 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 3/5)
+2026-08-15 22:25:22.536 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_N' (connected: 4/5)
+2026-08-15 22:25:22.536 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_P' (connected: 4/5)
+2026-08-15 22:25:22.536 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_N' (connected: 4/5)
+2026-08-15 22:25:22.536 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_P' (connected: 4/5)
+2026-08-15 22:25:22.536 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_N' (connected: 3/6)
+2026-08-15 22:25:22.536 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_N' (connected: 1/2)
+2026-08-15 22:25:22.536 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_P' (connected: 3/7)
+2026-08-15 22:25:22.536 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_P' (connected: 1/2)
+2026-08-15 22:25:22.537 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.537 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_N' (connected: 3/7)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_P' (connected: 5/8)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_P' (connected: 3/7)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 22:25:22.538 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_P' (connected: 3/6)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_N' (connected: 3/7)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_P' (connected: 3/6)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_N' (connected: 1/2)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.539 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 22:25:22.540 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_N' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 22:25:22.541 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 22:25:22.542 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_N' (connected: 1/2)
+2026-08-15 22:25:22.542 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_P' (connected: 1/2)
+2026-08-15 22:25:22.542 DEBUG  Queuing item for routing: Pin on net '+3V3' (connected: 1/11)
+2026-08-15 22:25:22.542 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_P' (connected: 1/2)
+2026-08-15 22:25:22.542 DEBUG  Queuing item for routing: Pin on net 'GND' (connected: 1/27)
+2026-08-15 22:25:26.395 DEBUG  [E34270\2345C9] Pass #1: 87 incompletes across 169 items to route
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'GND' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB3_TX_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net '+3V3' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB3_RX_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB3_RX_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB_C_RX2_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB_C_RX2_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB_C_TX2_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB_C_TX2_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB_C_RX1_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB_C_RX1_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB_C_TX1_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'USB_C_TX1_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_D0_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_D3_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_D0_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_D3_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_D1_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_CLK_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_D1_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_CLK_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIB_D2_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_D2_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIB_D2_N' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIA_D2_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIB_CLK_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIB_D1_P' has 1 incomplete(s)
+2026-08-15 22:25:26.396 DEBUG  [E34270\2345C9]   Net 'L_DSIB_CLK_N' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'L_DSIB_D1_N' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'L_DSIB_D3_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'L_DSIB_D0_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'L_DSIB_D3_N' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'L_DSIB_D0_N' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'HDMI_L_CLK_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'HDMI_L_CLK_N' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'HDMI_L_D0_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'HDMI_L_D0_N' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'HDMI_L_D1_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'HDMI_L_D1_N' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'HDMI_L_D2_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'HDMI_L_D2_N' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'nPI_LED_PWR' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'USB2_SERVICE_DP' has 2 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'USB2_SERVICE_DM' has 2 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'PCIE_RX_USB3_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'PCIE_RX_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'USB2_HOST_DP' has 3 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'USB2_HOST_DM' has 2 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'R_DSIB_D3_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'R_DSIB_D2_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'R_DSIB_CLK_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'R_DSIB_D1_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'R_DSIB_D0_P' has 1 incomplete(s)
+2026-08-15 22:25:26.397 DEBUG  [E34270\2345C9]   Net 'R_DSIB_D3_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIB_D2_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIB_CLK_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIB_D1_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIB_D0_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'HDMI_R_CLK_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'HDMI_R_CLK_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'HDMI_R_D0_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'HDMI_R_D0_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_D3_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_D3_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'HDMI_R_D1_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'HDMI_R_D1_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_D2_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_D2_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'HDMI_R_D2_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'HDMI_R_D2_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_CLK_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_CLK_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_D1_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_D1_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_D0_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'R_DSIA_D0_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'PCIE_RX_USB3_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'PCIE_RX_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'PCIE_CLK_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'PCIE_CLK_N' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'PCIE_TX_P' has 1 incomplete(s)
+2026-08-15 22:25:26.398 DEBUG  [E34270\2345C9]   Net 'PCIE_TX_N' has 1 incomplete(s)
+2026-08-15 22:25:30.662 DEBUG  PolylineTrace.normalize: max normalization depth (16) reached for trace #8368 on net 81 — stopping recursion, trace kept as-is.
+2026-08-15 22:25:38.947 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:25:41.057 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #1 at corner 43/43 on layer 3, trace width: 1250, from corner: 3, ok_point: (2297259,-1056546), target: (2106000,-1162000)
+2026-08-15 22:25:41.093 DEBUG  [E34270\2345C9] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin #1 of component #1, conductionarea, conductionarea, because the new connection could not be inserted.
+2026-08-15 22:28:37.180 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #148 at corner 20/20 on layer 0, trace width: 450, from corner: 11, ok_point: (2080778,-1042118), target: (2091009,-1051356)
+2026-08-15 22:28:37.212 DEBUG  [E34270\2345C9] Autorouter Failed to route connection between pin #8 of component #173 and pin #35 of component #182, because the new connection could not be inserted.
+2026-08-15 22:29:59.618 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #175 at corner 26/26 on layer 3, trace width: 450, from corner: 8, ok_point: (2095800,-1014142), target: (1874336,-1046151)
+2026-08-15 22:29:59.663 DEBUG  [E34270\2345C9] Autorouter Failed to route connection between pin #59 of component #173 and pin #12 of component #182, because the new connection could not be inserted.
+2026-08-15 22:30:09.604 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #174 at corner 36/36 on layer 3, trace width: 450, from corner: 18, ok_point: (2095800,-1014142), target: (1899435,-1047417)
+2026-08-15 22:30:09.631 DEBUG  [E34270\2345C9] Autorouter Failed to route connection between pin #58 of component #173 and pin #10 of component #182, because the new connection could not be inserted.
+2026-08-15 22:33:10.566 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #11 at corner 21/21 on layer 0, trace width: 450, from corner: 17, ok_point: (2233002,-1276009), target: (2232198,-1259167)
+2026-08-15 22:33:10.604 DEBUG  [E34270\2345C9] Autorouter Failed to route connection between polylinetrace, polylinetrace, pin #1 of component #157, pin #13 of component #26 and pin #14 of component #165, because the new connection could not be inserted.
+2026-08-15 22:36:45.029 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #42 at corner 15/35 on layer 3, trace width: 450, from corner: 14, ok_point: (1309060,-1027753), target: (1311468,-1030161)
+2026-08-15 22:36:45.074 DEBUG  [E34270\2345C9] Autorouter Failed to route connection between polylinetrace, via, pin #8 of component #82 and polylinetrace, via, pin #35 of component #81, because the new connection could not be inserted.
+2026-08-15 22:38:25.499 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #1 at corner 1/6 on layer 2, trace width: 1250, from corner: 0, ok_point: (1663271,-944066), target: (1634247,-944066)
+2026-08-15 22:38:25.546 DEBUG  [E34270\2345C9] Autorouter Failed to route connection between pin #1 of component #1 and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, conductionarea, conductionarea, because the new connection could not be inserted.
+2026-08-15 22:38:25.548 DEBUG  [E34270\2345C9] Pass #1: Failed to route Pin on net 'GND' (1 items remaining, 1 failures). State: FAILED
+2026-08-15 22:38:38.669 INFO   [E34270\2345C9] Auto-routing pass #1 on board 'c588665c1a4aad12a7ea4e808408ff82' was completed in 796.17 seconds with the score of 424.46 (29 unrouted and 137 violations), using 811.75 CPU seconds and the job allocated 1054.98 GB of memory so far.
+2026-08-15 22:38:42.774 DEBUG  === Performance Profile ===
+2026-08-15 22:38:42.775 DEBUG  === Routing Parameters ===
+2026-08-15 22:38:42.775 DEBUG    Via Costs: 50, Plane Via Costs: 5
+2026-08-15 22:38:42.775 DEBUG    Layer Costs (Preferred / Against):
+2026-08-15 22:38:42.775 DEBUG      Layer 1: 2,2 / 5,1
+2026-08-15 22:38:42.775 DEBUG      Layer 2: 1,0 / 1,3
+2026-08-15 22:38:42.775 DEBUG      Layer 3: 1,0 / 3,9
+2026-08-15 22:38:42.775 DEBUG      Layer 4: 1,0 / 1,3
+2026-08-15 22:38:42.775 DEBUG      Layer 5: 1,0 / 3,9
+2026-08-15 22:38:42.775 DEBUG      Layer 6: 2,2 / 2,5
+2026-08-15 22:38:42.775 DEBUG  
+2026-08-15 22:38:42.777 DEBUG    autoroute_item                          :    76815 ms total,      169 calls,    454 ms avg
+2026-08-15 22:38:42.777 DEBUG  
+2026-08-15 22:38:42.777 DEBUG  === Pass History ===
+2026-08-15 22:38:42.778 DEBUG    Pass 1  :   29 unrouted items,   792,04 s,   100 ripup cost
+2026-08-15 22:38:42.778 DEBUG  ===========================
+2026-08-15 22:38:46.886 INFO   [E34270\2345C9] Auto-routing stage completed: started with 99 unrouted nets, completed in 832.78 seconds, final score: 424.46 (29 unrouted and 137 violations), using 819.56 total CPU seconds, 1064.40 GB total allocated, and 880.6 MB peak heap usage.
+2026-08-15 22:38:46.888 INFO   [E34270\2345C9] Job 'E34270\2345C9' finished with state: COMPLETED (elapsed: 13 minutes 57.01 seconds, finished at UTC: 2026-08-15T20:38:46.887388Z).

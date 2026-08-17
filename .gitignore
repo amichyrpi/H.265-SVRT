@@ -12,3 +12,11 @@ buildpi/
 .idea/
 
 vanilla-master
+
+*.kicad_prl
+*.kicad-pcb.lck
+*.kicad_pcb.lck
+*.kicad_pro.lck
+__pycache__/
+*.pyc
+.history
