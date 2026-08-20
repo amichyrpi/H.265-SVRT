@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="/assets/stearlight.svg">
+</p>
+
 [![Build](https://github.com/amichyrpi/H.265-SVRT/actions/workflows/build.yml/badge.svg)](https://github.com/amichyrpi/H.265-SVRT/actions/workflows/build.yml)
 
 # H.265 SVRT
