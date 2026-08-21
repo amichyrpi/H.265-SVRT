@@ -71,7 +71,7 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   // is a use-after-reset race.
   mutable std::mutex lifecycle_mutex_;
   std::mutex mutex_,d3d_mutex_; std::condition_variable ready_; std::thread worker_;
-  std::vector<uint8_t> frame_,extra_frame_;
+  std::vector<uint8_t> frame_;
   bool gpu_nv12_=false;
   std::atomic<bool> running_{false},accepting_{false},encoder_failed_{false},receiver_available_{false},disconnect_requested_{false};
   uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=20;
@@ -80,5 +80,4 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   DXGI_FORMAT logged_virtual_format_=DXGI_FORMAT_UNKNOWN;
   std::string host_,ffmpeg_,encoder_,pixel_format_="bgra"; uint16_t port_=9944;
   HANDLE pipe_=INVALID_HANDLE_VALUE,process_=nullptr;
-  HANDLE extra_pipe_=INVALID_HANDLE_VALUE,extra_process_=nullptr;
 };

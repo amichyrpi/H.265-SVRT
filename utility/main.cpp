@@ -19,8 +19,6 @@ LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM w, LPARAM l) {
       switch (LOWORD(w)) {
         case ID_REFRESH_60: ui_select(window, ID_REFRESH_60, ID_REFRESH_30); break;
         case ID_REFRESH_30: ui_select(window, ID_REFRESH_30, ID_REFRESH_60); break;
-        case ID_RESOLUTION_HD: ui_select(window, ID_RESOLUTION_HD, ID_RESOLUTION_4K); break;
-        case ID_RESOLUTION_4K: ui_select(window, ID_RESOLUTION_4K, ID_RESOLUTION_HD); break;
         case ID_PAIR: pairing_pair(window, settings); break;
         case ID_UNPAIR: pairing_unpair(window, settings); break;
         case ID_SAVE: steamvr_save(window, settings, false); break;
@@ -54,7 +52,6 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int show) {
   ui_create_controls(window, instance);
   settings = load_settings();
   ui_select(window, settings.refresh == 60 ? ID_REFRESH_60 : ID_REFRESH_30, settings.refresh == 60 ? ID_REFRESH_30 : ID_REFRESH_60);
-  ui_select(window, settings.width <= 2160 ? ID_RESOLUTION_HD : ID_RESOLUTION_4K, settings.width <= 2160 ? ID_RESOLUTION_4K : ID_RESOLUTION_HD);
   if (settings.verbose) ui_toggle_verbose(window);
   ShowWindow(window, show); UpdateWindow(window);
   MSG message;

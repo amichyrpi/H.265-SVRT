@@ -4,7 +4,7 @@
 
 #include "ui_util.h"
 
-enum : int { ID_REFRESH_60 = 100, ID_REFRESH_30, ID_RESOLUTION_HD, ID_RESOLUTION_4K,
+enum : int { ID_REFRESH_60 = 100, ID_REFRESH_30,
              ID_CODE, ID_PAIR, ID_UNPAIR, ID_SAVE, ID_START, ID_VERBOSE };
 
 void ui_create_controls(HWND window, HINSTANCE instance);

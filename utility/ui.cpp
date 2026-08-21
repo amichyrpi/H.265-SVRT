@@ -2,7 +2,6 @@
 
 namespace {
 int refresh_selected = ID_REFRESH_60;
-int resolution_selected = ID_RESOLUTION_HD;
 bool verbose_selected = false;
 
 HWND button(HWND parent, const wchar_t *label, int id, int x, int y, int width, int height) {
@@ -14,8 +13,6 @@ HWND button(HWND parent, const wchar_t *label, int id, int x, int y, int width, 
 void ui_create_controls(HWND window, HINSTANCE instance) {
   button(window, L"60 Hz", ID_REFRESH_60, 260, 86, 137, 37);
   button(window, L"30 Hz", ID_REFRESH_30, 407, 86, 137, 37);
-  button(window, L"1080p", ID_RESOLUTION_HD, 260, 140, 137, 37);
-  button(window, L"4K", ID_RESOLUTION_4K, 407, 140, 137, 37);
   CreateWindowW(L"EDIT", L"", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_CENTER | ES_NUMBER,
                 15, 243, 168, 30, window, reinterpret_cast<HMENU>(ID_CODE), instance, nullptr);
   button(window, L"Pair", ID_PAIR, 192, 243, 170, 30);
@@ -33,6 +30,7 @@ void ui_paint(HWND window, HDC dc, const UtilityFonts &fonts) {
   ui_text(dc, L"Display Refresh Rate", {15, 90, 240, 120}, RGB(232, 232, 236), fonts.text);
   ui_rule(dc, 130);
   ui_text(dc, L"Resolution", {15, 144, 240, 174}, RGB(232, 232, 236), fonts.text);
+  ui_text(dc, L"1440 x 1600 per eye", {260, 144, 544, 174}, RGB(232, 232, 236), fonts.text, DT_CENTER);
   ui_rule(dc, 184);
   ui_text(dc, L"PAIR HEADSET", {15, 199, 300, 224}, RGB(232, 232, 236), fonts.title);
   ui_text(dc, L"Enter the four-digit code shown in the headset.", {15, 220, 500, 241}, RGB(190, 190, 196), fonts.small);
@@ -66,7 +64,6 @@ void ui_draw_button(const DRAWITEMSTRUCT *item, const UtilityFonts &fonts) {
 
 void ui_select(HWND window, int selected, int unselected) {
   if (selected == ID_REFRESH_60 || selected == ID_REFRESH_30) refresh_selected = selected;
-  if (selected == ID_RESOLUTION_HD || selected == ID_RESOLUTION_4K) resolution_selected = selected;
   InvalidateRect(window, nullptr, FALSE);
 }
 
@@ -76,6 +73,6 @@ void ui_toggle_verbose(HWND window) {
 }
 
 bool ui_is_selected(int id) {
-  return id == refresh_selected || id == resolution_selected ||
+  return id == refresh_selected ||
          (id == ID_VERBOSE && verbose_selected);
 }

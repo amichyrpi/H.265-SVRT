@@ -31,7 +31,7 @@
  * disabled in normal/user builds so diagnostic graphics are not visible in
  * the headset. Set it to 1 temporarily when profiling display performance.
  */
-#define SVRT_ENABLE_DEBUG_FPS_OVERLAY 0
+#define SVRT_ENABLE_DEBUG_FPS_OVERLAY 1
 typedef struct svrt_cached_fb {
     uint64_t object_ids[SVRT_MAX_PLANES];
     uint32_t width,height,format,fb,handles[SVRT_MAX_PLANES];
