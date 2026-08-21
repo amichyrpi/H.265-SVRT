@@ -1,0 +1,882 @@
+(session "pcb-hmd-carrier-board2-microsd-only"
+  (base_design "pcb-hmd-carrier-board2-microsd-only")
+  (placement
+    (resolution um 10)
+    (component "Board2_Recovered:R_0402_1005Metric"
+      (place R265 1634900 -990000 front 0)
+      (place R73 2298000 -1083000 front 0)
+      (place R34 1709900 -1195000 front 0)
+      (place R266 1639900 -1004000 front 0)
+      (place R32 1684800 -1180000 front 0)
+      (place R2022 1646000 -1115000 front 0)
+      (place R15 2250000 -1210000 front 0)
+      (place R2010 1284900 -1065000 front 0)
+      (place R31 1709900 -1180000 front 0)
+      (place R2021 1646000 -1100000 front 0)
+      (place R35 2079900 -1235000 front 0)
+      (place R260 1109900 -1010000 front 0)
+      (place R18 1219900 -1255000 front 0)
+      (place R14 2014900 -1240000 front 0)
+      (place R74 2299900 -1130000 front 0)
+      (place R29 1684800 -1165000 front 0)
+      (place R2012 1284900 -1089000 front 0)
+      (place R2011 1284900 -1077000 front 0)
+      (place R13 2014900 -1225000 front 0)
+      (place R77 2269900 -985100 front 0)
+      (place R261 1110000 -1025000 front 0)
+      (place R33 1684900 -1195000 front 0)
+      (place R30 1709900 -1165000 front 0)
+      (place R76 2269900 -1000000 front 0)
+      (place R2020 1646000 -1085000 front 0)
+      (place R75 2337000 -1145000 front 90)
+      (place R16 1365000 -1110000 front 90)
+      (place R17 1380000 -1114900 front 90)
+      (place R78 2280000 -960100 front 270)
+      (place R290 2125000 -1105100 back 270)
+      (place R292 2155000 -1105100 back 270)
+      (place R295 2105000 -1085100 back 270)
+      (place R294 2090000 -1085000 back 270)
+      (place R291 2140000 -1105100 back 270)
+      (place R293 2170000 -1105100 back 270)
+      (place R8 2340000 -980000 back 180)
+      (place R21 1299900 -990000 back 180)
+      (place R22 1355100 -1015000 back 180)
+      (place R10 2339100 -1040000 back 180)
+      (place R2 1278100 -1275000 back 180)
+      (place R25 1169900 -1245000 back 180)
+      (place R4 2339100 -1030000 back 180)
+      (place R19 1345000 -980000 back 180)
+      (place R28 2299000 -1108000 back 180)
+      (place R11 2280000 -1098000 back 180)
+      (place R27 2280000 -1108000 back 180)
+      (place R24 1300100 -1275000 back 180)
+      (place R9 2320000 -1040000 back 180)
+      (place R5 2340000 -950000 back 180)
+      (place R26 1274850 -970000 back 180)
+      (place R6 2340000 -960000 back 180)
+      (place R3 2320000 -1030000 back 180)
+      (place R1 1256100 -1275000 back 180)
+      (place R12 2299000 -1098000 back 180)
+      (place R7 2340000 -970000 back 180)
+      (place R23 1380100 -1015000 back 180)
+      (place R20 1299900 -975000 back 180)
+      (place R303 1335100 -1275000 back 0)
+      (place R2042 1100000 -1270000 back 0)
+      (place R284 2320000 -1305000 back 0)
+      (place R283 2344900 -1290000 back 0)
+      (place R2061 1389900 -1270000 back 0)
+      (place R2052 1074900 -1050000 back 0)
+      (place R2062 1390000 -1285000 back 0)
+      (place R301 1370000 -1270000 back 0)
+      (place R280 2319900 -1275000 back 0)
+      (place R2031 1039900 -1045000 back 0)
+      (place R2041 1099900 -1255000 back 0)
+      (place R302 1369900 -1285000 back 0)
+      (place R282 2319900 -1290000 back 0)
+      (place R281 2344900 -1275000 back 0)
+      (place R2032 1039900 -1060000 back 0)
+      (place R2051 1074900 -1035000 back 0)
+    )
+    (component "Board2_Recovered:Texas_RVC0020A_WQFN-20-1EP_3x4mm_P0.5mm_EP1.6x2.6mm"
+      (place U11 2216000 -1157500 front 0)
+    )
+    (component "Board2_Recovered:MountingHole_2.2mm_M2_DIN965_Pad_TopBottom"
+      (place H1 1055000 -900000 front 0)
+      (place H5 1475000 -1345000 front 0)
+      (place H6 1900000 -1345000 back 0)
+      (place H2 2320000 -900000 back 0)
+      (place H4 2390000 -1310000 back 270)
+    )
+    (component "Board2_Recovered:C_0402_1005Metric"
+      (place C2011 1484200 -1100000 front 0)
+      (place C2024 1700000 -1050000 front 0)
+      (place C20231 1670400 -1100000 front 0)
+      (place C32 1743850 -1215000 front 0)
+      (place C20232 1670400 -1115000 front 0)
+      (place C2014 1505200 -1110000 front 0)
+      (place C2026 1700000 -1065000 front 0)
+      (place C2021 1679000 -1035000 front 0)
+      (place C20132 1304900 -1089000 front 0)
+      (place C2020 1865200 -995000 front 0)
+      (place C20131 1304900 -1077000 front 0)
+      (place C61 1220200 -1230000 front 0)
+      (place C37 1743850 -1228700 front 0)
+      (place C2012 1505200 -1100000 front 0)
+      (place C20130 1304900 -1065000 front 0)
+      (place C2027 1995000 -1049800 front 0)
+      (place C20230 1670200 -1085000 front 0)
+      (place C68 1830200 -1165000 front 0)
+      (place C31 1718850 -1215000 front 0)
+      (place C36 1718850 -1228700 front 0)
+      (place C2017 1504800 -1035000 front 0)
+      (place C52 2055000 -1270000 front 0)
+      (place C2025 1679000 -1065000 front 0)
+      (place C2013 1484200 -1110000 front 0)
+      (place C50 1355000 -1250000 front 0)
+      (place C2015 1484200 -1120000 front 0)
+      (place C51 2055200 -1285000 front 0)
+      (place C2016 1505200 -1120000 front 0)
+      (place C49 1355000 -1235000 front 0)
+      (place C2010 1420000 -1120000 front 0)
+      (place C2022 1700000 -1035000 front 0)
+      (place C2023 1679000 -1050000 front 0)
+      (place C41 1185200 -1150000 front 0)
+      (place C46 1240000 -1140200 front 90)
+      (place C30 2121250 -1271100 front 90)
+      (place C45 1240000 -1115200 front 90)
+      (place C28 2091650 -1271100 front 90)
+      (place C29 2106250 -1271100 front 90)
+      (place C39 2106250 -1319800 front 90)
+      (place C44 1250000 -1185200 front 90)
+      (place C48 1270000 -1140200 front 90)
+      (place C55 2015000 -1094800 front 90)
+      (place C43 1270000 -1115200 front 90)
+      (place C38 2091250 -1319600 front 90)
+      (place C42 1255000 -1115200 front 90)
+      (place C40 2121250 -1319800 front 90)
+      (place C56 2030000 -1086100 front 90)
+      (place C35 2121250 -1294600 front 90)
+      (place C34 2106250 -1294600 front 90)
+      (place C47 1255000 -1140200 front 90)
+      (place C33 2091250 -1294600 front 90)
+      (place C291 2079800 -1155000 back 0)
+      (place C281 2300000 -1225000 back 0)
+      (place C290 2030000 -1125000 back 0)
+      (place C282 2300000 -1235000 back 0)
+      (place C283 2300000 -1245000 back 0)
+      (place C280 2344900 -1305000 back 0)
+      (place C67 1329800 -1015000 back 180)
+    )
+    (component "Board2_Recovered:C_0603_1608Metric"
+      (place C20220 1712250 -965000 front 0)
+      (place C260 1065750 -983125 front 0)
+      (place C20222 1833200 -1030000 front 0)
+      (place C20121 1520000 -1165000 front 0)
+      (place C20123 1582250 -1035000 front 0)
+      (place C261 1065750 -1003125 front 0)
+      (place C63 1147250 -1175000 front 0)
+      (place C62 1217250 -1180000 front 0)
+      (place C20122 1582250 -1015000 front 0)
+      (place C266 2217250 -1040000 front 0)
+      (place C20221 1712250 -985000 front 0)
+      (place C20223 1845000 -1050000 front 0)
+      (place C20120 1505500 -1145000 front 0)
+      (place C265 2217250 -1020000 front 0)
+      (place C262 1065750 -1023125 front 0)
+      (place C267 2217250 -1060000 front 0)
+      (place C60 1107250 -1335000 back 180)
+      (place C21 1382250 -1125000 back 180)
+      (place C17 2192750 -1050000 back 180)
+      (place C15 2162250 -1020000 back 180)
+      (place C13 2162250 -1050000 back 180)
+      (place C20 1062750 -1230000 back 180)
+      (place C12 2192250 -1170000 back 180)
+      (place C16 2192750 -1020000 back 180)
+      (place C18 2197250 -1105000 back 180)
+      (place C64 1217250 -975000 back 180)
+      (place C59 1072250 -1335000 back 180)
+      (place C19 1032250 -1230000 back 180)
+      (place C65 1217250 -995000 back 180)
+      (place C11 2192250 -1150000 back 180)
+      (place C7 1997750 -995000 back 180)
+      (place C57 1072250 -1315000 back 180)
+      (place C26 1392250 -1225000 back 180)
+      (place C3 2115000 -970000 back 180)
+      (place C2 2115000 -950000 back 180)
+      (place C5 2080000 -950000 back 180)
+      (place C10 2192250 -1130000 back 180)
+      (place C27 1210000 -1260000 back 180)
+      (place C22 1032250 -1250000 back 180)
+      (place C66 1217250 -1015000 back 180)
+      (place C58 1107250 -1315000 back 180)
+      (place C24 2192750 -1035000 back 180)
+      (place C6 2242750 -1100000 back 180)
+      (place C9 2032750 -995000 back 180)
+      (place C23 1062750 -1250000 back 180)
+      (place C8 2005000 -1014000 back 180)
+      (place C25 1392250 -1205000 back 180)
+      (place C1 2115000 -930000 back 180)
+      (place C14 2162250 -1035000 back 180)
+      (place C4 2080000 -930000 back 180)
+      (place C272 1987250 -1135000 back 0)
+      (place C2051 1107750 -1045000 back 0)
+      (place C2031 1210000 -1240000 back 0)
+      (place C2061 1107750 -1085000 back 0)
+      (place C2041 1382250 -1105000 back 0)
+      (place C273 1987250 -1150000 back 0)
+      (place C2032 1107750 -1065000 back 0)
+      (place C301 2337250 -1145000 back 0)
+      (place C2062 1392250 -1185000 back 0)
+      (place C2052 1175000 -970000 back 0)
+      (place C271 1987250 -1120000 back 0)
+      (place C270 1987250 -1105000 back 0)
+      (place C2042 1382250 -1085000 back 0)
+      (place C274 2007250 -1085000 back 0)
+    )
+    (component "Board2_Recovered:Kyocera_245863050104829_50P_P0.35"
+      (place J201 1253500 -1037300 front 0)
+      (place J202 2124500 -1037300 front 180)
+    )
+    (component "Board2_Recovered:Toshiba_P-VFBGA80_7x7mm_P0.65"
+      (place U201 1419250 -1050750 front 0)
+      (place U202 1911750 -1064250 front 180)
+    )
+    (component "Board2_Recovered:TestPoint_Pad_D1.0mm"
+      (place TP209 1715000 -1110000 front 0)
+      (place TP21 2285000 -1190000 front 0)
+      (place TP203 1460000 -1000000 front 0)
+      (place TP20 2235000 -1235000 front 0)
+      (place TP14 1305000 -1125000 front 0)
+      (place TP265 2190000 -1005000 front 0)
+      (place TP10 2337250 -1270000 front 0)
+      (place TP204 1475000 -1015000 front 0)
+      (place TP13 1130000 -1085000 front 0)
+      (place TP22 2260000 -1105000 front 0)
+      (place TP202 1420000 -1235000 front 0)
+      (place TP16 1750000 -1175000 front 0)
+      (place TP260 1170000 -1045000 front 0)
+      (place TP262 1150000 -1010000 front 0)
+      (place TP266 2060000 -1005000 front 0)
+      (place TP9 2337250 -1250000 front 0)
+      (place TP261 1245000 -1075000 front 0)
+      (place TP267 2150000 -1080000 front 0)
+      (place TP206 1635000 -1055000 front 0)
+      (place TP15 1400000 -1280000 front 0)
+      (place TP211 1825000 -995000 front 0)
+      (place TP201 1360000 -1055000 front 0)
+      (place TP12 1110000 -1215000 front 0)
+      (place TP207 1605000 -995000 front 0)
+      (place TP210 1755000 -985000 front 0)
+      (place TP205 1495000 -1070000 front 0)
+      (place TP11 1115000 -1245000 front 0)
+      (place TP23 1885000 -1175000 front 0)
+      (place TP208 1730000 -1075000 front 0)
+      (place TP18 1990000 -1135000 front 0)
+      (place TP19 2065000 -1100000 front 0)
+      (place TP17 1980000 -1280000 front 0)
+      (place TP1 1075000 -1095000 back 180)
+      (place TP3 1125000 -1135000 back 180)
+      (place TP8 1385000 -1055000 back 180)
+      (place TP6 1260000 -1195000 back 180)
+      (place TP7 1385000 -975000 back 180)
+      (place TP4 1125000 -1155000 back 180)
+      (place TP2 1095000 -1225000 back 180)
+      (place TP5 1125000 -1175000 back 180)
+    )
+    (component "Board2_Recovered:L_0603_1608Metric"
+      (place FB2021 1759000 -1010000 front 0)
+      (place FB2014 1407875 -1170000 front 0)
+      (place FB2024 1792125 -1027125 front 0)
+      (place FB2023 1759000 -1027125 front 0)
+      (place FB2012 1407875 -1150000 front 0)
+      (place FB2025 1759000 -1045000 front 0)
+      (place FB1 1815000 -1235000 front 0)
+      (place FB2015 1372875 -1185000 front 0)
+      (place FB2013 1372875 -1165000 front 0)
+      (place FB2027 1762125 -1100000 front 0)
+      (place FB2017 1372875 -1205000 front 0)
+      (place FB2016 1407875 -1190000 front 0)
+      (place FB2022 1792125 -1010000 front 0)
+      (place FB2026 1792125 -1045000 front 0)
+      (place FB2011 1372875 -1145000 front 0)
+    )
+    (component "Board2_Recovered:USON-10_2.5x1.0mm_P0.5mm"
+      (place U4 1116150 -1180000 front 0)
+      (place U9 2264650 -1151500 front 0)
+      (place U8 2218500 -1107650 front 90)
+    )
+    (component "Board2_Recovered:JST_SUR_SM05B-SURS-TF_1x05-1MP_P0.80mm_Horizontal"
+      (place J10 1595000 -1225000 front 180)
+    )
+    (component "Board2_Recovered:SameSky_SJ-43514-SMT-TR"
+      (place J1 1285000 -1280000 front 90)
+    )
+    (component "Board2_Recovered:USB_C_Receptacle_JAE_DX07S016JA1R1500"
+      (place J9 1180000 -1312000 front 0)
+    )
+    (component "Board2_Recovered:TOGIALED_TJ-S3227SW1TCGLCCYRGB-A5"
+      (place D11 2337000 -1110000 front 0)
+    )
+    (component "Board2_Recovered:Texas_RHB0032M_VQFN-32-1EP_5x5mm_P0.5mm_EP2.1x2.1mm_ThermalVias"
+      (place U3 1175625 -1217500 front 0)
+    )
+    (component "Board2_Recovered:Crystal_SMD_3225-4Pin_3.2x2.5mm"
+      (place Y1 2054000 -1183500 front 0)
+    )
+    (component "Board2_Recovered:JAE_DX07S024JJ2R1300"
+      (place J8 2201000 -1297000 front 0)
+    )
+    (component "Board2_Recovered:Oscillator_SMD_SiT_PQFN-4Pin_2.0x1.6mm"
+      (place Y201 1197500 -1076000 front 0)
+      (place Y202 2037500 -1046000 front 0)
+    )
+    (component "Board2_Recovered:Infineon_PG-LLGA-5-2"
+      (place MK1 1373200 -1325000 front 0)
+      (place MK2 2005000 -1325000 front 180)
+    )
+    (component "Board2_Recovered:SOT-23"
+      (place U15 2005625 -1185000 front 0)
+      (place U7 1145625 -1135000 front 0)
+    )
+    (component "Board2_Recovered:WSON-6-1EP_2x2mm_P0.65mm_EP1x1.6mm"
+      (place D1 1186125 -1128500 front 0)
+      (place U16 2206125 -1218500 front 0)
+    )
+    (component "Board2_Recovered:Texas_X2QFN-12_1.6x1.6mm_P0.4mm"
+      (place U5 2031000 -1136750 front 0)
+    )
+    (component "Board2_Recovered:QFN-48-1EP_7x7mm_P0.5mm_EP5.7x5.7mm_ThermalVias"
+      (place U14 2125500 -1152500 front 0)
+    )
+    (component "Board2_Recovered:SOT-23-5"
+      (place U10 1860000 -1215000 front 0)
+      (place U206 1271000 -1318625 back 270)
+      (place U301 1305500 -1318625 back 270)
+      (place U205 1086375 -1194000 back 180)
+      (place U204 1086375 -1159500 back 180)
+      (place U203 1086375 -1125000 back 180)
+    )
+    (component "Board2_Recovered:Hirose_BM28B0.6-20DS_2-0.35V"
+      (place J2 2302250 -1265000 front 90)
+    )
+    (component "Board2_Recovered:Hirose_BM28B0.6-20DS_2-0.35V_BUTTONS"
+      (place J11 2302250 -985000 front 90)
+    )
+    (component "Board2_Recovered:Raspberry-Pi-4-Compute-Module"
+      (place Module1 1450000 -1283000 back 270)
+    )
+    (component "Board2_Recovered:MountingHole_2.2mm_M2_DIN965_Pad_TopBottom::1"
+      (place H3 985000 -1310000 front 90)
+    )
+    (component "Board2_Recovered:L_Abracon_ASPI-4030S"
+      (place L204 1260000 -1240000 back 270)
+      (place L208 2280000 -1180000 back 270)
+      (place L206 1305000 -1180000 back 270)
+      (place L203 1315000 -1240000 back 270)
+      (place L205 1310000 -1120000 back 180)
+    )
+    (component "Board2_Recovered:TI_DSBGA15_YFF_2.108x1.514mm_P0.4"
+      (place U207 2182000 -1275000 back 0)
+    )
+    (component "Board2_Recovered:TSSOP-24_4.4x7.8mm_P0.65mm"
+      (place U210 2256375 -985750 back 0)
+    )
+    (component "Board2_Recovered:Bourns_SRP5030CA"
+      (place L3 2100000 -1030000 back 0)
+    )
+    (component "Board2_Recovered:Hirose_DF40C-100DP-0.4V_2x50-1MP_P0.4mm"
+      (place J7 1245000 -1053550 back 0)
+    )
+    (component "Board2_Recovered:D_SOD-123"
+      (place D201 2335000 -1230000 back 270)
+    )
+    (component "Board2_Recovered:L_APV_ANR252010"
+      (place L207 2075000 -1118250 back 270)
+    )
+    (component "Board2_Recovered:Bourns_SRP7050TA"
+      (place L2 1195000 -1150000 back 0)
+    )
+    (component "Board2_Recovered:Texas_RQM0029A_VQFN-29_4x4mm_P0.4mm"
+      (place U6 2218625 -1232250 back 0)
+    )
+    (component "Board2_Recovered:Texas_DMQ0006A_VSON-HR-6_1.5x1.5mm"
+      (place U1 1223500 -1205000 back 0)
+    )
+    (component "Board2_Recovered:Texas_REF0038A_WQFN-38_6x4mm_DualPad"
+      (place U12 2011000 -948000 back 0)
+    )
+    (component "Board2_Recovered:SDCARD_MOLEX_503398-1892"
+      (place J301 2080000 -1280000 back 180)
+    )
+    (component "Board2_Recovered:TQFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm"
+      (place U208 2037500 -1162875 back 270)
+    )
+    (component "Board2_Recovered:Tag-Connect_TC2050-IDC-NL_2x05_P1.27mm_Vertical"
+      (place J6 1081900 -986350 back 0)
+    )
+    (component "Board2_Recovered:L_0402_1005Metric"
+      (place L1 1274850 -985000 back 180)
+    )
+    (component "Board2_Recovered:TSSOP-8_3x3mm_P0.65mm"
+      (place U209 2018500 -1049750 back 0)
+      (place U13 2175000 -950000 back 0)
+    )
+    (component "Board2_Recovered:Texas_RJE0020A_VQFN-20-1EP_3x3mm_P0.45mm_EP0.675x0.76mm_ThermalVias"
+      (place U2 1129000 -1230625 back 0)
+    )
+  )
+  (was_is
+  )
+  (routes 
+    (resolution um 10)
+    (parser
+      (host_cad "KiCad's Pcbnew")
+      (host_version "10.0.5")
+    )
+    (library_out 
+      (padstack "Via[0-5]_450:200_um"
+        (shape
+          (circle F.Cu 4500 0 0)
+        )
+        (shape
+          (circle GND1 4500 0 0)
+        )
+        (shape
+          (circle "PWR_SIG1" 4500 0 0)
+        )
+        (shape
+          (circle "PWR_SIG2" 4500 0 0)
+        )
+        (shape
+          (circle GND2 4500 0 0)
+        )
+        (shape
+          (circle B.Cu 4500 0 0)
+        )
+        (attach off)
+      )
+      (padstack "Via[0-5]_600:300_um"
+        (shape
+          (circle F.Cu 6000 0 0)
+        )
+        (shape
+          (circle GND1 6000 0 0)
+        )
+        (shape
+          (circle "PWR_SIG1" 6000 0 0)
+        )
+        (shape
+          (circle "PWR_SIG2" 6000 0 0)
+        )
+        (shape
+          (circle GND2 6000 0 0)
+        )
+        (shape
+          (circle B.Cu 6000 0 0)
+        )
+        (attach off)
+      )
+      (padstack "Via[0-5]_800:400_um"
+        (shape
+          (circle F.Cu 8000 0 0)
+        )
+        (shape
+          (circle GND1 8000 0 0)
+        )
+        (shape
+          (circle "PWR_SIG1" 8000 0 0)
+        )
+        (shape
+          (circle "PWR_SIG2" 8000 0 0)
+        )
+        (shape
+          (circle GND2 8000 0 0)
+        )
+        (shape
+          (circle B.Cu 8000 0 0)
+        )
+        (attach off)
+      )
+    )
+    (network_out 
+      (net "SD_CLK"
+        (wire
+          (path "PWR_SIG2" 1500
+            1654258 -1295733
+            1659313 -1300788
+            2079723 -1300788
+            2082631 -1303696
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2100200 -1336250
+            2100200 -1321265
+            2082631 -1303696
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1654258 -1295733
+            1652758 -1297233
+            1651000 -1297233
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1651000 -1303000
+            1651000 -1297233
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1654258 -1295733
+        )
+        (via "Via[0-5]_450:200_um" 2082631 -1303696
+        )
+      )
+      (net "SD_DAT3"
+        (wire
+          (path "PWR_SIG2" 1500
+            1644942 -1314544
+            2042049 -1314544
+            2054435 -1326930
+            2067200 -1326930
+            2067200 -1326931
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2067200 -1328483
+            2067200 -1326931
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1643000 -1303000
+            1643000 -1312602
+            1644942 -1314544
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2067200 -1336250
+            2067200 -1328483
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1644942 -1314544
+        )
+        (via "Via[0-5]_450:200_um" 2067200 -1326931
+        )
+      )
+      (net "SD_CMD"
+        (wire
+          (path "PWR_SIG2" 1500
+            2080330 -1326836
+            2072903 -1319409
+            2059825 -1319409
+            2047426 -1307010
+            1642390 -1307010
+            1632954 -1297574
+            1632954 -1290777
+            1644260 -1279471
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1643000 -1272200
+            1643000 -1278211
+            1644260 -1279471
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2078200 -1336250
+            2078200 -1328483
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2078200 -1328483
+            2078683 -1328483
+            2080330 -1326836
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1644260 -1279471
+        )
+        (via "Via[0-5]_450:200_um" 2080330 -1326836
+        )
+      )
+      (net "SD_DAT0"
+        (wire
+          (path "PWR_SIG2" 1500
+            2119684 -1308339
+            2054791 -1308339
+            2050445 -1303993
+            1646098 -1303993
+            1637828 -1295723
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1639000 -1297233
+            1639000 -1296895
+            1637828 -1295723
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2122200 -1328483
+            2119684 -1325967
+            2119684 -1308339
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2122200 -1336250
+            2122200 -1328483
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1639000 -1303000
+            1639000 -1297233
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1637828 -1295723
+        )
+        (via "Via[0-5]_450:200_um" 2119684 -1308339
+        )
+      )
+      (net "SD_DAT1"
+        (wire
+          (path "PWR_SIG2" 1500
+            1631000 -1310369
+            1629176 -1308545
+            1629176 -1287919
+            1652039 -1265056
+            2082931 -1265056
+            2133200 -1315325
+            2133200 -1326940
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1631000 -1303000
+            1631000 -1310369
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2133200 -1328483
+            2133200 -1326940
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2133200 -1336250
+            2133200 -1328483
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1631000 -1310369
+        )
+        (via "Via[0-5]_450:200_um" 2133200 -1326940
+        )
+      )
+      (net "SD_DAT2"
+        (wire
+          (path "PWR_SIG2" 1500
+            2046177 -1312285
+            2043919 -1310027
+            1642870 -1310027
+            1637680 -1315217
+            1628881 -1315217
+            1623932 -1310268
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1623932 -1310268
+            1627000 -1307200
+            1627000 -1303000
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2056200 -1336250
+            2056200 -1328483
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1623932 -1310268
+        )
+        (via "Via[0-5]_450:200_um" 2046177 -1312285
+        )
+        (wire
+          (path B.Cu 1500
+            2056200 -1328483
+            2046177 -1318460
+            2046177 -1312285
+          )
+        )
+      )
+      (net "SD_PWR_ON"
+        (wire
+          (path "PWR_SIG2" 1500
+            1294778 -1317826
+            1310444 -1333492
+            1464918 -1333492
+            1488093 -1310317
+            1615000 -1310317
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1615000 -1310317
+            1615000 -1303000
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1615000 -1310317
+        )
+        (wire
+          (path "PWR_SIG2" 1500
+            1294778 -1317826
+            1294778 -1314604
+            1334035 -1275347
+            1359553 -1275347
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1296000 -1307250
+            1294778 -1308472
+            1294778 -1317826
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1359553 -1275347
+            1364900 -1270000
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1359553 -1275347
+        )
+        (via "Via[0-5]_450:200_um" 1294778 -1317826
+        )
+      )
+      (net "SD_DETECT_B"
+        (wire
+          (path "PWR_SIG2" 1500
+            1302800 -1313575
+            1335290 -1281085
+            1360435 -1281085
+            1366447 -1275073
+            1366447 -1253103
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1296000 -1330000
+            1299295 -1326705
+            1299295 -1317080
+            1302800 -1313575
+          )
+        )
+        (wire
+          (path "PWR_SIG2" 1500
+            2080298 -1218627
+            2077522 -1215851
+            2044307 -1215851
+            2041532 -1218626
+            2041532 -1218627
+            1400923 -1218627
+            1366447 -1253103
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2080950 -1210850
+            2080950 -1217975
+            2080298 -1218627
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1302800 -1313575
+        )
+        (via "Via[0-5]_450:200_um" 2080298 -1218627
+        )
+        (wire
+          (path B.Cu 1500
+            1366447 -1253103
+            1362097 -1253103
+            1340200 -1275000
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1366447 -1253103
+        )
+      )
+      (net "SD_PWR"
+        (wire
+          (path "PWR_SIG2" 1500
+            2143433 -1320527
+            2143433 -1323095
+            2134967 -1331561
+            2101024 -1331561
+            2084370 -1314907
+          )
+        )
+        (wire
+          (path "PWR_SIG2" 1500
+            2333269 -1156731
+            2187116 -1302884
+            2161076 -1302884
+            2143433 -1320527
+          )
+        )
+        (wire
+          (path "PWR_SIG2" 1500
+            2143433 -1320527
+            2084761 -1261855
+            1423181 -1261855
+            1361920 -1323116
+            1321884 -1323116
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2089200 -1336250
+            2089200 -1319737
+            2084370 -1314907
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            2333269 -1156731
+            2345000 -1145000
+          )
+        )
+        (via "Via[0-5]_450:200_um" 2333269 -1156731
+        )
+        (wire
+          (path B.Cu 1500
+            1321884 -1323116
+            1315000 -1330000
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1321884 -1323116
+        )
+        (via "Via[0-5]_450:200_um" 2084370 -1314907
+        )
+      )
+      (net "SD_DETECT_A"
+        (wire
+          (path B.Cu 1500
+            2038300 -1211600
+            2045067 -1211600
+          )
+        )
+        (wire
+          (path "PWR_SIG2" 1500
+            2046177 -1220368
+            2031632 -1234913
+            1432138 -1234913
+            1375000 -1292051
+          )
+        )
+        (wire
+          (path B.Cu 1500
+            1375000 -1292051
+            1375000 -1285000
+          )
+        )
+        (via "Via[0-5]_450:200_um" 1375000 -1292051
+        )
+        (via "Via[0-5]_450:200_um" 2046177 -1220368
+        )
+        (wire
+          (path B.Cu 1500
+            2045067 -1211600
+            2045067 -1219258
+            2046177 -1220368
+          )
+        )
+      )
+    )
+  )
+)

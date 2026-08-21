@@ -1,0 +1,19 @@
+(version 1)
+
+# Verified manufacturer-footprint exceptions only.  These rules do not relax
+# the general JLCPCB production constraints configured in the project.
+
+(rule "J8 DX07 shell-stake annulus"
+    (condition "A.Reference == 'J8' && A.Pad_Number == 'SH'")
+    (constraint annular_width (min 0mm))
+)
+
+(rule "IM73A135 acoustic-port clearance"
+    (condition "((A.Reference == 'MK1' && B.Reference == 'MK1') || (A.Reference == 'MK2' && B.Reference == 'MK2'))")
+    (constraint hole_clearance (min 0.18mm))
+)
+
+(rule "J9 DX07 locating-hole to shell-stake clearance"
+    (condition "A.Reference == 'J9' || B.Reference == 'J9'")
+    (constraint edge_clearance (min 0.25mm))
+)

@@ -1,0 +1,18 @@
+2026-08-15 22:16:41.853 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 22:16:43.408 INFO   [07A52D\3C72AD] Loading board file 'pcb-hmd-carrier-board2-high-speed-neckdown.dsn'...
+2026-08-15 22:16:43.547 INFO   Layer 'GND1' has been automatically configured as a dedicated power plane because it contains a large conduction area covering >50% of the board.
+2026-08-15 22:16:43.548 INFO   Layer 'GND2' has been automatically configured as a dedicated power plane because it contains a large conduction area covering >50% of the board.
+2026-08-15 22:16:43.591 INFO   [07A52D\3C72AD] Job '07A52D\3C72AD' started at 2026-08-15T20:16:43.591018600Z.
+2026-08-15 22:16:43.742 INFO   [07A52D\3C72AD] Fanout stage started on board 'a831c3f6b8104f50c90e09685f7ca33f' with 176 of 1581 SMD pins needing fanout (0 already connected, 1405 netless).
+2026-08-15 22:16:48.689 INFO   [07A52D\3C72AD] Fanout pass #1 on board 'fad0f6c012aa841ae692a456272d8f48' completed in 4.83 seconds with 42 SMD pins fanouted, 133 not routed, 0 insert errors, +20 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-08-15 22:16:52.311 INFO   [07A52D\3C72AD] Fanout pass #2 on board '65b15b10843dc4810e28503a50b1907d' completed in 3.55 seconds with 22 SMD pins fanouted, 135 not routed, 0 insert errors, +13 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-08-15 22:16:55.644 INFO   [07A52D\3C72AD] Fanout pass #3 on board '8ebe43a14ff8c341da477ffb88877435' completed in 3.27 seconds with 14 SMD pins fanouted, 129 not routed, 0 insert errors, +3 extra vias (0 SMD pins still to check in pass, ripup costs=300).
+2026-08-15 22:16:58.626 INFO   [07A52D\3C72AD] Fanout pass #4 on board '5bddacca1f055648a8717c84281a5b26' completed in 2.93 seconds with 13 SMD pins fanouted, 130 not routed, 0 insert errors, +2 extra vias (0 SMD pins still to check in pass, ripup costs=400).
+2026-08-15 22:17:01.432 INFO   [07A52D\3C72AD] Fanout pass #5 on board '78b0ae2ba693392621d6fab69961692f' completed in 2.75 seconds with 10 SMD pins fanouted, 129 not routed, 0 insert errors, +1 extra via (0 SMD pins still to check in pass, ripup costs=500).
+2026-08-15 22:17:04.038 INFO   [07A52D\3C72AD] Fanout pass #6 on board '20c8f4fab1b8ad60d1664b29b8a974e6' completed in 2.55 seconds with 8 SMD pins fanouted, 131 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=600).
+2026-08-15 22:17:06.629 INFO   [07A52D\3C72AD] Fanout pass #7 on board '947b7ca265cd7f7e2cdc08c025bf6f46' completed in 2.53 seconds with 8 SMD pins fanouted, 131 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=700).
+2026-08-15 22:17:09.511 INFO   [07A52D\3C72AD] Fanout pass #8 on board '11221157510714959038aa9573ff1afc' completed in 2.83 seconds with 8 SMD pins fanouted, 131 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=800).
+2026-08-15 22:17:12.161 INFO   [07A52D\3C72AD] Fanout pass #9 on board '51db05db0c3d704f6e613213355cc3e0' completed in 2.60 seconds with 8 SMD pins fanouted, 131 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=900).
+2026-08-15 22:17:12.161 INFO   Fanout stopped after 9 passes: no progress for 3 consecutive passes.
+2026-08-15 22:17:12.197 INFO   [07A52D\3C72AD] Fanout stage completed: started with 176 total SMD pins, completed in 28.42 seconds, escaped pins: 63/176 (35.8%), using 27.81 total CPU seconds, 50.21 GB total allocated, and 284.0 MB peak heap usage.
+2026-08-15 22:17:12.219 INFO   [07A52D\3C72AD] Auto-routing stage started on board '51db05db0c3d704f6e613213355cc3e0' for 85 unrouted items.

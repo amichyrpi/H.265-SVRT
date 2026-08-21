@@ -1,0 +1,124 @@
+(footprint "SameSky_SJ-43514-SMT-TR"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "Same Sky SJ-43514-SMT-TR CTIA-capable 4-contact 3.5 mm jack; manufacturer mechanical drawing")
+	(tags "audio jack TRRS")
+	(property "Reference" "J1"
+		(at 8 0 270)
+		(layer "F.SilkS")
+		(uuid "58a12070-7ca4-4259-95d7-489d6c2903ef")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "SJ-43514-SMT-TR"
+		(at 0 4.2 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8325d133-c125-46f2-a25f-bb34304ba3c0")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b2e975b3-0d75-46a7-a2ba-515203cf9006")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "faec775f-d67f-4454-8a59-95cca8384ed3")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start -7.3 -3.5)
+		(end 7.3 3.5)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "70fde49d-6af0-4e5c-b4fc-2c241671adef")
+	)
+	(fp_rect
+		(start -7 -3.2)
+		(end 7 3.2)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "136d6aec-c5c3-40cf-be95-d101670fe03a")
+	)
+	(fp_text user "PORT"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(uuid "566da56e-c671-4ccd-98e9-485c85fa2ba5")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at 4.8 -3)
+		(size 2 1.4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "f49c9b7c-e87d-456f-8270-8cb885aae0cb")
+	)
+	(pad "2" smd rect
+		(at -4.8 -3)
+		(size 2 1.4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "0f2f9b65-4849-4bc9-8ed8-114092701897")
+	)
+	(pad "3" smd rect
+		(at 1.5 3)
+		(size 2 1.4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "92dd659c-eb86-4799-a63c-9f5c6e3090d0")
+	)
+	(pad "4" smd rect
+		(at -2 3)
+		(size 2 1.4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "5130c9e5-1bff-4a74-8c77-8fc8cc0be414")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/libraries/3dmodels/exact/SameSky/Same_Sky_SJ-43514-SMT-TR_KiCad.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

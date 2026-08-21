@@ -1,0 +1,508 @@
+(kicad_symbol_lib
+  (version 20211014)
+  (generator https://github.com/uPesy/easyeda2kicad.py)
+
+  (symbol "DX07S024JJ2R1300"
+    (in_bom yes)
+    (on_board yes)
+    (property
+      "Reference"
+      "USB"
+      (id 0)
+      (at 0 31.75 0)
+      (effects (font (size 1.27 1.27) ) )
+    )
+    (property
+      "Value"
+      "DX07S024JJ2R1300"
+      (id 1)
+      (at 0 -31.75 0)
+      (effects (font (size 1.27 1.27) ) )
+    )
+    (property
+      "Footprint"
+      "JLC_import:USB-C-SMD_TYPEC-DX07S024JJ2R1300"
+      (id 2)
+      (at 0 -34.29 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "Datasheet"
+      "https://www.lcsc.com/datasheet/C2977282.pdf"
+      (id 3)
+      (at 0 -36.83 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "Manufacturer"
+      "JAE(日本航空电子)"
+      (id 4)
+      (at 0 -39.37 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "MPN"
+      "DX07S024JJ2R1300"
+      (id 5)
+      (at 0 -41.91 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "LCSC Part"
+      "C2977282"
+      (id 6)
+      (at 0 -44.45 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (symbol "DX07S024JJ2R1300_0_1"
+      (rectangle
+        (start -10.16 21.59)
+        (end 10.16 -21.59)
+        (stroke (width 0) (type default))
+        (fill (type background))
+      )
+      (pin unspecified line
+        (at -15.24 13.97 0)
+        (length 5.08)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "A1" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 6.35 0)
+        (length 5.08)
+        (name "VBUS" (effects (font (size 1.27 1.27))))
+        (number "A4" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 3.81 0)
+        (length 5.08)
+        (name "CC1" (effects (font (size 1.27 1.27))))
+        (number "A5" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 1.27 0)
+        (length 5.08)
+        (name "D+" (effects (font (size 1.27 1.27))))
+        (number "A6" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 -1.27 0)
+        (length 5.08)
+        (name "D-" (effects (font (size 1.27 1.27))))
+        (number "A7" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 -6.35 0)
+        (length 5.08)
+        (name "VBUS" (effects (font (size 1.27 1.27))))
+        (number "A9" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 -13.97 0)
+        (length 5.08)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "A12" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 -13.97 180)
+        (length 5.08)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "B1" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 -6.35 180)
+        (length 5.08)
+        (name "VBUS" (effects (font (size 1.27 1.27))))
+        (number "B4" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 -3.81 180)
+        (length 5.08)
+        (name "CC2" (effects (font (size 1.27 1.27))))
+        (number "B5" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 -1.27 180)
+        (length 5.08)
+        (name "D+" (effects (font (size 1.27 1.27))))
+        (number "B6" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 1.27 180)
+        (length 5.08)
+        (name "D-" (effects (font (size 1.27 1.27))))
+        (number "B7" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 6.35 180)
+        (length 5.08)
+        (name "VBUS" (effects (font (size 1.27 1.27))))
+        (number "B9" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 13.97 180)
+        (length 5.08)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "B12" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 2.54 26.67 270)
+        (length 5.08)
+        (name "SHELL" (effects (font (size 1.27 1.27))))
+        (number "1" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -2.54 -26.67 90)
+        (length 5.08)
+        (name "SHELL" (effects (font (size 1.27 1.27))))
+        (number "2" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -2.54 26.67 270)
+        (length 5.08)
+        (name "SHELL" (effects (font (size 1.27 1.27))))
+        (number "3" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 2.54 -26.67 90)
+        (length 5.08)
+        (name "SHELL" (effects (font (size 1.27 1.27))))
+        (number "4" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 11.43 0)
+        (length 5.08)
+        (name "TX1+" (effects (font (size 1.27 1.27))))
+        (number "A2" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 8.89 0)
+        (length 5.08)
+        (name "TX1-" (effects (font (size 1.27 1.27))))
+        (number "A3" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 -3.81 0)
+        (length 5.08)
+        (name "SUB1" (effects (font (size 1.27 1.27))))
+        (number "A8" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 -8.89 0)
+        (length 5.08)
+        (name "RX2-" (effects (font (size 1.27 1.27))))
+        (number "A10" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -15.24 -11.43 0)
+        (length 5.08)
+        (name "RX2+" (effects (font (size 1.27 1.27))))
+        (number "A11" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 -11.43 180)
+        (length 5.08)
+        (name "TX2+" (effects (font (size 1.27 1.27))))
+        (number "B2" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 -8.89 180)
+        (length 5.08)
+        (name "TX2-" (effects (font (size 1.27 1.27))))
+        (number "B3" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 3.81 180)
+        (length 5.08)
+        (name "SUB2" (effects (font (size 1.27 1.27))))
+        (number "B8" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 8.89 180)
+        (length 5.08)
+        (name "RX1-" (effects (font (size 1.27 1.27))))
+        (number "B10" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 15.24 11.43 180)
+        (length 5.08)
+        (name "RX1+" (effects (font (size 1.27 1.27))))
+        (number "B11" (effects (font (size 1.27 1.27))))
+      )
+    )
+  )
+
+  (symbol "DX07S016JA1R1500_C3197885"
+    (in_bom yes)
+    (on_board yes)
+    (property
+      "Reference"
+      "U"
+      (id 0)
+      (at 0 19.05 0)
+      (effects (font (size 1.27 1.27) ) )
+    )
+    (property
+      "Value"
+      "DX07S016JA1R1500_C3197885"
+      (id 1)
+      (at 0 -19.05 0)
+      (effects (font (size 1.27 1.27) ) )
+    )
+    (property
+      "Footprint"
+      "JLC_import:USB-C-SMD_DX07S016JA1R1500"
+      (id 2)
+      (at 0 -21.59 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "Datasheet"
+      "https://www.lcsc.com/datasheet/C3197885.pdf"
+      (id 3)
+      (at 0 -24.13 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "Manufacturer"
+      "JAE(日本航空电子)"
+      (id 4)
+      (at 0 -26.67 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "MPN"
+      "DX07S016JA1R1500"
+      (id 5)
+      (at 0 -29.21 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "LCSC Part"
+      "C3197885"
+      (id 6)
+      (at 0 -31.75 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "ki_keywords"
+      "USB Connectors"
+      (id 8)
+      (at 0 -34.29 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (symbol "DX07S016JA1R1500_C3197885_0_1"
+      (rectangle
+        (start -8.89 16.51)
+        (end 8.89 -16.51)
+        (stroke (width 0) (type default))
+        (fill (type background))
+      )
+      (circle
+        (center -7.62 15.24)
+        (radius 0.38)
+        (stroke (width 0) (type default))
+        (fill (type none))
+      )
+      (pin unspecified line
+        (at -11.43 13.97 0)
+        (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "1" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 11.43 0)
+        (length 2.54)
+        (name "VBUS" (effects (font (size 1.27 1.27))))
+        (number "2" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 8.89 0)
+        (length 2.54)
+        (name "SBU2" (effects (font (size 1.27 1.27))))
+        (number "3" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 6.35 0)
+        (length 2.54)
+        (name "CC1" (effects (font (size 1.27 1.27))))
+        (number "4" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 3.81 0)
+        (length 2.54)
+        (name "D-" (effects (font (size 1.27 1.27))))
+        (number "5" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 1.27 0)
+        (length 2.54)
+        (name "D+" (effects (font (size 1.27 1.27))))
+        (number "6" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 -1.27 0)
+        (length 2.54)
+        (name "D+" (effects (font (size 1.27 1.27))))
+        (number "7" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 -3.81 0)
+        (length 2.54)
+        (name "D-" (effects (font (size 1.27 1.27))))
+        (number "8" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 -6.35 0)
+        (length 2.54)
+        (name "SBU1" (effects (font (size 1.27 1.27))))
+        (number "9" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 -8.89 0)
+        (length 2.54)
+        (name "CC2" (effects (font (size 1.27 1.27))))
+        (number "10" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 -11.43 0)
+        (length 2.54)
+        (name "VBUS" (effects (font (size 1.27 1.27))))
+        (number "11" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -11.43 -13.97 0)
+        (length 2.54)
+        (name "GND" (effects (font (size 1.27 1.27))))
+        (number "12" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 11.43 -13.97 180)
+        (length 2.54)
+        (name "SHELL" (effects (font (size 1.27 1.27))))
+        (number "13" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 11.43 -6.35 180)
+        (length 2.54)
+        (name "SHELL" (effects (font (size 1.27 1.27))))
+        (number "14" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 11.43 3.81 180)
+        (length 2.54)
+        (name "SHELL" (effects (font (size 1.27 1.27))))
+        (number "15" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at 11.43 13.97 180)
+        (length 2.54)
+        (name "SHELL" (effects (font (size 1.27 1.27))))
+        (number "16" (effects (font (size 1.27 1.27))))
+      )
+    )
+  )
+
+  (symbol "SRP7050TA-2R2M"
+    (in_bom yes)
+    (on_board yes)
+    (property
+      "Reference"
+      "U"
+      (id 0)
+      (at 0 5.08 0)
+      (effects (font (size 1.27 1.27) ) )
+    )
+    (property
+      "Value"
+      "SRP7050TA-2R2M"
+      (id 1)
+      (at 0 -5.08 0)
+      (effects (font (size 1.27 1.27) ) )
+    )
+    (property
+      "Footprint"
+      "JLC_import:IND-SMD_L7.3-W6.6"
+      (id 2)
+      (at 0 -7.62 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "Datasheet"
+      "https://www.lcsc.com/datasheet/C2045424.pdf"
+      (id 3)
+      (at 0 -10.16 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "Manufacturer"
+      "BOURNS"
+      (id 4)
+      (at 0 -12.70 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "MPN"
+      "SRP7050TA-2R2M"
+      (id 5)
+      (at 0 -15.24 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "LCSC Part"
+      "C2045424"
+      (id 6)
+      (at 0 -17.78 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (property
+      "ki_keywords"
+      "Inductors/Coils/Transformers"
+      (id 8)
+      (at 0 -20.32 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+    (symbol "SRP7050TA-2R2M_0_1"
+      (arc
+        (start -2.03 -0.01)
+        (mid -3.04 1.02)
+        (end -4.06 0.01)
+        (stroke (width 0) (type default))
+        (fill (type none))
+      )
+      (arc
+        (start 0.00 -0.01)
+        (mid -1.01 1.02)
+        (end -2.03 0.01)
+        (stroke (width 0) (type default))
+        (fill (type none))
+      )
+      (arc
+        (start 4.06 -0.01)
+        (mid 3.05 1.02)
+        (end 2.03 0.01)
+        (stroke (width 0) (type default))
+        (fill (type none))
+      )
+      (arc
+        (start 2.03 -0.01)
+        (mid 1.02 1.02)
+        (end 0.00 0.01)
+        (stroke (width 0) (type default))
+        (fill (type none))
+      )
+      (pin unspecified line
+        (at 5.08 -0.00 180)
+        (length 1.27)
+        (name "2" (effects (font (size 1.27 1.27))))
+        (number "2" (effects (font (size 1.27 1.27))))
+      )
+      (pin unspecified line
+        (at -5.08 -0.00 0)
+        (length 1.27)
+        (name "1" (effects (font (size 1.27 1.27))))
+        (number "1" (effects (font (size 1.27 1.27))))
+      )
+    )
+  )
+)

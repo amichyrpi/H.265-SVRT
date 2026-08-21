@@ -1,0 +1,12 @@
+2026-08-15 21:17:47.442 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 21:17:48.942 INFO   [E3794C\60B557] Loading board file 'pcb-hmd-carrier-board2-routing-copy.dsn'...
+2026-08-15 21:17:49.179 INFO   Loading SES file: C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2.ses
+2026-08-15 21:17:49.292 INFO   SES file import complete: 649 wires, 237 vias imported
+2026-08-15 21:17:49.297 INFO   SES file loaded: 649 wires, 237 vias imported
+2026-08-15 21:17:49.301 INFO   [E3794C\60B557] Job 'E3794C\60B557' started at 2026-08-15T19:17:49.301487900Z.
+2026-08-15 21:17:49.591 INFO   [E3794C\60B557] Auto-routing stage started on board 'eacf13c034554fecf56af2355e098bf1' for 346 unrouted items.
+2026-08-15 21:22:01.085 WARN   BasicBoard.normalize_traces: reached 2000 iterations for net 'L_3V3_HDMI' — stopping to prevent hang. The board geometry for this net may be oscillating (split/combine cycle); traces are kept as-is and further normalization for this net is suppressed on this board candidate.
+2026-08-15 21:52:15.221 WARN   BasicBoard.normalize_traces: reached 2000 iterations for net 'USB_C_RX2_N' — stopping to prevent hang. The board geometry for this net may be oscillating (split/combine cycle); traces are kept as-is and further normalization for this net is suppressed on this board candidate.
+2026-08-15 22:06:41.115 INFO   [E3794C\60B557] Auto-routing pass #1 on board 'eacf13c034554fecf56af2355e098bf1' was completed in 2925.69 seconds with the score of 393.23 (304 unrouted and 364 violations), using 2880.89 CPU seconds and the job allocated 4715.03 GB of memory so far.
+2026-08-15 22:06:49.380 INFO   [E3794C\60B557] Auto-routing stage completed: started with 346 unrouted nets, completed in 2935.83 seconds, final score: 393.23 (304 unrouted and 364 violations), using 2888.81 total CPU seconds, 4724.85 GB total allocated, and 960.4 MB peak heap usage.
+2026-08-15 22:06:49.382 INFO   [E3794C\60B557] Job 'E3794C\60B557' finished with state: COMPLETED (elapsed: 49 minutes 0.08 seconds, finished at UTC: 2026-08-15T20:06:49.381801200Z).

@@ -1,0 +1,5 @@
+2026-08-15 20:15:53.232 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 20:15:53.289 WARN   Unknown command line argument: -im
+2026-08-15 20:15:54.752 INFO   [88C040\74516C] Loading board file 'pcb-hmd-carrier-board2.dsn'...
+2026-08-15 20:15:55.004 INFO   [88C040\74516C] Job '88C040\74516C' started at 2026-08-15T18:15:55.003689400Z.
+2026-08-15 20:15:55.241 INFO   [88C040\74516C] Auto-routing stage started on board 'ae2fc85cb8ba3047e48e520f7728a8bd' for 956 unrouted items.

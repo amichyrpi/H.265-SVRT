@@ -1,0 +1,1901 @@
+2026-08-15 21:22:17.457 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 21:22:17.461 DEBUG  [startup] user-data path : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-signals-only  (source: CLI argument --user_data_path)
+2026-08-15 21:22:17.461 DEBUG  [startup] log file       : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-signals-only\freerouting.log
+2026-08-15 21:22:17.463 DEBUG  No freerouting.json found at 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-signals-only\freerouting.json' — will create one with default settings.
+2026-08-15 21:22:17.507 DEBUG  Default settings saved to 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-signals-only\freerouting.json'.
+2026-08-15 21:22:17.508 DEBUG  Version: 2.3.0,2026-08-07
+2026-08-15 21:22:17.508 DEBUG  Command line arguments: '-de C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-signals-only.dsn -do C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-signals-only.ses -mp 1 -mt 0 --router.fanout.enabled=false --router.optimizer.enabled=false --router.layers.routable=true,false,true,true,false,true --router.layers.preferred_direction_horizontal=true,false,false,true,false,true --api_server.enabled=false --gui.enabled=false --logging.console.level=INFO --user_data_path=C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-signals-only -l en'
+2026-08-15 21:22:17.508 DEBUG  Architecture: Windows 11,amd64,10.0
+2026-08-15 21:22:17.508 DEBUG  Java: 25.0.4,Eclipse Adoptium
+2026-08-15 21:22:17.508 DEBUG  System Language: fr,fr_FR
+2026-08-15 21:22:17.508 DEBUG  Hardware: 12 CPU cores,4044 MB RAM
+2026-08-15 21:22:17.509 DEBUG  UTC Time: 2026-08-15T19:22:17.508514400Z
+2026-08-15 21:22:17.511 DEBUG  GUI Language: en
+2026-08-15 21:22:17.511 DEBUG  Host: N/A
+2026-08-15 21:22:18.563 DEBUG  Loaded router settings from: C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-signals-only\freerouting.json
+2026-08-15 21:22:18.564 DEBUG  Applied CLI router setting: router.max_passes = 1
+2026-08-15 21:22:18.564 DEBUG  Applied CLI router setting: router.max_threads = 0
+2026-08-15 21:22:18.564 DEBUG  Applied CLI router setting: router.fanout.enabled = false
+2026-08-15 21:22:18.564 DEBUG  Applied CLI router setting: router.optimizer.enabled = false
+2026-08-15 21:22:18.564 DEBUG  Applied CLI router setting: router.layers.routable = true,false,true,true,false,true
+2026-08-15 21:22:18.564 DEBUG  Applied CLI router setting: router.layers.preferred_direction_horizontal = true,false,false,true,false,true
+2026-08-15 21:22:18.564 DEBUG  Applied CLI router setting: router.enabled = true (implicit from -de/-do batch mode)
+2026-08-15 21:22:18.565 DEBUG  No router settings found in environment variables
+2026-08-15 21:22:18.635 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 21:22:18.641 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 21:22:18.643 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 21:22:18.728 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-signals-only.dsn (6 layers)
+2026-08-15 21:22:18.740 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 21:22:18.740 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 21:22:18.740 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 21:22:18.777 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-signals-only.dsn (6 layers)
+2026-08-15 21:22:18.779 DEBUG  Merging settings from 5 sources:
+2026-08-15 21:22:18.780 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 21:22:18.782 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 21:22:18.782 DEBUG    - DSN file: pcb-hmd-carrier-board2-signals-only.dsn (priority 20): 8 fields changed
+2026-08-15 21:22:18.782 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 21:22:18.783 DEBUG    - CLI Arguments (priority 60): 10 fields changed
+2026-08-15 21:22:18.783 DEBUG  Settings merged successfully from 5 source(s)
+2026-08-15 21:22:18.896 DEBUG  No new version available. Current version is up to date: v2.3.0
+2026-08-15 21:22:18.985 INFO   [BA4939\59D9E9] Loading board file 'pcb-hmd-carrier-board2-signals-only.dsn'...
+2026-08-15 21:22:18.993 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 21:22:18.994 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 21:22:18.994 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 21:22:19.176 WARN   Wiring: via net '+3V3' not found at '+3V3'
+2026-08-15 21:22:19.178 WARN   Wiring: via net '+3V3' not found at '+3V3'
+2026-08-15 21:22:19.194 WARN   DSN file 'pcb-hmd-carrier-board2-signals-only.dsn' was loaded with 2 warning(s).
+2026-08-15 21:22:19.196 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 21:22:19.210 DEBUG  Applied copper-to-edge clearance override: 500.0 um (5000 board units).
+2026-08-15 21:22:19.217 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 21:22:19.217 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 21:22:19.217 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 21:22:19.230 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-signals-only.dsn (6 layers)
+2026-08-15 21:22:19.230 DEBUG  Merging settings from 6 sources:
+2026-08-15 21:22:19.231 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 21:22:19.231 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 21:22:19.231 DEBUG    - DSN file: pcb-hmd-carrier-board2-signals-only.dsn (priority 20): 8 fields changed
+2026-08-15 21:22:19.231 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 21:22:19.231 DEBUG    - CLI Arguments (priority 60): 10 fields changed
+2026-08-15 21:22:19.232 DEBUG    - API Settings (priority 70): 28 fields changed
+2026-08-15 21:22:19.232 DEBUG  Settings merged successfully from 6 source(s)
+2026-08-15 21:22:19.232 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 21:22:19.235 INFO   [BA4939\59D9E9] Job 'BA4939\59D9E9' started at 2026-08-15T19:22:19.235542300Z.
+2026-08-15 21:22:19.394 DEBUG  [BA4939\59D9E9] Checking fanout pre-pass. settings.fanout.enabled=false, smd_pins=1581
+2026-08-15 21:22:19.452 INFO   [BA4939\59D9E9] Auto-routing stage started on board '868246c6b4a11d7c97ccb1281b6fe68c' for 398 unrouted items.
+2026-08-15 21:22:19.481 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:19.482 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:25.082 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 3/12)
+2026-08-15 21:22:25.083 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 9/12)
+2026-08-15 21:22:25.097 DEBUG  Queuing item for routing: PolylineTrace on net 'GND' (connected: 14/32)
+2026-08-15 21:22:25.097 DEBUG  Queuing item for routing: Pin on net 'SW_5V' (connected: 1/5)
+2026-08-15 21:22:25.098 DEBUG  Queuing item for routing: Pin on net 'SW_5V' (connected: 1/5)
+2026-08-15 21:22:25.098 DEBUG  Queuing item for routing: Pin on net 'VCC_5V' (connected: 1/3)
+2026-08-15 21:22:25.098 DEBUG  Queuing item for routing: Pin on net 'MODE_5V' (connected: 1/3)
+2026-08-15 21:22:25.099 DEBUG  Queuing item for routing: Pin on net 'FB_5V' (connected: 1/4)
+2026-08-15 21:22:25.099 DEBUG  Queuing item for routing: Pin on net 'PGOOD_5V' (connected: 1/2)
+2026-08-15 21:22:25.099 DEBUG  Queuing item for routing: Pin on net 'SW_5V' (connected: 1/5)
+2026-08-15 21:22:25.099 DEBUG  Queuing item for routing: Pin on net 'BST_5V' (connected: 1/2)
+2026-08-15 21:22:25.099 DEBUG  Queuing item for routing: Pin on net 'USB1V05_FB' (connected: 1/4)
+2026-08-15 21:22:25.099 DEBUG  Queuing item for routing: Pin on net 'LDO_3V3' (connected: 1/8)
+2026-08-15 21:22:25.100 DEBUG  Queuing item for routing: Pin on net 'I2Ct_SCL' (connected: 1/3)
+2026-08-15 21:22:25.100 DEBUG  Queuing item for routing: Pin on net 'I2Ct_SDA' (connected: 1/3)
+2026-08-15 21:22:25.100 DEBUG  Queuing item for routing: Pin on net 'I2C_SCL' (connected: 1/8)
+2026-08-15 21:22:25.100 DEBUG  Queuing item for routing: Pin on net 'I2C_SDA' (connected: 1/8)
+2026-08-15 21:22:25.100 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SDA_1V8' (connected: 1/7)
+2026-08-15 21:22:25.100 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SCL_1V8' (connected: 1/7)
+2026-08-15 21:22:25.100 DEBUG  Queuing item for routing: Pin on net 'USB1V05_SW' (connected: 1/2)
+2026-08-15 21:22:25.101 DEBUG  Queuing item for routing: Pin on net 'RUN_PG' (connected: 1/2)
+2026-08-15 21:22:25.101 DEBUG  Queuing item for routing: Pin on net 'CM4_EXT_RESET_N' (connected: 1/2)
+2026-08-15 21:22:25.102 DEBUG  Queuing item for routing: Pin on net 'EMMC_BOOT_N' (connected: 1/2)
+2026-08-15 21:22:25.102 DEBUG  Queuing item for routing: Pin on net 'UART_RX' (connected: 1/2)
+2026-08-15 21:22:25.102 DEBUG  Queuing item for routing: Pin on net 'UART_TX' (connected: 1/2)
+2026-08-15 21:22:25.102 DEBUG  Queuing item for routing: Pin on net 'I2C_SCL' (connected: 1/8)
+2026-08-15 21:22:25.102 DEBUG  Queuing item for routing: Pin on net 'I2C_SDA' (connected: 1/8)
+2026-08-15 21:22:25.102 DEBUG  Queuing item for routing: Pin on net 'WLED_COMP' (connected: 1/2)
+2026-08-15 21:22:25.103 DEBUG  Queuing item for routing: Pin on net 'WLED_SW' (connected: 1/4)
+2026-08-15 21:22:25.103 DEBUG  Queuing item for routing: Pin on net 'WLED_SW' (connected: 1/4)
+2026-08-15 21:22:25.103 DEBUG  Queuing item for routing: Pin on net 'WLED_OVP' (connected: 1/3)
+2026-08-15 21:22:25.103 DEBUG  Queuing item for routing: Pin on net 'L_LED1_N' (connected: 1/2)
+2026-08-15 21:22:25.103 DEBUG  Queuing item for routing: Pin on net 'L_LED2_N' (connected: 1/2)
+2026-08-15 21:22:25.103 DEBUG  Queuing item for routing: Pin on net 'L_LED3_N' (connected: 1/2)
+2026-08-15 21:22:25.103 DEBUG  Queuing item for routing: Pin on net 'R_LED1_N' (connected: 1/2)
+2026-08-15 21:22:25.103 DEBUG  Queuing item for routing: Pin on net 'WLED_ISET' (connected: 1/2)
+2026-08-15 21:22:25.103 DEBUG  Queuing item for routing: Pin on net 'R_LED2_N' (connected: 1/2)
+2026-08-15 21:22:25.104 DEBUG  Queuing item for routing: Pin on net 'R_LED3_N' (connected: 1/2)
+2026-08-15 21:22:25.104 DEBUG  Queuing item for routing: Pin on net 'BL_PWM' (connected: 1/5)
+2026-08-15 21:22:25.104 DEBUG  Queuing item for routing: Pin on net 'WLED_FREQ' (connected: 1/2)
+2026-08-15 21:22:25.104 DEBUG  Queuing item for routing: Pin on net 'BL_EN' (connected: 1/3)
+2026-08-15 21:22:25.104 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_B' (connected: 1/3)
+2026-08-15 21:22:25.104 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_A' (connected: 1/2)
+2026-08-15 21:22:25.104 DEBUG  Queuing item for routing: Pin on net 'SD_DAT1' (connected: 1/2)
+2026-08-15 21:22:25.104 DEBUG  Queuing item for routing: Pin on net 'SD_DAT0' (connected: 1/2)
+2026-08-15 21:22:25.105 DEBUG  Queuing item for routing: Pin on net 'SD_CLK' (connected: 1/2)
+2026-08-15 21:22:25.105 DEBUG  Queuing item for routing: Pin on net 'SD_PWR' (connected: 1/3)
+2026-08-15 21:22:25.105 DEBUG  Queuing item for routing: Pin on net 'SD_CMD' (connected: 1/2)
+2026-08-15 21:22:25.105 DEBUG  Queuing item for routing: Pin on net 'SD_DAT3' (connected: 1/2)
+2026-08-15 21:22:25.105 DEBUG  Queuing item for routing: Pin on net 'SD_DAT2' (connected: 1/2)
+2026-08-15 21:22:25.105 DEBUG  Queuing item for routing: Pin on net 'unconnected-(U12-DRAIN_PAD-Pad40)' (connected: 1/3)
+2026-08-15 21:22:25.105 DEBUG  Queuing item for routing: Pin on net 'unconnected-(U12-DRAIN_PAD-Pad40)' (connected: 1/3)
+2026-08-15 21:22:25.105 DEBUG  Queuing item for routing: Pin on net 'unconnected-(U12-DRAIN_PAD-Pad40)' (connected: 1/3)
+2026-08-15 21:22:25.106 DEBUG  Queuing item for routing: Pin on net 'CC2' (connected: 1/5)
+2026-08-15 21:22:25.106 DEBUG  Queuing item for routing: Pin on net 'CC1' (connected: 1/5)
+2026-08-15 21:22:25.106 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/4)
+2026-08-15 21:22:25.106 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/4)
+2026-08-15 21:22:25.106 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.106 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.106 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.107 DEBUG  Queuing item for routing: Pin on net 'CHG_IRQ_N' (connected: 1/3)
+2026-08-15 21:22:25.107 DEBUG  Queuing item for routing: Pin on net 'CHG_SCL' (connected: 1/3)
+2026-08-15 21:22:25.107 DEBUG  Queuing item for routing: Pin on net 'CHG_SDA' (connected: 1/3)
+2026-08-15 21:22:25.107 DEBUG  Queuing item for routing: Pin on net 'PD_IRQ_N' (connected: 1/2)
+2026-08-15 21:22:25.107 DEBUG  Queuing item for routing: Pin on net 'I2Ct_SCL' (connected: 1/3)
+2026-08-15 21:22:25.107 DEBUG  Queuing item for routing: Pin on net 'I2Ct_SDA' (connected: 1/3)
+2026-08-15 21:22:25.108 DEBUG  Queuing item for routing: Pin on net 'LDO_1V5' (connected: 1/4)
+2026-08-15 21:22:25.108 DEBUG  Queuing item for routing: Pin on net 'LDO_1V5' (connected: 1/4)
+2026-08-15 21:22:25.108 DEBUG  Queuing item for routing: Pin on net 'LDO_1V5' (connected: 1/4)
+2026-08-15 21:22:25.108 DEBUG  Queuing item for routing: Pin on net 'LDO_3V3' (connected: 1/8)
+2026-08-15 21:22:25.108 DEBUG  Queuing item for routing: Pin on net 'USB1V05_SW' (connected: 1/2)
+2026-08-15 21:22:25.109 DEBUG  Queuing item for routing: Pin on net 'USB1V05_FB' (connected: 1/4)
+2026-08-15 21:22:25.109 DEBUG  Queuing item for routing: Pin on net 'USB1V05_PG' (connected: 1/2)
+2026-08-15 21:22:25.109 DEBUG  Queuing item for routing: Pin on net 'PMID' (connected: 1/4)
+2026-08-15 21:22:25.109 DEBUG  Queuing item for routing: Pin on net 'SW1' (connected: 1/3)
+2026-08-15 21:22:25.109 DEBUG  Queuing item for routing: Pin on net 'SW2' (connected: 1/3)
+2026-08-15 21:22:25.110 DEBUG  Queuing item for routing: Pin on net 'CHG_IRQ_N' (connected: 1/3)
+2026-08-15 21:22:25.110 DEBUG  Queuing item for routing: Pin on net 'PROG' (connected: 1/2)
+2026-08-15 21:22:25.110 DEBUG  Queuing item for routing: Pin on net 'BST2' (connected: 1/2)
+2026-08-15 21:22:25.110 DEBUG  Queuing item for routing: Pin on net 'ILIM_HIZ' (connected: 1/3)
+2026-08-15 21:22:25.110 DEBUG  Queuing item for routing: Pin on net 'TS' (connected: 1/3)
+2026-08-15 21:22:25.111 DEBUG  Queuing item for routing: Pin on net 'CHG_SDA' (connected: 1/3)
+2026-08-15 21:22:25.111 DEBUG  Queuing item for routing: Pin on net 'CHG_SCL' (connected: 1/3)
+2026-08-15 21:22:25.111 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.111 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.111 DEBUG  Queuing item for routing: Pin on net 'REGN' (connected: 1/3)
+2026-08-15 21:22:25.111 DEBUG  Queuing item for routing: Pin on net 'BST1' (connected: 1/2)
+2026-08-15 21:22:25.112 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.112 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.112 DEBUG  Queuing item for routing: Pin on net 'CHG_STAT' (connected: 1/2)
+2026-08-15 21:22:25.112 DEBUG  Queuing item for routing: Pin on net 'SW_5V' (connected: 1/5)
+2026-08-15 21:22:25.112 DEBUG  Queuing item for routing: Pin on net 'BIAS_SW' (connected: 1/2)
+2026-08-15 21:22:25.112 DEBUG  Queuing item for routing: Pin on net 'REG_1V2_SW' (connected: 1/2)
+2026-08-15 21:22:25.112 DEBUG  Queuing item for routing: Pin on net 'REG_3V3_FB' (connected: 1/3)
+2026-08-15 21:22:25.112 DEBUG  Queuing item for routing: Pin on net 'REG_3V3_SW' (connected: 1/2)
+2026-08-15 21:22:25.113 DEBUG  Queuing item for routing: Pin on net 'REG_1V8_FB' (connected: 1/3)
+2026-08-15 21:22:25.113 DEBUG  Queuing item for routing: Pin on net 'REG_1V8_SW' (connected: 1/2)
+2026-08-15 21:22:25.113 DEBUG  Queuing item for routing: Pin on net 'REG_1V2_FB' (connected: 1/3)
+2026-08-15 21:22:25.113 DEBUG  Queuing item for routing: Pin on net 'REG_1V2_SW' (connected: 1/2)
+2026-08-15 21:22:25.113 DEBUG  Queuing item for routing: Pin on net 'WLED_SW' (connected: 1/4)
+2026-08-15 21:22:25.122 DEBUG  Queuing item for routing: Pin on net 'SW2' (connected: 1/3)
+2026-08-15 21:22:25.122 DEBUG  Queuing item for routing: Pin on net 'SW1' (connected: 1/3)
+2026-08-15 21:22:25.122 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SDA_1V8' (connected: 1/7)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SCL_1V8' (connected: 1/7)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'LCD_BIAS_ENN' (connected: 1/2)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'LCD_BIAS_ENP' (connected: 1/2)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'R_HPDI' (connected: 1/3)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'L_HPDI' (connected: 1/3)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'R_LCD_LEDPWM' (connected: 1/4)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'L_LCD_LEDPWM' (connected: 1/4)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'BL_EN' (connected: 1/3)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'R_LCD_TE' (connected: 1/3)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'L_LCD_TE' (connected: 1/3)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'R_LCD_RESET' (connected: 1/3)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'L_LCD_RESET' (connected: 1/3)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'R_BRIDGE_INT' (connected: 1/3)
+2026-08-15 21:22:25.123 DEBUG  Queuing item for routing: Pin on net 'L_BRIDGE_INT' (connected: 1/3)
+2026-08-15 21:22:25.124 DEBUG  Queuing item for routing: Pin on net 'R_BRIDGE_RESETN' (connected: 1/2)
+2026-08-15 21:22:25.124 DEBUG  Queuing item for routing: Pin on net 'L_BRIDGE_RESETN' (connected: 1/2)
+2026-08-15 21:22:25.124 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_GPIO_RESETN' (connected: 1/2)
+2026-08-15 21:22:25.124 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_GPIO_INT_N' (connected: 1/2)
+2026-08-15 21:22:25.124 DEBUG  Queuing item for routing: Pin on net 'BIAS_REG' (connected: 1/3)
+2026-08-15 21:22:25.124 DEBUG  Queuing item for routing: Pin on net 'BIAS_FLY2' (connected: 1/2)
+2026-08-15 21:22:25.124 DEBUG  Queuing item for routing: Pin on net 'BIAS_FLY1' (connected: 1/2)
+2026-08-15 21:22:25.124 DEBUG  Queuing item for routing: Pin on net 'SD_PWR' (connected: 1/3)
+2026-08-15 21:22:25.124 DEBUG  Queuing item for routing: Pin on net 'SD_PWR_ON' (connected: 1/3)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_B' (connected: 1/3)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'SD_PWR' (connected: 1/3)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'REG_1V15_FB' (connected: 1/3)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'REG_1V15_SW' (connected: 1/2)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'BIAS_REG' (connected: 1/3)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'BIAS_REG' (connected: 1/3)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'BIAS_SW' (connected: 1/2)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'BIAS_FLY1' (connected: 1/2)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SDA_1V8' (connected: 1/7)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SCL_1V8' (connected: 1/7)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'LCD_BIAS_ENP' (connected: 1/2)
+2026-08-15 21:22:25.125 DEBUG  Queuing item for routing: Pin on net 'BIAS_FLY2' (connected: 1/2)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'LCD_BIAS_ENN' (connected: 1/2)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'WLED_COMP_RC' (connected: 1/2)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'REG_1V2_FB' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'REG_3V3_FB' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'WLED_FREQ' (connected: 1/2)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'WLED_OVP' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_A' (connected: 1/2)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'REG_1V8_FB' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'REG_3V3_FB' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'WLED_ISET' (connected: 1/2)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'SD_PWR_ON' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'REG_1V15_FB' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'REG_1V2_FB' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'REG_1V15_FB' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'WLED_OVP' (connected: 1/3)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'WLED_COMP_RC' (connected: 1/2)
+2026-08-15 21:22:25.126 DEBUG  Queuing item for routing: Pin on net 'WLED_COMP' (connected: 1/2)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'REG_1V8_FB' (connected: 1/3)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_B' (connected: 1/3)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'USB1V05_FB' (connected: 1/4)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'BT_ENABLE_N' (connected: 1/2)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'PD_IRQ_N' (connected: 1/2)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'LDO_3V3' (connected: 1/8)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'PROG' (connected: 1/2)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'FB_5V' (connected: 1/4)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'ILIM_HIZ' (connected: 1/3)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'REGN' (connected: 1/3)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'I2Ct_SCL' (connected: 1/3)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'LDO_3V3' (connected: 1/8)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLKREQ_N' (connected: 1/3)
+2026-08-15 21:22:25.127 DEBUG  Queuing item for routing: Pin on net 'I2Ct_SDA' (connected: 1/3)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'LDO_3V3' (connected: 1/8)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'TS' (connected: 1/3)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'MODE_5V' (connected: 1/3)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'VCC_5V' (connected: 1/3)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'CHG_SCL' (connected: 1/3)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'LDO_3V3' (connected: 1/8)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'CHG_SDA' (connected: 1/3)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'LDO_3V3' (connected: 1/8)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'USB1V05_FB' (connected: 1/4)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'ILIM_HIZ' (connected: 1/3)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'MODE_5V' (connected: 1/3)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'FB_5V' (connected: 1/4)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'TS' (connected: 1/3)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'WIFI_ENABLE_N' (connected: 1/2)
+2026-08-15 21:22:25.128 DEBUG  Queuing item for routing: Pin on net 'USB1V05_PG' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'CHG_IRQ_N' (connected: 1/3)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'REG_3V3_SW' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'REG_1V15_SW' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'WLED_SW' (connected: 1/4)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'REG_1V8_SW' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_DDC_SCL' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_DDC_SDA' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.129 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_HPD' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CEC' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CEC' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_DDC_SCL' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.130 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_DDC_SDA' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_HPD' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_N' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_P' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_N' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_P' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'PCIE_RST_N' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/4)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/4)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLKREQ_N' (connected: 1/3)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'CM4_EXT_RESET_N' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'EMMC_BOOT_N' (connected: 1/2)
+2026-08-15 21:22:25.131 DEBUG  Queuing item for routing: Pin on net 'RUN_PG' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'BT_ENABLE_N' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net '+1V8' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'WIFI_ENABLE_N' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net '+1V8' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'SD_PWR_ON' (connected: 1/3)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'SD_DAT2' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'SD_DAT1' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'SD_DAT0' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'SD_CMD' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'SD_DAT3' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'I2C_SDA' (connected: 1/8)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'SD_CLK' (connected: 1/2)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'I2C_SCL' (connected: 1/8)
+2026-08-15 21:22:25.132 DEBUG  Queuing item for routing: Pin on net 'UART_TX' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'AUDIO_MCLK' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'UART_RX' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'I2S_BCLK' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'TYPEC_FLIP' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'PROX_INT' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'TYPEC_INT_N' (connected: 1/3)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'AUDIO_RESET_N' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'BL_PWM' (connected: 1/5)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'I2S_DIN' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'I2S_LRCLK' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'I2S_DOUT' (connected: 1/2)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'PMID' (connected: 1/4)
+2026-08-15 21:22:25.133 DEBUG  Queuing item for routing: Pin on net 'LDO_3V3' (connected: 1/8)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'SW_5V' (connected: 1/5)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'BST_5V' (connected: 1/2)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'CC2' (connected: 1/5)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'FB_5V' (connected: 1/4)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'PPHV' (connected: 1/10)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'LDO_1V5' (connected: 1/4)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'VCC_5V' (connected: 1/3)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'CC1' (connected: 1/5)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'SW2' (connected: 1/3)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'BST2' (connected: 1/2)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'REGN' (connected: 1/3)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'PMID' (connected: 1/4)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'PMID' (connected: 1/4)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'SW1' (connected: 1/3)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'BST1' (connected: 1/2)
+2026-08-15 21:22:25.134 DEBUG  Queuing item for routing: Pin on net 'MIC_R_RAW_N' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'MIC_R_RAW_P' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'PCIE_RST_N' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/4)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_N' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_P' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_N' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_P' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB3_RREF' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB3_XT1' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB3_XT2' (connected: 1/2)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'USB_OC_N' (connected: 1/3)
+2026-08-15 21:22:25.135 DEBUG  Queuing item for routing: Pin on net 'SPI_MOSI' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'SPI_CLK' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'SPI_CS_N' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'SPI_MISO' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'USB3_POR_N' (connected: 1/3)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLKREQ_N' (connected: 1/3)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_N' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_P' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_N' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_P' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'TYPEC_ATTACHED_N' (connected: 1/3)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'I2C_SCL' (connected: 1/8)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'I2C_SDA' (connected: 1/8)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'TYPEC_INT_N' (connected: 1/3)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'CC2' (connected: 1/5)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'CC1' (connected: 1/5)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'R_LED3_N' (connected: 1/2)
+2026-08-15 21:22:25.136 DEBUG  Queuing item for routing: Pin on net 'R_LCD_LEDPWM' (connected: 1/4)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_LED2_N' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_LED1_N' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_LCD_TE' (connected: 1/3)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_LCD_RESET' (connected: 1/3)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_N' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_P' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.137 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_P' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_N' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'R_S1_TEST' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'TYPEC_ATTACHED_N' (connected: 1/3)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'USB_OC_N' (connected: 1/3)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'USB_ILIM' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/4)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'USB3_POR_N' (connected: 1/3)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'MIC_L_RAW_N' (connected: 1/2)
+2026-08-15 21:22:25.138 DEBUG  Queuing item for routing: Pin on net 'MIC_L_RAW_P' (connected: 1/2)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_N' (connected: 1/3)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_P' (connected: 1/3)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_N' (connected: 1/3)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_P' (connected: 1/3)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_REFCLK' (connected: 1/2)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'L_REFCLK' (connected: 1/2)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_REFCLK' (connected: 1/2)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_BRIDGE_RESETN' (connected: 1/2)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SCL_1V8' (connected: 1/7)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SDA_1V8' (connected: 1/7)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_PFIL' (connected: 1/2)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_PCKIN' (connected: 1/2)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_1V2_MIPI0' (connected: 1/4)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_1V8_IO' (connected: 1/4)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_BRIDGE_INT' (connected: 1/3)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_BIASDA' (connected: 1/2)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.139 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'R_3V3_IO' (connected: 1/3)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'R_1V15_HDMI' (connected: 1/4)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'R_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.140 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_P' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_N' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'R_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'R_1V2_MIPI1' (connected: 1/3)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.141 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_N' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_HPD' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_DDC_SDA' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'R_1V15_HDMI' (connected: 1/4)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'R_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_P' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'R_HPDI' (connected: 1/3)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_DDC_SCL' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CEC' (connected: 1/2)
+2026-08-15 21:22:25.142 DEBUG  Queuing item for routing: Pin on net 'R_REXT' (connected: 1/2)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SCL_1V8' (connected: 1/7)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'I2C_SCL' (connected: 1/8)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_GPIO_RESETN' (connected: 1/2)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_GPIO_INT_N' (connected: 1/2)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SDA_1V8' (connected: 1/7)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'I2C_SDA' (connected: 1/8)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_P' (connected: 1/3)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_N' (connected: 1/3)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/4)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'CC2' (connected: 1/5)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_N' (connected: 1/3)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_P' (connected: 1/3)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_P' (connected: 1/3)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_N' (connected: 1/3)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/4)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'CC1' (connected: 1/5)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_N' (connected: 1/3)
+2026-08-15 21:22:25.143 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_P' (connected: 1/3)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'USB3_XT2' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'USB3_XT1' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'AUDIO_RESET_N' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'AUDIO_1V8_LDO' (connected: 1/3)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'HP_R_CODEC' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'HP_L_CODEC' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'AUDIO_1V8_LDO' (connected: 1/3)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'JACK_MIC_CODEC' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'MICBIAS' (connected: 1/3)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'AUDIO_REF' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'MIC_L_N' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'MIC_L_P' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'MIC_R_P' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'MIC_R_N' (connected: 1/2)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'I2C_SDA' (connected: 1/8)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'I2C_SCL' (connected: 1/8)
+2026-08-15 21:22:25.144 DEBUG  Queuing item for routing: Pin on net 'I2S_DIN' (connected: 1/2)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'I2S_DOUT' (connected: 1/2)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'I2S_LRCLK' (connected: 1/2)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'I2S_BCLK' (connected: 1/2)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'AUDIO_MCLK' (connected: 1/2)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/4)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/4)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'CC2' (connected: 1/5)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/4)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/4)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'CC1' (connected: 1/5)
+2026-08-15 21:22:25.145 DEBUG  Queuing item for routing: Pin on net 'I2C_SCL' (connected: 1/8)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'I2C_SDA' (connected: 1/8)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'PROX_INT' (connected: 1/2)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_N' (connected: 1/3)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_P' (connected: 1/3)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_N' (connected: 1/3)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_P' (connected: 1/3)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'JACK_MIC' (connected: 1/3)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'HP_R' (connected: 1/2)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'HP_L' (connected: 1/2)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'L_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'R_1V2_MIPI0' (connected: 1/4)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'R_3V3_IO' (connected: 1/3)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'L_1V2_MIPI0' (connected: 1/4)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'L_1V2_MIPI1' (connected: 1/3)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'R_1V2_MIPI1' (connected: 1/3)
+2026-08-15 21:22:25.146 DEBUG  Queuing item for routing: Pin on net 'L_1V8_IO' (connected: 1/4)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'L_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'R_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'L_3V3_IO' (connected: 1/3)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'R_1V8_IO' (connected: 1/4)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'R_1V15_HDMI' (connected: 1/4)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'L_1V15_HDMI' (connected: 1/4)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'R_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'MICBIAS' (connected: 1/3)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_N' (connected: 1/2)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_N' (connected: 1/2)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_P' (connected: 1/2)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_P' (connected: 1/2)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'AUDIO_1V8_LDO' (connected: 1/3)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'AUDIO_REF' (connected: 1/2)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'PGOOD_5V' (connected: 1/2)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'CHG_STAT' (connected: 1/2)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'BL_EN' (connected: 1/3)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SDA_1V8' (connected: 1/7)
+2026-08-15 21:22:25.147 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SCL_1V8' (connected: 1/7)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'R_LCD_LEDPWM' (connected: 1/4)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_LCD_TE' (connected: 1/3)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'R_LCD_TE' (connected: 1/3)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_LCD_LEDPWM' (connected: 1/4)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_S1_TEST' (connected: 1/2)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'R_S1_TEST' (connected: 1/2)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'BL_PWM' (connected: 1/5)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_REFCLK' (connected: 1/2)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_BRIDGE_RESETN' (connected: 1/2)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SCL_1V8' (connected: 1/7)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'DISPLAY_I2C_SDA_1V8' (connected: 1/7)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_PFIL' (connected: 1/2)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_PCKIN' (connected: 1/2)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_1V2_MIPI0' (connected: 1/4)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_1V8_IO' (connected: 1/4)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_BRIDGE_INT' (connected: 1/3)
+2026-08-15 21:22:25.148 DEBUG  Queuing item for routing: Pin on net 'L_BIASDA' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_3V3_IO' (connected: 1/3)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_1V15_HDMI' (connected: 1/4)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'L_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.149 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_1V2_MIPI1' (connected: 1/3)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_HPD' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_DDC_SDA' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_1V15_HDMI' (connected: 1/4)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_HPDI' (connected: 1/3)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_DDC_SCL' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CEC' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_REXT' (connected: 1/2)
+2026-08-15 21:22:25.150 DEBUG  Queuing item for routing: Pin on net 'L_LED3_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_LCD_LEDPWM' (connected: 1/4)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_LED2_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_LED1_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_LCD_TE' (connected: 1/3)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_LCD_RESET' (connected: 1/3)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 21:22:25.151 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'L_S1_TEST' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'L_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'R_1V2_MIPI0' (connected: 1/4)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'R_1V8_IO' (connected: 1/4)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'L_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'HP_L' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'HP_L_CODEC' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'HP_R' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'HP_R_CODEC' (connected: 1/2)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'L_1V2_MIPI0' (connected: 1/4)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'L_1V8_IO' (connected: 1/4)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'R_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'R_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'R_1V8_IO' (connected: 1/4)
+2026-08-15 21:22:25.152 DEBUG  Queuing item for routing: Pin on net 'R_3V3_IO' (connected: 1/3)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'MIC_L_P' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'MIC_L_RAW_P' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'L_1V2_MIPI0' (connected: 1/4)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'MIC_R_P' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'MIC_R_RAW_P' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'L_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'MIC_L_N' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'MIC_L_RAW_N' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'L_1V8_IO' (connected: 1/4)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'R_1V15_CORE' (connected: 1/5)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'MIC_R_N' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'MIC_R_RAW_N' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'L_1V2_MIPI1' (connected: 1/3)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'R_BIASDA' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'R_1V2_MIPI1' (connected: 1/3)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'L_BIASDA' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'L_3V3_IO' (connected: 1/3)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'JACK_MIC_CODEC' (connected: 1/2)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'JACK_MIC' (connected: 1/3)
+2026-08-15 21:22:25.153 DEBUG  Queuing item for routing: Pin on net 'L_PCKIN' (connected: 1/2)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'L_PFIL' (connected: 1/2)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'R_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'R_1V2_MIPI0' (connected: 1/4)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'L_1V15_HDMI' (connected: 1/4)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'R_PFIL' (connected: 1/2)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'R_PCKIN' (connected: 1/2)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'R_1V15_HDMI' (connected: 1/4)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'L_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'I2C_SDA' (connected: 1/8)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'I2C_SCL' (connected: 1/8)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_P' (connected: 1/3)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_N' (connected: 1/3)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_P' (connected: 1/3)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_N' (connected: 1/3)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_P' (connected: 1/3)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_N' (connected: 1/3)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_P' (connected: 1/3)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_N' (connected: 1/3)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'TYPEC_FLIP' (connected: 1/2)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_N' (connected: 1/2)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_P' (connected: 1/2)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_N' (connected: 1/2)
+2026-08-15 21:22:25.154 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_P' (connected: 1/2)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'R_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'R_REXT' (connected: 1/2)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'USB3_RREF' (connected: 1/2)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'SPI_CS_N' (connected: 1/2)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'BL_PWM' (connected: 1/5)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'L_LCD_LEDPWM' (connected: 1/4)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'TYPEC_INT_N' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'L_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'L_HPDI' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'L_BRIDGE_INT' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'USB_OC_N' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'TYPEC_ATTACHED_N' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'JACK_MIC' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'MICBIAS' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'L_LCD_RESET' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'SPI_MOSI' (connected: 1/2)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'R_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'R_HPDI' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'USB3_POR_N' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'L_3V3_HDMI' (connected: 1/7)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'L_REXT' (connected: 1/2)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'USB_ILIM' (connected: 1/2)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'R_BRIDGE_INT' (connected: 1/3)
+2026-08-15 21:22:25.155 DEBUG  Queuing item for routing: Pin on net 'SPI_CLK' (connected: 1/2)
+2026-08-15 21:22:25.156 DEBUG  Queuing item for routing: Pin on net 'BL_PWM' (connected: 1/5)
+2026-08-15 21:22:25.156 DEBUG  Queuing item for routing: Pin on net 'R_LCD_LEDPWM' (connected: 1/4)
+2026-08-15 21:22:25.156 DEBUG  Queuing item for routing: Pin on net 'SPI_MISO' (connected: 1/2)
+2026-08-15 21:22:25.156 DEBUG  Queuing item for routing: Pin on net 'R_LCD_RESET' (connected: 1/3)
+2026-08-15 21:22:27.843 DEBUG  [BA4939\59D9E9] Pass #1: 398 incompletes across 648 items to route
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'R_LCD_RESET' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB3_TX_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB3_TX_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB3_RX_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB3_RX_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'TYPEC_FLIP' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB_C_RX2_N' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB_C_RX2_P' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB_C_TX2_N' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB_C_TX2_P' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB_C_RX1_N' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB_C_RX1_P' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB_C_TX1_N' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'USB_C_TX1_P' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_3V3_HDMI' has 6 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'R_3V3_HDMI' has 6 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_S1_TEST' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_D0_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_D3_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_D0_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_D3_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_D1_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_CLK_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_D1_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_CLK_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_D2_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_D2_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_D2_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIA_D2_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_CLK_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_D1_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_CLK_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_D1_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_D3_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_D0_P' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_D3_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_DSIB_D0_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_LCD_RESET' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_LCD_TE' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_LED1_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_LED2_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_LCD_LEDPWM' has 3 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_LED3_N' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_REXT' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_CEC' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_DDC_SCL' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_HPDI' has 2 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_1V15_HDMI' has 3 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_DDC_SDA' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_HPD' has 1 incomplete(s)
+2026-08-15 21:22:27.844 DEBUG  [BA4939\59D9E9]   Net 'L_1V2_MIPI1' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_CLK_P' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_CLK_N' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_1V15_CORE' has 4 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_D0_P' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_D0_N' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_D1_P' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_D1_N' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_D2_P' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HDMI_L_D2_N' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_3V3_IO' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_BIASDA' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_BRIDGE_INT' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_1V8_IO' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_1V2_MIPI0' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_PCKIN' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_PFIL' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'DISPLAY_I2C_SDA_1V8' has 6 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'DISPLAY_I2C_SCL_1V8' has 6 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_BRIDGE_RESETN' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'L_REFCLK' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'BL_PWM' has 4 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'nPI_LED_PWR' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_1V15_HDMI' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_PCKIN' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'AUDIO_REF' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'SPI_MISO' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_LCD_LEDPWM' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HP_L' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HP_R' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'JACK_MIC' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_PFIL' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'PROX_INT' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'I2C_SDA' has 7 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'I2C_SCL' has 7 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_1V15_CORE' has 4 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'SPI_CLK' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_1V8_IO' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_S1_TEST' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_1V2_MIPI0' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_BRIDGE_INT' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'CC1' has 4 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'USB2_SERVICE_DP' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'USB2_SERVICE_DM' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'CC2' has 4 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'USB_ILIM' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'AUDIO_1V8_LDO' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'AUDIO_MCLK' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'I2S_BCLK' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'I2S_LRCLK' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'I2S_DOUT' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'I2S_DIN' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'MIC_R_N' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'MIC_R_P' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'MIC_L_P' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'MIC_L_N' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'MICBIAS' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'JACK_MIC_CODEC' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HP_L_CODEC' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'HP_R_CODEC' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'AUDIO_RESET_N' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'USB3_POR_N' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'USB3_XT1' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'USB3_XT2' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'PCIE_RX_USB3_P' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'PCIE_RX_P' has 1 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'USB2_HOST_DP' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'USB2_HOST_DM' has 3 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_HPDI' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'R_LCD_TE' has 2 incomplete(s)
+2026-08-15 21:22:27.845 DEBUG  [BA4939\59D9E9]   Net 'SPI_MOSI' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_REXT' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_CEC' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_DDC_SCL' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_D3_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_D2_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_CLK_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_D1_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_D0_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_DDC_SDA' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_HPD' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_D3_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_D2_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_CLK_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_D1_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIB_D0_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_1V2_MIPI1' has 2 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_CLK_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_CLK_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_D0_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_D0_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_D3_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_D3_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_D1_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_D1_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_D2_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_D2_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_D2_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'HDMI_R_D2_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_CLK_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_CLK_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_D1_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_D1_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_3V3_IO' has 2 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_D0_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_DSIA_D0_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_BIASDA' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_BRIDGE_RESETN' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_REFCLK' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'MIC_L_RAW_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'MIC_L_RAW_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'TYPEC_ATTACHED_N' has 2 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'USB_OC_N' has 2 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_LED1_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_LED2_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'R_LED3_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'PCIE_RX_USB3_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'PCIE_RX_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'MIC_R_RAW_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'TYPEC_INT_N' has 2 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'PCIE_CLK_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'PCIE_CLK_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'PCIE_TX_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'PCIE_TX_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'PCIE_CLKREQ_N' has 2 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'SPI_CS_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'USB3_RREF' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'PCIE_RST_N' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'MIC_R_RAW_P' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'BL_EN' has 2 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'UART_RX' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'UART_TX' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'SD_CLK' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'SD_DAT3' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'SD_CMD' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'SD_DAT0' has 1 incomplete(s)
+2026-08-15 21:22:27.846 DEBUG  [BA4939\59D9E9]   Net 'SD_DAT1' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'SD_DAT2' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'SD_PWR_ON' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net '+1V8' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'WIFI_ENABLE_N' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'BT_ENABLE_N' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'RUN_PG' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'EMMC_BOOT_N' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'CM4_EXT_RESET_N' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'REG_1V8_SW' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'CHG_IRQ_N' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'SD_DETECT_B' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'USB1V05_PG' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'LCD_BIAS_ENN' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'BIAS_FLY2' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'LCD_BIAS_ENP' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'BIAS_FLY1' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'BIAS_SW' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'BIAS_REG' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'REG_1V8_FB' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'CHG_STAT' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'TS' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'REG_1V15_SW' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'REG_1V15_FB' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'WLED_COMP' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'WLED_COMP_RC' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'FB_5V' has 3 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'WLED_OVP' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'BST1' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'SW1' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'PMID' has 3 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'DISPLAY_GPIO_INT_N' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'DISPLAY_GPIO_RESETN' has 1 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'MODE_5V' has 2 incomplete(s)
+2026-08-15 21:22:27.847 DEBUG  [BA4939\59D9E9]   Net 'SW2' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'WLED_SW' has 3 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'REG_1V2_SW' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'REG_1V2_FB' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'ILIM_HIZ' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'USB1V05_FB' has 3 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'REGN' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'BST2' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'LDO_3V3' has 7 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'CHG_SDA' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'CHG_SCL' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'SD_PWR' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'WLED_ISET' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'VCC_5V' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'REG_3V3_SW' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'REG_3V3_FB' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'SW_5V' has 4 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'PPHV' has 9 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'PROG' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'USB1V05_SW' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'LDO_1V5' has 3 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'I2Ct_SDA' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'I2Ct_SCL' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'PD_IRQ_N' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'unconnected-(U12-DRAIN_PAD-Pad40)' has 2 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'SD_DETECT_A' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'WLED_FREQ' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'PGOOD_5V' has 1 incomplete(s)
+2026-08-15 21:22:27.848 DEBUG  [BA4939\59D9E9]   Net 'BST_5V' has 1 incomplete(s)
+2026-08-15 21:22:27.956 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:27.962 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:30.915 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:30.916 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:30.958 DEBUG  PolylineTrace.normalize: max normalization depth (16) reached for trace #3275 on net 78 — stopping recursion, trace kept as-is.
+2026-08-15 21:22:33.761 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:33.761 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:33.764 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 21:22:38.524 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:38.524 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:41.257 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:41.257 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:44.136 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:44.142 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:47.016 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:47.022 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:50.053 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:50.054 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:53.092 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:53.092 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:56.021 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:56.022 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:58.889 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:22:58.895 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:01.840 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:01.847 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:04.600 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:04.600 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:07.353 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:07.358 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:10.153 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:10.153 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:13.009 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:13.010 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:15.840 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:15.840 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:18.678 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:18.678 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:21.420 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:21.421 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:24.212 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:24.212 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:27.518 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:27.519 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:30.401 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:30.402 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:33.271 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:33.271 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:36.561 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:36.562 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:40.674 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:40.674 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:45.215 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:45.216 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:49.235 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:49.235 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:53.424 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:53.424 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:57.569 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:23:57.569 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:01.610 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:01.611 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:01.630 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #367 at corner 24/24 on layer 5, trace width: 750, from corner: 6, ok_point: (2088260,-1123250), target: (2280000,-1165000)
+2026-08-15 21:24:01.664 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #1 of component #294, pin #1 of component #227 and polylinetrace, pin #19 of component #305, pin #18 of component #305, because the new connection could not be inserted.
+2026-08-15 21:24:05.626 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:05.627 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:09.729 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:09.730 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:14.653 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:14.654 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:19.999 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:19.999 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:25.337 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:25.337 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:29.082 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:29.083 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:33.328 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:33.329 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:37.388 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:37.389 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:41.766 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:41.767 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:45.867 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:45.867 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:50.072 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:50.073 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:54.753 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:54.754 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:58.977 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:24:58.977 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:03.476 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:03.477 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:03.683 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #232 at corner 46/46 on layer 3, trace width: 750, from corner: 33, ok_point: (1703748,-1316648), target: (1631901,-1319900)
+2026-08-15 21:25:03.720 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #66 of component #223 and pin #7 of component #304, because the new connection could not be inserted.
+2026-08-15 21:25:07.750 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:07.750 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:08.014 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #231 at corner 52/52 on layer 3, trace width: 750, from corner: 44, ok_point: (1698313,-1316648), target: (1631901,-1319900)
+2026-08-15 21:25:08.044 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #62 of component #223 and pin #6 of component #304, because the new connection could not be inserted.
+2026-08-15 21:25:12.012 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:12.013 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:12.437 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #228 at corner 17/17 on layer 3, trace width: 750, from corner: 9, ok_point: (1703000,-1316648), target: (1631901,-1319900)
+2026-08-15 21:25:12.471 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #56 of component #223 and pin #4 of component #304, because the new connection could not be inserted.
+2026-08-15 21:25:16.362 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:16.362 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:20.537 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:20.537 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:24.693 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:24.693 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:25.067 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #229 at corner 32/32 on layer 3, trace width: 750, from corner: 17, ok_point: (1710144,-1316012), target: (1660440,-1288189)
+2026-08-15 21:25:25.096 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #60 of component #223 and pin #1 of component #304, because the new connection could not be inserted.
+2026-08-15 21:25:28.978 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:28.979 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:32.905 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:32.910 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:36.956 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:36.956 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:40.984 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:40.984 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:44.790 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:44.790 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:44.819 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #105 at corner 16/16 on layer 5, trace width: 750, from corner: 4, ok_point: (1998254,-969143), target: (1997250,-1014000)
+2026-08-15 21:25:44.854 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #218, pin #1 of component #183, pin #16 of component #165, pin #13 of component #160 and pin #28 of component #303, because the new connection could not be inserted.
+2026-08-15 21:25:48.860 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:48.860 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:52.827 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:52.828 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:56.852 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:25:56.853 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:00.821 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:00.822 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:04.803 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:04.804 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:08.803 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:08.803 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:12.739 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:12.740 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:16.811 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:16.811 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:21.480 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:21.481 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:26.586 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:26.586 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:30.820 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:30.821 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:30.890 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #395 at corner 35/35 on layer 5, trace width: 750, from corner: 4, ok_point: (2027746,-925143), target: (2153500,-953250)
+2026-08-15 21:26:30.930 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, via, via, pin #5 of component #309, pin #1 of component #245 and pin #8 of component #303, because the new connection could not be inserted.
+2026-08-15 21:26:34.852 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:34.857 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:38.949 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:38.950 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:42.920 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:42.921 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:46.772 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:46.773 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:50.706 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:50.711 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:54.823 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:54.824 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:58.774 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:26:58.774 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:02.984 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:02.985 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:06.989 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:06.991 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:11.340 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:11.340 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:15.407 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:15.408 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:15.487 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #266 at corner 8/8 on layer 3, trace width: 750, from corner: 2, ok_point: (2219954,-1196109), target: (2230584,-1195348)
+2026-08-15 21:27:15.521 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #1 of component #292, pin #1 of component #197 and pin #25 of component #301, because the new connection could not be inserted.
+2026-08-15 21:27:19.350 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:19.352 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:19.624 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #242 at corner 17/17 on layer 3, trace width: 750, from corner: 12, ok_point: (2281750,-1074159), target: (2337585,-993147)
+2026-08-15 21:27:19.661 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #17 of component #303, pin #1 of component #230 and pin #20 of component #301, because the new connection could not be inserted.
+2026-08-15 21:27:23.656 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:23.656 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:23.891 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #387 at corner 14/14 on layer 5, trace width: 750, from corner: 3, ok_point: (2198949,-1231573), target: (2220937,-1236448)
+2026-08-15 21:27:23.926 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #248 and pin #19 of component #301, because the new connection could not be inserted.
+2026-08-15 21:27:27.883 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:27.884 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:32.055 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:32.055 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:32.119 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #370 at corner 20/20 on layer 3, trace width: 750, from corner: 14, ok_point: (2281750,-1074159), target: (2315239,-1014810)
+2026-08-15 21:27:32.155 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #1 of component #246, pin of component #236 and pin #16 of component #301, because the new connection could not be inserted.
+2026-08-15 21:27:35.996 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:35.996 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:40.206 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:40.211 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:44.507 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:44.507 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:48.689 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:48.689 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:52.856 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:52.856 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:56.866 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:27:56.872 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:00.943 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:00.944 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:05.262 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:05.263 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:09.302 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:09.302 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:13.328 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:13.329 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:19.792 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:19.793 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:23.716 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:23.717 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:27.894 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:27.894 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:32.242 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:32.243 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:36.380 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:36.380 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:40.644 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:40.645 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:44.779 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:44.780 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:49.010 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:49.010 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:53.196 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:53.197 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:57.268 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:28:57.268 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:01.387 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:01.389 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:05.721 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:05.721 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:09.836 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:09.836 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:14.024 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:14.030 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:18.116 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:18.116 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:22.760 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:22.760 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:23.631 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:29:27.793 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:27.793 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:32.392 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:32.393 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:36.849 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:36.849 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:41.289 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:41.289 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:42.942 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #47 at corner 93/93 on layer 3, trace width: 750, from corner: 11, ok_point: (2210871,-982098), target: (1238325,-949490)
+2026-08-15 21:29:42.981 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #96, pin #47 of component #81, pin of component #21 and pin #13 of component #291, because the new connection could not be inserted.
+2026-08-15 21:29:46.929 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:46.929 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:51.659 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:51.660 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:56.036 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:29:56.036 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:01.655 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:01.656 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:06.423 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:06.423 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:11.958 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:11.959 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:13.972 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #101 at corner 41/41 on layer 3, trace width: 750, from corner: 17, ok_point: (2219947,-985679), target: (1929811,-972989)
+2026-08-15 21:30:14.017 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #62 of component #173, pin of component #6 and pin #6 of component #291, because the new connection could not be inserted.
+2026-08-15 21:30:18.027 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:18.027 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:23.020 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:23.021 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:23.596 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #177 at corner 25/40 on layer 3, trace width: 750, from corner: 24, ok_point: null, target: (2052703,-1027716)
+2026-08-15 21:30:23.636 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #77 of component #173 and pin #4 of component #291, because the new connection could not be inserted.
+2026-08-15 21:30:27.734 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:27.735 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:32.127 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:32.127 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:37.383 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:37.384 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:42.253 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:42.254 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:47.204 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:47.205 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:51.844 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:51.844 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:56.581 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:56.581 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:30:56.635 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #378 at corner 38/38 on layer 3, trace width: 750, from corner: 1, ok_point: (2022552,-1288978), target: (1329415,-1339755)
+2026-08-15 21:30:56.681 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #276 and polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, via, via, via, via, pin #3 of component #304, pin of component #284, because the new connection could not be inserted.
+2026-08-15 21:31:00.556 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:00.558 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:04.689 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:04.694 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:08.738 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:08.738 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:13.654 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:13.655 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:17.781 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:17.781 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:21.933 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:21.933 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:28.488 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #290, pin #11 of component #274 and pin #13 of component #274, because no connection was found between their nets.
+2026-08-15 21:31:32.522 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:32.523 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:39.339 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #290, pin #13 of component #274 and pin #11 of component #274, because no connection was found between their nets.
+2026-08-15 21:31:43.266 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:43.266 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:47.600 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:47.601 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:51.527 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:31:51.528 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:03.153 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, via, via, pin #5 of component #308, pin #22 of component #291, pin #72 of component #173, pin of component #168, pin of component #107, pin #72 of component #82 and pin #7 of component #274, because no connection was found between their nets.
+2026-08-15 21:32:07.107 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:07.107 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:18.020 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, via, via, pin #4 of component #308, pin #21 of component #291, pin #73 of component #173, pin of component #172, pin of component #103, pin #73 of component #82 and pin #4 of component #274, because no connection was found between their nets.
+2026-08-15 21:32:21.996 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:22.001 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:26.856 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:26.856 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:30.954 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:30.955 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:35.770 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:35.771 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:39.771 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:39.771 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:43.811 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:43.824 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:47.683 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:47.683 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:51.782 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:51.782 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:55.782 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:55.782 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:59.874 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:32:59.874 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:03.885 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:03.886 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:07.841 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:07.841 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:08.174 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #379 at corner 17/17 on layer 3, trace width: 750, from corner: 5, ok_point: (2114028,-1160748), target: (2012860,-1156175)
+2026-08-15 21:33:08.217 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #10 of component #305 and pin of component #260, because the new connection could not be inserted.
+2026-08-15 21:33:12.145 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:12.146 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:12.207 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:33:12.222 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:33:12.243 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:33:12.256 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:33:12.272 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:33:12.286 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:33:12.302 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:33:12.317 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:33:12.342 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:33:16.417 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:16.418 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:20.401 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:20.401 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:24.389 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:24.390 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:28.953 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:28.953 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:33.766 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:33.767 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:37.711 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:37.712 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:42.087 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:42.087 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:45.943 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:45.943 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:50.058 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:50.059 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:53.987 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:53.987 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:58.356 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:33:58.357 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:02.282 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:02.283 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:06.270 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:06.270 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:10.460 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:10.461 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:14.569 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:14.570 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:18.516 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:18.517 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:22.938 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:22.940 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:22.976 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #395 at corner 34/34 on layer 5, trace width: 750, from corner: 6, ok_point: (2120993,-937011), target: (2027000,-926000)
+2026-08-15 21:34:23.019 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #8 of component #303 and polylinetrace, polylinetrace, polylinetrace, polylinetrace, via, via, pin #5 of component #309, pin #1 of component #245, because the new connection could not be inserted.
+2026-08-15 21:34:27.001 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:27.001 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:31.009 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:31.009 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:35.489 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:35.495 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:39.537 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:39.537 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:43.562 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:43.563 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:47.773 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:47.773 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:51.934 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:51.934 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:56.038 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:34:56.039 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:01.289 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:01.290 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:05.272 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:05.273 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:09.445 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:09.445 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:13.314 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:13.314 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:17.414 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:17.420 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:21.968 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:21.969 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:25.968 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:25.968 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:29.852 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:29.852 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:34.258 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:34.258 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:38.611 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:38.616 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:42.699 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:42.700 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:47.108 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:47.109 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:51.269 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:51.269 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:55.322 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:55.323 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:55.463 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #367 at corner 13/13 on layer 3, trace width: 750, from corner: 4, ok_point: (2114028,-1160748), target: (2063207,-1160830)
+2026-08-15 21:35:55.510 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between polylinetrace, pin #19 of component #305, pin #18 of component #305 and polylinetrace, pin #1 of component #294, pin #1 of component #227, because the new connection could not be inserted.
+2026-08-15 21:35:59.636 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:35:59.642 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:03.700 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:03.701 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:07.937 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:07.937 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:12.061 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:12.061 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:16.387 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:16.388 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:20.677 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:20.678 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:20.737 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #25 of component #82 and pin #183 of component #223, because no connection was found between their nets.
+2026-08-15 21:36:24.738 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:24.738 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:28.996 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:28.996 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:33.269 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:33.269 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:37.632 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:37.633 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:41.916 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:41.916 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:46.130 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:46.130 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:46.194 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #21 of component #173 and pin #165 of component #223, because no connection was found between their nets.
+2026-08-15 21:36:50.265 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:50.271 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:54.549 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:54.549 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:58.863 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:36:58.863 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:03.095 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:03.096 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:07.374 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:07.375 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:11.639 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:11.640 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:15.866 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:15.866 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:19.990 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:19.996 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:24.503 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:24.505 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:28.647 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:28.648 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:28.909 DEBUG  OptViaAlgo.opt_via_location: probably endless loop
+2026-08-15 21:37:33.329 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:33.329 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:37.669 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:37.669 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:42.116 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:42.116 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:46.395 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:46.395 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:46.589 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #196 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1719000,-933000), target: (1732353,-949821)
+2026-08-15 21:37:46.640 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #1 of component #136 and pin #123 of component #223, because the new connection could not be inserted.
+2026-08-15 21:37:50.748 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:50.748 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:50.819 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #133 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1723000,-933000), target: (1709937,-924573)
+2026-08-15 21:37:50.868 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #1 of component #131 and pin #121 of component #223, because the new connection could not be inserted.
+2026-08-15 21:37:55.142 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:55.142 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:55.338 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #205 at corner 2/2 on layer 5, trace width: 1000, from corner: 0, ok_point: (1731000,-933000), target: (1732353,-924573)
+2026-08-15 21:37:55.387 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #7 of component #184 and pin #117 of component #223, because the new connection could not be inserted.
+2026-08-15 21:37:59.265 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:59.266 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:37:59.498 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #204 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1735000,-933000), target: (1732353,-924573)
+2026-08-15 21:37:59.549 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #6 of component #184 and pin #115 of component #223, because the new connection could not be inserted.
+2026-08-15 21:38:03.491 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:03.492 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:03.717 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #203 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1743000,-933000), target: (1732353,-924573)
+2026-08-15 21:38:03.767 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #1 of component #184 and pin #111 of component #223, because the new connection could not be inserted.
+2026-08-15 21:38:07.683 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:07.683 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:07.900 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #202 at corner 2/2 on layer 5, trace width: 1000, from corner: 0, ok_point: (1747000,-933000), target: (1748531,-946998)
+2026-08-15 21:38:07.942 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #184 and pin #109 of component #223, because the new connection could not be inserted.
+2026-08-15 21:38:11.936 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:11.947 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:16.368 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:16.369 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:21.649 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:21.650 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:26.962 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:26.968 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:31.220 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:31.220 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:35.329 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:35.332 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:39.363 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:39.368 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:43.383 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:43.384 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:47.376 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:47.376 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:51.405 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:51.405 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:55.589 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:55.594 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:59.947 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:38:59.953 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:04.026 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:04.027 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:04.132 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #233 at corner 32/32 on layer 3, trace width: 750, from corner: 5, ok_point: (1621155,-1317707), target: (2046177,-1330357)
+2026-08-15 21:39:04.177 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #304 and pin #68 of component #223, because the new connection could not be inserted.
+2026-08-15 21:39:08.217 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:08.217 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:08.440 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #232 at corner 35/35 on layer 3, trace width: 750, from corner: 1, ok_point: (1604161,-1320870), target: (2133989,-1326978)
+2026-08-15 21:39:08.489 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #7 of component #304 and pin #66 of component #223, because the new connection could not be inserted.
+2026-08-15 21:39:12.463 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:12.464 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:12.724 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #231 at corner 34/34 on layer 3, trace width: 750, from corner: 26, ok_point: (1981699,-1304864), target: (2135841,-1318092)
+2026-08-15 21:39:12.777 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #6 of component #304 and pin #62 of component #223, because the new connection could not be inserted.
+2026-08-15 21:39:16.860 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:16.860 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:21.604 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:21.605 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:21.884 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #229 at corner 17/17 on layer 3, trace width: 750, from corner: 3, ok_point: (1631799,-1316648), target: (2046177,-1344197)
+2026-08-15 21:39:21.933 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #1 of component #304 and pin #60 of component #223, because the new connection could not be inserted.
+2026-08-15 21:39:25.951 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:25.952 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:30.047 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:30.047 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:34.799 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:34.799 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:38.914 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:38.915 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:42.954 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:42.954 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:47.386 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:47.387 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:53.535 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:53.535 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:58.245 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:39:58.246 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:02.772 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:02.773 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:03.471 DEBUG  InsertFoundConnectionAlgo: via placement blocked by clearance/shove limits for net #93
+2026-08-15 21:40:03.522 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #158 and pin #46 of component #223, because the new connection could not be inserted.
+2026-08-15 21:40:07.601 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:07.602 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:11.989 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:11.989 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:16.885 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:16.885 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:21.813 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:21.814 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:23.663 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #113 at corner 28/50 on layer 3, trace width: 750, from corner: 27, ok_point: (1300583,-1324572), target: (1297160,-1324572)
+2026-08-15 21:40:23.709 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #4 of component #162 and pin #26 of component #223, because the new connection could not be inserted.
+2026-08-15 21:40:27.825 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:27.825 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:28.995 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #111 at corner 29/29 on layer 3, trace width: 750, from corner: 7, ok_point: (1677550,-1254975), target: (1143282,-1213215)
+2026-08-15 21:40:29.045 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #2 of component #162 and pin #25 of component #223, because the new connection could not be inserted.
+2026-08-15 21:40:33.065 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:33.066 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:39.148 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:39.148 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:43.321 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:43.321 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:47.370 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:47.370 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:47.385 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #374 at corner 17/17 on layer 5, trace width: 750, from corner: 4, ok_point: (2072394,-922989), target: (2043000,-958000)
+2026-08-15 21:40:47.438 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin of component #303, pin of component #249, pin of component #245, pin of component #243, pin of component #240, pin of component #238 and polylinetrace, pin #7 of component #309, pin of component #220, because the new connection could not be inserted.
+2026-08-15 21:40:51.538 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:51.539 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:55.676 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:55.677 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:59.954 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:40:59.954 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:04.119 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:04.120 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:08.448 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:08.449 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:12.538 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:12.538 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:16.661 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:16.662 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:16.681 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #390 at corner 29/29 on layer 5, trace width: 750, from corner: 17, ok_point: (2072394,-922989), target: (2043000,-946000)
+2026-08-15 21:41:16.726 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between polylinetrace, polylinetrace, pin #3 of component #303, pin #2 of component #303, pin #1 of component #303 and pin of component #207, because the new connection could not be inserted.
+2026-08-15 21:41:20.862 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:20.868 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:24.951 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:24.952 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:29.117 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:29.117 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:33.312 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:33.312 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:37.333 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:37.334 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:41.831 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:41.831 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:45.866 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:45.867 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:49.738 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:49.743 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:53.817 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:53.817 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:58.331 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:41:58.332 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:02.375 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:02.376 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:06.515 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:06.515 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:10.753 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:10.754 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:15.022 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:15.028 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:20.434 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #179, pin #17 of component #165, pin #5 of component #165 and pin #34 of component #184, because no connection was found between their nets.
+2026-08-15 21:42:24.449 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:24.449 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:28.710 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:28.710 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:32.781 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:32.782 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:36.946 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:36.947 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:41.152 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:41.152 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:41.521 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #211 at corner 46/46 on layer 3, trace width: 750, from corner: 22, ok_point: (2114028,-1160748), target: (1870106,-1147669)
+2026-08-15 21:42:41.572 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin of component #23 and pin #25 of component #184, because the new connection could not be inserted.
+2026-08-15 21:42:45.512 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:45.512 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:49.561 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:49.561 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:53.755 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:53.755 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:58.229 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:42:58.230 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:02.169 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:02.170 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:07.424 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:07.424 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:12.791 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:12.791 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:16.969 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:16.975 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:21.001 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:21.003 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:27.560 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:27.561 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:28.519 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #205 at corner 2/2 on layer 5, trace width: 1000, from corner: 1, ok_point: (1731000,-953399), target: (1731000,-933000)
+2026-08-15 21:43:28.577 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #117 of component #223 and pin #7 of component #184, because the new connection could not be inserted.
+2026-08-15 21:43:32.544 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:32.545 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:32.977 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #204 at corner 2/2 on layer 5, trace width: 1000, from corner: 1, ok_point: (1735000,-940818), target: (1735000,-933000)
+2026-08-15 21:43:33.030 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #115 of component #223 and pin #6 of component #184, because the new connection could not be inserted.
+2026-08-15 21:43:36.771 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:36.771 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:41.045 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:41.045 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:45.192 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:45.192 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:46.058 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #203 at corner 4/4 on layer 5, trace width: 1000, from corner: 3, ok_point: (1743000,-941565), target: (1743000,-933000)
+2026-08-15 21:43:46.108 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #111 of component #223 and pin #1 of component #184, because the new connection could not be inserted.
+2026-08-15 21:43:50.121 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:50.121 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:50.556 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #202 at corner 3/3 on layer 5, trace width: 1000, from corner: 2, ok_point: (1747000,-927175), target: (1747000,-933000)
+2026-08-15 21:43:50.609 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #109 of component #223 and pin of component #184, because the new connection could not be inserted.
+2026-08-15 21:43:54.602 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:54.603 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:58.943 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:43:58.943 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:03.204 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:03.210 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:07.375 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:07.376 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:11.470 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:11.471 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:23.631 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between polylinetrace, pin #28 of component #303, pin of component #218, pin #16 of component #165, pin #13 of component #160 and pin #1 of component #183, because no connection was found between their nets.
+2026-08-15 21:44:27.684 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:27.685 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:31.985 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:31.985 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:36.698 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:36.698 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:44.209 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #14 of component #291, pin of component #100, pin of component #4 and pin #47 of component #182, because no connection was found between their nets.
+2026-08-15 21:44:48.180 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:48.180 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:53.369 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:53.370 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:58.327 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:44:58.328 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:02.565 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:02.566 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:06.675 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:06.675 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:06.803 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #155 at corner 5/5 on layer 0, trace width: 615, from corner: 0, ok_point: (2124500,-1045000), target: (2120039,-1057144)
+2026-08-15 21:45:06.856 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #18 of component #173 and pin #37 of component #182, because the new connection could not be inserted.
+2026-08-15 21:45:10.856 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:10.857 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:16.747 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #14 of component #173 and pin #36 of component #182, because no connection was found between their nets.
+2026-08-15 21:45:20.718 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:20.719 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:26.516 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #8 of component #173 and pin #35 of component #182, because no connection was found between their nets.
+2026-08-15 21:45:30.577 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:30.578 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:36.344 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #4 of component #173 and pin #34 of component #182, because no connection was found between their nets.
+2026-08-15 21:45:40.296 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:40.297 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:46.007 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #17 of component #173 and pin #31 of component #182, because no connection was found between their nets.
+2026-08-15 21:45:49.850 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:49.850 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:55.807 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #16 of component #173 and pin #30 of component #182, because no connection was found between their nets.
+2026-08-15 21:45:59.889 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:45:59.890 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:05.912 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #7 of component #173 and pin #29 of component #182, because no connection was found between their nets.
+2026-08-15 21:46:10.017 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:10.017 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:15.901 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #6 of component #173 and pin #28 of component #182, because no connection was found between their nets.
+2026-08-15 21:46:19.877 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:19.880 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:20.035 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #166 at corner 7/7 on layer 0, trace width: 615, from corner: 0, ok_point: (2082500,-1045000), target: (2068593,-1057652)
+2026-08-15 21:46:20.082 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #39 of component #173 and pin #25 of component #182, because the new connection could not be inserted.
+2026-08-15 21:46:24.008 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:24.009 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:24.140 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #152 at corner 5/5 on layer 0, trace width: 615, from corner: 0, ok_point: (2082500,-1029600), target: (2046177,-1018871)
+2026-08-15 21:46:24.190 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #15 of component #173 and pin #24 of component #182, because the new connection could not be inserted.
+2026-08-15 21:46:28.213 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:28.213 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:33.882 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #38 of component #173 and pin #23 of component #182, because no connection was found between their nets.
+2026-08-15 21:46:38.018 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:38.019 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:44.101 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #5 of component #173 and pin #22 of component #182, because no connection was found between their nets.
+2026-08-15 21:46:48.085 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:48.085 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:48.182 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #170 at corner 4/4 on layer 0, trace width: 615, from corner: 0, ok_point: (2100000,-1029600), target: (2091009,-1018871)
+2026-08-15 21:46:48.225 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #47 of component #173 and pin #19 of component #182, because the new connection could not be inserted.
+2026-08-15 21:46:52.382 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:52.382 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:46:57.842 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #55 of component #173 and pin #18 of component #182, because no connection was found between their nets.
+2026-08-15 21:47:01.959 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:01.960 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:07.609 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #46 of component #173 and pin #17 of component #182, because no connection was found between their nets.
+2026-08-15 21:47:11.737 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:11.737 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:17.536 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #54 of component #173 and pin #16 of component #182, because no connection was found between their nets.
+2026-08-15 21:47:21.607 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:21.608 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:21.882 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #162 at corner 5/5 on layer 0, trace width: 615, from corner: 0, ok_point: (2121000,-1029600), target: (2091009,-1018871)
+2026-08-15 21:47:21.928 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #31 of component #173 and pin #13 of component #182, because the new connection could not be inserted.
+2026-08-15 21:47:25.833 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:25.833 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:31.572 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #59 of component #173 and pin #12 of component #182, because no connection was found between their nets.
+2026-08-15 21:47:35.649 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:35.649 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:35.753 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #30 of component #173 and pin #11 of component #182, because no connection was found between their nets.
+2026-08-15 21:47:39.534 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:39.535 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:45.192 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #58 of component #173 and pin #10 of component #182, because no connection was found between their nets.
+2026-08-15 21:47:49.073 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:49.073 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:53.115 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:53.115 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:57.501 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:47:57.501 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:02.121 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:02.122 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:06.306 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:06.307 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:14.873 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:14.873 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:15.980 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #134 at corner 47/47 on layer 3, trace width: 850, from corner: 34, ok_point: (2138421,-1160148), target: (2170989,-1137853)
+2026-08-15 21:48:16.029 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #34 of component #184, pin #17 of component #165, pin #5 of component #165 and pin of component #179, because the new connection could not be inserted.
+2026-08-15 21:48:20.031 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:20.032 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:24.277 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:24.277 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:28.432 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:28.433 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:32.636 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:32.637 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:36.720 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:36.721 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:40.787 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:40.787 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:40.817 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #16 at corner 13/13 on layer 0, trace width: 850, from corner: 5, ok_point: (2214145,-1111083), target: (2218500,-1138500)
+2026-08-15 21:48:40.864 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #2 of component #165, pin #17 of component #26 and pin #1 of component #176, because the new connection could not be inserted.
+2026-08-15 21:48:44.661 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:44.666 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:48.849 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:48.850 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:52.736 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:52.736 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:56.866 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:48:56.866 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:01.017 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:01.018 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:04.915 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:04.915 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:09.258 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:09.264 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:12.983 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:12.983 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:17.189 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:17.190 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:21.286 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:21.286 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:25.367 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:25.367 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:29.546 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:29.546 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:33.812 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:33.812 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:38.203 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:38.203 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:42.578 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:42.579 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:42.687 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #175 at corner 8/8 on layer 0, trace width: 615, from corner: 7, ok_point: (2124500,-1035550), target: (2124500,-1029600)
+2026-08-15 21:49:42.737 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #12 of component #182 and pin #59 of component #173, because the new connection could not be inserted.
+2026-08-15 21:49:46.592 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:46.593 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:53.057 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #10 of component #182 and pin #58 of component #173, because no connection was found between their nets.
+2026-08-15 21:49:57.063 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:49:57.063 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:01.334 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:01.338 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:01.483 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #172 at corner 9/9 on layer 0, trace width: 615, from corner: 8, ok_point: (2103500,-1035550), target: (2103500,-1029600)
+2026-08-15 21:50:01.538 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #18 of component #182 and pin #55 of component #173, because the new connection could not be inserted.
+2026-08-15 21:50:05.437 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:05.437 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:11.332 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #16 of component #182 and pin #54 of component #173, because no connection was found between their nets.
+2026-08-15 21:50:15.415 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:15.416 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:19.305 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:19.311 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:23.503 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:23.504 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:23.637 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #170 at corner 8/8 on layer 0, trace width: 615, from corner: 7, ok_point: (2100000,-1035550), target: (2100000,-1029600)
+2026-08-15 21:50:23.687 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #19 of component #182 and pin #47 of component #173, because the new connection could not be inserted.
+2026-08-15 21:50:27.466 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:27.467 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:33.646 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #17 of component #182 and pin #46 of component #173, because no connection was found between their nets.
+2026-08-15 21:50:37.374 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:37.379 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:43.513 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #147 of component #223 and pin #41 of component #173, because no connection was found between their nets.
+2026-08-15 21:50:47.224 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:47.224 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:50.986 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:50.986 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:51.072 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #166 at corner 7/7 on layer 0, trace width: 615, from corner: 6, ok_point: (2080122,-1047378), target: (2082500,-1045000)
+2026-08-15 21:50:51.116 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #25 of component #182 and pin #39 of component #173, because the new connection could not be inserted.
+2026-08-15 21:50:54.674 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:50:54.675 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:00.582 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #23 of component #182 and pin #38 of component #173, because no connection was found between their nets.
+2026-08-15 21:51:04.231 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:04.237 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:10.278 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #153 of component #223 and pin #33 of component #173, because no connection was found between their nets.
+2026-08-15 21:51:14.046 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:14.046 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:18.640 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:18.641 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:18.835 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #162 at corner 6/6 on layer 0, trace width: 615, from corner: 5, ok_point: (2121000,-1035550), target: (2121000,-1029600)
+2026-08-15 21:51:18.883 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #13 of component #182 and pin #31 of component #173, because the new connection could not be inserted.
+2026-08-15 21:51:22.495 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:22.496 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:28.421 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #11 of component #182 and pin #30 of component #173, because no connection was found between their nets.
+2026-08-15 21:51:32.331 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:32.331 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:38.590 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #159 of component #223 and pin #25 of component #173, because no connection was found between their nets.
+2026-08-15 21:51:42.475 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:42.475 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:47.167 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:47.167 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:50.942 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:50.942 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:51:56.782 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #165 of component #223 and pin #21 of component #173, because no connection was found between their nets.
+2026-08-15 21:52:00.590 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:00.596 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:05.130 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:05.131 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:09.100 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:09.101 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:15.352 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #37 of component #182 and pin #18 of component #173, because no connection was found between their nets.
+2026-08-15 21:52:19.136 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:19.137 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:24.970 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #31 of component #182 and pin #17 of component #173, because no connection was found between their nets.
+2026-08-15 21:52:28.763 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:28.764 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:35.002 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #30 of component #182 and pin #16 of component #173, because no connection was found between their nets.
+2026-08-15 21:52:38.955 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:38.960 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:45.414 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #24 of component #182 and pin #15 of component #173, because no connection was found between their nets.
+2026-08-15 21:52:49.319 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:49.319 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:52:56.725 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #36 of component #182 and pin #14 of component #173, because no connection was found between their nets.
+2026-08-15 21:53:01.323 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:01.324 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:06.592 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:06.593 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:12.097 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:12.098 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:16.581 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:16.581 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:20.382 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:20.382 WARN   Wiring.write_wire_scope: net not found
+2026-08-15 21:53:20.667 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #148 at corner 6/6 on layer 0, trace width: 615, from corner: 5, ok_point: (2117500,-1057615), target: (2117500,-1045000)
+2026-08-15 21:53:20.728 DEBUG  [BA4939\59D9E9] Autorouter Failed to route connection between pin #35 of component #182 and pin #8 of component #173, because the new connection could not be inserted.

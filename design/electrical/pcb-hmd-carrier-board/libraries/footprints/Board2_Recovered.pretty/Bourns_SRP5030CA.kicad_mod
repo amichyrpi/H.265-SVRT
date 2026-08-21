@@ -1,0 +1,123 @@
+(footprint "Bourns_SRP5030CA"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "Bourns SRP5030CA shielded power inductor; official 5.5x5.3 mm body and 4.7 mm pad pitch")
+	(tags "Bourns SRP5030CA inductor")
+	(property "Reference" "L3"
+		(at 0 -3.7 0)
+		(layer "F.Fab")
+		(uuid "7a31e9d3-35fd-4aee-a55e-82265cb68aea")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "SRP5030CA-1R0M 1uH 9A"
+		(at 0 3.7 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a7baac3c-5143-449e-b0c4-707a8fcb0b29")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2ff7f0a2-565b-49ad-b937-8a72c85b425d")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a51f2f80-8b6f-43e3-ba48-8a5895ea50fc")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -2.75 -2.75)
+		(end 2.75 -2.75)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "0401356e-1891-4bbf-a9f2-b6a750202e03")
+	)
+	(fp_line
+		(start -2.75 2.75)
+		(end 2.75 2.75)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "bcacded7-e057-48fe-bff3-4b512f95eea0")
+	)
+	(fp_rect
+		(start -3.65 -3.05)
+		(end 3.65 3.05)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "aa1bae39-2cd2-4839-8d63-25dfaf373183")
+	)
+	(fp_rect
+		(start -2.75 -2.65)
+		(end 2.75 2.65)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "e6ab1305-0a65-49d5-839b-5e08d7f9af39")
+	)
+	(pad "1" smd roundrect
+		(at -2.35 0)
+		(size 2 4.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.08)
+		(uuid "f296641d-2c85-4f4b-b88b-69cab91dee9d")
+	)
+	(pad "2" smd roundrect
+		(at 2.35 0)
+		(size 2 4.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.08)
+		(uuid "79bc3e16-8688-4f0c-ab8e-0f7ab283e0a2")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/libraries/3dmodels/exact/Bourns/SRP5030CA-1R0M.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

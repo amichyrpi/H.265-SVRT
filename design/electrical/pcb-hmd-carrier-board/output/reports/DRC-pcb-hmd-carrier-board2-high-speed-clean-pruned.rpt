@@ -1,0 +1,2014 @@
+** Drc report for pcb-hmd-carrier-board2-high-speed-clean-pruned.kicad_pcb **
+** Created on 2026-08-15T22:20:12 **
+** Report includes: Errors, Warnings, Exclusions **
+
+** Found 0 DRC violations **
+
+** Found 499 unconnected pads **
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(162.9800 mm, 99.0000 mm): Pad 1 [R_LCD_RESET] of R265 on F.Cu
+    @(213.8500 mm, 104.5000 mm): Pad 42 [R_LCD_RESET] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(213.8500 mm, 104.5000 mm): Pad 42 [R_LCD_RESET] of J202 on F.Cu
+    @(228.5000 mm, 100.2000 mm): Pad 9 [R_LCD_RESET] of U210 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(103.4800 mm, 106.0000 mm): Pad 2 [GND] of R2032 on B.Cu
+    @(106.9800 mm, 105.0000 mm): Pad 2 [GND] of R2052 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(104.0000 mm, 123.0000 mm): Pad 2 [GND] of C19 on B.Cu
+    @(107.0500 mm, 123.0000 mm): Pad 2 [GND] of C20 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(104.0000 mm, 125.0000 mm): Pad 2 [GND] of C22 on B.Cu
+    @(104.0000 mm, 123.0000 mm): Pad 2 [GND] of C19 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(106.9800 mm, 105.0000 mm): Pad 2 [GND] of R2052 on B.Cu
+    @(110.0000 mm, 104.5000 mm): Pad 2 [GND] of C2051 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.0500 mm, 123.0000 mm): Pad 2 [GND] of C20 on B.Cu
+    @(107.5000 mm, 119.4000 mm): Pad 2 [GND] of U205 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.0500 mm, 125.0000 mm): Pad 2 [GND] of C23 on B.Cu
+    @(107.0500 mm, 123.0000 mm): Pad 2 [GND] of C20 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.0500 mm, 125.0000 mm): Pad 2 [GND] of C23 on B.Cu
+    @(109.4900 mm, 127.0000 mm): Pad 2 [GND] of R2042 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.3500 mm, 98.3125 mm): Pad 2 [GND] of C260 on F.Cu
+    @(109.4600 mm, 99.2700 mm): Pad 2 [GND] of J6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.3500 mm, 100.3125 mm): Pad 2 [GND] of C261 on F.Cu
+    @(107.3500 mm, 98.3125 mm): Pad 2 [GND] of C260 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.3500 mm, 102.3125 mm): Pad 2 [GND] of C262 on F.Cu
+    @(107.3500 mm, 100.3125 mm): Pad 2 [GND] of C261 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.3500 mm, 102.3125 mm): Pad 2 [GND] of C262 on F.Cu
+    @(106.9800 mm, 105.0000 mm): Pad 2 [GND] of R2052 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.5000 mm, 112.5000 mm): Pad 2 [GND] of U203 on B.Cu
+    @(107.5000 mm, 115.9500 mm): Pad 2 [GND] of U204 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.5000 mm, 119.4000 mm): Pad 2 [GND] of U205 on B.Cu
+    @(107.5000 mm, 115.9500 mm): Pad 2 [GND] of U204 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(107.5000 mm, 119.4000 mm): Pad 2 [GND] of U205 on B.Cu
+    @(111.2300 mm, 119.0000 mm): Pad 5 [GND] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(108.0000 mm, 131.5000 mm): Pad 2 [GND] of C57 on B.Cu
+    @(109.4900 mm, 127.0000 mm): Pad 2 [GND] of R2042 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(108.0000 mm, 133.5000 mm): Pad 2 [GND] of C59 on B.Cu
+    @(108.0000 mm, 131.5000 mm): Pad 2 [GND] of C57 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(108.0000 mm, 133.5000 mm): Pad 2 [GND] of C59 on B.Cu
+    @(111.5000 mm, 133.5000 mm): Pad 2 [GND] of C60 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(109.4600 mm, 99.2700 mm): Pad 2 [GND] of J6 on B.Cu
+    @(110.7300 mm, 98.0000 mm): Pad 10 [GND] of J6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(110.0000 mm, 104.5000 mm): Pad 2 [GND] of C2051 on B.Cu
+    @(110.0000 mm, 106.5000 mm): Pad 2 [GND] of C2032 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(110.0000 mm, 108.5000 mm): Pad 2 [GND] of C2061 on B.Cu
+    @(110.0000 mm, 106.5000 mm): Pad 2 [GND] of C2032 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(110.0000 mm, 108.5000 mm): Pad 2 [GND] of C2061 on B.Cu
+    @(107.5000 mm, 112.5000 mm): Pad 2 [GND] of U203 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(111.2300 mm, 118.0000 mm): Pad 3 [GND] of U4 on F.Cu
+    @(112.0000 mm, 118.0000 mm): Pad 8 [GND] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(111.2300 mm, 119.0000 mm): Pad 5 [GND] of U4 on F.Cu
+    @(111.2300 mm, 118.0000 mm): Pad 3 [GND] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(111.4625 mm, 123.0625 mm): Pad 13 [GND] of U2 on B.Cu
+    @(112.9600 mm, 123.0445 mm): PTH pad 21 [GND] of U2
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(111.5000 mm, 101.0000 mm): Pad 2 [GND] of R260 on F.Cu
+    @(109.4600 mm, 99.2700 mm): Pad 2 [GND] of J6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(111.5000 mm, 133.5000 mm): Pad 2 [GND] of C60 on B.Cu
+    @(111.5000 mm, 131.5000 mm): Pad 2 [GND] of C58 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(112.9000 mm, 121.6250 mm): Pad 18 [GND] of U2 on B.Cu
+    @(111.2300 mm, 119.0000 mm): Pad 5 [GND] of U4 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(112.9600 mm, 123.0445 mm): PTH pad 21 [GND] of U2
+    @(112.9000 mm, 121.6250 mm): Pad 18 [GND] of U2 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(112.9600 mm, 123.0445 mm): PTH pad 21 [GND] of U2
+    @(112.9000 mm, 124.5000 mm): Pad 8 [GND] of U2 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(112.9600 mm, 123.0445 mm): PTH pad 21 [GND] of U2
+    @(115.1250 mm, 123.0000 mm): Pad 7 [GND] of U3 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(113.3500 mm, 124.5000 mm): Pad 7 [GND] of U2 on B.Cu
+    @(112.9000 mm, 124.5000 mm): Pad 8 [GND] of U2 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(113.3500 mm, 124.5000 mm): Pad 7 [GND] of U2 on B.Cu
+    @(114.9000 mm, 128.1500 mm): Pad A1 [GND] of J9 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(115.5000 mm, 113.5000 mm): Pad 3 [GND] of U7 on F.Cu
+    @(117.7250 mm, 113.5000 mm): Pad 3 [GND] of D1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(117.3125 mm, 124.1875 mm): Pad 12 [GND] of U3 on F.Cu
+    @(117.5000 mm, 124.5000 mm): Pad 2 [GND] of R25 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(117.3125 mm, 124.1875 mm): Pad 12 [GND] of U3 on F.Cu
+    @(115.1250 mm, 123.0000 mm): Pad 7 [GND] of U3 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(117.7250 mm, 112.8500 mm): Pad 2 [GND] of D1 on F.Cu
+    @(117.7250 mm, 112.2000 mm): Pad 1 [GND] of D1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(117.7250 mm, 112.8500 mm): Pad 2 [GND] of D1 on F.Cu
+    @(118.6125 mm, 112.8500 mm): Pad 7 [GND] of D1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(117.7250 mm, 113.5000 mm): Pad 3 [GND] of D1 on F.Cu
+    @(117.7250 mm, 112.8500 mm): Pad 2 [GND] of D1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(117.8125 mm, 119.3125 mm): Pad 28 [GND] of U3 on F.Cu
+    @(121.9000 mm, 121.0000 mm): Pad 4 [GND] of U1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(117.8125 mm, 119.3125 mm): Pad 28 [GND] of U3 on F.Cu
+    @(119.0000 mm, 115.0000 mm): Pad 2 [GND] of C41 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(119.0000 mm, 115.0000 mm): Pad 2 [GND] of C41 on F.Cu
+    @(117.7250 mm, 113.5000 mm): Pad 3 [GND] of D1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(120.0000 mm, 123.5000 mm): Pad 17 [GND] of U3 on F.Cu
+    @(120.2250 mm, 124.0000 mm): Pad 2 [GND] of C2031 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(120.0000 mm, 123.5000 mm): Pad 17 [GND] of U3 on F.Cu
+    @(117.5000 mm, 124.5000 mm): Pad 2 [GND] of R25 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(120.2250 mm, 124.0000 mm): Pad 2 [GND] of C2031 on B.Cu
+    @(121.7750 mm, 126.0000 mm): Pad 2 [GND] of C27 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(121.1000 mm, 128.1500 mm): Pad A12 [GND] of J9 on F.Cu
+    @(121.7750 mm, 126.0000 mm): Pad 2 [GND] of C27 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(121.1500 mm, 104.5000 mm): Pad 1 [GND] of J201 on F.Cu
+    @(122.5500 mm, 104.5000 mm): Pad 5 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(121.1500 mm, 104.5000 mm): Pad 1 [GND] of J201 on F.Cu
+    @(120.5000 mm, 108.2000 mm): Pad 2 [GND] of Y201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(121.9000 mm, 121.0000 mm): Pad 4 [GND] of U1 on B.Cu
+    @(120.0000 mm, 123.5000 mm): Pad 17 [GND] of U3 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.5000 mm, 97.5000 mm): Pad 2 [GND] of C64 on B.Cu
+    @(122.5000 mm, 99.5000 mm): Pad 2 [GND] of C65 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.5000 mm, 97.5000 mm): Pad 2 [GND] of C64 on B.Cu
+    @(116.7250 mm, 97.0000 mm): Pad 2 [GND] of C2052 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.5000 mm, 101.5000 mm): Pad 2 [GND] of C66 on B.Cu
+    @(122.5500 mm, 102.9600 mm): Pad 46 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.5000 mm, 101.5000 mm): Pad 2 [GND] of C66 on B.Cu
+    @(122.5000 mm, 99.5000 mm): Pad 2 [GND] of C65 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.5500 mm, 102.9600 mm): Pad 46 [GND] of J201 on F.Cu
+    @(123.6000 mm, 102.9600 mm): Pad 43 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.5500 mm, 102.9600 mm): Pad 46 [GND] of J201 on F.Cu
+    @(121.1500 mm, 102.9600 mm): Pad 50 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.5500 mm, 104.5000 mm): Pad 5 [GND] of J201 on F.Cu
+    @(122.9000 mm, 104.5000 mm): Pad 6 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.5500 mm, 104.5000 mm): Pad 5 [GND] of J201 on F.Cu
+    @(122.5500 mm, 102.9600 mm): Pad 46 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(123.9500 mm, 104.5000 mm): Pad 9 [GND] of J201 on F.Cu
+    @(122.9000 mm, 104.5000 mm): Pad 6 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(124.0000 mm, 111.0400 mm): Pad 2 [GND] of C45 on F.Cu
+    @(125.5000 mm, 111.0400 mm): Pad 2 [GND] of C42 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(124.3000 mm, 104.5000 mm): Pad 10 [GND] of J201 on F.Cu
+    @(123.9500 mm, 104.5000 mm): Pad 9 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(124.3000 mm, 104.5000 mm): Pad 10 [GND] of J201 on F.Cu
+    @(126.0500 mm, 104.5000 mm): Pad 15 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(124.6500 mm, 102.9600 mm): Pad 40 [GND] of J201 on F.Cu
+    @(125.0000 mm, 102.9600 mm): Pad 39 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(124.6500 mm, 102.9600 mm): Pad 40 [GND] of J201 on F.Cu
+    @(123.6000 mm, 102.9600 mm): Pad 43 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.0000 mm, 118.0400 mm): Pad 2 [GND] of C44 on F.Cu
+    @(121.9000 mm, 121.0000 mm): Pad 4 [GND] of U1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.5000 mm, 113.5400 mm): Pad 2 [GND] of C47 on F.Cu
+    @(127.0000 mm, 113.5400 mm): Pad 2 [GND] of C48 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.5000 mm, 113.5400 mm): Pad 2 [GND] of C47 on F.Cu
+    @(124.0000 mm, 113.5400 mm): Pad 2 [GND] of C46 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.5000 mm, 113.5400 mm): Pad 2 [GND] of C47 on F.Cu
+    @(125.5000 mm, 111.0400 mm): Pad 2 [GND] of C42 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.5000 mm, 113.5400 mm): Pad 2 [GND] of C47 on F.Cu
+    @(125.0000 mm, 118.0400 mm): Pad 2 [GND] of C44 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.0500 mm, 104.5000 mm): Pad 15 [GND] of J201 on F.Cu
+    @(126.4000 mm, 104.5000 mm): Pad 16 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.4000 mm, 104.5000 mm): Pad 16 [GND] of J201 on F.Cu
+    @(126.7500 mm, 102.9600 mm): Pad 34 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.7500 mm, 102.9600 mm): Pad 34 [GND] of J201 on F.Cu
+    @(127.1000 mm, 102.9600 mm): Pad 33 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.0000 mm, 111.0400 mm): Pad 2 [GND] of C43 on F.Cu
+    @(125.5000 mm, 111.0400 mm): Pad 2 [GND] of C42 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.0000 mm, 111.0400 mm): Pad 2 [GND] of C43 on F.Cu
+    @(129.0000 mm, 108.9000 mm): Pad 2 [GND] of R2012 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.1000 mm, 133.0000 mm): Pad 2 [GND] of U206 on B.Cu
+    @(130.5500 mm, 133.0000 mm): Pad 2 [GND] of U301 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.3200 mm, 127.5000 mm): Pad 2 [GND] of R2 on B.Cu
+    @(133.0000 mm, 127.5000 mm): Pad 2 [GND] of R303 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.3200 mm, 127.5000 mm): Pad 2 [GND] of R2 on B.Cu
+    @(127.1000 mm, 133.0000 mm): Pad 2 [GND] of U206 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.5000 mm, 104.5000 mm): Pad 22 [GND] of J201 on F.Cu
+    @(128.1500 mm, 104.5000 mm): Pad 21 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.8500 mm, 102.9600 mm): Pad 28 [GND] of J201 on F.Cu
+    @(128.5000 mm, 104.5000 mm): Pad 22 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.8500 mm, 102.9600 mm): Pad 28 [GND] of J201 on F.Cu
+    @(127.1000 mm, 102.9600 mm): Pad 33 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(129.2000 mm, 102.9600 mm): Pad 27 [GND] of J201 on F.Cu
+    @(128.8500 mm, 102.9600 mm): Pad 28 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(129.2000 mm, 102.9600 mm): Pad 27 [GND] of J201 on F.Cu
+    @(130.5000 mm, 97.5000 mm): Pad 2 [GND] of R20 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(130.9700 mm, 106.5000 mm): Pad 2 [GND] of C20130 on F.Cu
+    @(128.5000 mm, 104.5000 mm): Pad 22 [GND] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(130.9700 mm, 107.7000 mm): Pad 2 [GND] of C20131 on F.Cu
+    @(130.9700 mm, 108.9000 mm): Pad 2 [GND] of C20132 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(130.9700 mm, 107.7000 mm): Pad 2 [GND] of C20131 on F.Cu
+    @(130.9700 mm, 106.5000 mm): Pad 2 [GND] of C20130 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(130.9700 mm, 108.9000 mm): Pad 2 [GND] of C20132 on F.Cu
+    @(129.0000 mm, 108.9000 mm): Pad 2 [GND] of R2012 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(136.4800 mm, 128.5000 mm): Pad 2 [GND] of R302 on B.Cu
+    @(133.0000 mm, 127.5000 mm): Pad 2 [GND] of R303 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(136.5200 mm, 133.3500 mm): Pad 4 [GND] of MK1 on F.Cu
+    @(137.1900 mm, 132.5000 mm): Pad 5 [GND] of MK1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(137.1900 mm, 132.5000 mm): Pad 5 [GND] of MK1 on F.Cu
+    @(136.4800 mm, 128.5000 mm): Pad 2 [GND] of R302 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(137.4500 mm, 108.5000 mm): Pad 2 [GND] of C2042 on B.Cu
+    @(139.0000 mm, 106.7000 mm): Pad H1 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(137.4500 mm, 108.5000 mm): Pad 2 [GND] of C2042 on B.Cu
+    @(130.9700 mm, 108.9000 mm): Pad 2 [GND] of C20132 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(137.4500 mm, 110.5000 mm): Pad 2 [GND] of C2041 on B.Cu
+    @(137.4500 mm, 108.5000 mm): Pad 2 [GND] of C2042 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(137.4500 mm, 110.5000 mm): Pad 2 [GND] of C2041 on B.Cu
+    @(139.0000 mm, 112.5000 mm): Pad 2 [GND] of C21 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(138.4500 mm, 118.5000 mm): Pad 2 [GND] of C2062 on B.Cu
+    @(139.0000 mm, 112.5000 mm): Pad 2 [GND] of C21 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(138.4900 mm, 128.5000 mm): Pad 2 [GND] of R2062 on B.Cu
+    @(136.4800 mm, 128.5000 mm): Pad 2 [GND] of R302 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(138.4900 mm, 128.5000 mm): Pad 2 [GND] of R2062 on B.Cu
+    @(140.0000 mm, 122.5000 mm): Pad 2 [GND] of C26 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(139.0000 mm, 106.7000 mm): Pad H1 [GND] of U201 on F.Cu
+    @(140.9500 mm, 106.0500 mm): Pad G4 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(139.0000 mm, 112.5000 mm): Pad 2 [GND] of C21 on B.Cu
+    @(142.4800 mm, 112.0000 mm): Pad 2 [GND] of C2010 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(140.0000 mm, 122.5000 mm): Pad 2 [GND] of C26 on B.Cu
+    @(138.4500 mm, 118.5000 mm): Pad 2 [GND] of C2062 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(140.9500 mm, 104.1000 mm): Pad D4 [GND] of U201 on F.Cu
+    @(140.9500 mm, 104.7500 mm): Pad E4 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(140.9500 mm, 104.1000 mm): Pad D4 [GND] of U201 on F.Cu
+    @(138.5000 mm, 97.5000 mm): Pad 1 [GND] of TP7 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(140.9500 mm, 104.7500 mm): Pad E4 [GND] of U201 on F.Cu
+    @(141.6000 mm, 104.7500 mm): Pad E5 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(140.9500 mm, 105.4000 mm): Pad F4 [GND] of U201 on F.Cu
+    @(140.9500 mm, 104.7500 mm): Pad E4 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(140.9500 mm, 106.0500 mm): Pad G4 [GND] of U201 on F.Cu
+    @(140.9500 mm, 105.4000 mm): Pad F4 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(141.6000 mm, 104.1000 mm): Pad D5 [GND] of U201 on F.Cu
+    @(140.9500 mm, 104.1000 mm): Pad D4 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(141.6000 mm, 104.7500 mm): Pad E5 [GND] of U201 on F.Cu
+    @(141.6000 mm, 105.4000 mm): Pad F5 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(141.6000 mm, 105.4000 mm): Pad F5 [GND] of U201 on F.Cu
+    @(142.2500 mm, 105.4000 mm): Pad F6 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(141.6000 mm, 105.4000 mm): Pad F5 [GND] of U201 on F.Cu
+    @(141.6000 mm, 106.0500 mm): Pad G5 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(142.2500 mm, 104.1000 mm): Pad D6 [GND] of U201 on F.Cu
+    @(142.9000 mm, 104.1000 mm): Pad D7 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(142.2500 mm, 104.7500 mm): Pad E6 [GND] of U201 on F.Cu
+    @(142.2500 mm, 105.4000 mm): Pad F6 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(142.2500 mm, 105.4000 mm): Pad F6 [GND] of U201 on F.Cu
+    @(142.2500 mm, 106.0500 mm): Pad G6 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(142.9000 mm, 104.1000 mm): Pad D7 [GND] of U201 on F.Cu
+    @(142.9000 mm, 104.7500 mm): Pad E7 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(142.9000 mm, 104.7500 mm): Pad E7 [GND] of U201 on F.Cu
+    @(142.9000 mm, 105.4000 mm): Pad F7 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(142.9000 mm, 105.4000 mm): Pad F7 [GND] of U201 on F.Cu
+    @(142.9000 mm, 106.0500 mm): Pad G7 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(142.9000 mm, 106.0500 mm): Pad G7 [GND] of U201 on F.Cu
+    @(142.2500 mm, 106.0500 mm): Pad G6 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(142.9000 mm, 106.0500 mm): Pad G7 [GND] of U201 on F.Cu
+    @(144.8500 mm, 108.0000 mm): Pad K10 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(144.2000 mm, 103.4500 mm): Pad C9 [GND] of U201 on F.Cu
+    @(142.9000 mm, 104.1000 mm): Pad D7 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(144.8500 mm, 102.1500 mm): Pad A10 [GND] of U201 on F.Cu
+    @(144.2000 mm, 103.4500 mm): Pad C9 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(144.8500 mm, 108.0000 mm): Pad K10 [GND] of U201 on F.Cu
+    @(148.9000 mm, 110.0000 mm): Pad 2 [GND] of C2011 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(148.9000 mm, 110.0000 mm): Pad 2 [GND] of C2011 on F.Cu
+    @(148.9000 mm, 111.0000 mm): Pad 2 [GND] of C2013 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(148.9000 mm, 110.0000 mm): Pad 2 [GND] of C2011 on F.Cu
+    @(151.0000 mm, 110.0000 mm): Pad 2 [GND] of C2012 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(148.9000 mm, 111.0000 mm): Pad 2 [GND] of C2013 on F.Cu
+    @(148.9000 mm, 112.0000 mm): Pad 2 [GND] of C2015 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(150.9600 mm, 103.5000 mm): Pad 2 [GND] of C2017 on F.Cu
+    @(144.8500 mm, 102.1500 mm): Pad A10 [GND] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(151.0000 mm, 110.0000 mm): Pad 2 [GND] of C2012 on F.Cu
+    @(151.0000 mm, 111.0000 mm): Pad 2 [GND] of C2014 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(151.0000 mm, 111.0000 mm): Pad 2 [GND] of C2014 on F.Cu
+    @(151.0000 mm, 112.0000 mm): Pad 2 [GND] of C2016 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(151.0000 mm, 112.0000 mm): Pad 2 [GND] of C2016 on F.Cu
+    @(151.3250 mm, 114.5000 mm): Pad 2 [GND] of C20120 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(151.3250 mm, 114.5000 mm): Pad 2 [GND] of C20120 on F.Cu
+    @(152.7750 mm, 116.5000 mm): Pad 2 [GND] of C20121 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(157.1000 mm, 93.3000 mm): Pad 198 [GND] of Module1 on B.Cu
+    @(158.3000 mm, 93.3000 mm): Pad 192 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(157.1000 mm, 96.3800 mm): Pad 197 [GND] of Module1 on B.Cu
+    @(157.1000 mm, 93.3000 mm): Pad 198 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(157.1000 mm, 127.2200 mm): Pad 98 [GND] of Module1 on B.Cu
+    @(157.9000 mm, 123.6500 mm): Pad 5 [GND] of J10 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(157.1000 mm, 127.2200 mm): Pad 98 [GND] of Module1 on B.Cu
+    @(161.9000 mm, 127.2200 mm): Pad 74 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(158.3000 mm, 93.3000 mm): Pad 192 [GND] of Module1 on B.Cu
+    @(159.5000 mm, 93.3000 mm): Pad 186 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(158.3000 mm, 96.3800 mm): Pad 191 [GND] of Module1 on B.Cu
+    @(157.1000 mm, 96.3800 mm): Pad 197 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.0000 mm, 101.5000 mm): Pad 2 [GND] of C20122 on F.Cu
+    @(159.0000 mm, 103.5000 mm): Pad 2 [GND] of C20123 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.5000 mm, 93.3000 mm): Pad 186 [GND] of Module1 on B.Cu
+    @(160.7000 mm, 93.3000 mm): Pad 180 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.5000 mm, 96.3800 mm): Pad 185 [GND] of Module1 on B.Cu
+    @(160.7000 mm, 96.3800 mm): Pad 179 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.5000 mm, 96.3800 mm): Pad 185 [GND] of Module1 on B.Cu
+    @(158.3000 mm, 96.3800 mm): Pad 191 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.5000 mm, 96.3800 mm): Pad 185 [GND] of Module1 on B.Cu
+    @(159.0000 mm, 101.5000 mm): Pad 2 [GND] of C20122 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(160.7000 mm, 93.3000 mm): Pad 180 [GND] of Module1 on B.Cu
+    @(161.9000 mm, 93.3000 mm): Pad 174 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(161.9000 mm, 93.3000 mm): Pad 174 [GND] of Module1 on B.Cu
+    @(163.1000 mm, 93.3000 mm): Pad 168 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(161.9000 mm, 96.3800 mm): Pad 173 [GND] of Module1 on B.Cu
+    @(160.7000 mm, 96.3800 mm): Pad 179 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(163.1000 mm, 93.3000 mm): Pad 168 [GND] of Module1 on B.Cu
+    @(164.3000 mm, 93.3000 mm): Pad 162 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(163.1000 mm, 96.3800 mm): Pad 167 [GND] of Module1 on B.Cu
+    @(161.9000 mm, 96.3800 mm): Pad 173 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(163.1000 mm, 96.3800 mm): Pad 167 [GND] of Module1 on B.Cu
+    @(164.3000 mm, 96.3800 mm): Pad 161 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(163.5000 mm, 127.2200 mm): Pad 66 [GND] of Module1 on B.Cu
+    @(164.7000 mm, 127.2200 mm): Pad 60 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(163.5000 mm, 127.2200 mm): Pad 66 [GND] of Module1 on B.Cu
+    @(161.9000 mm, 127.2200 mm): Pad 74 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(163.5000 mm, 130.3000 mm): Pad 65 [GND] of Module1 on B.Cu
+    @(162.3000 mm, 130.3000 mm): Pad 71 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(164.3000 mm, 93.3000 mm): Pad 162 [GND] of Module1 on B.Cu
+    @(165.5000 mm, 93.3000 mm): Pad 156 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(164.3000 mm, 96.3800 mm): Pad 161 [GND] of Module1 on B.Cu
+    @(164.0000 mm, 99.0000 mm): Pad 2 [GND] of R265 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(164.7000 mm, 130.3000 mm): Pad 59 [GND] of Module1 on B.Cu
+    @(163.5000 mm, 130.3000 mm): Pad 65 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(165.5000 mm, 93.3000 mm): Pad 156 [GND] of Module1 on B.Cu
+    @(166.7000 mm, 93.3000 mm): Pad 150 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(165.5000 mm, 96.3800 mm): Pad 155 [GND] of Module1 on B.Cu
+    @(164.3000 mm, 96.3800 mm): Pad 161 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(165.9000 mm, 130.3000 mm): Pad 53 [GND] of Module1 on B.Cu
+    @(164.7000 mm, 130.3000 mm): Pad 59 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(165.9000 mm, 130.3000 mm): Pad 53 [GND] of Module1 on B.Cu
+    @(167.9000 mm, 130.3000 mm): Pad 43 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(166.3000 mm, 127.2200 mm): Pad 52 [GND] of Module1 on B.Cu
+    @(164.7000 mm, 127.2200 mm): Pad 60 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(167.5200 mm, 110.0000 mm): Pad 2 [GND] of C20231 on F.Cu
+    @(167.5000 mm, 108.5000 mm): Pad 2 [GND] of C20230 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(167.5200 mm, 111.5000 mm): Pad 2 [GND] of C20232 on F.Cu
+    @(167.5200 mm, 110.0000 mm): Pad 2 [GND] of C20231 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(167.9000 mm, 93.3000 mm): Pad 144 [GND] of Module1 on B.Cu
+    @(166.7000 mm, 93.3000 mm): Pad 150 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(167.9000 mm, 130.3000 mm): Pad 43 [GND] of Module1 on B.Cu
+    @(169.9000 mm, 130.3000 mm): Pad 33 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(168.3000 mm, 127.2200 mm): Pad 42 [GND] of Module1 on B.Cu
+    @(166.3000 mm, 127.2200 mm): Pad 52 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(168.3000 mm, 127.2200 mm): Pad 42 [GND] of Module1 on B.Cu
+    @(170.3000 mm, 127.2200 mm): Pad 32 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(168.3800 mm, 103.5000 mm): Pad 2 [GND] of C2021 on F.Cu
+    @(168.3800 mm, 105.0000 mm): Pad 2 [GND] of C2023 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(168.3800 mm, 103.5000 mm): Pad 2 [GND] of C2021 on F.Cu
+    @(170.4800 mm, 103.5000 mm): Pad 2 [GND] of C2022 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(168.3800 mm, 105.0000 mm): Pad 2 [GND] of C2023 on F.Cu
+    @(168.3800 mm, 106.5000 mm): Pad 2 [GND] of C2025 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(168.3800 mm, 106.5000 mm): Pad 2 [GND] of C2025 on F.Cu
+    @(167.5000 mm, 108.5000 mm): Pad 2 [GND] of C20230 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(168.9900 mm, 118.0000 mm): Pad 2 [GND] of R32 on F.Cu
+    @(169.0000 mm, 119.5000 mm): Pad 2 [GND] of R33 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(168.9900 mm, 118.0000 mm): Pad 2 [GND] of R32 on F.Cu
+    @(171.5000 mm, 116.5000 mm): Pad 2 [GND] of R30 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(169.1000 mm, 93.3000 mm): Pad 138 [GND] of Module1 on B.Cu
+    @(167.9000 mm, 93.3000 mm): Pad 144 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(169.1000 mm, 96.3800 mm): Pad 137 [GND] of Module1 on B.Cu
+    @(170.3000 mm, 96.3800 mm): Pad 131 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(169.9000 mm, 130.3000 mm): Pad 33 [GND] of Module1 on B.Cu
+    @(171.9000 mm, 130.3000 mm): Pad 23 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(170.3000 mm, 93.3000 mm): Pad 132 [GND] of Module1 on B.Cu
+    @(169.1000 mm, 93.3000 mm): Pad 138 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(170.3000 mm, 96.3800 mm): Pad 131 [GND] of Module1 on B.Cu
+    @(171.5000 mm, 96.3800 mm): Pad 125 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(170.3000 mm, 127.2200 mm): Pad 32 [GND] of Module1 on B.Cu
+    @(172.3000 mm, 127.2200 mm): Pad 22 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(170.4800 mm, 103.5000 mm): Pad 2 [GND] of C2022 on F.Cu
+    @(170.4800 mm, 105.0000 mm): Pad 2 [GND] of C2024 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(170.4800 mm, 103.5000 mm): Pad 2 [GND] of C2022 on F.Cu
+    @(172.0000 mm, 98.5000 mm): Pad 2 [GND] of C20221 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(170.4800 mm, 106.5000 mm): Pad 2 [GND] of C2026 on F.Cu
+    @(170.4800 mm, 105.0000 mm): Pad 2 [GND] of C2024 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(171.5000 mm, 93.3000 mm): Pad 126 [GND] of Module1 on B.Cu
+    @(170.3000 mm, 93.3000 mm): Pad 132 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(171.5000 mm, 96.3800 mm): Pad 125 [GND] of Module1 on B.Cu
+    @(172.0000 mm, 96.5000 mm): Pad 2 [GND] of C20220 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(171.5000 mm, 116.5000 mm): Pad 2 [GND] of R30 on F.Cu
+    @(167.5200 mm, 111.5000 mm): Pad 2 [GND] of C20232 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(171.9000 mm, 130.3000 mm): Pad 23 [GND] of Module1 on B.Cu
+    @(173.9000 mm, 130.3000 mm): Pad 13 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.0000 mm, 96.5000 mm): Pad 2 [GND] of C20220 on F.Cu
+    @(172.7000 mm, 96.3800 mm): Pad 119 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.0000 mm, 96.5000 mm): Pad 2 [GND] of C20220 on F.Cu
+    @(172.0000 mm, 98.5000 mm): Pad 2 [GND] of C20221 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.3000 mm, 127.2200 mm): Pad 22 [GND] of Module1 on B.Cu
+    @(172.3650 mm, 122.8700 mm): Pad 2 [GND] of C36 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.3650 mm, 121.5000 mm): Pad 2 [GND] of C31 on F.Cu
+    @(174.8650 mm, 121.5000 mm): Pad 2 [GND] of C32 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.3650 mm, 121.5000 mm): Pad 2 [GND] of C31 on F.Cu
+    @(169.0000 mm, 119.5000 mm): Pad 2 [GND] of R33 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.3650 mm, 122.8700 mm): Pad 2 [GND] of C36 on F.Cu
+    @(172.3650 mm, 121.5000 mm): Pad 2 [GND] of C31 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.7000 mm, 93.3000 mm): Pad 120 [GND] of Module1 on B.Cu
+    @(171.5000 mm, 93.3000 mm): Pad 126 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(172.7000 mm, 96.3800 mm): Pad 119 [GND] of Module1 on B.Cu
+    @(173.9000 mm, 96.3800 mm): Pad 113 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(173.9000 mm, 93.3000 mm): Pad 114 [GND] of Module1 on B.Cu
+    @(172.7000 mm, 93.3000 mm): Pad 120 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(173.9000 mm, 96.3800 mm): Pad 113 [GND] of Module1 on B.Cu
+    @(175.1000 mm, 96.3800 mm): Pad 107 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(173.9000 mm, 127.2200 mm): Pad 14 [GND] of Module1 on B.Cu
+    @(175.1000 mm, 127.2200 mm): Pad 8 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(173.9000 mm, 127.2200 mm): Pad 14 [GND] of Module1 on B.Cu
+    @(172.3000 mm, 127.2200 mm): Pad 22 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(173.9000 mm, 130.3000 mm): Pad 13 [GND] of Module1 on B.Cu
+    @(173.9000 mm, 127.2200 mm): Pad 14 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(174.8650 mm, 122.8700 mm): Pad 2 [GND] of C37 on F.Cu
+    @(174.8650 mm, 121.5000 mm): Pad 2 [GND] of C32 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(175.1000 mm, 93.3000 mm): Pad 108 [GND] of Module1 on B.Cu
+    @(173.9000 mm, 93.3000 mm): Pad 114 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(175.1000 mm, 93.3000 mm): Pad 108 [GND] of Module1 on B.Cu
+    @(176.3000 mm, 95.2000 mm): Via [GND] on F.Cu - B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(175.1000 mm, 96.3800 mm): Pad 107 [GND] of Module1 on B.Cu
+    @(176.3000 mm, 96.3800 mm): Track [GND] on B.Cu, length 1.1800 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(175.1000 mm, 127.2200 mm): Pad 8 [GND] of Module1 on B.Cu
+    @(176.3000 mm, 127.2200 mm): Pad 2 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(175.1000 mm, 130.3000 mm): Pad 7 [GND] of Module1 on B.Cu
+    @(173.9000 mm, 130.3000 mm): Pad 13 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(176.3000 mm, 130.3000 mm): Pad 1 [GND] of Module1 on B.Cu
+    @(175.1000 mm, 130.3000 mm): Pad 7 [GND] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(184.0950 mm, 103.0000 mm): Pad 2 [GND] of C20222 on F.Cu
+    @(185.2750 mm, 105.0000 mm): Pad 2 [GND] of C20223 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(184.8625 mm, 121.5000 mm): Pad 2 [GND] of U10 on F.Cu
+    @(183.5000 mm, 116.5000 mm): Pad 2 [GND] of C68 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(185.2750 mm, 105.0000 mm): Pad 2 [GND] of C20223 on F.Cu
+    @(188.2500 mm, 103.5000 mm): Pad K10 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(187.0000 mm, 99.5000 mm): Pad 2 [GND] of C2020 on F.Cu
+    @(188.2500 mm, 103.5000 mm): Pad K10 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(188.2500 mm, 109.3500 mm): Pad A10 [GND] of U202 on F.Cu
+    @(183.5000 mm, 116.5000 mm): Pad 2 [GND] of C68 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(188.9000 mm, 108.0500 mm): Pad C9 [GND] of U202 on F.Cu
+    @(190.2000 mm, 107.4000 mm): Pad D7 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(188.9000 mm, 108.0500 mm): Pad C9 [GND] of U202 on F.Cu
+    @(188.2500 mm, 109.3500 mm): Pad A10 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.2000 mm, 105.4500 mm): Pad G7 [GND] of U202 on F.Cu
+    @(190.8500 mm, 105.4500 mm): Pad G6 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.2000 mm, 105.4500 mm): Pad G7 [GND] of U202 on F.Cu
+    @(188.2500 mm, 103.5000 mm): Pad K10 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.2000 mm, 106.1000 mm): Pad F7 [GND] of U202 on F.Cu
+    @(190.2000 mm, 105.4500 mm): Pad G7 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.2000 mm, 106.1000 mm): Pad F7 [GND] of U202 on F.Cu
+    @(190.8500 mm, 106.1000 mm): Pad F6 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.2000 mm, 106.7500 mm): Pad E7 [GND] of U202 on F.Cu
+    @(190.2000 mm, 106.1000 mm): Pad F7 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.2000 mm, 106.7500 mm): Pad E7 [GND] of U202 on F.Cu
+    @(190.8500 mm, 106.7500 mm): Pad E6 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.2000 mm, 107.4000 mm): Pad D7 [GND] of U202 on F.Cu
+    @(190.2000 mm, 106.7500 mm): Pad E7 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.8500 mm, 105.4500 mm): Pad G6 [GND] of U202 on F.Cu
+    @(191.5000 mm, 105.4500 mm): Pad G5 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.8500 mm, 106.1000 mm): Pad F6 [GND] of U202 on F.Cu
+    @(191.5000 mm, 106.1000 mm): Pad F5 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.8500 mm, 106.7500 mm): Pad E6 [GND] of U202 on F.Cu
+    @(191.5000 mm, 106.7500 mm): Pad E5 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(190.8500 mm, 107.4000 mm): Pad D6 [GND] of U202 on F.Cu
+    @(190.2000 mm, 107.4000 mm): Pad D7 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(191.5000 mm, 106.1000 mm): Pad F5 [GND] of U202 on F.Cu
+    @(192.1500 mm, 106.1000 mm): Pad F4 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(191.5000 mm, 106.7500 mm): Pad E5 [GND] of U202 on F.Cu
+    @(192.1500 mm, 106.7500 mm): Pad E4 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(191.5000 mm, 107.4000 mm): Pad D5 [GND] of U202 on F.Cu
+    @(190.8500 mm, 107.4000 mm): Pad D6 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(192.1500 mm, 105.4500 mm): Pad G4 [GND] of U202 on F.Cu
+    @(194.1000 mm, 104.8000 mm): Pad H1 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(192.1500 mm, 106.1000 mm): Pad F4 [GND] of U202 on F.Cu
+    @(192.1500 mm, 105.4500 mm): Pad G4 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(192.1500 mm, 107.4000 mm): Pad D4 [GND] of U202 on F.Cu
+    @(191.5000 mm, 107.4000 mm): Pad D5 [GND] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(194.1000 mm, 104.8000 mm): Pad H1 [GND] of U202 on F.Cu
+    @(228.1250 mm, 101.0000 mm): Track [GND] on GND2, length 32.1250 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(197.9500 mm, 110.5000 mm): Pad 2 [GND] of C270 on B.Cu
+    @(197.9500 mm, 113.5000 mm): Pad 2 [GND] of C272 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(197.9500 mm, 115.0000 mm): Pad 2 [GND] of C273 on B.Cu
+    @(197.9500 mm, 113.5000 mm): Pad 2 [GND] of C272 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(197.9500 mm, 115.0000 mm): Pad 2 [GND] of C273 on B.Cu
+    @(199.6250 mm, 117.5500 mm): Pad 1 [GND] of U15 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(199.6250 mm, 117.5500 mm): Pad 1 [GND] of U15 on F.Cu
+    @(201.9625 mm, 117.5375 mm): Pad 7 [GND] of U208 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(199.9500 mm, 108.5000 mm): Pad 2 [GND] of C274 on B.Cu
+    @(197.9500 mm, 110.5000 mm): Pad 2 [GND] of C270 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(199.9500 mm, 108.5000 mm): Pad 2 [GND] of C274 on B.Cu
+    @(199.9800 mm, 104.9800 mm): Pad 2 [GND] of C2027 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(200.5500 mm, 99.5000 mm): Pad 2 [GND] of C7 on B.Cu
+    @(201.2750 mm, 101.4000 mm): Pad 2 [GND] of C8 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(200.6300 mm, 132.5000 mm): Pad 5 [GND] of MK2 on F.Cu
+    @(201.7400 mm, 133.6100 mm): Pad 11 [GND] of J301 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(200.7000 mm, 97.0000 mm): Pad 31 [GND] of U12 on B.Cu
+    @(201.5500 mm, 95.4500 mm): PTH pad 39 [GND] of U12
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(200.7000 mm, 97.0000 mm): Pad 31 [GND] of U12 on B.Cu
+    @(200.5500 mm, 99.5000 mm): Pad 2 [GND] of C7 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(201.2750 mm, 101.4000 mm): Pad 2 [GND] of C8 on B.Cu
+    @(204.0500 mm, 99.5000 mm): Pad 2 [GND] of C9 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(201.3000 mm, 131.6500 mm): Pad 4 [GND] of MK2 on F.Cu
+    @(200.6300 mm, 132.5000 mm): Pad 5 [GND] of MK2 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(201.5000 mm, 92.6000 mm): Pad 12 [GND] of U12 on B.Cu
+    @(200.7000 mm, 92.6000 mm): Pad 14 [GND] of U12 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(201.5500 mm, 94.1500 mm): PTH pad 39 [GND] of U12
+    @(201.5000 mm, 92.6000 mm): Pad 12 [GND] of U12 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(201.7400 mm, 133.6100 mm): Pad 11 [GND] of J301 on B.Cu
+    @(209.1250 mm, 131.4800 mm): Pad 2 [GND] of C38 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(201.9000 mm, 92.6000 mm): Pad 11 [GND] of U12 on B.Cu
+    @(201.5000 mm, 92.6000 mm): Pad 12 [GND] of U12 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(201.9625 mm, 117.5375 mm): Pad 7 [GND] of U208 on B.Cu
+    @(201.9625 mm, 117.0375 mm): Pad 8 [GND] of U208 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(201.9625 mm, 117.5375 mm): Pad 7 [GND] of U208 on B.Cu
+    @(203.0000 mm, 118.0750 mm): Pad 5 [GND] of U208 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(202.5200 mm, 112.5000 mm): Pad 2 [GND] of C290 on B.Cu
+    @(202.9000 mm, 112.8500 mm): Pad 11 [GND] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(202.9000 mm, 112.8500 mm): Pad 11 [GND] of U5 on F.Cu
+    @(203.3000 mm, 112.8500 mm): Pad 10 [GND] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(203.0000 mm, 118.0750 mm): Pad 5 [GND] of U208 on B.Cu
+    @(203.5000 mm, 118.0750 mm): Pad 4 [GND] of U208 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(203.0000 mm, 118.0750 mm): Pad 5 [GND] of U208 on B.Cu
+    @(201.5200 mm, 122.3600 mm): Pad 11 [GND] of J301 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(203.3000 mm, 114.5000 mm): Pad 5 [GND] of U5 on F.Cu
+    @(203.3000 mm, 112.8500 mm): Pad 10 [GND] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(203.5000 mm, 118.0750 mm): Pad 4 [GND] of U208 on B.Cu
+    @(204.0000 mm, 118.0750 mm): Pad 3 [GND] of U208 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(203.7500 mm, 116.2875 mm): Pad 25 [GND] of U208 on B.Cu
+    @(204.3000 mm, 117.5000 mm): Pad 4 [GND] of Y1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 104.0000 mm): Pad 1 [GND] of U209 on B.Cu
+    @(204.5000 mm, 105.2000 mm): Pad 2 [GND] of Y202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 104.0000 mm): Pad 1 [GND] of U209 on B.Cu
+    @(201.2750 mm, 101.4000 mm): Pad 2 [GND] of C8 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 118.0750 mm): Pad 3 [GND] of U208 on B.Cu
+    @(204.3000 mm, 117.5000 mm): Pad 4 [GND] of Y1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 118.0750 mm): Pad 3 [GND] of U208 on B.Cu
+    @(206.5000 mm, 119.2000 mm): Pad 2 [GND] of Y1 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.5000 mm, 105.2000 mm): Pad 2 [GND] of Y202 on F.Cu
+    @(208.6000 mm, 104.5000 mm): Pad 27 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.5000 mm, 114.5000 mm): Pad 17 [GND] of U208 on B.Cu
+    @(205.0000 mm, 114.5000 mm): Pad 18 [GND] of U208 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.5000 mm, 114.5000 mm): Pad 17 [GND] of U208 on B.Cu
+    @(203.3000 mm, 114.5000 mm): Pad 5 [GND] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(205.0000 mm, 114.5000 mm): Pad 18 [GND] of U208 on B.Cu
+    @(205.5375 mm, 116.0375 mm): Pad 21 [GND] of U208 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(205.5375 mm, 116.0375 mm): Pad 21 [GND] of U208 on B.Cu
+    @(203.7500 mm, 116.2875 mm): Pad 25 [GND] of U208 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(205.5375 mm, 116.0375 mm): Pad 21 [GND] of U208 on B.Cu
+    @(207.5000 mm, 115.5000 mm): Pad 2 [GND] of C291 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(207.5000 mm, 115.5000 mm): Pad 2 [GND] of C291 on B.Cu
+    @(209.9500 mm, 115.2500 mm): PTH pad 49 [GND] of U14
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(208.6000 mm, 104.5000 mm): Pad 27 [GND] of J202 on F.Cu
+    @(208.9500 mm, 104.5000 mm): Pad 28 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(208.7750 mm, 93.0000 mm): Pad 2 [GND] of C4 on B.Cu
+    @(208.7750 mm, 95.0000 mm): Pad 2 [GND] of C5 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.1250 mm, 128.9800 mm): Pad 2 [GND] of C33 on F.Cu
+    @(209.1250 mm, 131.4800 mm): Pad 2 [GND] of C38 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.1250 mm, 131.4800 mm): Pad 2 [GND] of C38 on F.Cu
+    @(210.6250 mm, 131.5000 mm): Pad 2 [GND] of C39 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.1650 mm, 126.6300 mm): Pad 2 [GND] of C28 on F.Cu
+    @(208.5000 mm, 123.5000 mm): Pad 2 [GND] of R35 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.3000 mm, 102.9600 mm): Pad 22 [GND] of J202 on F.Cu
+    @(208.9500 mm, 104.5000 mm): Pad 28 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.6500 mm, 102.9600 mm): Pad 21 [GND] of J202 on F.Cu
+    @(209.3000 mm, 102.9600 mm): Pad 22 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.6500 mm, 102.9600 mm): Pad 21 [GND] of J202 on F.Cu
+    @(211.4000 mm, 102.9600 mm): Pad 16 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(210.6250 mm, 126.6300 mm): Pad 2 [GND] of C29 on F.Cu
+    @(209.1650 mm, 126.6300 mm): Pad 2 [GND] of C28 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(210.6250 mm, 128.9800 mm): Pad 2 [GND] of C34 on F.Cu
+    @(209.1250 mm, 128.9800 mm): Pad 2 [GND] of C33 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(210.6250 mm, 128.9800 mm): Pad 2 [GND] of C34 on F.Cu
+    @(212.1250 mm, 128.9800 mm): Pad 2 [GND] of C35 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(210.6250 mm, 128.9800 mm): Pad 2 [GND] of C34 on F.Cu
+    @(210.6250 mm, 126.6300 mm): Pad 2 [GND] of C29 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(210.6250 mm, 131.5000 mm): Pad 2 [GND] of C39 on F.Cu
+    @(212.1250 mm, 131.5000 mm): Pad 2 [GND] of C40 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(211.0500 mm, 104.5000 mm): Pad 34 [GND] of J202 on F.Cu
+    @(210.7000 mm, 104.5000 mm): Pad 33 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(211.0500 mm, 104.5000 mm): Pad 34 [GND] of J202 on F.Cu
+    @(211.4000 mm, 102.9600 mm): Pad 16 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(211.1200 mm, 133.6250 mm): Pad 6 [GND] of J301 on B.Cu
+    @(210.6250 mm, 131.5000 mm): Pad 2 [GND] of C39 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(211.4000 mm, 102.9600 mm): Pad 16 [GND] of J202 on F.Cu
+    @(211.7500 mm, 102.9600 mm): Pad 15 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(211.7500 mm, 102.9600 mm): Pad 15 [GND] of J202 on F.Cu
+    @(213.5000 mm, 102.9600 mm): Pad 10 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(212.1250 mm, 126.6300 mm): Pad 2 [GND] of C30 on F.Cu
+    @(210.6250 mm, 126.6300 mm): Pad 2 [GND] of C29 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(212.1250 mm, 131.5000 mm): Pad 2 [GND] of C40 on F.Cu
+    @(214.4000 mm, 133.1250 mm): Pad 11 [GND] of J301 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(212.2750 mm, 93.0000 mm): Pad 2 [GND] of C1 on B.Cu
+    @(212.2750 mm, 95.0000 mm): Pad 2 [GND] of C2 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(212.2750 mm, 95.0000 mm): Pad 2 [GND] of C2 on B.Cu
+    @(212.2750 mm, 97.0000 mm): Pad 2 [GND] of C3 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(212.2750 mm, 95.0000 mm): Pad 2 [GND] of C2 on B.Cu
+    @(208.7750 mm, 95.0000 mm): Pad 2 [GND] of C5 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(213.1500 mm, 104.5000 mm): Pad 40 [GND] of J202 on F.Cu
+    @(212.8000 mm, 104.5000 mm): Pad 39 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(213.8500 mm, 102.9600 mm): Pad 9 [GND] of J202 on F.Cu
+    @(213.5000 mm, 102.9600 mm): Pad 10 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(213.8500 mm, 102.9600 mm): Pad 9 [GND] of J202 on F.Cu
+    @(214.9000 mm, 102.9600 mm): Pad 6 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(213.8500 mm, 117.8500 mm): PTH pad 49 [GND] of U14
+    @(214.4800 mm, 122.3600 mm): Pad 11 [GND] of J301 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(214.2000 mm, 104.5000 mm): Pad 43 [GND] of J202 on F.Cu
+    @(213.1500 mm, 104.5000 mm): Pad 40 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(214.4000 mm, 133.1250 mm): Pad 11 [GND] of J301 on B.Cu
+    @(215.7800 mm, 132.5800 mm): PTH pad SH [GND] of J8
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(214.9000 mm, 102.9600 mm): Pad 6 [GND] of J202 on F.Cu
+    @(215.2500 mm, 102.9600 mm): Pad 5 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(215.1500 mm, 116.5500 mm): PTH pad 49 [GND] of U14
+    @(216.0000 mm, 117.0000 mm): Pad 27 [GND] of U14 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(215.2500 mm, 102.9600 mm): Pad 5 [GND] of J202 on F.Cu
+    @(216.6500 mm, 102.9600 mm): Pad 1 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(215.2500 mm, 104.5000 mm): Pad 46 [GND] of J202 on F.Cu
+    @(214.2000 mm, 104.5000 mm): Pad 43 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(215.2500 mm, 104.5000 mm): Pad 46 [GND] of J202 on F.Cu
+    @(216.6500 mm, 104.5000 mm): Pad 50 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(215.3500 mm, 94.6750 mm): Pad 7 [GND] of U13 on B.Cu
+    @(212.2750 mm, 95.0000 mm): Pad 2 [GND] of C2 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(215.3500 mm, 94.6750 mm): Pad 7 [GND] of U13 on B.Cu
+    @(219.6500 mm, 94.6750 mm): Pad 2 [GND] of U13 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(216.0000 mm, 117.0000 mm): Pad 27 [GND] of U14 on F.Cu
+    @(220.0000 mm, 117.0000 mm): Pad 2 [GND] of C12 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(216.6500 mm, 104.5000 mm): Pad 50 [GND] of J202 on F.Cu
+    @(217.0000 mm, 103.5000 mm): Pad 2 [GND] of C14 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(217.0000 mm, 102.0000 mm): Pad 2 [GND] of C15 on B.Cu
+    @(216.6500 mm, 102.9600 mm): Pad 1 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(217.0000 mm, 103.5000 mm): Pad 2 [GND] of C14 on B.Cu
+    @(216.6500 mm, 102.9600 mm): Pad 1 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(217.0000 mm, 105.0000 mm): Pad 2 [GND] of C13 on B.Cu
+    @(216.6500 mm, 104.5000 mm): Pad 50 [GND] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(217.2200 mm, 128.4300 mm): Pad B12 [GND] of J8 on F.Cu
+    @(218.2000 mm, 127.9000 mm): Pad D2 [GND] of U207 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(217.2200 mm, 128.4300 mm): Pad B12 [GND] of J8 on F.Cu
+    @(216.1000 mm, 128.1300 mm): PTH pad SH [GND] of J8
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(217.8000 mm, 127.1000 mm): Pad B3 [GND] of U207 on B.Cu
+    @(217.4700 mm, 126.8200 mm): Pad A1 [GND] of J8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(218.2000 mm, 127.9000 mm): Pad D2 [GND] of U207 on B.Cu
+    @(217.8000 mm, 127.1000 mm): Pad B3 [GND] of U207 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(218.6000 mm, 128.3000 mm): Pad E1 [GND] of U207 on B.Cu
+    @(218.2000 mm, 127.9000 mm): Pad D2 [GND] of U207 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(219.6500 mm, 94.6750 mm): Pad 2 [GND] of U13 on B.Cu
+    @(219.6500 mm, 94.0250 mm): Pad 1 [GND] of U13 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(219.6500 mm, 95.3250 mm): Pad 3 [GND] of U13 on B.Cu
+    @(219.6500 mm, 94.6750 mm): Pad 2 [GND] of U13 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(219.6500 mm, 95.9750 mm): Pad 4 [GND] of U13 on B.Cu
+    @(219.6500 mm, 95.3250 mm): Pad 3 [GND] of U13 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(219.6500 mm, 95.9750 mm): Pad 4 [GND] of U13 on B.Cu
+    @(222.7750 mm, 96.9500 mm): Pad 21 [GND] of U210 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.0000 mm, 113.0000 mm): Pad 2 [GND] of C10 on B.Cu
+    @(220.8500 mm, 113.8500 mm): Pad 20 [GND] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.0000 mm, 115.0000 mm): Pad 2 [GND] of C11 on B.Cu
+    @(220.2000 mm, 115.0000 mm): Pad 2 [GND] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.0500 mm, 102.0000 mm): Pad 2 [GND] of C16 on B.Cu
+    @(217.0000 mm, 102.0000 mm): Pad 2 [GND] of C15 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.0500 mm, 103.5000 mm): Pad 2 [GND] of C24 on B.Cu
+    @(220.0500 mm, 102.0000 mm): Pad 2 [GND] of C16 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.2000 mm, 115.0000 mm): Pad 2 [GND] of U11 on F.Cu
+    @(220.8500 mm, 113.8500 mm): Pad 20 [GND] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.2000 mm, 115.0000 mm): Pad 2 [GND] of U11 on F.Cu
+    @(220.2000 mm, 116.5000 mm): Pad 5 [GND] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.2000 mm, 116.5000 mm): Pad 5 [GND] of U11 on F.Cu
+    @(220.0000 mm, 117.0000 mm): Pad 2 [GND] of C12 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.6125 mm, 121.8500 mm): Pad 7 [GND] of U16 on F.Cu
+    @(221.5000 mm, 121.8500 mm): Pad 5 [GND] of U16 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(221.5000 mm, 121.8500 mm): Pad 5 [GND] of U16 on F.Cu
+    @(221.6625 mm, 125.1250 mm): Pad 13 [GND] of U6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(221.6625 mm, 125.1250 mm): Pad 13 [GND] of U6 on B.Cu
+    @(222.0625 mm, 125.1250 mm): Pad 12 [GND] of U6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(221.8500 mm, 110.3800 mm): Pad 8 [GND] of U8 on F.Cu
+    @(221.8500 mm, 111.1500 mm): Pad 3 [GND] of U8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(221.8500 mm, 110.3800 mm): Pad 8 [GND] of U8 on F.Cu
+    @(225.0500 mm, 110.0000 mm): Pad 2 [GND] of C6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(221.8500 mm, 111.1500 mm): Pad 3 [GND] of U8 on F.Cu
+    @(220.0000 mm, 113.0000 mm): Pad 2 [GND] of C10 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(221.8625 mm, 121.5250 mm): Pad 27 [GND] of U6 on B.Cu
+    @(221.5000 mm, 121.8500 mm): Pad 5 [GND] of U16 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(222.0625 mm, 125.1250 mm): Pad 12 [GND] of U6 on B.Cu
+    @(222.4625 mm, 125.1250 mm): Pad 11 [GND] of U6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(222.5000 mm, 102.0000 mm): Pad 2 [GND] of C265 on F.Cu
+    @(220.0500 mm, 102.0000 mm): Pad 2 [GND] of C16 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(222.5000 mm, 102.0000 mm): Pad 2 [GND] of C265 on F.Cu
+    @(222.7750 mm, 96.9500 mm): Pad 21 [GND] of U210 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(222.5000 mm, 104.0000 mm): Pad 2 [GND] of C266 on F.Cu
+    @(222.5000 mm, 102.0000 mm): Pad 2 [GND] of C265 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(222.5000 mm, 106.0000 mm): Pad 2 [GND] of C267 on F.Cu
+    @(222.5000 mm, 104.0000 mm): Pad 2 [GND] of C266 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(222.8625 mm, 125.1250 mm): Pad 10 [GND] of U6 on B.Cu
+    @(222.4625 mm, 125.1250 mm): Pad 11 [GND] of U6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(222.8625 mm, 125.1250 mm): Pad 10 [GND] of U6 on B.Cu
+    @(222.9700 mm, 126.8200 mm): Pad A12 [GND] of J8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(222.9700 mm, 126.8200 mm): Pad A12 [GND] of J8 on F.Cu
+    @(224.4200 mm, 127.5300 mm): PTH pad SH [GND] of J8
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(223.0000 mm, 117.0000 mm): Pad 11 [GND] of U11 on F.Cu
+    @(220.2000 mm, 116.5000 mm): Pad 5 [GND] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(223.0000 mm, 117.0000 mm): Pad 11 [GND] of U11 on F.Cu
+    @(226.0800 mm, 115.1500 mm): Pad 3 [GND] of U9 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(224.1000 mm, 128.1300 mm): PTH pad SH [GND] of J8
+    @(222.7200 mm, 128.4300 mm): Pad B1 [GND] of J8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(225.5100 mm, 121.0000 mm): Pad 2 [GND] of R15 on F.Cu
+    @(221.8625 mm, 121.5250 mm): Pad 27 [GND] of U6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(226.8500 mm, 115.1500 mm): Pad 8 [GND] of U9 on F.Cu
+    @(226.0800 mm, 115.1500 mm): Pad 3 [GND] of U9 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(228.1250 mm, 101.0000 mm): Track [GND] on GND2, length 32.1250 mm
+    @(228.5000 mm, 102.1500 mm): Pad 12 [GND] of U210 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(228.5000 mm, 95.6500 mm): Pad 2 [GND] of U210 on B.Cu
+    @(228.1250 mm, 101.0000 mm): Track [GND] on GND2, length 32.1250 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(229.5200 mm, 122.5000 mm): Pad 2 [GND] of C281 on B.Cu
+    @(225.5100 mm, 121.0000 mm): Pad 2 [GND] of R15 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(229.5200 mm, 123.5000 mm): Pad 2 [GND] of C282 on B.Cu
+    @(229.5200 mm, 124.5000 mm): Pad 2 [GND] of C283 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(229.5200 mm, 123.5000 mm): Pad 2 [GND] of C282 on B.Cu
+    @(229.5200 mm, 122.5000 mm): Pad 2 [GND] of C281 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(229.5200 mm, 124.5000 mm): Pad 2 [GND] of C283 on B.Cu
+    @(231.4800 mm, 127.5000 mm): Pad 2 [GND] of R280 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(230.0000 mm, 102.8750 mm): Track [GND] on F.Cu, length 0.3182 mm
+    @(232.5100 mm, 104.0000 mm): Pad 2 [GND] of R9 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(230.4100 mm, 109.8000 mm): Pad 2 [GND] of R12 on B.Cu
+    @(232.9500 mm, 114.5000 mm): Pad 2 [GND] of C301 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(230.4100 mm, 109.8000 mm): Pad 2 [GND] of R12 on B.Cu
+    @(225.0500 mm, 110.0000 mm): Pad 2 [GND] of C6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(233.9800 mm, 127.5000 mm): Pad 2 [GND] of R281 on B.Cu
+    @(233.9800 mm, 129.0000 mm): Pad 2 [GND] of R283 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(233.9800 mm, 127.5000 mm): Pad 2 [GND] of R281 on B.Cu
+    @(231.4800 mm, 127.5000 mm): Pad 2 [GND] of R280 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(234.0100 mm, 130.5000 mm): Pad 2 [GND] of C280 on B.Cu
+    @(233.9800 mm, 129.0000 mm): Pad 2 [GND] of R283 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(234.4200 mm, 104.0000 mm): Pad 2 [GND] of R10 on B.Cu
+    @(234.4200 mm, 103.0000 mm): Pad 2 [GND] of R4 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(234.4200 mm, 104.0000 mm): Pad 2 [GND] of R10 on B.Cu
+    @(232.5100 mm, 104.0000 mm): Pad 2 [GND] of R9 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(115.1250 mm, 122.5000 mm): Pad 6 [+3V3] of U3 on F.Cu
+    @(116.8125 mm, 119.3125 mm): Pad 30 [+3V3] of U3 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(116.8125 mm, 119.3125 mm): Pad 30 [+3V3] of U3 on F.Cu
+    @(112.5000 mm, 117.5000 mm): Pad 1 [+3V3] of TP5 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(120.9500 mm, 97.5000 mm): Pad 1 [+3V3] of C64 on B.Cu
+    @(110.7300 mm, 99.2700 mm): Pad 1 [+3V3] of J6 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(121.9000 mm, 120.0000 mm): Pad 6 [+3V3] of U1 on B.Cu
+    @(116.8125 mm, 119.3125 mm): Pad 30 [+3V3] of U3 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(123.0000 mm, 120.0000 mm): Pad 1 [+3V3] of U1 on B.Cu
+    @(121.9000 mm, 120.0000 mm): Pad 6 [+3V3] of U1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(123.0000 mm, 120.0000 mm): Pad 1 [+3V3] of U1 on B.Cu
+    @(127.0000 mm, 112.0000 mm): Pad 1 [+3V3] of C43 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.9750 mm, 97.0000 mm): Pad 1 [+3V3] of R26 on B.Cu
+    @(120.9500 mm, 97.5000 mm): Pad 1 [+3V3] of C64 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.0000 mm, 112.0000 mm): Pad 1 [+3V3] of C43 on F.Cu
+    @(136.5000 mm, 111.5100 mm): Pad 1 [+3V3] of R16 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(129.4800 mm, 99.0000 mm): Pad 1 [+3V3] of R21 on B.Cu
+    @(126.9750 mm, 97.0000 mm): Pad 1 [+3V3] of R26 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(131.5000 mm, 130.7250 mm): Pad 5 [+3V3] of U301 on B.Cu
+    @(123.0000 mm, 120.0000 mm): Pad 1 [+3V3] of U1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(135.0000 mm, 101.5000 mm): Pad 1 [+3V3] of R22 on B.Cu
+    @(129.4800 mm, 99.0000 mm): Pad 1 [+3V3] of R21 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(137.5000 mm, 101.5000 mm): Pad 1 [+3V3] of R23 on B.Cu
+    @(135.0000 mm, 101.5000 mm): Pad 1 [+3V3] of R22 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(137.5000 mm, 101.5000 mm): Pad 1 [+3V3] of R23 on B.Cu
+    @(136.5000 mm, 111.5100 mm): Pad 1 [+3V3] of R16 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(137.5100 mm, 127.0000 mm): Pad 1 [+3V3] of R301 on B.Cu
+    @(131.5000 mm, 130.7250 mm): Pad 5 [+3V3] of U301 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(137.5100 mm, 127.0000 mm): Pad 1 [+3V3] of R301 on B.Cu
+    @(158.7000 mm, 123.6500 mm): Pad 4 [+3V3] of J10 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(138.0000 mm, 112.0000 mm): Pad 1 [+3V3] of R17 on F.Cu
+    @(136.5000 mm, 111.5100 mm): Pad 1 [+3V3] of R16 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.5000 mm, 127.2200 mm): Pad 86 [+3V3] of Module1 on B.Cu
+    @(159.9000 mm, 127.2200 mm): Pad 84 [+3V3] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.5000 mm, 127.2200 mm): Pad 86 [+3V3] of Module1 on B.Cu
+    @(158.7000 mm, 123.6500 mm): Pad 4 [+3V3] of J10 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(159.9000 mm, 127.2200 mm): Pad 84 [+3V3] of Module1 on B.Cu
+    @(161.1000 mm, 127.2200 mm): Pad 78 [+3V3] of Module1 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(164.0000 mm, 113.5000 mm): Track [+3V3] on GND2, length 12.5000 mm
+    @(167.9700 mm, 116.5000 mm): Pad 1 [+3V3] of R29 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(167.9700 mm, 116.5000 mm): Pad 1 [+3V3] of R29 on F.Cu
+    @(170.4800 mm, 118.0000 mm): Pad 1 [+3V3] of R31 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(170.4800 mm, 118.0000 mm): Pad 1 [+3V3] of R31 on F.Cu
+    @(170.4800 mm, 119.5000 mm): Pad 1 [+3V3] of R34 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(171.4050 mm, 122.8700 mm): Pad 1 [+3V3] of C36 on F.Cu
+    @(170.4800 mm, 119.5000 mm): Pad 1 [+3V3] of R34 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(173.9050 mm, 122.8700 mm): Pad 1 [+3V3] of C37 on F.Cu
+    @(171.4050 mm, 122.8700 mm): Pad 1 [+3V3] of C36 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(179.0000 mm, 113.5000 mm): Track [+3V3] on GND2, length 15.0000 mm
+    @(182.5400 mm, 116.5000 mm): Pad 1 [+3V3] of C68 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(180.7125 mm, 123.5000 mm): Pad 1 [+3V3] of FB1 on F.Cu
+    @(173.9050 mm, 122.8700 mm): Pad 1 [+3V3] of C37 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(200.9800 mm, 122.5000 mm): Pad 1 [+3V3] of R13 on F.Cu
+    @(201.5000 mm, 118.5000 mm): Pad 3 [+3V3] of U15 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(200.9800 mm, 124.0000 mm): Pad 1 [+3V3] of R14 on F.Cu
+    @(200.9800 mm, 122.5000 mm): Pad 1 [+3V3] of R13 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(202.5000 mm, 114.5000 mm): Pad 3 [+3V3] of U5 on F.Cu
+    @(202.5000 mm, 112.8500 mm): Pad 12 [+3V3] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(202.5000 mm, 114.5000 mm): Pad 3 [+3V3] of U5 on F.Cu
+    @(201.5000 mm, 118.5000 mm): Pad 3 [+3V3] of U15 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 104.6500 mm): Pad 2 [+3V3] of U209 on B.Cu
+    @(203.5000 mm, 97.0000 mm): Pad 38 [+3V3] of U12 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 104.6500 mm): Pad 2 [+3V3] of U209 on B.Cu
+    @(202.5000 mm, 112.8500 mm): Pad 12 [+3V3] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.1000 mm, 113.5000 mm): Pad 3 [+3V3] of U14 on F.Cu
+    @(202.5000 mm, 112.8500 mm): Pad 12 [+3V3] of U5 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.1000 mm, 118.0000 mm): Pad 12 [+3V3] of U14 on F.Cu
+    @(209.1000 mm, 113.5000 mm): Pad 3 [+3V3] of U14 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.1250 mm, 132.4400 mm): Pad 1 [+3V3] of C38 on F.Cu
+    @(210.6250 mm, 129.9400 mm): Pad 1 [+3V3] of C34 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(210.6250 mm, 129.9400 mm): Pad 1 [+3V3] of C34 on F.Cu
+    @(200.9800 mm, 124.0000 mm): Pad 1 [+3V3] of R14 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(210.7250 mm, 97.0000 mm): Pad 1 [+3V3] of C3 on B.Cu
+    @(203.5000 mm, 97.0000 mm): Pad 38 [+3V3] of U12 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(212.1250 mm, 129.9400 mm): Pad 1 [+3V3] of C35 on F.Cu
+    @(210.6250 mm, 129.9400 mm): Pad 1 [+3V3] of C34 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(212.1250 mm, 132.4600 mm): Pad 1 [+3V3] of C40 on F.Cu
+    @(212.1250 mm, 129.9400 mm): Pad 1 [+3V3] of C35 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(212.3000 mm, 111.8000 mm): Pad 43 [+3V3] of U14 on F.Cu
+    @(212.5000 mm, 110.0000 mm): Pad 2 [+3V3] of R290 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(212.3000 mm, 111.8000 mm): Pad 43 [+3V3] of U14 on F.Cu
+    @(209.1000 mm, 113.5000 mm): Pad 3 [+3V3] of U14 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(214.0000 mm, 110.0000 mm): Pad 2 [+3V3] of R291 on B.Cu
+    @(212.5000 mm, 110.0000 mm): Pad 2 [+3V3] of R290 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(214.0000 mm, 110.0000 mm): Pad 2 [+3V3] of R291 on B.Cu
+    @(216.0000 mm, 113.5000 mm): Pad 34 [+3V3] of U14 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(216.0000 mm, 118.0000 mm): Pad 25 [+3V3] of U14 on F.Cu
+    @(214.3000 mm, 118.7000 mm): Pad 22 [+3V3] of U14 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(216.0000 mm, 118.0000 mm): Pad 25 [+3V3] of U14 on F.Cu
+    @(216.0000 mm, 113.5000 mm): Pad 34 [+3V3] of U14 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.2000 mm, 117.0000 mm): Pad 6 [+3V3] of U11 on F.Cu
+    @(216.0000 mm, 118.0000 mm): Pad 25 [+3V3] of U14 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.2000 mm, 117.0000 mm): Pad 6 [+3V3] of U11 on F.Cu
+    @(235.1000 mm, 110.2750 mm): Track [+3V3] on F.Cu, length 2.9851 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(233.4900 mm, 98.0000 mm): Pad 1 [+3V3] of R8 on B.Cu
+    @(234.0000 mm, 107.5000 mm): Track [+3V3] on GND2, length 49.0000 mm
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(216.0000 mm, 115.0000 mm): Pad 31 [USB3_RX_P] of U14 on F.Cu
+    @(220.8500 mm, 117.6500 mm): Pad 7 [USB3_RX_P] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(216.0000 mm, 114.5000 mm): Pad 32 [USB3_RX_N] of U14 on F.Cu
+    @(221.3500 mm, 117.6500 mm): Pad 8 [USB3_RX_N] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(167.1000 mm, 127.2200 mm): Pad 48 [TYPEC_FLIP] of Module1 on B.Cu
+    @(221.8500 mm, 117.6500 mm): Pad 9 [TYPEC_FLIP] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(223.0000 mm, 116.5000 mm): Pad 12 [USB_C_RX2_N] of U11 on F.Cu
+    @(221.9700 mm, 126.8200 mm): Pad A10 [USB_C_RX2_N] of J8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(226.0800 mm, 116.1500 mm): Pad 5 [USB_C_RX2_N] of U9 on F.Cu
+    @(223.0000 mm, 116.5000 mm): Pad 12 [USB_C_RX2_N] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(223.0000 mm, 116.0000 mm): Pad 13 [USB_C_RX2_P] of U11 on F.Cu
+    @(222.4700 mm, 126.8200 mm): Pad A11 [USB_C_RX2_P] of J8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(226.0800 mm, 115.6500 mm): Pad 4 [USB_C_RX2_P] of U9 on F.Cu
+    @(223.0000 mm, 116.0000 mm): Pad 13 [USB_C_RX2_P] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(223.0000 mm, 115.5000 mm): Pad 14 [USB_C_TX2_N] of U11 on F.Cu
+    @(221.7200 mm, 128.4300 mm): Pad B3 [USB_C_TX2_N] of J8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(226.0800 mm, 114.6500 mm): Pad 2 [USB_C_TX2_N] of U9 on F.Cu
+    @(223.0000 mm, 115.5000 mm): Pad 14 [USB_C_TX2_N] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(223.0000 mm, 115.0000 mm): Pad 15 [USB_C_TX2_P] of U11 on F.Cu
+    @(222.2200 mm, 128.4300 mm): Pad B2 [USB_C_TX2_P] of J8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(226.0800 mm, 114.1500 mm): Pad 1 [USB_C_TX2_P] of U9 on F.Cu
+    @(223.0000 mm, 115.0000 mm): Pad 15 [USB_C_TX2_P] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(218.2200 mm, 128.4300 mm): Pad B10 [USB_C_RX1_N] of J8 on F.Cu
+    @(223.0000 mm, 114.5000 mm): Pad 16 [USB_C_RX1_N] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(223.0000 mm, 114.5000 mm): Pad 16 [USB_C_RX1_N] of U11 on F.Cu
+    @(222.8500 mm, 111.1500 mm): Pad 5 [USB_C_RX1_N] of U8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(217.7200 mm, 128.4300 mm): Pad B11 [USB_C_RX1_P] of J8 on F.Cu
+    @(222.3500 mm, 113.8500 mm): Pad 17 [USB_C_RX1_P] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(222.3500 mm, 113.8500 mm): Pad 17 [USB_C_RX1_P] of U11 on F.Cu
+    @(222.3500 mm, 111.1500 mm): Pad 4 [USB_C_RX1_P] of U8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(218.4700 mm, 126.8200 mm): Pad A3 [USB_C_TX1_N] of J8 on F.Cu
+    @(221.8500 mm, 113.8500 mm): Pad 18 [USB_C_TX1_N] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(221.8500 mm, 113.8500 mm): Pad 18 [USB_C_TX1_N] of U11 on F.Cu
+    @(221.3500 mm, 111.1500 mm): Pad 2 [USB_C_TX1_N] of U8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(217.9700 mm, 126.8200 mm): Pad A2 [USB_C_TX1_P] of J8 on F.Cu
+    @(221.3500 mm, 113.8500 mm): Pad 19 [USB_C_TX1_P] of U11 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(221.3500 mm, 113.8500 mm): Pad 19 [USB_C_TX1_P] of U11 on F.Cu
+    @(220.8500 mm, 111.1500 mm): Pad 1 [USB_C_TX1_P] of U8 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(129.0000 mm, 106.5000 mm): Pad 2 [L_3V3_HDMI] of R2010 on F.Cu
+    @(129.0000 mm, 107.7000 mm): Pad 2 [L_3V3_HDMI] of R2011 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(129.0000 mm, 106.5000 mm): Pad 2 [L_3V3_HDMI] of R2010 on F.Cu
+    @(139.0000 mm, 106.0500 mm): Pad G1 [L_3V3_HDMI] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(138.0750 mm, 114.5000 mm): Pad 2 [L_3V3_HDMI] of FB2011 on F.Cu
+    @(139.0000 mm, 106.0500 mm): Pad G1 [L_3V3_HDMI] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(139.0000 mm, 106.0500 mm): Pad G1 [L_3V3_HDMI] of U201 on F.Cu
+    @(139.0000 mm, 102.8000 mm): Pad B1 [L_3V3_HDMI] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(139.0000 mm, 106.0500 mm): Pad G1 [L_3V3_HDMI] of U201 on F.Cu
+    @(147.9400 mm, 110.0000 mm): Pad 1 [L_3V3_HDMI] of C2011 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(149.7750 mm, 114.5000 mm): Pad 1 [L_3V3_HDMI] of C20120 on F.Cu
+    @(147.9400 mm, 110.0000 mm): Pad 1 [L_3V3_HDMI] of C2011 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(165.1100 mm, 108.5000 mm): Pad 2 [R_3V3_HDMI] of R2020 on F.Cu
+    @(165.1100 mm, 110.0000 mm): Pad 2 [R_3V3_HDMI] of R2021 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(165.1100 mm, 108.5000 mm): Pad 2 [R_3V3_HDMI] of R2020 on F.Cu
+    @(167.4200 mm, 103.5000 mm): Pad 1 [R_3V3_HDMI] of C2021 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(170.4500 mm, 96.5000 mm): Pad 1 [R_3V3_HDMI] of C20220 on F.Cu
+    @(167.4200 mm, 103.5000 mm): Pad 1 [R_3V3_HDMI] of C2021 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(176.6875 mm, 101.0000 mm): Pad 2 [R_3V3_HDMI] of FB2021 on F.Cu
+    @(170.4500 mm, 96.5000 mm): Pad 1 [R_3V3_HDMI] of C20220 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(176.6875 mm, 101.0000 mm): Pad 2 [R_3V3_HDMI] of FB2021 on F.Cu
+    @(194.1000 mm, 105.4500 mm): Pad G1 [R_3V3_HDMI] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(194.1000 mm, 108.7000 mm): Pad B1 [R_3V3_HDMI] of U202 on F.Cu
+    @(194.1000 mm, 105.4500 mm): Pad G1 [R_3V3_HDMI] of U202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(105.8000 mm, 98.3125 mm): Pad 1 [DISPLAY_1V8] of C260 on F.Cu
+    @(119.0000 mm, 107.0000 mm): Pad 4 [DISPLAY_1V8] of Y201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(119.0000 mm, 107.0000 mm): Pad 4 [DISPLAY_1V8] of Y201 on F.Cu
+    @(121.5000 mm, 104.5000 mm): Pad 2 [DISPLAY_1V8] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(119.0000 mm, 108.2000 mm): Pad 1 [DISPLAY_1V8] of Y201 on F.Cu
+    @(119.0000 mm, 107.0000 mm): Pad 4 [DISPLAY_1V8] of Y201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(122.2000 mm, 104.5000 mm): Pad 4 [DISPLAY_1V8] of J201 on F.Cu
+    @(121.5000 mm, 104.5000 mm): Pad 2 [DISPLAY_1V8] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.0000 mm, 122.5000 mm): Pad 2 [DISPLAY_1V8] of L204 on B.Cu
+    @(136.5000 mm, 116.5000 mm): Pad 1 [DISPLAY_1V8] of FB2013 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.0000 mm, 122.5000 mm): Pad 2 [DISPLAY_1V8] of L204 on B.Cu
+    @(110.5000 mm, 125.5000 mm): Pad 1 [DISPLAY_1V8] of R2041 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.0000 mm, 122.5000 mm): Pad 2 [DISPLAY_1V8] of L204 on B.Cu
+    @(119.0000 mm, 108.2000 mm): Pad 1 [DISPLAY_1V8] of Y201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(139.0000 mm, 108.5000 mm): Pad 1 [DISPLAY_1V8] of C2042 on B.Cu
+    @(141.5200 mm, 112.0000 mm): Pad 1 [DISPLAY_1V8] of C2010 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(141.5200 mm, 112.0000 mm): Pad 1 [DISPLAY_1V8] of C2010 on F.Cu
+    @(136.5000 mm, 116.5000 mm): Pad 1 [DISPLAY_1V8] of FB2013 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(146.0000 mm, 100.0000 mm): Pad 1 [DISPLAY_1V8] of TP203 on F.Cu
+    @(139.0000 mm, 108.5000 mm): Pad 1 [DISPLAY_1V8] of C2042 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(146.0000 mm, 100.0000 mm): Pad 1 [DISPLAY_1V8] of TP203 on F.Cu
+    @(165.1100 mm, 111.5000 mm): Pad 2 [DISPLAY_1V8] of R2022 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(165.1100 mm, 111.5000 mm): Pad 2 [DISPLAY_1V8] of R2022 on F.Cu
+    @(175.1125 mm, 102.7125 mm): Pad 1 [DISPLAY_1V8] of FB2023 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(175.1125 mm, 102.7125 mm): Pad 1 [DISPLAY_1V8] of FB2023 on F.Cu
+    @(186.0400 mm, 99.5000 mm): Pad 1 [DISPLAY_1V8] of C2020 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(186.0400 mm, 99.5000 mm): Pad 1 [DISPLAY_1V8] of C2020 on F.Cu
+    @(203.0000 mm, 104.0000 mm): Pad 4 [DISPLAY_1V8] of Y202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(203.0000 mm, 104.0000 mm): Pad 4 [DISPLAY_1V8] of Y202 on F.Cu
+    @(203.0000 mm, 105.2000 mm): Pad 1 [DISPLAY_1V8] of Y202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(203.4800 mm, 112.5000 mm): Pad 1 [DISPLAY_1V8] of C290 on B.Cu
+    @(208.4600 mm, 115.5000 mm): Pad 1 [DISPLAY_1V8] of C291 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 105.3000 mm): Pad 3 [DISPLAY_1V8] of U209 on B.Cu
+    @(204.0000 mm, 105.9500 mm): Pad 4 [DISPLAY_1V8] of U209 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 105.3000 mm): Pad 3 [DISPLAY_1V8] of U209 on B.Cu
+    @(203.0000 mm, 105.2000 mm): Pad 1 [DISPLAY_1V8] of Y202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 105.9500 mm): Pad 4 [DISPLAY_1V8] of U209 on B.Cu
+    @(209.0000 mm, 107.9900 mm): Pad 2 [DISPLAY_1V8] of R294 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(204.0000 mm, 105.9500 mm): Pad 4 [DISPLAY_1V8] of U209 on B.Cu
+    @(203.4800 mm, 112.5000 mm): Pad 1 [DISPLAY_1V8] of C290 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(209.0000 mm, 107.9900 mm): Pad 2 [DISPLAY_1V8] of R294 on B.Cu
+    @(210.5000 mm, 108.0000 mm): Pad 2 [DISPLAY_1V8] of R295 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(210.5000 mm, 108.0000 mm): Pad 2 [DISPLAY_1V8] of R295 on B.Cu
+    @(215.5000 mm, 110.0000 mm): Pad 2 [DISPLAY_1V8] of R292 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(215.6000 mm, 102.9600 mm): Pad 4 [DISPLAY_1V8] of J202 on F.Cu
+    @(215.5000 mm, 110.0000 mm): Pad 2 [DISPLAY_1V8] of R292 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(216.3000 mm, 102.9600 mm): Pad 2 [DISPLAY_1V8] of J202 on F.Cu
+    @(215.6000 mm, 102.9600 mm): Pad 4 [DISPLAY_1V8] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(216.3000 mm, 102.9600 mm): Pad 2 [DISPLAY_1V8] of J202 on F.Cu
+    @(220.9500 mm, 102.0000 mm): Pad 1 [DISPLAY_1V8] of C265 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(217.0000 mm, 110.0000 mm): Pad 2 [DISPLAY_1V8] of R293 on B.Cu
+    @(215.5000 mm, 110.0000 mm): Pad 2 [DISPLAY_1V8] of R292 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.9500 mm, 102.0000 mm): Pad 1 [DISPLAY_1V8] of C265 on F.Cu
+    @(222.7750 mm, 95.0000 mm): Pad 24 [DISPLAY_1V8] of U210 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(105.8000 mm, 100.3125 mm): Pad 1 [LCD_VSP] of C261 on F.Cu
+    @(121.8500 mm, 104.5000 mm): Pad 3 [LCD_VSP] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(121.8500 mm, 104.5000 mm): Pad 3 [LCD_VSP] of J201 on F.Cu
+    @(163.5000 mm, 105.5000 mm): Pad 1 [LCD_VSP] of TP206 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(163.5000 mm, 105.5000 mm): Pad 1 [LCD_VSP] of TP206 on F.Cu
+    @(199.5000 mm, 113.5000 mm): Pad 1 [LCD_VSP] of C272 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(199.5000 mm, 113.5000 mm): Pad 1 [LCD_VSP] of C272 on B.Cu
+    @(215.9500 mm, 102.9600 mm): Pad 3 [LCD_VSP] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(199.5000 mm, 113.5000 mm): Pad 1 [LCD_VSP] of C272 on B.Cu
+    @(217.8000 mm, 128.3000 mm): Pad E3 [LCD_VSP] of U207 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.9500 mm, 104.0000 mm): Pad 1 [LCD_VSP] of C266 on F.Cu
+    @(215.9500 mm, 102.9600 mm): Pad 3 [LCD_VSP] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(105.8000 mm, 102.3125 mm): Pad 1 [LCD_VSN] of C262 on F.Cu
+    @(123.2500 mm, 104.5000 mm): Pad 7 [LCD_VSN] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(160.5000 mm, 99.5000 mm): Pad 1 [LCD_VSN] of TP207 on F.Cu
+    @(123.2500 mm, 104.5000 mm): Pad 7 [LCD_VSN] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(199.5000 mm, 115.0000 mm): Pad 1 [LCD_VSN] of C273 on B.Cu
+    @(214.5500 mm, 102.9600 mm): Pad 7 [LCD_VSN] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(199.5000 mm, 115.0000 mm): Pad 1 [LCD_VSN] of C273 on B.Cu
+    @(160.5000 mm, 99.5000 mm): Pad 1 [LCD_VSN] of TP207 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(218.2000 mm, 126.7000 mm): Pad A2 [LCD_VSN] of U207 on B.Cu
+    @(220.9500 mm, 106.0000 mm): Pad 1 [LCD_VSN] of C267 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(220.9500 mm, 106.0000 mm): Pad 1 [LCD_VSN] of C267 on F.Cu
+    @(214.5500 mm, 102.9600 mm): Pad 7 [LCD_VSN] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(117.0000 mm, 104.5000 mm): Pad 1 [L_S1_TEST] of TP260 on F.Cu
+    @(123.6000 mm, 104.5000 mm): Pad 8 [L_S1_TEST] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(124.6500 mm, 104.5000 mm): Pad 11 [L_DSIA_D0_N] of J201 on F.Cu
+    @(144.2000 mm, 106.7000 mm): Pad H9 [L_DSIA_D0_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.0000 mm, 104.5000 mm): Pad 12 [L_DSIA_D3_N] of J201 on F.Cu
+    @(144.2000 mm, 104.1000 mm): Pad D9 [L_DSIA_D3_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.3500 mm, 104.5000 mm): Pad 13 [L_DSIA_D0_P] of J201 on F.Cu
+    @(144.8500 mm, 106.7000 mm): Pad H10 [L_DSIA_D0_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.7000 mm, 104.5000 mm): Pad 14 [L_DSIA_D3_P] of J201 on F.Cu
+    @(144.8500 mm, 104.1000 mm): Pad D10 [L_DSIA_D3_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.7500 mm, 104.5000 mm): Pad 17 [L_DSIA_D1_N] of J201 on F.Cu
+    @(144.2000 mm, 106.0500 mm): Pad G9 [L_DSIA_D1_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.1000 mm, 104.5000 mm): Pad 18 [L_DSIA_CLK_N] of J201 on F.Cu
+    @(144.2000 mm, 105.4000 mm): Pad F9 [L_DSIA_CLK_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.4500 mm, 104.5000 mm): Pad 19 [L_DSIA_D1_P] of J201 on F.Cu
+    @(144.8500 mm, 106.0500 mm): Pad G10 [L_DSIA_D1_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.8000 mm, 104.5000 mm): Pad 20 [L_DSIA_CLK_P] of J201 on F.Cu
+    @(144.8500 mm, 105.4000 mm): Pad F10 [L_DSIA_CLK_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.8500 mm, 104.5000 mm): Pad 23 [L_DSIB_D2_P] of J201 on F.Cu
+    @(142.2500 mm, 102.1500 mm): Pad A6 [L_DSIB_D2_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(129.2000 mm, 104.5000 mm): Pad 24 [L_DSIA_D2_N] of J201 on F.Cu
+    @(144.2000 mm, 104.7500 mm): Pad E9 [L_DSIA_D2_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(129.5500 mm, 104.5000 mm): Pad 25 [L_DSIB_D2_N] of J201 on F.Cu
+    @(142.2500 mm, 102.8000 mm): Pad B6 [L_DSIB_D2_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(129.5500 mm, 102.9600 mm): Pad 26 [L_DSIA_D2_P] of J201 on F.Cu
+    @(144.8500 mm, 104.7500 mm): Pad E10 [L_DSIA_D2_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.5000 mm, 102.9600 mm): Pad 29 [L_DSIB_CLK_P] of J201 on F.Cu
+    @(142.9000 mm, 102.1500 mm): Pad A7 [L_DSIB_CLK_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(128.1500 mm, 102.9600 mm): Pad 30 [L_DSIB_D1_P] of J201 on F.Cu
+    @(143.5500 mm, 102.1500 mm): Pad A8 [L_DSIB_D1_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.8000 mm, 102.9600 mm): Pad 31 [L_DSIB_CLK_N] of J201 on F.Cu
+    @(142.9000 mm, 102.8000 mm): Pad B7 [L_DSIB_CLK_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(127.4500 mm, 102.9600 mm): Pad 32 [L_DSIB_D1_N] of J201 on F.Cu
+    @(143.5500 mm, 102.8000 mm): Pad B8 [L_DSIB_D1_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.4000 mm, 102.9600 mm): Pad 35 [L_DSIB_D3_P] of J201 on F.Cu
+    @(141.6000 mm, 102.1500 mm): Pad A5 [L_DSIB_D3_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(126.0500 mm, 102.9600 mm): Pad 36 [L_DSIB_D0_P] of J201 on F.Cu
+    @(144.2000 mm, 102.1500 mm): Pad A9 [L_DSIB_D0_P] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.7000 mm, 102.9600 mm): Pad 37 [L_DSIB_D3_N] of J201 on F.Cu
+    @(141.6000 mm, 102.8000 mm): Pad B5 [L_DSIB_D3_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(125.3500 mm, 102.9600 mm): Pad 38 [L_DSIB_D0_N] of J201 on F.Cu
+    @(144.2000 mm, 102.8000 mm): Pad B9 [L_DSIB_D0_N] of U201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(213.5000 mm, 104.5000 mm): Pad 41 [LED_BOOST] of J202 on F.Cu
+    @(124.3000 mm, 102.9600 mm): Pad 41 [LED_BOOST] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(230.4800 mm, 123.5000 mm): Pad 1 [LED_BOOST] of C282 on B.Cu
+    @(213.5000 mm, 104.5000 mm): Pad 41 [LED_BOOST] of J202 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(230.4800 mm, 124.5000 mm): Pad 1 [LED_BOOST] of C283 on B.Cu
+    @(230.4800 mm, 123.5000 mm): Pad 1 [LED_BOOST] of C282 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(230.4800 mm, 124.5000 mm): Pad 1 [LED_BOOST] of C283 on B.Cu
+    @(233.5000 mm, 124.6500 mm): Pad 1 [LED_BOOST] of D201 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(232.5000 mm, 129.0000 mm): Pad 1 [LED_BOOST] of R282 on B.Cu
+    @(233.5000 mm, 124.6500 mm): Pad 1 [LED_BOOST] of D201 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(110.4800 mm, 101.0000 mm): Pad 1 [L_LCD_RESET] of R260 on F.Cu
+    @(123.9500 mm, 102.9600 mm): Pad 42 [L_LCD_RESET] of J201 on F.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(123.9500 mm, 102.9600 mm): Pad 42 [L_LCD_RESET] of J201 on F.Cu
+    @(228.5000 mm, 99.5500 mm): Pad 8 [L_LCD_RESET] of U210 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(123.2500 mm, 102.9600 mm): Pad 44 [L_LCD_TE] of J201 on F.Cu
+    @(124.5000 mm, 107.5000 mm): Pad 1 [L_LCD_TE] of TP261 on F.Cu
+
+** Found 0 Footprint errors **
+
+** Ignored checks **
+    - Footprint has no courtyard defined
+    - Track endpoint not centered on via
+    - Tuning profile track geometries
+    - Footprint doesn't match symbol's footprint filters
+    - Footprint component type doesn't match footprint pads
+
+** End of Report **

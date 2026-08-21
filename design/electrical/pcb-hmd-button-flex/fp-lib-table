@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "Stearlight_Button_Flex")(type "KiCad")(uri "${KIPRJMOD}/libraries/footprints/Stearlight_Button_Flex.pretty")(options "")(descr "Stearlight button flex local footprints"))
+)

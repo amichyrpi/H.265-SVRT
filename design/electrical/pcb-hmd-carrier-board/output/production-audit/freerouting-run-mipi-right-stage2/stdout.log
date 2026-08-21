@@ -1,0 +1,14 @@
+2026-08-15 22:46:06.922 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 22:46:08.461 INFO   [DF0440\62C6A6] Loading board file 'pcb-hmd-carrier-board2-mipi-right-stage2.dsn'...
+2026-08-15 22:46:08.750 WARN   DSN file 'pcb-hmd-carrier-board2-mipi-right-stage2.dsn' was loaded with 3 warning(s).
+2026-08-15 22:46:08.808 INFO   [DF0440\62C6A6] Job 'DF0440\62C6A6' started at 2026-08-15T20:46:08.808784200Z.
+2026-08-15 22:46:09.115 INFO   [DF0440\62C6A6] Auto-routing stage started on board 'a33773551e922d61aaf7b39f36c82b79' for 26 unrouted items.
+2026-08-15 22:51:03.708 INFO   [DF0440\62C6A6] Auto-routing pass #1 on board 'a33773551e922d61aaf7b39f36c82b79' was completed in 285.93 seconds with the score of 0.00 (17 unrouted and 274 violations), using 287.48 CPU seconds and the job allocated 352.73 GB of memory so far.
+2026-08-15 22:54:23.477 INFO   [DF0440\62C6A6] Auto-routing pass #2 on board '8f5ef8fc08b5cc1bc1768739078613da' was completed in 191.38 seconds with the score of 0.00 (17 unrouted and 274 violations), using 484.22 CPU seconds and the job allocated 618.47 GB of memory so far.
+2026-08-15 22:57:57.913 INFO   [DF0440\62C6A6] Auto-routing pass #3 on board 'ce42fcb024db4c8b6cf65f3281c5e466' was completed in 206.63 seconds with the score of 0.00 (16 unrouted and 274 violations), using 695.77 CPU seconds and the job allocated 898.50 GB of memory so far.
+2026-08-15 22:58:05.962 INFO   [DF0440\62C6A6] Auto-routing stage completed: started with 26 unrouted nets, completed in 713.07 seconds, final score: 0.00 (16 unrouted and 274 violations), using 703.66 total CPU seconds, 907.90 GB total allocated, and 597.7 MB peak heap usage.
+2026-08-15 22:58:10.023 INFO   [DF0440\62C6A6] Optimization stage started on board '63e0a4085efc75507d63afeae11755f5' with score 0.00 (16 unrouted and 274 violations).
+2026-08-15 22:58:29.177 INFO   [DF0440\62C6A6] Optimizer pass #1 on board '29c095c004f74d3764ac40c5fb7e260d' was completed in 7.06 seconds with the score of 0.00 (16 unrouted and 274 violations).
+2026-08-15 22:58:33.270 INFO   [DF0440\62C6A6] Stopping optimizer because the improvement in this pass (0.0000%) is below the threshold (1.00%).
+2026-08-15 22:58:37.330 INFO   [DF0440\62C6A6] Optimization stage completed: started with score 0.00 (16 unrouted and 274 violations), completed in 23.25 seconds, final score: 0.00 (16 unrouted and 274 violations), using 22.95 total CPU seconds, 41.47 GB total allocated, and 466.6 MB peak heap usage.
+2026-08-15 22:58:37.332 INFO   [DF0440\62C6A6] Job 'DF0440\62C6A6' finished with state: COMPLETED (elapsed: 12 minutes 28.52 seconds, finished at UTC: 2026-08-15T20:58:37.330889400Z).

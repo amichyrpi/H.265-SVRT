@@ -1,0 +1,513 @@
+2026-08-15 21:49:47.481 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 21:49:47.487 DEBUG  [startup] user-data path : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-only-clean  (source: CLI argument --user_data_path)
+2026-08-15 21:49:47.487 DEBUG  [startup] log file       : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-only-clean\freerouting.log
+2026-08-15 21:49:47.489 DEBUG  No freerouting.json found at 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-only-clean\freerouting.json' — will create one with default settings.
+2026-08-15 21:49:47.545 DEBUG  Default settings saved to 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-only-clean\freerouting.json'.
+2026-08-15 21:49:47.546 DEBUG  Version: 2.3.0,2026-08-07
+2026-08-15 21:49:47.546 DEBUG  Command line arguments: '-de C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-high-speed-only.dsn -do C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-high-speed-only-clean.ses -mp 1 -mt 0 --router.fanout.enabled=false --router.optimizer.enabled=false --router.layers.routable=true,false,true,true,false,true --router.layers.preferred_direction_horizontal=true,false,false,true,false,true --api_server.enabled=false --gui.enabled=false --logging.console.level=INFO --user_data_path=C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-only-clean -l en'
+2026-08-15 21:49:47.546 DEBUG  Architecture: Windows 11,amd64,10.0
+2026-08-15 21:49:47.546 DEBUG  Java: 25.0.4,Eclipse Adoptium
+2026-08-15 21:49:47.546 DEBUG  System Language: fr,fr_FR
+2026-08-15 21:49:47.547 DEBUG  Hardware: 12 CPU cores,4044 MB RAM
+2026-08-15 21:49:47.547 DEBUG  UTC Time: 2026-08-15T19:49:47.545990900Z
+2026-08-15 21:49:47.549 DEBUG  GUI Language: en
+2026-08-15 21:49:47.549 DEBUG  Host: N/A
+2026-08-15 21:49:48.607 DEBUG  Loaded router settings from: C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-high-speed-only-clean\freerouting.json
+2026-08-15 21:49:48.608 DEBUG  Applied CLI router setting: router.max_passes = 1
+2026-08-15 21:49:48.608 DEBUG  Applied CLI router setting: router.max_threads = 0
+2026-08-15 21:49:48.608 DEBUG  Applied CLI router setting: router.fanout.enabled = false
+2026-08-15 21:49:48.608 DEBUG  Applied CLI router setting: router.optimizer.enabled = false
+2026-08-15 21:49:48.608 DEBUG  Applied CLI router setting: router.layers.routable = true,false,true,true,false,true
+2026-08-15 21:49:48.608 DEBUG  Applied CLI router setting: router.layers.preferred_direction_horizontal = true,false,false,true,false,true
+2026-08-15 21:49:48.609 DEBUG  Applied CLI router setting: router.enabled = true (implicit from -de/-do batch mode)
+2026-08-15 21:49:48.609 DEBUG  No router settings found in environment variables
+2026-08-15 21:49:48.678 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 21:49:48.683 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 21:49:48.685 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 21:49:48.779 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-high-speed-only.dsn (6 layers)
+2026-08-15 21:49:48.790 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 21:49:48.791 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 21:49:48.791 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 21:49:48.819 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-high-speed-only.dsn (6 layers)
+2026-08-15 21:49:48.821 DEBUG  Merging settings from 5 sources:
+2026-08-15 21:49:48.822 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 21:49:48.824 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 21:49:48.824 DEBUG    - DSN file: pcb-hmd-carrier-board2-high-speed-only.dsn (priority 20): 8 fields changed
+2026-08-15 21:49:48.825 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 21:49:48.825 DEBUG    - CLI Arguments (priority 60): 10 fields changed
+2026-08-15 21:49:48.825 DEBUG  Settings merged successfully from 5 source(s)
+2026-08-15 21:49:48.909 DEBUG  No new version available. Current version is up to date: v2.3.0
+2026-08-15 21:49:49.035 INFO   [E14EA0\A6E915] Loading board file 'pcb-hmd-carrier-board2-high-speed-only.dsn'...
+2026-08-15 21:49:49.043 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 21:49:49.043 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 21:49:49.043 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 21:49:49.178 INFO   Layer 'GND1' has been automatically configured as a dedicated power plane because it contains a large conduction area covering >50% of the board.
+2026-08-15 21:49:49.179 INFO   Layer 'GND2' has been automatically configured as a dedicated power plane because it contains a large conduction area covering >50% of the board.
+2026-08-15 21:49:49.181 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 21:49:49.195 DEBUG  Applied copper-to-edge clearance override: 500.0 um (5000 board units).
+2026-08-15 21:49:49.208 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 21:49:49.208 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 21:49:49.208 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 21:49:49.225 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-high-speed-only.dsn (6 layers)
+2026-08-15 21:49:49.226 DEBUG  Merging settings from 6 sources:
+2026-08-15 21:49:49.226 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 21:49:49.226 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 21:49:49.227 DEBUG    - DSN file: pcb-hmd-carrier-board2-high-speed-only.dsn (priority 20): 8 fields changed
+2026-08-15 21:49:49.227 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 21:49:49.227 DEBUG    - CLI Arguments (priority 60): 10 fields changed
+2026-08-15 21:49:49.228 DEBUG    - API Settings (priority 70): 28 fields changed
+2026-08-15 21:49:49.228 DEBUG  Settings merged successfully from 6 source(s)
+2026-08-15 21:49:49.228 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 21:49:49.232 INFO   [E14EA0\A6E915] Job 'E14EA0\A6E915' started at 2026-08-15T19:49:49.231268Z.
+2026-08-15 21:49:49.355 DEBUG  [E14EA0\A6E915] Checking fanout pre-pass. settings.fanout.enabled=false, smd_pins=1581
+2026-08-15 21:49:49.396 INFO   [E14EA0\A6E915] Auto-routing stage started on board 'a831c3f6b8104f50c90e09685f7ca33f' for 97 unrouted items.
+2026-08-15 21:49:56.938 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/4)
+2026-08-15 21:49:56.938 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/4)
+2026-08-15 21:49:56.939 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.939 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.939 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.940 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.940 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.940 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.940 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.940 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.941 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.941 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.941 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.941 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.942 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.942 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.942 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.942 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.943 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_N' (connected: 1/2)
+2026-08-15 21:49:56.943 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_P' (connected: 1/2)
+2026-08-15 21:49:56.943 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_N' (connected: 1/2)
+2026-08-15 21:49:56.944 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_P' (connected: 1/2)
+2026-08-15 21:49:56.944 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.944 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.944 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/4)
+2026-08-15 21:49:56.944 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/4)
+2026-08-15 21:49:56.945 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/4)
+2026-08-15 21:49:56.945 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 21:49:56.945 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_N' (connected: 1/2)
+2026-08-15 21:49:56.945 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_P' (connected: 1/2)
+2026-08-15 21:49:56.945 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_N' (connected: 1/2)
+2026-08-15 21:49:56.945 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_P' (connected: 1/2)
+2026-08-15 21:49:56.945 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_N' (connected: 1/2)
+2026-08-15 21:49:56.946 DEBUG  Queuing item for routing: Pin on net 'PCIE_TX_P' (connected: 1/2)
+2026-08-15 21:49:56.946 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_N' (connected: 1/2)
+2026-08-15 21:49:56.946 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_P' (connected: 1/2)
+2026-08-15 21:49:56.946 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.946 DEBUG  Queuing item for routing: Pin on net 'PCIE_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.946 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.947 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_N' (connected: 1/2)
+2026-08-15 21:49:56.947 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.947 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_P' (connected: 1/2)
+2026-08-15 21:49:56.947 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.947 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.947 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.948 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.948 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.948 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.948 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.948 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.948 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.948 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.949 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.949 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.949 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_P' (connected: 1/2)
+2026-08-15 21:49:56.949 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.949 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_N' (connected: 1/2)
+2026-08-15 21:49:56.949 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.950 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/4)
+2026-08-15 21:49:56.950 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 21:49:56.950 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_N' (connected: 1/3)
+2026-08-15 21:49:56.950 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_P' (connected: 1/3)
+2026-08-15 21:49:56.950 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_N' (connected: 1/3)
+2026-08-15 21:49:56.951 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_P' (connected: 1/3)
+2026-08-15 21:49:56.951 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.951 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.951 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.951 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.951 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.951 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.952 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.952 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.952 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.952 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.952 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.952 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.953 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_P' (connected: 1/2)
+2026-08-15 21:49:56.953 DEBUG  Queuing item for routing: Pin on net 'R_DSIA_D3_N' (connected: 1/2)
+2026-08-15 21:49:56.953 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.953 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.953 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.953 DEBUG  Queuing item for routing: Pin on net 'HDMI_R_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.953 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.954 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.954 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.954 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.954 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_N' (connected: 1/2)
+2026-08-15 21:49:56.954 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.955 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.955 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.955 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.955 DEBUG  Queuing item for routing: Pin on net 'R_DSIB_D3_P' (connected: 1/2)
+2026-08-15 21:49:56.955 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_P' (connected: 1/3)
+2026-08-15 21:49:56.955 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_N' (connected: 1/3)
+2026-08-15 21:49:56.955 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/4)
+2026-08-15 21:49:56.956 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 21:49:56.956 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_N' (connected: 1/3)
+2026-08-15 21:49:56.956 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_P' (connected: 1/3)
+2026-08-15 21:49:56.956 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_P' (connected: 1/3)
+2026-08-15 21:49:56.956 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_N' (connected: 1/3)
+2026-08-15 21:49:56.956 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DM' (connected: 1/4)
+2026-08-15 21:49:56.956 DEBUG  Queuing item for routing: Pin on net 'USB2_HOST_DP' (connected: 1/4)
+2026-08-15 21:49:56.956 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_N' (connected: 1/3)
+2026-08-15 21:49:56.957 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_P' (connected: 1/3)
+2026-08-15 21:49:56.957 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/4)
+2026-08-15 21:49:56.957 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/4)
+2026-08-15 21:49:56.957 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DM' (connected: 1/4)
+2026-08-15 21:49:56.957 DEBUG  Queuing item for routing: Pin on net 'USB2_SERVICE_DP' (connected: 1/4)
+2026-08-15 21:49:56.957 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_N' (connected: 1/3)
+2026-08-15 21:49:56.958 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_P' (connected: 1/3)
+2026-08-15 21:49:56.958 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_N' (connected: 1/3)
+2026-08-15 21:49:56.958 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_P' (connected: 1/3)
+2026-08-15 21:49:56.958 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_N' (connected: 1/2)
+2026-08-15 21:49:56.958 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_N' (connected: 1/2)
+2026-08-15 21:49:56.958 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_P' (connected: 1/2)
+2026-08-15 21:49:56.958 DEBUG  Queuing item for routing: Pin on net 'PCIE_RX_USB3_P' (connected: 1/2)
+2026-08-15 21:49:56.959 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.959 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.959 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.959 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.959 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.959 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.959 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.960 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.961 DEBUG  Queuing item for routing: Pin on net 'HDMI_L_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.961 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.961 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.961 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.961 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.961 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 21:49:56.961 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.961 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.962 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.962 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.962 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 21:49:56.962 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.962 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_N' (connected: 1/2)
+2026-08-15 21:49:56.962 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.963 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D3_P' (connected: 1/2)
+2026-08-15 21:49:56.963 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.963 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.963 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.963 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.963 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.963 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.964 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D2_N' (connected: 1/2)
+2026-08-15 21:49:56.964 DEBUG  Queuing item for routing: Pin on net 'L_DSIB_D2_P' (connected: 1/2)
+2026-08-15 21:49:56.964 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_P' (connected: 1/2)
+2026-08-15 21:49:56.964 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_P' (connected: 1/2)
+2026-08-15 21:49:56.964 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_CLK_N' (connected: 1/2)
+2026-08-15 21:49:56.964 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D1_N' (connected: 1/2)
+2026-08-15 21:49:56.964 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_P' (connected: 1/2)
+2026-08-15 21:49:56.965 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_P' (connected: 1/2)
+2026-08-15 21:49:56.965 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D3_N' (connected: 1/2)
+2026-08-15 21:49:56.965 DEBUG  Queuing item for routing: Pin on net 'L_DSIA_D0_N' (connected: 1/2)
+2026-08-15 21:49:56.965 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_P' (connected: 1/3)
+2026-08-15 21:49:56.965 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX1_N' (connected: 1/3)
+2026-08-15 21:49:56.965 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_P' (connected: 1/3)
+2026-08-15 21:49:56.966 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX1_N' (connected: 1/3)
+2026-08-15 21:49:56.966 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_P' (connected: 1/3)
+2026-08-15 21:49:56.966 DEBUG  Queuing item for routing: Pin on net 'USB_C_TX2_N' (connected: 1/3)
+2026-08-15 21:49:56.966 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_P' (connected: 1/3)
+2026-08-15 21:49:56.966 DEBUG  Queuing item for routing: Pin on net 'USB_C_RX2_N' (connected: 1/3)
+2026-08-15 21:49:56.966 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_N' (connected: 1/2)
+2026-08-15 21:49:56.966 DEBUG  Queuing item for routing: Pin on net 'USB3_RX_P' (connected: 1/2)
+2026-08-15 21:49:56.967 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_N' (connected: 1/2)
+2026-08-15 21:49:56.967 DEBUG  Queuing item for routing: Pin on net 'USB3_TX_P' (connected: 1/2)
+2026-08-15 21:50:00.620 DEBUG  [E14EA0\A6E915] Pass #1: 97 incompletes across 176 items to route
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'GND' has 1 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB3_TX_P' has 1 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB3_TX_N' has 1 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB3_RX_P' has 1 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB3_RX_N' has 1 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB_C_RX2_N' has 2 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB_C_RX2_P' has 2 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB_C_TX2_N' has 2 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB_C_TX2_P' has 2 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB_C_RX1_N' has 2 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB_C_RX1_P' has 2 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB_C_TX1_N' has 2 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'USB_C_TX1_P' has 2 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_D0_N' has 1 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_D3_N' has 1 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_D0_P' has 1 incomplete(s)
+2026-08-15 21:50:00.621 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_D3_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_D1_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_CLK_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_D1_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_CLK_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_D2_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_D2_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_D2_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIA_D2_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_CLK_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_D1_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_CLK_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_D1_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_D3_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_D0_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_D3_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'L_DSIB_D0_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'HDMI_L_CLK_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'HDMI_L_CLK_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'HDMI_L_D0_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'HDMI_L_D0_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'HDMI_L_D1_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'HDMI_L_D1_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'HDMI_L_D2_P' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'HDMI_L_D2_N' has 1 incomplete(s)
+2026-08-15 21:50:00.622 DEBUG  [E14EA0\A6E915]   Net 'USB2_SERVICE_DP' has 3 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'USB2_SERVICE_DM' has 3 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'PCIE_RX_USB3_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'PCIE_RX_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'USB2_HOST_DP' has 3 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'USB2_HOST_DM' has 3 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_D3_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_D2_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_CLK_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_D1_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_D0_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_D3_N' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_D2_N' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_CLK_N' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_D1_N' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIB_D0_N' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'HDMI_R_CLK_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'HDMI_R_CLK_N' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'HDMI_R_D0_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'HDMI_R_D0_N' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_D3_N' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_D3_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'HDMI_R_D1_P' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'HDMI_R_D1_N' has 1 incomplete(s)
+2026-08-15 21:50:00.623 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_D2_N' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_D2_P' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'HDMI_R_D2_P' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'HDMI_R_D2_N' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_CLK_N' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_CLK_P' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_D1_N' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_D1_P' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_D0_N' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'R_DSIA_D0_P' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'PCIE_RX_USB3_N' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'PCIE_RX_N' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'PCIE_CLK_P' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'PCIE_CLK_N' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'PCIE_TX_P' has 1 incomplete(s)
+2026-08-15 21:50:00.624 DEBUG  [E14EA0\A6E915]   Net 'PCIE_TX_N' has 1 incomplete(s)
+2026-08-15 21:50:08.555 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #21 of component #82 and pin #189 of component #223, because no connection was found between their nets.
+2026-08-15 21:50:15.878 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #25 of component #82 and pin #183 of component #223, because no connection was found between their nets.
+2026-08-15 21:50:23.336 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #33 of component #82 and pin #177 of component #223, because no connection was found between their nets.
+2026-08-15 21:50:30.711 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #41 of component #82 and pin #171 of component #223, because no connection was found between their nets.
+2026-08-15 21:50:38.116 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #21 of component #173 and pin #165 of component #223, because no connection was found between their nets.
+2026-08-15 21:50:45.385 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #25 of component #173 and pin #159 of component #223, because no connection was found between their nets.
+2026-08-15 21:50:52.792 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #33 of component #173 and pin #153 of component #223, because no connection was found between their nets.
+2026-08-15 21:51:00.056 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #41 of component #173 and pin #147 of component #223, because no connection was found between their nets.
+2026-08-15 21:51:07.317 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #77 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1719000,-933000), target: (1732353,-949821)
+2026-08-15 21:51:07.334 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #1 of component #136 and pin #123 of component #223, because the new connection could not be inserted.
+2026-08-15 21:51:10.908 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #45 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1723000,-933000), target: (1732353,-949821)
+2026-08-15 21:51:10.921 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #1 of component #131 and pin #121 of component #223, because the new connection could not be inserted.
+2026-08-15 21:51:14.643 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #81 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1731000,-933000), target: (1750433,-946335)
+2026-08-15 21:51:14.661 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #7 of component #184 and pin #117 of component #223, because the new connection could not be inserted.
+2026-08-15 21:51:18.385 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #80 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1735000,-933000), target: (1732353,-949821)
+2026-08-15 21:51:18.401 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #6 of component #184 and pin #115 of component #223, because the new connection could not be inserted.
+2026-08-15 21:51:22.096 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #79 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1743000,-933000), target: (1750433,-946335)
+2026-08-15 21:51:22.111 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #1 of component #184 and pin #111 of component #223, because the new connection could not be inserted.
+2026-08-15 21:51:25.678 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #78 at corner 4/4 on layer 5, trace width: 1000, from corner: 0, ok_point: (1747000,-933000), target: (1750433,-946335)
+2026-08-15 21:51:25.695 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin of component #184 and pin #109 of component #223, because the new connection could not be inserted.
+2026-08-15 21:52:00.272 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #81 at corner 3/3 on layer 5, trace width: 1000, from corner: 2, ok_point: (1731000,-945360), target: (1731000,-933000)
+2026-08-15 21:52:00.294 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #117 of component #223 and pin #7 of component #184, because the new connection could not be inserted.
+2026-08-15 21:52:04.525 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #80 at corner 15/15 on layer 0, trace width: 1000, from corner: 4, ok_point: (2091783,-1155746), target: (1988173,-1163552)
+2026-08-15 21:52:04.547 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #115 of component #223 and pin #6 of component #184, because the new connection could not be inserted.
+2026-08-15 21:52:11.814 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #44 at corner 9/9 on layer 0, trace width: 1000, from corner: 4, ok_point: (2091783,-1139254), target: (2078333,-1135425)
+2026-08-15 21:52:11.831 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin of component #131 and pin #3 of component #184, because the new connection could not be inserted.
+2026-08-15 21:52:15.493 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #79 at corner 3/3 on layer 5, trace width: 1000, from corner: 2, ok_point: (1743000,-944824), target: (1743000,-933000)
+2026-08-15 21:52:15.512 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #111 of component #223 and pin #1 of component #184, because the new connection could not be inserted.
+2026-08-15 21:52:19.242 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #78 at corner 7/7 on layer 5, trace width: 1000, from corner: 6, ok_point: (1747000,-942139), target: (1747000,-933000)
+2026-08-15 21:52:19.256 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #109 of component #223 and pin of component #184, because the new connection could not be inserted.
+2026-08-15 21:52:22.908 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #18 of component #173 and pin #37 of component #182, because no connection was found between their nets.
+2026-08-15 21:52:26.388 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #14 of component #173 and pin #36 of component #182, because no connection was found between their nets.
+2026-08-15 21:52:32.928 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #8 of component #173 and pin #35 of component #182, because no connection was found between their nets.
+2026-08-15 21:52:39.210 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #4 of component #173 and pin #34 of component #182, because no connection was found between their nets.
+2026-08-15 21:52:42.973 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #17 of component #173 and pin #31 of component #182, because no connection was found between their nets.
+2026-08-15 21:52:46.636 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #16 of component #173 and pin #30 of component #182, because no connection was found between their nets.
+2026-08-15 21:52:53.336 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #7 of component #173 and pin #29 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:00.551 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #6 of component #173 and pin #28 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:07.173 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #39 of component #173 and pin #25 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:10.855 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #15 of component #173 and pin #24 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:14.705 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #38 of component #173 and pin #23 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:20.935 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #5 of component #173 and pin #22 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:24.622 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #71 at corner 5/5 on layer 0, trace width: 615, from corner: 0, ok_point: (2100000,-1029600), target: (2091009,-1014810)
+2026-08-15 21:53:24.640 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #47 of component #173 and pin #19 of component #182, because the new connection could not be inserted.
+2026-08-15 21:53:31.200 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #55 of component #173 and pin #18 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:34.981 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #46 of component #173 and pin #17 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:38.801 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #54 of component #173 and pin #16 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:44.844 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #31 of component #173 and pin #13 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:48.823 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #75 at corner 5/5 on layer 0, trace width: 615, from corner: 0, ok_point: (2124500,-1029600), target: (2091009,-1014810)
+2026-08-15 21:53:48.841 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #59 of component #173 and pin #12 of component #182, because the new connection could not be inserted.
+2026-08-15 21:53:52.656 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #30 of component #173 and pin #11 of component #182, because no connection was found between their nets.
+2026-08-15 21:53:56.606 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #58 of component #173 and pin #10 of component #182, because no connection was found between their nets.
+2026-08-15 21:54:17.289 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #12 at corner 13/13 on layer 0, trace width: 850, from corner: 5, ok_point: (2214145,-1111083), target: (2218500,-1138500)
+2026-08-15 21:54:17.309 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #2 of component #165, pin #17 of component #26 and pin #1 of component #176, because the new connection could not be inserted.
+2026-08-15 21:54:25.052 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #75 at corner 11/11 on layer 0, trace width: 615, from corner: 10, ok_point: (2124500,-1015389), target: (2124500,-1029600)
+2026-08-15 21:54:25.070 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #12 of component #182 and pin #59 of component #173, because the new connection could not be inserted.
+2026-08-15 21:54:31.519 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #10 of component #182 and pin #58 of component #173, because no connection was found between their nets.
+2026-08-15 21:54:35.286 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #73 at corner 5/5 on layer 0, trace width: 615, from corner: 4, ok_point: (2103500,-1022533), target: (2103500,-1029600)
+2026-08-15 21:54:35.306 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #18 of component #182 and pin #55 of component #173, because the new connection could not be inserted.
+2026-08-15 21:54:42.305 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #16 of component #182 and pin #54 of component #173, because no connection was found between their nets.
+2026-08-15 21:54:46.203 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #71 at corner 7/7 on layer 0, trace width: 615, from corner: 6, ok_point: (2100000,-1026125), target: (2100000,-1029600)
+2026-08-15 21:54:46.224 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #19 of component #182 and pin #47 of component #173, because the new connection could not be inserted.
+2026-08-15 21:54:53.153 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #17 of component #182 and pin #46 of component #173, because no connection was found between their nets.
+2026-08-15 21:54:59.772 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #147 of component #223 and pin #41 of component #173, because no connection was found between their nets.
+2026-08-15 21:55:06.664 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #67 at corner 7/7 on layer 0, trace width: 615, from corner: 6, ok_point: (2080122,-1047378), target: (2082500,-1045000)
+2026-08-15 21:55:06.683 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #25 of component #182 and pin #39 of component #173, because the new connection could not be inserted.
+2026-08-15 21:55:13.123 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #23 of component #182 and pin #38 of component #173, because no connection was found between their nets.
+2026-08-15 21:55:19.420 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #153 of component #223 and pin #33 of component #173, because no connection was found between their nets.
+2026-08-15 21:55:26.707 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #63 at corner 13/13 on layer 0, trace width: 615, from corner: 12, ok_point: (2121000,-1015389), target: (2121000,-1029600)
+2026-08-15 21:55:26.721 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #13 of component #182 and pin #31 of component #173, because the new connection could not be inserted.
+2026-08-15 21:55:32.853 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #11 of component #182 and pin #30 of component #173, because no connection was found between their nets.
+2026-08-15 21:55:39.568 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #159 of component #223 and pin #25 of component #173, because no connection was found between their nets.
+2026-08-15 21:55:49.819 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #165 of component #223 and pin #21 of component #173, because no connection was found between their nets.
+2026-08-15 21:56:00.385 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #37 of component #182 and pin #18 of component #173, because no connection was found between their nets.
+2026-08-15 21:56:07.037 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #31 of component #182 and pin #17 of component #173, because no connection was found between their nets.
+2026-08-15 21:56:13.603 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #30 of component #182 and pin #16 of component #173, because no connection was found between their nets.
+2026-08-15 21:56:20.096 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #24 of component #182 and pin #15 of component #173, because no connection was found between their nets.
+2026-08-15 21:56:26.949 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #36 of component #182 and pin #14 of component #173, because no connection was found between their nets.
+2026-08-15 21:56:30.922 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #52 at corner 4/4 on layer 0, trace width: 615, from corner: 3, ok_point: (2117500,-1071209), target: (2117500,-1045000)
+2026-08-15 21:56:30.943 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #35 of component #182 and pin #8 of component #173, because the new connection could not be inserted.
+2026-08-15 21:56:34.879 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #51 at corner 4/4 on layer 0, trace width: 615, from corner: 3, ok_point: (2096500,-1079401), target: (2096500,-1045000)
+2026-08-15 21:56:34.894 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #29 of component #182 and pin #7 of component #173, because the new connection could not be inserted.
+2026-08-15 21:56:38.574 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #50 at corner 6/6 on layer 0, trace width: 615, from corner: 5, ok_point: (2093000,-1050568), target: (2093000,-1045000)
+2026-08-15 21:56:38.595 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #28 of component #182 and pin #6 of component #173, because the new connection could not be inserted.
+2026-08-15 21:56:42.711 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #49 at corner 6/6 on layer 0, trace width: 615, from corner: 5, ok_point: (2089500,-1012532), target: (2089500,-1029600)
+2026-08-15 21:56:42.732 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #22 of component #182 and pin #5 of component #173, because the new connection could not be inserted.
+2026-08-15 21:56:46.385 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #48 at corner 4/4 on layer 0, trace width: 615, from corner: 3, ok_point: (2114000,-1054472), target: (2114000,-1045000)
+2026-08-15 21:56:46.404 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #34 of component #182 and pin #4 of component #173, because the new connection could not be inserted.
+2026-08-15 21:57:39.361 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, via, via, pin of component #176, pin #18 of component #26 and pin #1 of component #165, because no connection was found between their nets.
+2026-08-15 21:58:02.399 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #7 at corner 15/15 on layer 0, trace width: 850, from corner: 5, ok_point: (2261217,-1157145), target: (2230000,-1160000)
+2026-08-15 21:58:02.422 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #10 of component #165, pin #12 of component #26 and pin #3 of component #157, because the new connection could not be inserted.
+2026-08-15 21:58:06.172 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #8 at corner 15/15 on layer 0, trace width: 850, from corner: 5, ok_point: (2261217,-1147145), target: (2237300,-1155000)
+2026-08-15 21:58:06.192 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between polylinetrace, polylinetrace, via, via, polylinetrace, pin #14 of component #165, pin #13 of component #26 and pin #1 of component #157, because the new connection could not be inserted.
+2026-08-15 21:58:16.999 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, via, via, pin #13 of component #165, pin #14 of component #26 and pin of component #157, because no connection was found between their nets.
+2026-08-15 21:58:20.583 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #77 at corner 4/4 on layer 5, trace width: 1000, from corner: 3, ok_point: (1719000,-946400), target: (1719000,-933000)
+2026-08-15 21:58:20.607 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #123 of component #223 and pin #1 of component #136, because the new connection could not be inserted.
+2026-08-15 21:58:28.091 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #45 at corner 7/7 on layer 5, trace width: 1000, from corner: 3, ok_point: (1777185,-928500), target: (1723000,-933000)
+2026-08-15 21:58:28.113 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #121 of component #223 and pin #1 of component #131, because the new connection could not be inserted.
+2026-08-15 21:58:35.521 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #16 at corner 4/4 on layer 0, trace width: 615, from corner: 3, ok_point: (1253500,-1075301), target: (1253500,-1045000)
+2026-08-15 21:58:35.546 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #12 of component #81 and pin #59 of component #82, because the new connection could not be inserted.
+2026-08-15 21:58:39.046 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #14 at corner 6/6 on layer 0, trace width: 615, from corner: 5, ok_point: (1246500,-1056503), target: (1246500,-1045000)
+2026-08-15 21:58:39.070 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #10 of component #81 and pin #58 of component #82, because the new connection could not be inserted.
+2026-08-15 21:58:43.069 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #20 at corner 8/8 on layer 0, trace width: 615, from corner: 7, ok_point: (1274500,-1061374), target: (1274500,-1045000)
+2026-08-15 21:58:43.092 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #18 of component #81 and pin #55 of component #82, because the new connection could not be inserted.
+2026-08-15 21:58:46.849 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #18 at corner 4/4 on layer 0, trace width: 615, from corner: 3, ok_point: (1267500,-1072217), target: (1267500,-1045000)
+2026-08-15 21:58:46.871 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #16 of component #81 and pin #54 of component #82, because the new connection could not be inserted.
+2026-08-15 21:58:50.876 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #21 at corner 13/13 on layer 0, trace width: 615, from corner: 12, ok_point: (1278000,-1052938), target: (1278000,-1045000)
+2026-08-15 21:58:50.897 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #19 of component #81 and pin #47 of component #82, because the new connection could not be inserted.
+2026-08-15 21:58:54.484 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #19 at corner 7/7 on layer 0, trace width: 615, from corner: 6, ok_point: (1271000,-1069801), target: (1271000,-1045000)
+2026-08-15 21:58:54.506 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #17 of component #81 and pin #46 of component #82, because the new connection could not be inserted.
+2026-08-15 21:59:06.272 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #25 at corner 4/4 on layer 0, trace width: 615, from corner: 3, ok_point: (1297878,-1027222), target: (1295500,-1029600)
+2026-08-15 21:59:06.292 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #25 of component #81 and pin #39 of component #82, because the new connection could not be inserted.
+2026-08-15 21:59:10.299 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #23 at corner 9/9 on layer 0, trace width: 615, from corner: 8, ok_point: (1292000,-1053038), target: (1292000,-1045000)
+2026-08-15 21:59:10.321 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #23 of component #81 and pin #38 of component #82, because the new connection could not be inserted.
+2026-08-15 21:59:21.692 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #17 at corner 4/4 on layer 0, trace width: 615, from corner: 3, ok_point: (1257000,-1075752), target: (1257000,-1045000)
+2026-08-15 21:59:21.711 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #13 of component #81 and pin #31 of component #82, because the new connection could not be inserted.
+2026-08-15 21:59:25.455 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #15 at corner 13/13 on layer 0, trace width: 615, from corner: 12, ok_point: (1250000,-1058709), target: (1250000,-1045000)
+2026-08-15 21:59:25.479 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #11 of component #81 and pin #30 of component #82, because the new connection could not be inserted.
+2026-08-15 21:59:36.653 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #35 at corner 16/16 on layer 5, trace width: 615, from corner: 5, ok_point: (1560833,-922001), target: (1587000,-933000)
+2026-08-15 21:59:36.677 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #189 of component #223 and pin #21 of component #82, because the new connection could not be inserted.
+2026-08-15 21:59:46.990 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #37 of component #81 and pin #18 of component #82, because no connection was found between their nets.
+2026-08-15 21:59:50.931 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #29 at corner 3/3 on layer 0, trace width: 615, from corner: 2, ok_point: (1274500,-1016409), target: (1274500,-1029600)
+2026-08-15 21:59:50.957 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #31 of component #81 and pin #17 of component #82, because the new connection could not be inserted.
+2026-08-15 21:59:58.120 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #30 of component #81 and pin #16 of component #82, because no connection was found between their nets.
+2026-08-15 22:00:05.182 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #24 of component #81 and pin #15 of component #82, because no connection was found between their nets.
+2026-08-15 22:00:12.280 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #36 of component #81 and pin #14 of component #82, because no connection was found between their nets.
+2026-08-15 22:00:16.091 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #31 at corner 9/9 on layer 0, trace width: 615, from corner: 8, ok_point: (1260500,-1018110), target: (1260500,-1029600)
+2026-08-15 22:00:16.112 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #35 of component #81 and pin #8 of component #82, because the new connection could not be inserted.
+2026-08-15 22:00:19.689 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #27 at corner 4/4 on layer 0, trace width: 615, from corner: 3, ok_point: (1281500,-1024081), target: (1281500,-1029600)
+2026-08-15 22:00:19.711 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #29 of component #81 and pin #7 of component #82, because the new connection could not be inserted.
+2026-08-15 22:00:23.478 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #26 at corner 5/5 on layer 0, trace width: 615, from corner: 4, ok_point: (1285000,-1013145), target: (1285000,-1029600)
+2026-08-15 22:00:23.502 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #28 of component #81 and pin #6 of component #82, because the new connection could not be inserted.
+2026-08-15 22:00:27.100 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #22 at corner 14/14 on layer 0, trace width: 615, from corner: 13, ok_point: (1288500,-1052788), target: (1288500,-1045000)
+2026-08-15 22:00:27.124 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #22 of component #81 and pin #5 of component #82, because the new connection could not be inserted.
+2026-08-15 22:00:30.789 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #30 at corner 5/5 on layer 0, trace width: 615, from corner: 4, ok_point: (1264000,-1016409), target: (1264000,-1029600)
+2026-08-15 22:00:30.809 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #34 of component #81 and pin #4 of component #82, because the new connection could not be inserted.
+2026-08-15 22:00:37.699 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #18 of component #82 and pin #37 of component #81, because no connection was found between their nets.
+2026-08-15 22:00:45.090 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #14 of component #82 and pin #36 of component #81, because no connection was found between their nets.
+2026-08-15 22:00:52.132 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #8 of component #82 and pin #35 of component #81, because no connection was found between their nets.
+2026-08-15 22:01:03.667 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between via, polylinetrace, via, polylinetrace, pin #4 of component #82 and pin #34 of component #81, because no connection was found between their nets.
+2026-08-15 22:01:11.206 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #17 of component #82 and pin #31 of component #81, because no connection was found between their nets.
+2026-08-15 22:01:18.524 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #16 of component #82 and pin #30 of component #81, because no connection was found between their nets.
+2026-08-15 22:01:25.867 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #7 of component #82 and pin #29 of component #81, because no connection was found between their nets.
+2026-08-15 22:01:33.356 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #6 of component #82 and pin #28 of component #81, because no connection was found between their nets.
+2026-08-15 22:01:36.954 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #25 at corner 5/5 on layer 0, trace width: 615, from corner: 0, ok_point: (1295500,-1029600), target: (1306449,-1020026)
+2026-08-15 22:01:36.971 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #39 of component #82 and pin #25 of component #81, because the new connection could not be inserted.
+2026-08-15 22:01:40.504 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #15 of component #82 and pin #24 of component #81, because no connection was found between their nets.
+2026-08-15 22:01:44.231 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #38 of component #82 and pin #23 of component #81, because no connection was found between their nets.
+2026-08-15 22:01:51.165 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #5 of component #82 and pin #22 of component #81, because no connection was found between their nets.
+2026-08-15 22:01:58.418 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #47 of component #82 and pin #19 of component #81, because no connection was found between their nets.
+2026-08-15 22:02:02.173 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #20 at corner 5/5 on layer 0, trace width: 615, from corner: 0, ok_point: (1274500,-1045000), target: (1261617,-1079799)
+2026-08-15 22:02:02.193 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #55 of component #82 and pin #18 of component #81, because the new connection could not be inserted.
+2026-08-15 22:02:05.939 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #46 of component #82 and pin #17 of component #81, because no connection was found between their nets.
+2026-08-15 22:02:09.460 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #54 of component #82 and pin #16 of component #81, because no connection was found between their nets.
+2026-08-15 22:02:16.511 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #31 of component #82 and pin #13 of component #81, because no connection was found between their nets.
+2026-08-15 22:02:20.175 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #16 at corner 9/9 on layer 0, trace width: 615, from corner: 0, ok_point: (1253500,-1045000), target: (1261617,-1079799)
+2026-08-15 22:02:20.200 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #59 of component #82 and pin #12 of component #81, because the new connection could not be inserted.
+2026-08-15 22:02:23.943 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #30 of component #82 and pin #11 of component #81, because no connection was found between their nets.
+2026-08-15 22:02:27.525 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between pin #58 of component #82 and pin #10 of component #81, because no connection was found between their nets.
+2026-08-15 22:02:34.870 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #12 at corner 16/16 on layer 0, trace width: 850, from corner: 4, ok_point: (2217354,-1139849), target: (2210950,-1120805)
+2026-08-15 22:02:34.886 DEBUG  [E14EA0\A6E915] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, via, via, via, pin #1 of component #176, pin #2 of component #165 and pin #17 of component #26, because the new connection could not be inserted.
+2026-08-15 22:03:22.669 INFO   [E14EA0\A6E915] Auto-routing pass #1 on board 'a831c3f6b8104f50c90e09685f7ca33f' was completed in 805.73 seconds with the score of 0.00 (62 unrouted and 188 violations), using 798.44 CPU seconds and the job allocated 965.26 GB of memory so far.
+2026-08-15 22:03:26.391 DEBUG  === Performance Profile ===
+2026-08-15 22:03:26.391 DEBUG  === Routing Parameters ===
+2026-08-15 22:03:26.395 DEBUG    Via Costs: 50, Plane Via Costs: 5
+2026-08-15 22:03:26.395 DEBUG    Layer Costs (Preferred / Against):
+2026-08-15 22:03:26.395 DEBUG      Layer 1: 2,2 / 5,1
+2026-08-15 22:03:26.395 DEBUG      Layer 2: 1,0 / 1,3
+2026-08-15 22:03:26.395 DEBUG      Layer 3: 1,0 / 3,9
+2026-08-15 22:03:26.395 DEBUG      Layer 4: 1,0 / 1,3
+2026-08-15 22:03:26.395 DEBUG      Layer 5: 1,0 / 3,9
+2026-08-15 22:03:26.395 DEBUG      Layer 6: 2,2 / 2,5
+2026-08-15 22:03:26.395 DEBUG  
+2026-08-15 22:03:26.397 DEBUG    autoroute_item                          :   154379 ms total,      176 calls,    877 ms avg
+2026-08-15 22:03:26.397 DEBUG  
+2026-08-15 22:03:26.397 DEBUG  === Pass History ===
+2026-08-15 22:03:26.397 DEBUG    Pass 1  :   62 unrouted items,   802,09 s,   100 ripup cost
+2026-08-15 22:03:26.397 DEBUG  ===========================
+2026-08-15 22:03:29.995 INFO   [E14EA0\A6E915] Auto-routing stage completed: started with 97 unrouted nets, completed in 817.12 seconds, final score: 0.00 (62 unrouted and 188 violations), using 806.30 total CPU seconds, 973.79 GB total allocated, and 921.8 MB peak heap usage.
+2026-08-15 22:03:30.002 INFO   [E14EA0\A6E915] Job 'E14EA0\A6E915' finished with state: COMPLETED (elapsed: 13 minutes 40.77 seconds, finished at UTC: 2026-08-15T20:03:30.001766200Z).

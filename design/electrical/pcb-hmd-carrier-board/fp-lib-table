@@ -1,0 +1,7 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Stearlight")(type "KiCad")(uri "${KIPRJMOD}/libraries/footprints/Stearlight.pretty")(options "")(descr "Stearlight carrier local footprints"))
+  (lib (name "Stearlight_Display")(type "KiCad")(uri "${KIPRJMOD}/libraries/footprints/Stearlight_Display.pretty")(options "")(descr "Verified Stearlight display footprints"))
+  (lib (name "Board2_Recovered")(type "KiCad")(uri "${KIPRJMOD}/libraries/footprints/Board2_Recovered.pretty")(options "")(descr "Exact footprints extracted from approved Board2 PCB"))
+  (lib (name "CM4IO")(type "KiCad")(uri "${KIPRJMOD}/cm4-io/CM4IO.pretty")(options "")(descr "Official Raspberry Pi CM4 IO footprints"))
+)

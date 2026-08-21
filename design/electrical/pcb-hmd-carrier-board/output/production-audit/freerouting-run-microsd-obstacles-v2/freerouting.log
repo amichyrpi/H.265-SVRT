@@ -1,0 +1,223 @@
+2026-08-15 22:24:47.853 INFO   Freerouting v2.3.0 (build-date: 2026-08-07)
+2026-08-15 22:24:47.857 DEBUG  [startup] user-data path : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-microsd-obstacles-v2  (source: CLI argument --user_data_path)
+2026-08-15 22:24:47.858 DEBUG  [startup] log file       : C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-microsd-obstacles-v2\freerouting.log
+2026-08-15 22:24:47.859 DEBUG  No freerouting.json found at 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-microsd-obstacles-v2\freerouting.json' — will create one with default settings.
+2026-08-15 22:24:47.914 DEBUG  Default settings saved to 'C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-microsd-obstacles-v2\freerouting.json'.
+2026-08-15 22:24:47.915 DEBUG  Version: 2.3.0,2026-08-07
+2026-08-15 22:24:47.915 DEBUG  Command line arguments: '-de C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-microsd-obstacles-v2.dsn -do C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\pcb-hmd-carrier-board2-microsd-obstacles-v2.ses -mp 2 -mt 0 --router.fanout.enabled=true --router.optimizer.enabled=true --router.layers.routable=true,false,true,true,false,true --router.layers.preferred_direction_horizontal=true,false,false,true,false,true --api_server.enabled=false --gui.enabled=false --logging.console.level=INFO --user_data_path=C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-microsd-obstacles-v2 -l en'
+2026-08-15 22:24:47.915 DEBUG  Architecture: Windows 11,amd64,10.0
+2026-08-15 22:24:47.915 DEBUG  Java: 25.0.4,Eclipse Adoptium
+2026-08-15 22:24:47.915 DEBUG  System Language: fr,fr_FR
+2026-08-15 22:24:47.916 DEBUG  Hardware: 12 CPU cores,4044 MB RAM
+2026-08-15 22:24:47.916 DEBUG  UTC Time: 2026-08-15T20:24:47.914841500Z
+2026-08-15 22:24:47.918 DEBUG  GUI Language: en
+2026-08-15 22:24:47.918 DEBUG  Host: N/A
+2026-08-15 22:24:48.970 DEBUG  Loaded router settings from: C:\Users\jfran\Documents\GitHub\H.265-SVRT\design\electrical\pcb-hmd-carrier-board\output\production-audit\freerouting-run-microsd-obstacles-v2\freerouting.json
+2026-08-15 22:24:48.971 DEBUG  Applied CLI router setting: router.max_passes = 2
+2026-08-15 22:24:48.971 DEBUG  Applied CLI router setting: router.max_threads = 0
+2026-08-15 22:24:48.971 DEBUG  Applied CLI router setting: router.fanout.enabled = true
+2026-08-15 22:24:48.971 DEBUG  Applied CLI router setting: router.optimizer.enabled = true
+2026-08-15 22:24:48.971 DEBUG  Applied CLI router setting: router.layers.routable = true,false,true,true,false,true
+2026-08-15 22:24:48.971 DEBUG  Applied CLI router setting: router.layers.preferred_direction_horizontal = true,false,false,true,false,true
+2026-08-15 22:24:48.971 DEBUG  Applied CLI router setting: router.enabled = true (implicit from -de/-do batch mode)
+2026-08-15 22:24:48.972 DEBUG  No router settings found in environment variables
+2026-08-15 22:24:49.050 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:24:49.057 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:24:49.059 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:24:49.169 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-microsd-obstacles-v2.dsn (6 layers)
+2026-08-15 22:24:49.184 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:24:49.184 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:24:49.184 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:24:49.227 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-microsd-obstacles-v2.dsn (6 layers)
+2026-08-15 22:24:49.229 DEBUG  Merging settings from 5 sources:
+2026-08-15 22:24:49.230 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 22:24:49.232 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 22:24:49.233 DEBUG    - DSN file: pcb-hmd-carrier-board2-microsd-obstacles-v2.dsn (priority 20): 8 fields changed
+2026-08-15 22:24:49.233 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 22:24:49.233 DEBUG    - CLI Arguments (priority 60): 8 fields changed
+2026-08-15 22:24:49.234 DEBUG  Settings merged successfully from 5 source(s)
+2026-08-15 22:24:49.294 DEBUG  No new version available. Current version is up to date: v2.3.0
+2026-08-15 22:24:49.430 INFO   [D4FBD5\190B50] Loading board file 'pcb-hmd-carrier-board2-microsd-obstacles-v2.dsn'...
+2026-08-15 22:24:49.437 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:24:49.438 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:24:49.438 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:24:49.624 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: bendCost: null -> 0.0; undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: bendCost: null -> 0.0; preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 22:24:49.646 DEBUG  Applied copper-to-edge clearance override: 500.0 um (5000 board units).
+2026-08-15 22:24:49.655 DEBUG  Set DEFAULT clearance (all layers): 1500 (0.0375 mm) from DSN value 150.0
+2026-08-15 22:24:49.655 DEBUG  Set clearance (all layers): smd_smd = 375 (0.009375 mm), classes [2,2]
+2026-08-15 22:24:49.655 DEBUG  Set default trace width (all layers): DSN=150.0 → board=1500 (0.0375 mm)
+2026-08-15 22:24:49.680 DEBUG  Loaded router settings from DSN file: pcb-hmd-carrier-board2-microsd-obstacles-v2.dsn (6 layers)
+2026-08-15 22:24:49.682 DEBUG  Merging settings from 6 sources:
+2026-08-15 22:24:49.683 DEBUG    - Default Settings (priority 0): base settings
+2026-08-15 22:24:49.683 DEBUG    - freerouting.json (priority 10): 0 fields changed
+2026-08-15 22:24:49.683 DEBUG    - DSN file: pcb-hmd-carrier-board2-microsd-obstacles-v2.dsn (priority 20): 8 fields changed
+2026-08-15 22:24:49.683 DEBUG    - Environment Variables (priority 55): 0 fields changed
+2026-08-15 22:24:49.684 DEBUG    - CLI Arguments (priority 60): 8 fields changed
+2026-08-15 22:24:49.684 DEBUG    - API Settings (priority 70): 28 fields changed
+2026-08-15 22:24:49.684 DEBUG  Settings merged successfully from 6 source(s)
+2026-08-15 22:24:49.685 DEBUG  applyBoardSpecificOptimizations changed parameters:
+  Layer 0: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 5.1000000000000005;
+  Layer 1: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 2: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 3: undesiredDirectionTraceCost: 1.0 -> 1.3;
+  Layer 4: undesiredDirectionTraceCost: 1.0 -> 3.9000000000000004;
+  Layer 5: preferredDirectionTraceCost: 1.0 -> 2.2; undesiredDirectionTraceCost: 1.0 -> 2.5;
+2026-08-15 22:24:49.689 INFO   [D4FBD5\190B50] Job 'D4FBD5\190B50' started at 2026-08-15T20:24:49.689160800Z.
+2026-08-15 22:24:49.876 DEBUG  [D4FBD5\190B50] Checking fanout pre-pass. settings.fanout.enabled=true, smd_pins=1581
+2026-08-15 22:24:49.946 INFO   [D4FBD5\190B50] Fanout stage started on board '66ff956ca6853b61198bedc4e454ffba' with 26 of 1581 SMD pins needing fanout (265 already connected, 1290 netless).
+2026-08-15 22:24:51.718 INFO   [D4FBD5\190B50] Fanout pass #1 on board 'cc446bacdf148f6792bd7c6c5679b48d' completed in 1.59 seconds with 4 SMD pins fanouted, 21 not routed, 0 insert errors, +4 extra vias (0 SMD pins still to check in pass, ripup costs=100).
+2026-08-15 22:24:52.667 INFO   [D4FBD5\190B50] Fanout pass #2 on board 'd94a379b483019a0ab1d5d3a2e4fc29e' completed in 0.85 seconds with 2 SMD pins fanouted, 19 not routed, 0 insert errors, +2 extra vias (0 SMD pins still to check in pass, ripup costs=200).
+2026-08-15 22:24:53.493 INFO   [D4FBD5\190B50] Fanout pass #3 on board 'd94a379b483019a0ab1d5d3a2e4fc29e' completed in 0.73 seconds with 0 SMD pins fanouted, 19 not routed, 0 insert errors, +0 extra vias (0 SMD pins still to check in pass, ripup costs=300).
+2026-08-15 22:24:53.586 INFO   [D4FBD5\190B50] Fanout stage completed: started with 291 total SMD pins, completed in 3.55 seconds, escaped pins: 17/291 (5.8%), using 3.45 total CPU seconds, 3.03 GB total allocated, and 207.6 MB peak heap usage.
+2026-08-15 22:24:53.625 INFO   [D4FBD5\190B50] Auto-routing stage started on board 'd94a379b483019a0ab1d5d3a2e4fc29e' for 16 unrouted items.
+2026-08-15 22:25:01.353 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 3/11)
+2026-08-15 22:25:01.354 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 8/11)
+2026-08-15 22:25:01.355 DEBUG  Queuing item for routing: Via on net '+3V3' (connected: 10/11)
+2026-08-15 22:25:01.373 DEBUG  Queuing item for routing: PolylineTrace on net 'GND' (connected: 14/27)
+2026-08-15 22:25:01.374 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_B' (connected: 3/9)
+2026-08-15 22:25:01.374 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_A' (connected: 1/2)
+2026-08-15 22:25:01.375 DEBUG  Queuing item for routing: Pin on net 'SD_DAT1' (connected: 1/2)
+2026-08-15 22:25:01.375 DEBUG  Queuing item for routing: Pin on net 'SD_DAT0' (connected: 1/2)
+2026-08-15 22:25:01.375 DEBUG  Queuing item for routing: Pin on net 'SD_CLK' (connected: 1/2)
+2026-08-15 22:25:01.375 DEBUG  Queuing item for routing: Pin on net 'SD_PWR' (connected: 3/9)
+2026-08-15 22:25:01.375 DEBUG  Queuing item for routing: Pin on net 'SD_CMD' (connected: 1/2)
+2026-08-15 22:25:01.376 DEBUG  Queuing item for routing: Pin on net 'SD_DAT3' (connected: 1/2)
+2026-08-15 22:25:01.376 DEBUG  Queuing item for routing: Pin on net 'SD_DAT2' (connected: 1/2)
+2026-08-15 22:25:01.378 DEBUG  Queuing item for routing: Pin on net 'SD_PWR' (connected: 3/9)
+2026-08-15 22:25:01.378 DEBUG  Queuing item for routing: Pin on net 'SD_PWR_ON' (connected: 1/3)
+2026-08-15 22:25:01.378 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_B' (connected: 3/9)
+2026-08-15 22:25:01.378 DEBUG  Queuing item for routing: Pin on net 'SD_PWR' (connected: 3/9)
+2026-08-15 22:25:01.380 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_A' (connected: 1/2)
+2026-08-15 22:25:01.380 DEBUG  Queuing item for routing: Pin on net 'SD_PWR_ON' (connected: 1/3)
+2026-08-15 22:25:01.381 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_B' (connected: 3/9)
+2026-08-15 22:25:01.383 DEBUG  Queuing item for routing: Pin on net 'SD_PWR_ON' (connected: 1/3)
+2026-08-15 22:25:01.383 DEBUG  Queuing item for routing: Pin on net 'SD_DAT2' (connected: 1/2)
+2026-08-15 22:25:01.383 DEBUG  Queuing item for routing: Pin on net 'SD_DAT1' (connected: 1/2)
+2026-08-15 22:25:01.383 DEBUG  Queuing item for routing: Pin on net 'SD_DAT0' (connected: 1/2)
+2026-08-15 22:25:01.384 DEBUG  Queuing item for routing: Pin on net 'SD_CMD' (connected: 1/2)
+2026-08-15 22:25:01.384 DEBUG  Queuing item for routing: Pin on net 'SD_DAT3' (connected: 1/2)
+2026-08-15 22:25:01.384 DEBUG  Queuing item for routing: Pin on net 'SD_CLK' (connected: 1/2)
+2026-08-15 22:25:01.407 DEBUG  Queuing item for routing: Pin on net '+3V3' (connected: 1/11)
+2026-08-15 22:25:01.408 DEBUG  Queuing item for routing: Pin on net 'GND' (connected: 1/27)
+2026-08-15 22:25:05.268 DEBUG  [D4FBD5\190B50] Pass #1: 16 incompletes across 29 items to route
+2026-08-15 22:25:05.268 DEBUG  [D4FBD5\190B50]   Net 'GND' has 1 incomplete(s)
+2026-08-15 22:25:05.268 DEBUG  [D4FBD5\190B50]   Net '+3V3' has 1 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'nPI_LED_PWR' has 1 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_CLK' has 1 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_DAT3' has 1 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_CMD' has 1 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_DAT0' has 1 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_DAT1' has 1 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_DAT2' has 1 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_PWR_ON' has 2 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_DETECT_B' has 2 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_PWR' has 2 incomplete(s)
+2026-08-15 22:25:05.269 DEBUG  [D4FBD5\190B50]   Net 'SD_DETECT_A' has 1 incomplete(s)
+2026-08-15 22:25:09.262 DEBUG  PolylineTrace.normalize: max normalization depth (16) reached for trace #3387 on net 81 — stopping recursion, trace kept as-is.
+2026-08-15 22:25:17.212 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:25:18.640 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #1 at corner 43/43 on layer 3, trace width: 1250, from corner: 3, ok_point: (2297259,-1056546), target: (2106000,-1162000)
+2026-08-15 22:25:18.665 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin #1 of component #1, conductionarea, conductionarea, because the new connection could not be inserted.
+2026-08-15 22:25:31.315 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #214 at corner 46/46 on layer 3, trace width: 750, from corner: 33, ok_point: (1703748,-1316648), target: (1631901,-1319900)
+2026-08-15 22:25:31.335 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between pin #66 of component #223 and pin #7 of component #304, because the new connection could not be inserted.
+2026-08-15 22:25:35.625 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #213 at corner 51/51 on layer 3, trace width: 750, from corner: 43, ok_point: (1703718,-1316648), target: (1631901,-1319900)
+2026-08-15 22:25:35.652 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between pin #62 of component #223 and pin #6 of component #304, because the new connection could not be inserted.
+2026-08-15 22:25:40.580 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #210 at corner 17/17 on layer 3, trace width: 750, from corner: 9, ok_point: (1703000,-1316648), target: (1631901,-1319900)
+2026-08-15 22:25:40.610 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between pin #56 of component #223 and pin #4 of component #304, because the new connection could not be inserted.
+2026-08-15 22:25:49.491 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #212 at corner 51/51 on layer 3, trace width: 750, from corner: 37, ok_point: (1711413,-1316012), target: (1642689,-1292665)
+2026-08-15 22:25:49.516 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between pin #61 of component #223 and pin #2 of component #304, because the new connection could not be inserted.
+2026-08-15 22:26:02.383 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #262 at corner 36/36 on layer 3, trace width: 750, from corner: 1, ok_point: (2025132,-1312206), target: (1321884,-1323116)
+2026-08-15 22:26:02.410 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, via, pin of component #276 and polylinetrace, polylinetrace, polylinetrace, via, via, pin #3 of component #304, pin of component #284, because the new connection could not be inserted.
+2026-08-15 22:26:49.337 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #212 at corner 59/59 on layer 3, trace width: 750, from corner: 28, ok_point: (1708585,-1313397), target: (2080629,-1326852)
+2026-08-15 22:26:49.357 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, polylinetrace, via, pin #2 of component #304 and pin #61 of component #223, because the new connection could not be inserted.
+2026-08-15 22:26:49.359 DEBUG  [D4FBD5\190B50] Pass #1: Failed to route Pin on net 'SD_CMD' (5 items remaining, 1 failures). State: FAILED
+2026-08-15 22:26:53.290 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #211 at corner 41/41 on layer 3, trace width: 750, from corner: 22, ok_point: (1911487,-1321750), target: (2059033,-1326859)
+2026-08-15 22:26:53.317 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, polylinetrace, via, pin #1 of component #304 and polylinetrace, via, pin #60 of component #223, because the new connection could not be inserted.
+2026-08-15 22:26:53.317 DEBUG  [D4FBD5\190B50] Pass #1: Failed to route Pin on net 'SD_DAT3' (4 items remaining, 1 failures). State: FAILED
+2026-08-15 22:26:57.366 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #210 at corner 44/44 on layer 3, trace width: 750, from corner: 12, ok_point: (1899822,-1323252), target: (2100200,-1310633)
+2026-08-15 22:26:57.389 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, via, pin #4 of component #304 and pin #56 of component #223, because the new connection could not be inserted.
+2026-08-15 22:26:57.389 DEBUG  [D4FBD5\190B50] Pass #1: Failed to route Pin on net 'SD_CLK' (3 items remaining, 1 failures). State: FAILED
+2026-08-15 22:27:16.456 INFO   [D4FBD5\190B50] Auto-routing pass #1 on board 'd94a379b483019a0ab1d5d3a2e4fc29e' was completed in 135.11 seconds with the score of 0.00 (10 unrouted and 167 violations), using 142.95 CPU seconds and the job allocated 155.95 GB of memory so far.
+2026-08-15 22:27:23.891 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 3/11)
+2026-08-15 22:27:23.892 DEBUG  Queuing item for routing: Via on net 'nPI_LED_PWR' (connected: 8/11)
+2026-08-15 22:27:23.906 DEBUG  Queuing item for routing: PolylineTrace on net 'GND' (connected: 14/27)
+2026-08-15 22:27:23.907 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_A' (connected: 4/7)
+2026-08-15 22:27:23.907 DEBUG  Queuing item for routing: Pin on net 'SD_DAT1' (connected: 3/6)
+2026-08-15 22:27:23.907 DEBUG  Queuing item for routing: Pin on net 'SD_DAT0' (connected: 4/8)
+2026-08-15 22:27:23.907 DEBUG  Queuing item for routing: Pin on net 'SD_CLK' (connected: 3/7)
+2026-08-15 22:27:23.907 DEBUG  Queuing item for routing: Pin on net 'SD_PWR' (connected: 7/10)
+2026-08-15 22:27:23.907 DEBUG  Queuing item for routing: Pin on net 'SD_CMD' (connected: 4/7)
+2026-08-15 22:27:23.907 DEBUG  Queuing item for routing: Pin on net 'SD_DAT3' (connected: 4/7)
+2026-08-15 22:27:23.907 DEBUG  Queuing item for routing: Pin on net 'SD_DAT2' (connected: 3/7)
+2026-08-15 22:27:23.908 DEBUG  Queuing item for routing: Pin on net 'SD_PWR' (connected: 3/10)
+2026-08-15 22:27:23.909 DEBUG  Queuing item for routing: Pin on net 'SD_DETECT_A' (connected: 3/7)
+2026-08-15 22:27:23.910 DEBUG  Queuing item for routing: Pin on net 'SD_DAT2' (connected: 4/7)
+2026-08-15 22:27:23.910 DEBUG  Queuing item for routing: Pin on net 'SD_DAT1' (connected: 3/6)
+2026-08-15 22:27:23.910 DEBUG  Queuing item for routing: Pin on net 'SD_DAT0' (connected: 4/8)
+2026-08-15 22:27:23.910 DEBUG  Queuing item for routing: Pin on net 'SD_CMD' (connected: 3/7)
+2026-08-15 22:27:23.910 DEBUG  Queuing item for routing: Pin on net 'SD_DAT3' (connected: 3/7)
+2026-08-15 22:27:23.911 DEBUG  Queuing item for routing: Pin on net 'SD_CLK' (connected: 4/7)
+2026-08-15 22:27:23.919 DEBUG  Queuing item for routing: Pin on net 'GND' (connected: 1/27)
+2026-08-15 22:27:27.444 DEBUG  [D4FBD5\190B50] Pass #2: 10 incompletes across 20 items to route
+2026-08-15 22:27:27.444 DEBUG  [D4FBD5\190B50]   Net 'GND' has 1 incomplete(s)
+2026-08-15 22:27:27.444 DEBUG  [D4FBD5\190B50]   Net 'nPI_LED_PWR' has 1 incomplete(s)
+2026-08-15 22:27:27.444 DEBUG  [D4FBD5\190B50]   Net 'SD_CLK' has 1 incomplete(s)
+2026-08-15 22:27:27.445 DEBUG  [D4FBD5\190B50]   Net 'SD_DAT3' has 1 incomplete(s)
+2026-08-15 22:27:27.445 DEBUG  [D4FBD5\190B50]   Net 'SD_CMD' has 1 incomplete(s)
+2026-08-15 22:27:27.445 DEBUG  [D4FBD5\190B50]   Net 'SD_DAT0' has 1 incomplete(s)
+2026-08-15 22:27:27.445 DEBUG  [D4FBD5\190B50]   Net 'SD_DAT1' has 1 incomplete(s)
+2026-08-15 22:27:27.445 DEBUG  [D4FBD5\190B50]   Net 'SD_DAT2' has 1 incomplete(s)
+2026-08-15 22:27:27.445 DEBUG  [D4FBD5\190B50]   Net 'SD_PWR' has 1 incomplete(s)
+2026-08-15 22:27:27.445 DEBUG  [D4FBD5\190B50]   Net 'SD_DETECT_A' has 1 incomplete(s)
+2026-08-15 22:27:31.199 DEBUG  PolylineTrace.normalize: max normalization depth (16) reached for trace #6829 on net 81 — stopping recursion, trace kept as-is.
+2026-08-15 22:27:34.900 DEBUG  FloatLine: one or both endpoints are null (degenerate line segment)
+2026-08-15 22:27:36.265 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #1 at corner 43/43 on layer 3, trace width: 1250, from corner: 3, ok_point: (2297259,-1056546), target: (2106000,-1162000)
+2026-08-15 22:27:36.288 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace and via, via, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, polylinetrace, pin #1 of component #1, conductionarea, conductionarea, because the new connection could not be inserted.
+2026-08-15 22:27:44.302 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #214 at corner 56/56 on layer 3, trace width: 750, from corner: 10, ok_point: (2029674,-1316748), target: (1625231,-1319813)
+2026-08-15 22:27:44.331 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, via, pin #66 of component #223 and polylinetrace, via, pin #7 of component #304, because the new connection could not be inserted.
+2026-08-15 22:27:56.367 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #262 at corner 44/44 on layer 3, trace width: 750, from corner: 1, ok_point: (2025132,-1312206), target: (1321884,-1323116)
+2026-08-15 22:27:56.390 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, via, pin of component #276 and polylinetrace, polylinetrace, polylinetrace, via, via, pin #3 of component #304, pin of component #284, because the new connection could not be inserted.
+2026-08-15 22:28:00.412 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #212 at corner 57/57 on layer 3, trace width: 750, from corner: 24, ok_point: (2029674,-1316748), target: (1643000,-1279542)
+2026-08-15 22:28:00.457 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, via, pin #61 of component #223 and polylinetrace, polylinetrace, via, pin #2 of component #304, because the new connection could not be inserted.
+2026-08-15 22:28:08.759 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #215 at corner 20/20 on layer 3, trace width: 750, from corner: 10, ok_point: (1927351,-1327376), target: (1630028,-1295621)
+2026-08-15 22:28:08.786 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, polylinetrace, via, pin #68 of component #223 and polylinetrace, via, pin of component #304, because the new connection could not be inserted.
+2026-08-15 22:28:35.135 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #212 at corner 42/42 on layer 3, trace width: 750, from corner: 20, ok_point: (1908215,-1321750), target: (2080629,-1326852)
+2026-08-15 22:28:35.161 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, polylinetrace, via, pin #2 of component #304 and polylinetrace, via, pin #61 of component #223, because the new connection could not be inserted.
+2026-08-15 22:28:35.161 DEBUG  [D4FBD5\190B50] Pass #2: Failed to route Pin on net 'SD_CMD' (4 items remaining, 2 failures). State: FAILED
+2026-08-15 22:28:39.494 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #211 at corner 28/28 on layer 3, trace width: 750, from corner: 9, ok_point: (1899822,-1323252), target: (2059033,-1326859)
+2026-08-15 22:28:39.516 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, polylinetrace, via, pin #1 of component #304 and polylinetrace, via, pin #60 of component #223, because the new connection could not be inserted.
+2026-08-15 22:28:39.516 DEBUG  [D4FBD5\190B50] Pass #2: Failed to route Pin on net 'SD_DAT3' (3 items remaining, 2 failures). State: FAILED
+2026-08-15 22:28:43.575 DEBUG  InsertFoundConnectionAlgo: insert trace failed for net #210 at corner 50/50 on layer 3, trace width: 750, from corner: 20, ok_point: (1899822,-1323252), target: (2099210,-1313604)
+2026-08-15 22:28:43.599 DEBUG  [D4FBD5\190B50] Autorouter Failed to route connection between polylinetrace, via, pin #4 of component #304 and polylinetrace, polylinetrace, via, pin #56 of component #223, because the new connection could not be inserted.
+2026-08-15 22:28:43.599 DEBUG  [D4FBD5\190B50] Pass #2: Failed to route Pin on net 'SD_CLK' (2 items remaining, 2 failures). State: FAILED
+2026-08-15 22:28:59.352 INFO   [D4FBD5\190B50] Auto-routing pass #2 on board '6aa6f327068b1e16c35af3337f693494' was completed in 95.46 seconds with the score of 0.00 (10 unrouted and 167 violations), using 244.08 CPU seconds and the job allocated 269.01 GB of memory so far.
+2026-08-15 22:29:03.219 DEBUG  === Performance Profile ===
+2026-08-15 22:29:03.219 DEBUG  === Routing Parameters ===
+2026-08-15 22:29:03.219 DEBUG    Via Costs: 50, Plane Via Costs: 5
+2026-08-15 22:29:03.219 DEBUG    Layer Costs (Preferred / Against):
+2026-08-15 22:29:03.219 DEBUG      Layer 1: 2,2 / 5,1
+2026-08-15 22:29:03.220 DEBUG      Layer 2: 1,0 / 1,3
+2026-08-15 22:29:03.220 DEBUG      Layer 3: 1,0 / 3,9
+2026-08-15 22:29:03.220 DEBUG      Layer 4: 1,0 / 1,3
+2026-08-15 22:29:03.220 DEBUG      Layer 5: 1,0 / 3,9
+2026-08-15 22:29:03.220 DEBUG      Layer 6: 2,2 / 2,5
+2026-08-15 22:29:03.220 DEBUG  
+2026-08-15 22:29:03.221 DEBUG    autoroute_item                          :    10507 ms total,       49 calls,    214 ms avg
+2026-08-15 22:29:03.221 DEBUG  
+2026-08-15 22:29:03.221 DEBUG  === Pass History ===
+2026-08-15 22:29:03.222 DEBUG    Pass 1  :   10 unrouted items,   131,57 s,   100 ripup cost
+2026-08-15 22:29:03.222 DEBUG    Pass 2  :   10 unrouted items,    91,64 s,   200 ripup cost
+2026-08-15 22:29:03.222 DEBUG  ===========================
+2026-08-15 22:29:07.638 INFO   [D4FBD5\190B50] Auto-routing stage completed: started with 16 unrouted nets, completed in 253.43 seconds, final score: 0.00 (10 unrouted and 167 violations), using 251.70 total CPU seconds, 276.99 GB total allocated, and 424.5 MB peak heap usage.
+2026-08-15 22:29:07.646 DEBUG  [D4FBD5\190B50] Before optimization: Via count: 41, trace length: 8700576
+2026-08-15 22:29:11.897 INFO   [D4FBD5\190B50] Optimization stage started on board 'f134ce62ace83a8abbdec9d5b2b26296' with score 0.00 (10 unrouted and 167 violations).
+2026-08-15 22:29:26.052 INFO   [D4FBD5\190B50] Optimizer pass #1 on board 'efe91e6064aef094233e84a5bd194052' was completed in 2.01 seconds with the score of 0.00 (10 unrouted and 167 violations).
+2026-08-15 22:29:43.975 INFO   [D4FBD5\190B50] Optimizer pass #2 on board 'efe91e6064aef094233e84a5bd194052' was completed in 1.62 seconds with the score of 0.00 (10 unrouted and 167 violations).
+2026-08-15 22:29:47.895 INFO   [D4FBD5\190B50] Stopping optimizer because the improvement in this pass (0.0000%) is below the threshold (1.00%).
+2026-08-15 22:29:51.696 INFO   [D4FBD5\190B50] Optimization stage completed: started with score 0.00 (10 unrouted and 167 violations), completed in 36.00 seconds, final score: 0.00 (10 unrouted and 167 violations), using 35.06 total CPU seconds, 38.66 GB total allocated, and 241.7 MB peak heap usage.
+2026-08-15 22:29:51.698 INFO   [D4FBD5\190B50] Job 'D4FBD5\190B50' finished with state: COMPLETED (elapsed: 5 minutes 2.01 seconds, finished at UTC: 2026-08-15T20:29:51.696948100Z).

@@ -1,0 +1,197 @@
+(footprint "L_Abracon_ASPI-4030S"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "smd shielded power inductor 4x4x3mm, Abracon ASPI-4030S, https://abracon.com/Magnetics/power/ASPI-4030S.pdf")
+	(tags "inductor abracon smd shielded")
+	(property "Reference" "L203"
+		(at 0 -3 180)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "aee13e20-c0d0-4b2c-b4b9-0241d1e22dd6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "2.2uH"
+		(at 0 3 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "bdc62831-2e79-4700-8ad8-72f2639ade1e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "33ed16e5-b4ac-4a71-b5d7-ef7b7b024deb")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "be4b33d3-89c4-4910-809a-e700aba70b04")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.99 -2.12)
+		(end 1.99 -2.12)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b5f7efb9-ffab-4898-a3fc-4a2253766bba")
+	)
+	(fp_line
+		(start -1.99 2.12)
+		(end 1.99 2.12)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "1c969cac-357b-4352-bb5d-74c2df592543")
+	)
+	(fp_line
+		(start -2.3 -2.25)
+		(end -2.3 2.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "f3af49ec-bdd3-4a2c-957c-3d36fd3bf6cf")
+	)
+	(fp_line
+		(start -2.3 2.25)
+		(end 2.3 2.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b26cf836-3d04-4464-a120-580fec9a94aa")
+	)
+	(fp_line
+		(start 2.3 -2.25)
+		(end -2.3 -2.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "1e9a7284-fbdb-405f-89ce-b082bec72a45")
+	)
+	(fp_line
+		(start 2.3 2.25)
+		(end 2.3 -2.25)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "9327019e-aa1c-48bd-93ba-aa8248963f3c")
+	)
+	(fp_line
+		(start -2 -2)
+		(end 2 -2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "bf9dca10-1f2e-465b-8acc-45d1515e28fa")
+	)
+	(fp_line
+		(start -2 2)
+		(end -2 -2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "0c1ac4f2-2850-4d95-a774-fdc5d4e21908")
+	)
+	(fp_line
+		(start 2 -2)
+		(end 2 2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "c5ff9d7e-e6dd-4c91-af51-35b181f18e16")
+	)
+	(fp_line
+		(start 2 2)
+		(end -2 2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "a8e0dcbf-ab6f-4a1e-bffa-033df4f22a5b")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(uuid "c9a7985f-c107-4796-bd86-4691c1eecee8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at -1.5 0)
+		(size 1.1 3.4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.1)
+		(uuid "109f287e-ec23-40b4-87ab-b6459ff0579f")
+	)
+	(pad "2" smd roundrect
+		(at 1.5 0)
+		(size 1.1 3.4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.1)
+		(uuid "b2572597-a718-40ea-99ca-542f38b570ca")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/libraries/3dmodels/Display_Final/ASPI-4030S.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)
