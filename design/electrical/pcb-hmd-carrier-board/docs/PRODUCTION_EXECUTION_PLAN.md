@@ -16,8 +16,8 @@ every electrical, safety, mechanical and validation gate below is closed.
 - The complete J301 microSD circuit is present on the main PCB. The primary Rev A
   CM4 Lite BOM populates it; the optional eMMC BOM marks it DNP on the same PCB.
 - Geometry/manufacturing DRC is clean using three documented exact-footprint rules.
-  The promoted first routing stage contains 627 segments and 127 vias, with 866
-  physical open edges across 214 incomplete nets and no known shorts. KiCad's
+  The validated routing baseline contains 1,077 segments and 213 vias, with 817
+  physical open edges across 184 incomplete nets and no known shorts. KiCad's
   text DRC display is capped at 499 unconnected items; the uncapped count comes
   from `output/production-audit/ROUTING_AUDIT-production-current.md`.
 - The approved edge-cut envelope is 145.70 x 49.82 mm. Future shell CAD must use
@@ -41,6 +41,12 @@ every electrical, safety, mechanical and validation gate below is closed.
 | Full board2 schematic/netlist reconciliation | Complete at PCB-authority level; vendor-symbol audit pending |
 | Final routing and power sequencing | In progress; depends on the gates below |
 | Fabrication outputs | Withheld |
+
+The 2026-08-20 routing review retained 28 additional DRC-clean low-speed nets.
+The power and MIPI autorouter candidates were rejected: the power candidate crossed
+validated signal copper, while both MIPI candidates violated production-width
+clearance and failed paired-net completeness. Those candidates remain under
+`output/production-audit/` for review and were not merged into the release baseline.
 
 ## 1. Gated inputs
 

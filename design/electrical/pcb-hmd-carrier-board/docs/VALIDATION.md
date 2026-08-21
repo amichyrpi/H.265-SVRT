@@ -1,6 +1,6 @@
 # Carrier board 2 validation checkpoint
 
-Validation date: 2026-08-15, KiCad 10.0.5.
+Validation date: 2026-08-20, KiCad 10.0.5.
 
 This is a placement/DFM checkpoint. It is not a fabrication release.
 
@@ -32,11 +32,13 @@ This is a placement/DFM checkpoint. It is not a fabrication release.
 - microSD footprints: 6 on the main PCB, populated for the primary CM4 Lite
   assembly and DNP only in the optional eMMC assembly.
 - Named nets represented by pads/copper: 278.
-- Nets containing any routed copper: 14.
-- Tracks/vias: 120.
+- Nets containing any routed copper: 94.
+- Tracks/vias: 1,290 (1,077 segments and 213 vias).
 - Copper zones: 2.
 - Geometry/manufacturing DRC: **0 violations**.
-- Unconnected items: **499**.
+- Unconnected items displayed by KiCad: **499** (reporting cap).
+- Uncapped connectivity audit: **817 physical open edges across 184 incomplete nets**.
+- Electrically complete high-speed differential pairs: **0/38**.
 - Known accidental shorts: **0**.
 
 The zero geometry result uses only three local manufacturer-footprint rules in
@@ -68,7 +70,8 @@ symbols as restricted source documents become available.
 The complete J301/U301/C301/R301-R303 native SD circuit is on the main PCB. The
 primary CM4 Lite assembly fits J301/U301/C301/R301; R302/R303 remain configurable
 DNP links. The optional CM4 eMMC assembly DNPs the complete SD block while using
-the same physical board.
+the same physical board. `SD_DAT0` and `SD_CLK` are presently complete; the other
+eight microSD nets remain in the routing release gate.
 
 ## Review exports
 

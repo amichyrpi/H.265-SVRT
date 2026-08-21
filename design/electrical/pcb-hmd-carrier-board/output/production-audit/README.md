@@ -7,8 +7,8 @@ Generated from `pcb-hmd-carrier-board2.kicad_pcb`. This is a review checkpoint, 
 - Footprints: 312 (4 marked DNP)
 - Footprints containing at least one 3D model reference: 265/312
 - Named nets represented by pads or copper: 278
-- Nets with any track/via copper: 66/278
-- Board tracks/vias: 789
+- Nets with any track/via copper: 94/278
+- Board tracks/vias: 1290
 - Copper zones: 2
 - Existing schematic components: 312
 - PCB-only BOM references: 0
@@ -16,6 +16,8 @@ Generated from `pcb-hmd-carrier-board2.kicad_pcb`. This is a review checkpoint, 
 - Fitted BOM references missing one or more sourcing fields: 261/261
 - Production DRC geometry violations: 0
 - Unconnected pads at this checkpoint: 499
+- Uncapped connectivity: 817 physical open edges across 184 incomplete nets
+- Electrically complete high-speed differential pairs: 0/38
 
 ## Release status
 

@@ -14,7 +14,9 @@ Generated before new production routing.
 - Board BOM references: **265**
 - PCB-only references still requiring schematic recovery: **0**
 - Schematic-only references requiring reconciliation: **0**
-- DRC checkpoint: **0 placement/footprint violations, 499 unconnected items**
+- DRC checkpoint: **0 geometry violations; KiCad displays 499 unconnected items**
+- Current uncapped routing checkpoint: **817 physical open edges across 184 incomplete nets**
+- Current copper: **1,077 segments and 213 vias**
 
 ## Remaining unrouted nets by functional block
 

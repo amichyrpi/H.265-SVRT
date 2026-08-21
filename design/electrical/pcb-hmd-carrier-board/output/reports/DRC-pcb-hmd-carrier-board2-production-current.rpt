@@ -1,5 +1,5 @@
 ** Drc report for pcb-hmd-carrier-board2.kicad_pcb **
-** Created on 2026-08-15T22:45:27 **
+** Created on 2026-08-20T21:34:37 **
 ** Report includes: Errors, Warnings, Exclusions **
 
 ** Found 0 DRC violations **
@@ -140,7 +140,7 @@
 [unconnected_items]: Missing connection between items
     Local override; error
     @(113.3500 mm, 124.5000 mm): Pad 7 [GND] of U2 on B.Cu
-    @(114.9000 mm, 128.1500 mm): Pad A1 [GND] of J9 on F.Cu
+    @(114.9000 mm, 128.1500 mm): Pad B12 [GND] of J9 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
     @(115.5000 mm, 113.5000 mm): Pad 3 [GND] of U7 on F.Cu
@@ -1359,12 +1359,12 @@
     @(226.0800 mm, 115.1500 mm): Pad 3 [GND] of U9 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(228.1250 mm, 101.0000 mm): Track [GND] on GND2, length 32.1250 mm
+    @(230.0000 mm, 102.8750 mm): Track [GND] on GND2, length 2.6517 mm
     @(228.5000 mm, 102.1500 mm): Pad 12 [GND] of U210 on B.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
     @(228.5000 mm, 95.6500 mm): Pad 2 [GND] of U210 on B.Cu
-    @(228.1250 mm, 101.0000 mm): Track [GND] on GND2, length 32.1250 mm
+    @(230.0000 mm, 102.8750 mm): Track [GND] on GND2, length 2.6517 mm
 [unconnected_items]: Missing connection between items
     Local override; error
     @(229.5200 mm, 122.5000 mm): Pad 2 [GND] of C281 on B.Cu
@@ -1383,7 +1383,7 @@
     @(231.4800 mm, 127.5000 mm): Pad 2 [GND] of R280 on B.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(230.0000 mm, 102.8750 mm): Track [GND] on F.Cu, length 0.3182 mm
+    @(230.2250 mm, 102.6500 mm): Track [GND] on F.Cu, length 1.6000 mm
     @(232.5100 mm, 104.0000 mm): Pad 2 [GND] of R9 on B.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
@@ -1875,10 +1875,6 @@
     @(214.5500 mm, 102.9600 mm): Pad 7 [LCD_VSN] of J202 on F.Cu
 [unconnected_items]: Missing connection between items
     Local override; error
-    @(117.0000 mm, 104.5000 mm): Pad 1 [L_S1_TEST] of TP260 on F.Cu
-    @(123.6000 mm, 104.5000 mm): Pad 8 [L_S1_TEST] of J201 on F.Cu
-[unconnected_items]: Missing connection between items
-    Local override; error
     @(124.6500 mm, 104.5000 mm): Pad 11 [L_DSIA_D0_N] of J201 on F.Cu
     @(144.2000 mm, 106.7000 mm): Pad H9 [L_DSIA_D0_N] of U201 on F.Cu
 [unconnected_items]: Missing connection between items
@@ -2001,6 +1997,10 @@
     Local override; error
     @(122.2000 mm, 102.9600 mm): Pad 47 [L_LED2_N] of J201 on F.Cu
     @(203.0000 mm, 114.5000 mm): Pad 14 [L_LED2_N] of U208 on B.Cu
+[unconnected_items]: Missing connection between items
+    Local override; error
+    @(115.0000 mm, 101.0000 mm): Pad 1 [L_LCD_LEDPWM] of TP262 on F.Cu
+    @(110.4900 mm, 102.5000 mm): Pad 1 [L_LCD_LEDPWM] of R261 on F.Cu
 
 ** Found 0 Footprint errors **
 
