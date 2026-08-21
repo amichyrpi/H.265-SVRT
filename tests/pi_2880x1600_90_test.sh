@@ -10,7 +10,7 @@ pid=
 
 cleanup() {
     test -z "$pid" || kill "$pid" 2>/dev/null || true
-    rm -f "$log"
+    rm -f "$log" /tmp/svrt-test-2880x1600-90-aud.hevc
 }
 trap cleanup EXIT INT TERM
 
@@ -19,8 +19,9 @@ test -s "$stream"
 pid=$!
 sleep 1
 started=$(date +%s%N)
-ffmpeg -hide_banner -loglevel error -r 90 -f hevc -i "$stream" -c:v copy \
-  -f mpegts "tcp://127.0.0.1:${port}?tcp_nodelay=1"
+prepared=/tmp/svrt-test-2880x1600-90-aud.hevc
+ffmpeg -y -hide_banner -loglevel error -r 90 -f hevc -i "$stream" -c:v copy -bsf:v hevc_metadata=aud=insert -f hevc "$prepared"
+python3 "$(dirname "$0")/../scripts/stearlight-send.py" "$prepared" 127.0.0.1 "$port" --fps 90
 complete=0
 for attempt in $(seq 1 100); do
     if grep -q "$frames decoded, $frames shown, 0 dropped" "$log"; then

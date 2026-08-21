@@ -181,14 +181,14 @@ static int decode(svrt_context *c,AVRational time_base,uint64_t packet_pts_us,in
 int svrt_run(svrt_context *c){
     if(!c)return -1;
     svrt_pipe_config pc={.bind_address=c->cfg.bind_address,.port=c->cfg.port,.interrupt=interrupted,.opaque=c};
-    fprintf(stderr,"SVRT: listening for main MPEG-TS on TCP %u\n",c->cfg.port);
+    fprintf(stderr,"SVRT: listening for Stearlight HEVC/FEC on UDP %u\n",c->cfg.port);
     int rc=svrt_pipe_listen(&c->pipe,&pc,c->error,sizeof(c->error));
     if(!rc)rc=open_video(c,svrt_pipe_video_parameters(c->pipe));
     if(!rc){
         AVRational time_base=svrt_pipe_time_base(c->pipe);c->decoder->pkt_timebase=time_base;
         while(!atomic_load(&c->stopping)){
             SDL_Event e;while(!c->cfg.headless&&SDL_PollEvent(&e))if(e.type==SDL_QUIT)atomic_store(&c->stopping,1);
-            rc=svrt_pipe_read(c->pipe,c->packet);if(rc<0)break;
+            rc=svrt_pipe_read(c->pipe,c->packet);if(rc<0)break;if(svrt_pipe_take_decoder_reset(c->pipe)){avcodec_flush_buffers(c->decoder);fprintf(stderr,"SVRT: new video session; decoder reset at keyframe\n");}else if(svrt_pipe_take_discontinuity(c->pipe))fprintf(stderr,"SVRT: video continuity restored at keyframe\n");
             atomic_fetch_add(&c->stats.access_units,1);atomic_fetch_add(&c->stats.bytes_received,(uint64_t)c->packet->size);
             uint64_t pts_us=c->packet->pts==AV_NOPTS_VALUE?UINT64_MAX:(uint64_t)av_rescale_q(c->packet->pts,time_base,AV_TIME_BASE_Q);
             if(pts_us!=UINT64_MAX){atomic_store(&c->stats.last_pts_us,pts_us);packet_event(c,SVRT_PACKET_RECEIVED,pts_us);}
@@ -201,6 +201,6 @@ int svrt_run(svrt_context *c){
     return c->error[0]?-1:0;
 }
 void svrt_stop(svrt_context *c){if(c)atomic_store(&c->stopping,1);}
-void svrt_get_stats(const svrt_context *c,svrt_stats *out){if(c&&out)*out=(svrt_stats){.access_units=atomic_load(&c->stats.access_units),.decoded_frames=atomic_load(&c->stats.decoded_frames),.presented_frames=atomic_load(&c->stats.presented_frames),.dropped_frames=atomic_load(&c->stats.dropped_frames),.bytes_received=atomic_load(&c->stats.bytes_received),.last_pts_us=atomic_load(&c->stats.last_pts_us)};}
+void svrt_get_stats(const svrt_context *c,svrt_stats *out){if(c&&out){svrt_pipe_stats network={0};svrt_pipe_get_stats(c->pipe,&network);*out=(svrt_stats){.access_units=atomic_load(&c->stats.access_units),.decoded_frames=atomic_load(&c->stats.decoded_frames),.presented_frames=atomic_load(&c->stats.presented_frames),.dropped_frames=atomic_load(&c->stats.dropped_frames),.bytes_received=atomic_load(&c->stats.bytes_received),.last_pts_us=atomic_load(&c->stats.last_pts_us),.invalid_packets=network.invalid_packets,.fec_recovered_shards=network.recovered_shards,.network_dropped_frames=network.expired_frames};}}
 const char *svrt_last_error(const svrt_context *c){return c?c->error:"invalid context";}
 void svrt_close(svrt_context **ptr){if(!ptr||!*ptr)return;svrt_context *c=*ptr;*ptr=NULL;atomic_store(&c->stopping,1);svrt_pipe_close(&c->pipe);svrt_pipe_close(&c->extra_pipe);svrt_drm_close(&c->drm);if(c->texture)SDL_DestroyTexture(c->texture);if(c->renderer)SDL_DestroyRenderer(c->renderer);if(c->window)SDL_DestroyWindow(c->window);SDL_Quit();av_packet_free(&c->packet);av_frame_free(&c->frame);avcodec_free_context(&c->decoder);av_buffer_unref(&c->hw_device);av_packet_free(&c->extra_packet);av_frame_free(&c->extra_decode_frame);for(unsigned i=0;i<SVRT_EXTRA_SLOTS;i++)av_frame_free(&c->extra_slots[i]);av_frame_free(&c->present_main);av_frame_free(&c->present_extra);avcodec_free_context(&c->extra_decoder);pthread_cond_destroy(&c->extra_cond);pthread_mutex_destroy(&c->extra_mutex);pthread_cond_destroy(&c->present_cond);pthread_mutex_destroy(&c->present_mutex);free(c);}

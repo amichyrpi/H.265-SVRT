@@ -21,10 +21,15 @@ namespace {
 #pragma pack(push, 1)
 struct AudioHeader {
   char magic[4];
+  uint8_t version;
+  uint8_t type;
+  uint16_t header_size;
+  uint32_t sequence;
   uint32_t rate;
   uint16_t channels;
   uint16_t bits;
-  uint32_t format;  // 1 = PCM, 3 = IEEE float
+  uint16_t format;  // 1 = PCM, 3 = IEEE float
+  uint16_t payload_size;
 };
 #pragma pack(pop)
 
@@ -38,7 +43,8 @@ void log(const char *message) {
 SOCKET connect_audio(const std::string &host, uint16_t port) {
   addrinfo hints{};
   hints.ai_family = AF_UNSPEC;
-  hints.ai_socktype = SOCK_STREAM;
+  hints.ai_socktype = SOCK_DGRAM;
+  hints.ai_protocol = IPPROTO_UDP;
   char service[16];
   std::snprintf(service, sizeof(service), "%u", port);
   addrinfo *addresses = nullptr;
@@ -48,26 +54,7 @@ SOCKET connect_audio(const std::string &host, uint16_t port) {
   for (addrinfo *it = addresses; it; it = it->ai_next) {
     result = socket(it->ai_family, it->ai_socktype, it->ai_protocol);
     if (result != INVALID_SOCKET) {
-      u_long nonblocking = 1;
-      ioctlsocket(result, FIONBIO, &nonblocking);
-      const int connected = connect(result, it->ai_addr,
-                                    static_cast<int>(it->ai_addrlen));
-      if (connected == 0 || WSAGetLastError() == WSAEWOULDBLOCK) {
-        fd_set writes;
-        FD_ZERO(&writes); FD_SET(result, &writes);
-        timeval timeout{0, 750000};
-        int error = 0; int length = sizeof(error);
-        if (select(0, nullptr, &writes, nullptr, &timeout) > 0 &&
-            !getsockopt(result, SOL_SOCKET, SO_ERROR,
-                        reinterpret_cast<char *>(&error), &length) && !error) {
-          nonblocking = 0;
-          ioctlsocket(result, FIONBIO, &nonblocking);
-          DWORD io_timeout = 500;
-          setsockopt(result, SOL_SOCKET, SO_SNDTIMEO,
-                     reinterpret_cast<const char *>(&io_timeout), sizeof(io_timeout));
-          break;
-        }
-      }
+      if (connect(result,it->ai_addr,static_cast<int>(it->ai_addrlen))==0) break;
     }
     if (result != INVALID_SOCKET) closesocket(result);
     result = INVALID_SOCKET;
@@ -76,17 +63,6 @@ SOCKET connect_audio(const std::string &host, uint16_t port) {
   return result;
 }
 
-bool send_all(SOCKET socket, const void *data, size_t size) {
-  const char *cursor = static_cast<const char *>(data);
-  while (size) {
-    const int sent = send(socket, cursor,
-                          static_cast<int>(std::min<size_t>(size, INT_MAX)), 0);
-    if (sent <= 0) return false;
-    cursor += sent;
-    size -= static_cast<size_t>(sent);
-  }
-  return true;
-}
 }  // namespace
 
 SvrtAudioTransport::~SvrtAudioTransport() { Stop(); }
@@ -163,6 +139,7 @@ void SvrtAudioTransport::Run() {
     log(message);
   }
   SOCKET socket = INVALID_SOCKET;
+  uint32_t audio_sequence=0;
   std::vector<uint8_t> silence;
   while (running_ && SUCCEEDED(hr)) {
     if (!receiver_available_) {
@@ -176,16 +153,7 @@ void SvrtAudioTransport::Run() {
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         continue;
       }
-      AudioHeader header{{'S', 'V', 'R', 'A'}, htonl(mix->nSamplesPerSec),
-                         htons(mix->nChannels), htons(mix->wBitsPerSample),
-                         htonl(wire_format)};
-      if (!send_all(socket, &header, sizeof(header))) {
-        closesocket(socket);
-        socket = INVALID_SOCKET;
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-        continue;
-      }
-      log("connected to Raspberry Pi audio receiver");
+      log("sending audio to Raspberry Pi over UDP");
     }
     UINT32 packets = 0;
     const HRESULT packet_size_result = capture->GetNextPacketSize(&packets);
@@ -240,7 +208,8 @@ void SvrtAudioTransport::Run() {
       silence.assign(bytes, 0);
       data = silence.data();
     }
-    const bool sent = send_all(socket, data, bytes);
+    bool sent=true;size_t offset=0;constexpr size_t kPayload=1100;const size_t aligned_payload=(kPayload/mix->nBlockAlign)*mix->nBlockAlign;uint8_t datagram[sizeof(AudioHeader)+kPayload];
+    while(offset<bytes){const size_t part=std::min(aligned_payload,bytes-offset);AudioHeader header{{'S','V','R','A'},2,4,htons(sizeof(AudioHeader)),htonl(++audio_sequence),htonl(mix->nSamplesPerSec),htons(mix->nChannels),htons(mix->wBitsPerSample),htons(static_cast<uint16_t>(wire_format)),htons(static_cast<uint16_t>(part))};std::memcpy(datagram,&header,sizeof(header));std::memcpy(datagram+sizeof(header),data+offset,part);if(send(socket,reinterpret_cast<const char*>(datagram),static_cast<int>(sizeof(header)+part),0)==SOCKET_ERROR){sent=false;break;}offset+=part;}
     capture->ReleaseBuffer(frames);
     if (!sent) {
       closesocket(socket);

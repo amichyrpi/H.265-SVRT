@@ -19,6 +19,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND
 endif()
 option(SVRT_BUILD_VENDORED_SDL "Build SDL2 with KMSDRM support like Vanilla"
   ${SVRT_VENDORED_SDL_DEFAULT})
+add_subdirectory(protocol)
 add_subdirectory(pipe)
 add_subdirectory(lib)
 if(SVRT_BUILD_DRIVER)

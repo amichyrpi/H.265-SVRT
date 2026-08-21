@@ -1,4 +1,5 @@
 #include "network.h"
+#include "mdns_discovery.h"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -7,6 +8,7 @@
 #include <atomic>
 #include <chrono>
 #include <climits>
+#include <cstdio>
 #include <string>
 
 namespace {
@@ -115,10 +117,14 @@ bool svrt_request(const std::string &host, const std::string &request,
   if (WSAStartup(MAKEWORD(2, 2), &data)) return false;
   constexpr size_t kMaxResponse = 4096;
   const Deadline deadline = Clock::now() + std::chrono::seconds(3);
-  char service[] = "9945";
+  std::string target=host;uint16_t discovered_port=9945;
+  if(target.empty()||target=="auto"){
+    if(!stearlight_mdns_discover(target,discovered_port)){WSACleanup();return false;}
+  }
+  char service[16];std::snprintf(service,sizeof(service),"%u",discovered_port);
   PADDRINFOEXW addresses = nullptr;
   SOCKET socket = INVALID_SOCKET;
-  bool ok = resolve_until(host, service, deadline, &addresses);
+  bool ok = resolve_until(target, service, deadline, &addresses);
   if (ok) {
     for (PADDRINFOEXW it = addresses; it && Clock::now() < deadline;
          it = it->ai_next) {

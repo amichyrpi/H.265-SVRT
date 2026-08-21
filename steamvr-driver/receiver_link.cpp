@@ -1,4 +1,5 @@
 #include "receiver_link.h"
+#include <stearlight_protocol.h>
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -9,6 +10,7 @@
 #include <cstdio>
 #include <string>
 #include <windows.h>
+#include <random>
 
 namespace {
 using Clock = std::chrono::steady_clock;
@@ -159,17 +161,19 @@ bool SvrtReceiverLink::Start(std::string host, uint16_t port, unsigned poll_ms,
   // This request carries the tracking pose as well as receiver statistics.
   // A health-style one second cadence makes SteamVR hold each pose for a
   // second and then jump to the next one.  Permit a tracking-rate cadence.
-  poll_ms_ = std::max(10u, poll_ms);
+  poll_ms_ = std::max(1000u, poll_ms);
   // A pose arrives in the status reply, so it cannot be fresher than the
   // health-poll cadence. Keep it valid across ordinary scheduling jitter and
   // one delayed poll; disconnect handling still uses consecutive failures.
   // Retain a valid sample through an isolated Wi-Fi scheduling spike.  New
   // samples still replace it at tracking rate; this only controls when a
   // real sustained outage becomes lost tracking.
-  pose_freshness_ms_ = std::max(3000u, poll_ms_ * 3u);
+  pose_freshness_ms_ = 3000;
   latency_warning_ms_ = std::max(1u, latency_warning_ms);
   state_ = static_cast<int>(SvrtLinkState::Starting);
+  std::random_device random;session_id_=static_cast<uint32_t>(random())^static_cast<uint32_t>(GetTickCount64());if(!session_id_)session_id_=1;
   running_ = true;
+  tracking_thread_ = std::thread(&SvrtReceiverLink::TrackingRun, this);
   thread_ = std::thread(&SvrtReceiverLink::Run, this);
   return true;
 }
@@ -177,13 +181,32 @@ bool SvrtReceiverLink::Start(std::string host, uint16_t port, unsigned poll_ms,
 void SvrtReceiverLink::Stop() {
   running_ = false;
   if (thread_.joinable()) thread_.join();
+  if (tracking_thread_.joinable()) tracking_thread_.join();
+  tracking_port_=0;
   state_ = static_cast<int>(SvrtLinkState::Searching);
+}
+
+void SvrtReceiverLink::TrackingRun(){
+  WSADATA data{};if(WSAStartup(MAKEWORD(2,2),&data))return;
+  SOCKET socket_fd=socket(AF_INET6,SOCK_DGRAM,IPPROTO_UDP);if(socket_fd==INVALID_SOCKET){WSACleanup();return;}
+  DWORD off=0;setsockopt(socket_fd,IPPROTO_IPV6,IPV6_V6ONLY,reinterpret_cast<const char*>(&off),sizeof(off));
+  sockaddr_in6 bind_address{};bind_address.sin6_family=AF_INET6;bind_address.sin6_addr=in6addr_any;
+  if(bind(socket_fd,reinterpret_cast<const sockaddr*>(&bind_address),sizeof(bind_address))){closesocket(socket_fd);WSACleanup();return;}
+  int address_size=sizeof(bind_address);if(getsockname(socket_fd,reinterpret_cast<sockaddr*>(&bind_address),&address_size)){closesocket(socket_fd);WSACleanup();return;}
+  tracking_port_=ntohs(bind_address.sin6_port);DWORD timeout=100;setsockopt(socket_fd,SOL_SOCKET,SO_RCVTIMEO,reinterpret_cast<const char*>(&timeout),sizeof(timeout));
+  sockaddr_in6 receiver{};receiver.sin6_family=AF_INET6;receiver.sin6_port=htons(9947);sockaddr_in numeric4{};if(InetPtonA(AF_INET,host_.c_str(),&numeric4.sin_addr)==1){receiver.sin6_addr.u.Byte[10]=0xff;receiver.sin6_addr.u.Byte[11]=0xff;std::memcpy(&receiver.sin6_addr.u.Byte[12],&numeric4.sin_addr,4);}else{addrinfo hints{};hints.ai_family=AF_INET6;hints.ai_socktype=SOCK_DGRAM;hints.ai_flags=AI_V4MAPPED;addrinfo *resolved=nullptr;if(!getaddrinfo(host_.c_str(),"9947",&hints,&resolved)&&resolved){receiver=*reinterpret_cast<sockaddr_in6*>(resolved->ai_addr);freeaddrinfo(resolved);}}
+  uint64_t last_hello=0;
+  while(running_){const uint64_t now_ms=static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now().time_since_epoch()).count());if(!last_hello||now_ms-last_hello>1000){char hello[64];int length=std::snprintf(hello,sizeof(hello),"STEARLIGHT_TRACK %u",session_id_);sendto(socket_fd,hello,length,0,reinterpret_cast<const sockaddr*>(&receiver),sizeof(receiver));last_hello=now_ms;}stearlight_pose_packet packet;int received=recv(socket_fd,reinterpret_cast<char*>(&packet),sizeof(packet),0);if(received!=sizeof(packet))continue;stearlight_pose_info info;if(stearlight_pose_decode(&info,&packet,sizeof(packet))||info.session_id!=session_id_)continue;
+    SvrtPose pose;pose.valid=(info.flags&1)!=0;pose.connected=(info.flags&2)!=0;pose.result=static_cast<int>(info.result);pose.sequence=info.sequence;const int64_t adjusted=static_cast<int64_t>(info.timestamp_us)-clock_offset_us_.load();pose.timestamp_us=adjusted>0?static_cast<uint64_t>(adjusted):info.timestamp_us;unsigned n=0;for(unsigned i=0;i<3;i++)pose.position[i]=info.values[n++];for(unsigned i=0;i<4;i++)pose.quaternion[i]=info.values[n++];for(unsigned i=0;i<3;i++)pose.velocity[i]=info.values[n++];for(unsigned i=0;i<3;i++)pose.angular_velocity[i]=info.values[n++];
+    if(pose.connected&&pose.valid){std::lock_guard<std::mutex> lock(pose_mutex_);pose_=pose;pose_received_ms_=static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now().time_since_epoch()).count());}
+  }
+  closesocket(socket_fd);WSACleanup();
 }
 
 SvrtLinkStatus SvrtReceiverLink::GetStatus() const {
   SvrtLinkStatus status{static_cast<SvrtLinkState>(state_.load()),
                         latency_ms_.load(), decoded_.load(), presented_.load(),
-                        dropped_.load(), bytes_.load()};
+                        dropped_.load(), bytes_.load(),invalid_packets_.load(),fec_recovered_.load(),network_dropped_.load()};
   std::lock_guard<std::mutex> lock(pose_mutex_);
   status.pose = pose_;
   const uint64_t now_ms = static_cast<uint64_t>(
@@ -257,6 +280,7 @@ void SvrtReceiverLink::Run() {
     presented_ = status.presented;
     dropped_ = status.dropped;
     bytes_ = status.bytes;
+    invalid_packets_=status.invalid_packets;fec_recovered_=status.fec_recovered;network_dropped_=status.network_dropped;
     {
       std::lock_guard<std::mutex> lock(pose_mutex_);
       // A health reply and a tracking sample are independent.  Keep the last
@@ -326,37 +350,28 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
   }
   if (socket == INVALID_SOCKET) return false;
 
-  char request[64];
-  int request_size = std::snprintf(request, sizeof(request), "SVRT/1 PING %llu\n",
-                                   static_cast<unsigned long long>(nonce));
+  const uint16_t tracking_port=tracking_port_.load();if(!tracking_port){closesocket(socket);return false;}
+  const uint64_t t1=static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::microseconds>(Clock::now().time_since_epoch()).count());
+  char request[128];
+  int request_size = std::snprintf(request, sizeof(request), "SVRT/2 CONNECT %u %u %llu\n",session_id_,tracking_port,static_cast<unsigned long long>(t1));
   bool ok = send_all(socket, request, static_cast<size_t>(request_size));
   char response[768]{};
   const bool received = ok && receive_line(socket, response, sizeof(response));
   closesocket(socket);
   if (!received) return false;
 
-  unsigned long long reply_nonce = 0, decoded = 0, presented = 0, dropped = 0,
-                     bytes = 0, pose_sequence = 0, pose_timestamp = 0;
+  unsigned long long decoded = 0, presented = 0, dropped = 0,
+                     bytes = 0, invalid=0,recovered=0,network_dropped=0,reply_t1=0,t2=0,t3=0;
+  unsigned reply_session=0;
   int receiver_state = 0;
-  int pose_valid = 0, pose_connected = 0, pose_result = 101;
-  double px = 0, py = 0, pz = 0;
-  double qx = 0, qy = 0, qz = 0, qw = 1;
-  double vx = 0, vy = 0, vz = 0;
-  double avx = 0, avy = 0, avz = 0;
   const int fields = std::sscanf(
       response,
-      "SVRT/1 STATUS %llu %d %llu %llu %llu %llu "
-      "%d %d %d %llu %llu "
-      "%lf %lf %lf "
-      "%lf %lf %lf %lf "
-      "%lf %lf %lf "
-      "%lf %lf %lf",
-      &reply_nonce, &receiver_state, &decoded, &presented, &dropped, &bytes,
-      &pose_valid, &pose_connected, &pose_result, &pose_sequence,
-      &pose_timestamp,
-      &px, &py, &pz, &qx, &qy, &qz, &qw, &vx, &vy, &vz, &avx, &avy, &avz);
-  if ((fields != 6 && fields != 24) || reply_nonce != nonce)
+      "SVRT/2 ACCEPT %u %llu %llu %llu %d %llu %llu %llu %llu %llu %llu %llu",
+      &reply_session,&reply_t1,&t2,&t3,&receiver_state,&decoded,&presented,&dropped,&bytes,&invalid,&recovered,&network_dropped);
+  if(fields!=12||reply_session!=session_id_||reply_t1!=t1)
     return false;
+  const uint64_t t4=static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::microseconds>(Clock::now().time_since_epoch()).count());
+  clock_offset_us_=static_cast<int64_t>((static_cast<int64_t>(t2)-static_cast<int64_t>(t1)+static_cast<int64_t>(t3)-static_cast<int64_t>(t4))/2);
   status.latency_ms = static_cast<unsigned>(
       std::chrono::duration_cast<std::chrono::milliseconds>(Clock::now() - started)
           .count());
@@ -364,26 +379,7 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
   status.presented = presented;
   status.dropped = dropped;
   status.bytes = bytes;
-  if (fields == 24) {
-    status.pose.valid = pose_valid != 0;
-    status.pose.connected = pose_connected != 0;
-    status.pose.result = pose_result;
-    status.pose.sequence = pose_sequence;
-    status.pose.timestamp_us = pose_timestamp;
-    status.pose.position[0] = px;
-    status.pose.position[1] = py;
-    status.pose.position[2] = pz;
-    status.pose.quaternion[0] = qx;
-    status.pose.quaternion[1] = qy;
-    status.pose.quaternion[2] = qz;
-    status.pose.quaternion[3] = qw;
-    status.pose.velocity[0] = vx;
-    status.pose.velocity[1] = vy;
-    status.pose.velocity[2] = vz;
-    status.pose.angular_velocity[0] = avx;
-    status.pose.angular_velocity[1] = avy;
-    status.pose.angular_velocity[2] = avz;
-  }
+  status.invalid_packets=invalid;status.fec_recovered=recovered;status.network_dropped=network_dropped;
   if (receiver_state == 3)
     status.state = SvrtLinkState::ReceiverError;
   else if (receiver_state == 0)

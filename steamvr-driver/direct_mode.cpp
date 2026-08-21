@@ -1,4 +1,7 @@
+#include <winsock2.h>
+#include <ws2tcpip.h>
 #include "direct_mode.h"
+#include <stearlight_protocol.h>
 #include <dxgi1_2.h>
 #include <algorithm>
 #include <chrono>
@@ -6,6 +9,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cctype>
+#include <random>
 
 using Microsoft::WRL::ComPtr;
 static void debug(const char *s){char line[2304];std::snprintf(line,sizeof(line),"SVRT: %s",s);OutputDebugStringA(line);OutputDebugStringA("\n");if(vr::VRDriverLog())vr::VRDriverLog()->Log(line);}
@@ -37,7 +41,7 @@ uint64_t SvrtDirectMode::GraphicsAdapterLuid() const{
 bool SvrtDirectMode::Start(const std::string &host,uint16_t port,unsigned fps,unsigned bitrate,const std::string &ffmpeg,const std::string &encoder){
   std::lock_guard<std::mutex> lifecycle(lifecycle_mutex_);
   if (running_) return true;
-  host_=host;port_=port;fps_=fps?fps:60;bitrate_=bitrate?bitrate:12;ffmpeg_=ffmpeg.empty()?"ffmpeg.exe":ffmpeg;encoder_=encoder.empty()?"hevc_nvenc":encoder;
+  host_=host;port_=port;fps_=fps?fps:60;bitrate_=bitrate?bitrate:8;bitrate_ceiling_=bitrate_;ffmpeg_=ffmpeg.empty()?"ffmpeg.exe":ffmpeg;encoder_=encoder.empty()?"hevc_nvenc":encoder;
   encoder_failed_=false; accepting_=false;if(!EnsureDeviceLocked()){encoder_failed_=true;return false;}debugf("direct mode ready: receiver=%s:%u fps=%u bitrate=%uM encoder=%s",host_.c_str(),port_,fps_,bitrate_,encoder_.c_str());running_=true;accepting_=true;worker_=std::thread(&SvrtDirectMode::EncoderThread,this);return true;
 }
 void SvrtDirectMode::SetReceiverAvailable(bool available){
@@ -112,6 +116,15 @@ bool SvrtDirectMode::ConvertSlot(Slot &slot){
   D3D11_VIDEO_PROCESSOR_STREAM stream{};stream.Enable=TRUE;stream.pInputSurface=slot.input_view.Get();
   if(FAILED(video_context_->VideoProcessorBlt(video_processor_.Get(),slot.output_view.Get(),0,1,&stream)))return false;
   context_->CopyResource(slot.staging.Get(),slot.converted.Get());return true;
+}
+void SvrtDirectMode::SetNetworkStats(uint64_t invalid,uint64_t recovered,uint64_t dropped){
+  std::lock_guard<std::mutex> lifecycle(lifecycle_mutex_);const auto now=std::chrono::steady_clock::now();
+  if(last_network_adjust_.time_since_epoch().count()==0){last_network_adjust_=now;last_invalid_=invalid;last_recovered_=recovered;last_network_dropped_=dropped;return;}
+  if(now-last_network_adjust_<std::chrono::seconds(2))return;
+  const uint64_t new_invalid=invalid>=last_invalid_?invalid-last_invalid_:invalid,new_recovered=recovered>=last_recovered_?recovered-last_recovered_:recovered,new_dropped=dropped>=last_network_dropped_?dropped-last_network_dropped_:dropped;
+  last_invalid_=invalid;last_recovered_=recovered;last_network_dropped_=dropped;last_network_adjust_=now;
+  ++network_intervals_;
+  if(new_dropped||new_invalid)debugf("network recovery: bitrate=%uM invalid=%llu fec_recovered=%llu unrecoverable_frames=%llu",bitrate_,(unsigned long long)new_invalid,(unsigned long long)new_recovered,(unsigned long long)new_dropped);
 }
 bool SvrtDirectMode::WaitForSourceCopy(Slot &slot){
   if(!slot.source_copied)return false;
@@ -241,28 +254,75 @@ bool SvrtDirectMode::StartEncoder(unsigned w,unsigned h){
     if(pipe_!=INVALID_HANDLE_VALUE)return true;
     if(w>2880||h>1600){debugf("refusing %ux%u stream: maximum packed size is 2880x1600",w,h);encoder_failed_=true;return false;}
     if(!valid_encoder(encoder_)||!valid_host(host_)||ffmpeg_.empty()||ffmpeg_.find('"')!=std::string::npos){debug("refusing unsafe FFmpeg command values");encoder_failed_=true;return false;}
-    std::string endpoint=host_.find(':')==std::string::npos?host_:"["+host_+"]";
-    auto launch=[&](const char *cmd,HANDLE &write_pipe,HANDLE &process,DWORD &pid)->bool{
-      SECURITY_ATTRIBUTES sa{sizeof(sa),nullptr,TRUE};HANDLE read_pipe=nullptr;
+    if(!OpenVideoSocket()){debug("cannot open Stearlight UDP video socket");encoder_failed_=true;return false;}
+    auto launch=[&](const char *cmd,HANDLE &write_pipe,HANDLE &output_pipe,HANDLE &process,DWORD &pid)->bool{
+      SECURITY_ATTRIBUTES sa{sizeof(sa),nullptr,TRUE};HANDLE read_pipe=nullptr,output_write=nullptr;
       if(!CreatePipe(&read_pipe,&write_pipe,&sa,1<<20))return false;
-      SetHandleInformation(write_pipe,HANDLE_FLAG_INHERIT,0);STARTUPINFOA si{};si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=read_pipe;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);
-      PROCESS_INFORMATION pi{};BOOL ok=CreateProcessA(nullptr,const_cast<char*>(cmd),nullptr,nullptr,TRUE,CREATE_NO_WINDOW,nullptr,nullptr,&si,&pi);CloseHandle(read_pipe);
-      if(!ok){CloseHandle(write_pipe);write_pipe=INVALID_HANDLE_VALUE;return false;}
+      if(!CreatePipe(&output_pipe,&output_write,&sa,1<<20)){CloseHandle(read_pipe);CloseHandle(write_pipe);write_pipe=INVALID_HANDLE_VALUE;return false;}
+      SetHandleInformation(write_pipe,HANDLE_FLAG_INHERIT,0);
+      SetHandleInformation(output_pipe,HANDLE_FLAG_INHERIT,0);
+      STARTUPINFOA si{};si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=read_pipe;si.hStdOutput=output_write;si.hStdError=GetStdHandle(STD_ERROR_HANDLE);
+      PROCESS_INFORMATION pi{};BOOL ok=CreateProcessA(nullptr,const_cast<char*>(cmd),nullptr,nullptr,TRUE,CREATE_NO_WINDOW,nullptr,nullptr,&si,&pi);
+      CloseHandle(read_pipe);CloseHandle(output_write);
+      if(!ok){CloseHandle(write_pipe);CloseHandle(output_pipe);write_pipe=output_pipe=INVALID_HANDLE_VALUE;return false;}
       CloseHandle(pi.hThread);process=pi.hProcess;pid=pi.dwProcessId;return true;
     };
-    char main_cmd[4096];unsigned encode_fps=fps_,keyint=fps_;
+    char main_cmd[4096];unsigned encode_fps=fps_,keyint=std::max(15u,fps_/2);
     int command_size=std::snprintf(main_cmd,sizeof(main_cmd),
-      "\"%s\" -hide_banner -loglevel warning -rw_timeout 500000 -fflags nobuffer -flags low_delay "
+      "\"%s\" -hide_banner -loglevel warning -fflags nobuffer -flags low_delay "
       "-f rawvideo -pix_fmt %s -video_size %ux%u -framerate %u -i pipe:0 -an -c:v %s -preset p1 -tune ull "
       "-zerolatency 1 -delay 0 -rc-lookahead 0 -rc cbr -b:v %uM -maxrate %uM -bufsize %uM "
-      "-g %u -bf 0 -muxdelay 0 -muxpreload 0 -flush_packets 1 -f mpegts \"tcp://%s:%u?tcp_nodelay=1&send_buffer_size=65536\"",
+      "-g %u -bf 0 -bsf:v hevc_metadata=aud=insert -flush_packets 1 -f hevc pipe:1",
       ffmpeg_.c_str(),pixel_format_.c_str(),w,h,encode_fps,encoder_.c_str(),bitrate_,bitrate_,
-      std::max(1u,bitrate_/12),keyint,endpoint.c_str(),port_);
+      std::max(1u,bitrate_/12),keyint);
     if(command_size<0||static_cast<size_t>(command_size)>=sizeof(main_cmd)){debug("refusing truncated FFmpeg command");encoder_failed_=true;return false;}
-    DWORD main_pid=0;if(!launch(main_cmd,pipe_,process_,main_pid)){encoder_failed_=true;debugf("failed to launch main FFmpeg: error %lu",GetLastError());return false;}
-    encoder_failed_=false;debugf("FFmpeg started: pid=%lu single HEVC stream=%ux%u@%u",main_pid,w,h,encode_fps);return true;
+    DWORD main_pid=0;if(!launch(main_cmd,pipe_,output_pipe_,process_,main_pid)){encoder_failed_=true;debugf("failed to launch main FFmpeg: error %lu",GetLastError());CloseEncoder();return false;}
+    encoded_frame_=0;
+    packetizer_=std::thread(&SvrtDirectMode::PacketizerThread,this);
+    encoder_failed_=false;debugf("FFmpeg started: pid=%lu raw HEVC -> UDP/FEC stream=%ux%u@%u session=%08x",main_pid,w,h,encode_fps,session_id_);return true;
 }
-void SvrtDirectMode::CloseEncoder(){if(pipe_!=INVALID_HANDLE_VALUE){CloseHandle(pipe_);pipe_=INVALID_HANDLE_VALUE;}if(process_){WaitForSingleObject(process_,2000);CloseHandle(process_);process_=nullptr;}}
+bool SvrtDirectMode::OpenVideoSocket(){
+  WSADATA data{};if(WSAStartup(MAKEWORD(2,2),&data))return false;
+  char service[16];std::snprintf(service,sizeof(service),"%u",port_);
+  addrinfo hints{};hints.ai_family=AF_UNSPEC;hints.ai_socktype=SOCK_DGRAM;hints.ai_protocol=IPPROTO_UDP;
+  addrinfo *addresses=nullptr;if(getaddrinfo(host_.c_str(),service,&hints,&addresses)){WSACleanup();return false;}
+  SOCKET selected=INVALID_SOCKET;
+  for(addrinfo *it=addresses;it;it=it->ai_next){selected=socket(it->ai_family,it->ai_socktype,it->ai_protocol);if(selected==INVALID_SOCKET)continue;if(connect(selected,it->ai_addr,static_cast<int>(it->ai_addrlen))==0)break;closesocket(selected);selected=INVALID_SOCKET;}
+  freeaddrinfo(addresses);
+  if(selected==INVALID_SOCKET){WSACleanup();return false;}
+  int buffer=4*1024*1024;setsockopt(selected,SOL_SOCKET,SO_SNDBUF,reinterpret_cast<const char*>(&buffer),sizeof(buffer));
+  video_socket_=static_cast<uintptr_t>(selected);
+  std::random_device random;session_id_=(static_cast<uint32_t>(random())^static_cast<uint32_t>(GetTickCount64()));if(!session_id_)session_id_=1;
+  return true;
+}
+static size_t aud_start(const std::vector<uint8_t>&data,size_t from){
+  for(size_t i=from;i+5<data.size();++i){size_t nal=0;if(data[i]==0&&data[i+1]==0&&data[i+2]==1)nal=i+3;else if(data[i]==0&&data[i+1]==0&&data[i+2]==0&&data[i+3]==1)nal=i+4;if(nal&&((data[nal]>>1)&0x3f)==35)return i;}return std::string::npos;
+}
+void SvrtDirectMode::PacketizerThread(){
+  std::vector<uint8_t> encoded;encoded.reserve(2*1024*1024);uint8_t chunk[65536];
+  auto is_keyframe=[](const uint8_t *bytes,size_t size){for(size_t i=0;i+5<size;++i){size_t nal=0;if(bytes[i]==0&&bytes[i+1]==0&&bytes[i+2]==1)nal=i+3;else if(i+4<size&&bytes[i]==0&&bytes[i+1]==0&&bytes[i+2]==0&&bytes[i+3]==1)nal=i+4;if(nal){unsigned type=(bytes[nal]>>1)&0x3f;if(type>=16&&type<=21)return true;}}return false;};
+  auto send_frame=[&](const uint8_t *bytes,size_t size){
+    if(!size||size>STEARLIGHT_MAX_FRAME_SIZE||video_socket_==~uintptr_t{0})return false;
+    const uint32_t frame_id=++encoded_frame_;const uint16_t frame_flags=is_keyframe(bytes,size)?STEARLIGHT_FLAG_KEYFRAME:0;auto next_datagram=std::chrono::steady_clock::now();auto pace=[&]{next_datagram+=std::chrono::microseconds(250);while(std::chrono::steady_clock::now()<next_datagram)SwitchToThread();};auto send_redundant=[&](const uint8_t *packet,int length){for(unsigned copy=0;copy<2;++copy){if(send(static_cast<SOCKET>(video_socket_),reinterpret_cast<const char*>(packet),length,0)==SOCKET_ERROR)return false;pace();}return true;};const uint64_t timestamp_us=static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch()).count());
+    const unsigned shards=static_cast<unsigned>((size+STEARLIGHT_VIDEO_SHARD_SIZE-1)/STEARLIGHT_VIDEO_SHARD_SIZE);uint8_t datagram[STEARLIGHT_DATAGRAM_SIZE];
+    for(unsigned group=0,first=0;first<shards;++group,first+=STEARLIGHT_FEC_DATA_SHARDS){
+      const unsigned count=std::min<unsigned>(STEARLIGHT_FEC_DATA_SHARDS,shards-first);uint8_t storage[STEARLIGHT_FEC_DATA_SHARDS][STEARLIGHT_VIDEO_SHARD_SIZE]{};const uint8_t *data[STEARLIGHT_FEC_DATA_SHARDS];
+      for(unsigned i=0;i<count;++i){const size_t offset=static_cast<size_t>(first+i)*STEARLIGHT_VIDEO_SHARD_SIZE;const size_t payload=std::min<size_t>(STEARLIGHT_VIDEO_SHARD_SIZE,size-offset);std::memcpy(storage[i],bytes+offset,payload);data[i]=storage[i];stearlight_video_info info{};info.flags=frame_flags;info.session_id=session_id_;info.frame_id=frame_id;info.timestamp_us=timestamp_us;info.frame_size=static_cast<uint32_t>(size);info.fec_group=static_cast<uint16_t>(group);info.shard_id=static_cast<uint8_t>(i);info.data_shards=static_cast<uint8_t>(count);info.parity_shards=STEARLIGHT_FEC_PARITY_SHARDS;info.payload_size=static_cast<uint16_t>(payload);stearlight_video_header header;if(stearlight_video_header_encode(&header,&info))return false;std::memcpy(datagram,&header,sizeof(header));std::memcpy(datagram+sizeof(header),storage[i],payload);if(!send_redundant(datagram,static_cast<int>(sizeof(header)+payload)))return false;}
+      uint8_t parity[2][STEARLIGHT_VIDEO_SHARD_SIZE];stearlight_fec_encode(data,count,STEARLIGHT_VIDEO_SHARD_SIZE,parity[0],parity[1]);
+      for(unsigned p=0;p<2;++p){stearlight_video_info info{};info.flags=frame_flags|STEARLIGHT_FLAG_FEC;info.session_id=session_id_;info.frame_id=frame_id;info.timestamp_us=timestamp_us;info.frame_size=static_cast<uint32_t>(size);info.fec_group=static_cast<uint16_t>(group);info.shard_id=static_cast<uint8_t>(count+p);info.data_shards=static_cast<uint8_t>(count);info.parity_shards=2;info.payload_size=STEARLIGHT_VIDEO_SHARD_SIZE;stearlight_video_header header;if(stearlight_video_header_encode(&header,&info))return false;std::memcpy(datagram,&header,sizeof(header));std::memcpy(datagram+sizeof(header),parity[p],STEARLIGHT_VIDEO_SHARD_SIZE);if(!send_redundant(datagram,sizeof(datagram)))return false;}
+    }
+    if(frame_id==1||frame_id%fps_==0)debugf("UDP video frame=%u bytes=%zu data_shards=%u fec=10+2",frame_id,size,shards);return true;
+  };
+  while(output_pipe_!=INVALID_HANDLE_VALUE){DWORD read=0;if(!ReadFile(output_pipe_,chunk,sizeof(chunk),&read,nullptr)||!read)break;encoded.insert(encoded.end(),chunk,chunk+read);for(;;){size_t first=aud_start(encoded,0);if(first==std::string::npos)break;size_t second=aud_start(encoded,first+4);if(second==std::string::npos)break;if(!send_frame(encoded.data(),second)){encoder_failed_=true;return;}encoded.erase(encoded.begin(),encoded.begin()+second);}if(encoded.size()>STEARLIGHT_MAX_FRAME_SIZE){debug("invalid HEVC stream: no access-unit boundary within 8 MiB");encoder_failed_=true;break;}}
+  if(!encoded.empty()&&!encoder_failed_)send_frame(encoded.data(),encoded.size());
+}
+void SvrtDirectMode::CloseEncoder(){
+  if(pipe_!=INVALID_HANDLE_VALUE){CloseHandle(pipe_);pipe_=INVALID_HANDLE_VALUE;}
+  if(process_){if(WaitForSingleObject(process_,2000)==WAIT_TIMEOUT)TerminateProcess(process_,0);WaitForSingleObject(process_,500);CloseHandle(process_);process_=nullptr;}
+  if(packetizer_.joinable())packetizer_.join();
+  if(output_pipe_!=INVALID_HANDLE_VALUE){CloseHandle(output_pipe_);output_pipe_=INVALID_HANDLE_VALUE;}
+  if(video_socket_!=~uintptr_t{0}){closesocket(static_cast<SOCKET>(video_socket_));video_socket_=~uintptr_t{0};WSACleanup();}
+}
 void SvrtDirectMode::EncoderThread(){uint64_t transmitted=0;while(running_){std::unique_lock<std::mutex> l(mutex_);ready_.wait(l,[this]{return !running_||disconnect_requested_||std::any_of(slots_.begin(),slots_.end(),[](const Slot&s){return s.pending;});});if(!running_)break;if(disconnect_requested_.exchange(false)||!receiver_available_){for(auto &slot:slots_)slot.pending=false;next_capture_={};l.unlock();CloseEncoder();l.lock();slots_.clear();encoder_failed_=false;continue;}auto it=std::max_element(slots_.begin(),slots_.end(),[](const Slot&a,const Slot&b){return (!a.pending?0:a.sequence)<(!b.pending?0:b.sequence);});if(it==slots_.end()||!it->pending)continue;Slot *slot=&*it;for(auto &queued:slots_)if(&queued!=slot&&queued.pending&&queued.sequence<slot->sequence)queued.pending=false;unsigned w=width_,h=height_;uint64_t frame=slot->sequence;l.unlock();D3D11_MAPPED_SUBRESOURCE map{};bool ok=false;bool gpu_busy=false;const auto started=std::chrono::steady_clock::now();
   // The immediate context must be serialized, but the CPU copy itself does
   // not.  Keeping this lock during a full stereo-frame memcpy made Present()

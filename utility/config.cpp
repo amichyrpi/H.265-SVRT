@@ -13,7 +13,7 @@ static std::wstring widen(const std::string &value) { if(value.empty())return {}
 static std::string narrow(const std::wstring &value) { if(value.empty())return {};const int count=WideCharToMultiByte(CP_UTF8,0,value.data(),static_cast<int>(value.size()),nullptr,0,nullptr,nullptr);std::string out(count,'\0');WideCharToMultiByte(CP_UTF8,0,value.data(),static_cast<int>(value.size()),out.data(),count,nullptr,nullptr);return out; }
 static std::string get(const wchar_t *key,const wchar_t *fallback=L"") { wchar_t value[256]{};const auto path=ini_path();GetPrivateProfileStringW(L"svrt",key,fallback,value,256,path.c_str());return narrow(value); }
 static int get_int(const wchar_t *key,int fallback){try{return std::stoi(get(key));}catch(const std::exception&){return fallback;}}
-UtilitySettings load_settings(){ UtilitySettings s;s.host=get(L"host",L"ROOT.local");s.client_id=get(L"client_id");s.refresh=get_int(L"refresh",60);s.width=2880;s.height=1600;s.verbose=get(L"verbose",L"0")=="1";if(s.refresh!=30&&s.refresh!=60)s.refresh=60;return s; }
+UtilitySettings load_settings(){ UtilitySettings s;s.host=get(L"host",L"auto");if(s.host=="ROOT.local"||std::regex_match(s.host,std::regex("[0-9]{1,3}(\\.[0-9]{1,3}){3}")))s.host="auto";s.client_id=get(L"client_id");s.refresh=get_int(L"refresh",60);s.width=2880;s.height=1600;s.verbose=get(L"verbose",L"0")=="1";if(s.refresh!=30&&s.refresh!=60)s.refresh=60;return s; }
 static void put(const wchar_t *key,const std::wstring &value){const auto path=ini_path();WritePrivateProfileStringW(L"svrt",key,value.c_str(),path.c_str());}
 void save_settings(const UtilitySettings&s){put(L"host",widen(s.host));put(L"client_id",widen(s.client_id));put(L"refresh",std::to_wstring(s.refresh));put(L"width",std::to_wstring(s.width));put(L"height",std::to_wstring(s.height));put(L"verbose",s.verbose?L"1":L"0");}
 static size_t matching_brace(const std::string &json, size_t open) {
@@ -199,6 +199,7 @@ static std::string driver_section(const UtilitySettings &settings, bool enabled)
       "  \"receiver_port\" : 9944,\n"
       "  \"status_port\" : 9945,\n"
       "  \"audio_port\" : 9946,\n"
+      "  \"bitrate_mbps\" : 8,\n"
       "  \"display_frequency\" : " + std::to_string(settings.refresh) + ",\n"
       "  \"render_width\" : " + std::to_string(settings.width / 2) + ",\n"
       "  \"render_height\" : " + std::to_string(settings.height) + "\n"

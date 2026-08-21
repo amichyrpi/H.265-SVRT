@@ -155,8 +155,11 @@ The headset renders `1440x1600` per eye and packs both eyes side by side in one
 `2880x1600` HEVC stream. The Raspberry Pi decodes that stream with the single
 `rpivid` H.265 hardware decoder and presents its DRM PRIME frames directly with
 KMS. The selectable refresh rates are 60 Hz and 30 Hz, with 60 Hz as the
-default. Video uses low-latency TCP with a short write timeout so a wedged
-decoder connection is restarted instead of accumulating stale frames.
+default. Runtime discovery uses mDNS/DNS-SD (`_stearlight._tcp.local`) with a
+UDP discovery fallback. TCP 9945 carries session/configuration and clock-sync
+messages; video uses 1200-byte UDP datagrams on 9944 with 10+2 Reed-Solomon
+FEC and bounded frame reassembly. Tracking returns over UDP 9947 at 250 Hz,
+and audio uses UDP 9946. SSH is only a development/deployment tool.
 
 To start the installed Raspberry Pi receiver manually:
 

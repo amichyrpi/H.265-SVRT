@@ -21,6 +21,7 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   bool EnsureDevice();
   void Stop();
   void SetReceiverAvailable(bool available);
+  void SetNetworkStats(uint64_t invalid_packets,uint64_t recovered_shards,uint64_t dropped_frames);
   bool ReceiverAvailable() const { return receiver_available_.load(); }
   bool IsRunning() const { return running_.load(); }
   // LUID of the adapter that owns the D3D device. SteamVR uses this on a
@@ -57,7 +58,8 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   bool WaitForSourceCopy(Slot &slot);
   bool CopyVirtualFrame(vr::SharedTextureHandle_t handle);
   bool StartEncoder(unsigned width,unsigned height);
-  void EncoderThread(); void CloseEncoder();
+  void EncoderThread(); void PacketizerThread(); void CloseEncoder();
+  bool OpenVideoSocket();
   Microsoft::WRL::ComPtr<ID3D11Device> device_; Microsoft::WRL::ComPtr<ID3D11DeviceContext> context_;
   Microsoft::WRL::ComPtr<ID3D11VideoDevice> video_device_;
   Microsoft::WRL::ComPtr<ID3D11VideoContext> video_context_;
@@ -74,10 +76,19 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   std::vector<uint8_t> frame_;
   bool gpu_nv12_=false;
   std::atomic<bool> running_{false},accepting_{false},encoder_failed_{false},receiver_available_{false},disconnect_requested_{false};
-  uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=20;
+  uint64_t sequence_=0; unsigned width_=0,height_=0,fps_=60,bitrate_=8,bitrate_ceiling_=8;
+  uint64_t last_invalid_=0,last_recovered_=0,last_network_dropped_=0;
+  std::chrono::steady_clock::time_point last_network_adjust_{};
+  unsigned stable_intervals_=0;
+  unsigned congested_intervals_=0;
+  unsigned network_intervals_=0;
   std::chrono::steady_clock::time_point next_capture_{};
   unsigned logged_virtual_width_=0,logged_virtual_height_=0;
   DXGI_FORMAT logged_virtual_format_=DXGI_FORMAT_UNKNOWN;
   std::string host_,ffmpeg_,encoder_,pixel_format_="bgra"; uint16_t port_=9944;
-  HANDLE pipe_=INVALID_HANDLE_VALUE,process_=nullptr;
+  HANDLE pipe_=INVALID_HANDLE_VALUE,output_pipe_=INVALID_HANDLE_VALUE,process_=nullptr;
+  uintptr_t video_socket_=~uintptr_t{0};
+  std::thread packetizer_;
+  uint32_t session_id_=0;
+  std::atomic<uint32_t> encoded_frame_{0};
 };

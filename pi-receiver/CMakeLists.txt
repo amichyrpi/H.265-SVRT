@@ -40,5 +40,9 @@ configure_file(
   @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/svrt-receiver.service
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/systemd/system)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/stearlight.service
+  DESTINATION /etc/avahi/services)
+install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/force-5ghz.sh
+  DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/svrt)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../gui/assets/
   DESTINATION ${CMAKE_INSTALL_DATADIR}/svrt/gui/assets)

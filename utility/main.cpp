@@ -33,6 +33,14 @@ LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM w, LPARAM l) {
 }
 
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE, PWSTR, int show) {
+  if (wcsstr(GetCommandLineW(), L"--apply-auto")) {
+    UtilitySettings automatic=load_settings();automatic.host="auto";
+    automatic.width=2880;automatic.height=1600;
+    wchar_t executable[MAX_PATH];GetModuleFileNameW(nullptr,executable,MAX_PATH);
+    std::wstring directory(executable);directory=directory.substr(0,directory.find_last_of(L"\\/"))+L"\\..\\svrt";
+    const bool ok=stop_steamvr()&&install_steamvr_driver(directory)&&write_steamvr_settings(automatic,true);
+    if(ok)save_settings(automatic);return ok?0:1;
+  }
   fonts = ui_fonts_create();
   WNDCLASSW type{}; type.hInstance = instance; type.lpszClassName = L"SvrtUtility"; type.lpfnWndProc = window_proc;
   type.hCursor = LoadCursor(nullptr, IDC_ARROW); type.hbrBackground = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));

@@ -34,6 +34,9 @@ struct SvrtLinkStatus {
   uint64_t presented = 0;
   uint64_t dropped = 0;
   uint64_t bytes = 0;
+  uint64_t invalid_packets = 0;
+  uint64_t fec_recovered = 0;
+  uint64_t network_dropped = 0;
   SvrtPose pose;
 };
 
@@ -49,19 +52,24 @@ class SvrtReceiverLink {
 
  private:
   void Run();
+  void TrackingRun();
   bool Poll(uint64_t nonce, SvrtLinkStatus &status);
 
   std::string host_;
   uint16_t port_ = 9945;
-  unsigned poll_ms_ = 50;
-  unsigned pose_freshness_ms_ = 1000;
+  unsigned poll_ms_ = 1000;
+  unsigned pose_freshness_ms_ = 3000;
   unsigned latency_warning_ms_ = 80;
   std::atomic<bool> running_{false};
   std::atomic<int> state_{static_cast<int>(SvrtLinkState::Searching)};
   std::atomic<unsigned> latency_ms_{0};
   std::atomic<uint64_t> decoded_{0}, presented_{0}, dropped_{0}, bytes_{0};
+  std::atomic<uint64_t> invalid_packets_{0},fec_recovered_{0},network_dropped_{0};
+  std::atomic<uint16_t> tracking_port_{0};
+  std::atomic<int64_t> clock_offset_us_{0};
+  uint32_t session_id_=0;
   mutable std::mutex pose_mutex_;
   SvrtPose pose_;
   uint64_t pose_received_ms_ = 0;
-  std::thread thread_;
+  std::thread thread_,tracking_thread_;
 };

@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-struct UtilitySettings { std::string host="ROOT.local", client_id; int refresh=60; int width=2880; int height=1600; bool verbose=false; };
+struct UtilitySettings { std::string host="auto", client_id; int refresh=60; int width=2880; int height=1600; bool verbose=false; };
 UtilitySettings load_settings();
 void save_settings(const UtilitySettings &settings);
 bool write_steamvr_settings(const UtilitySettings &settings, bool enabled);

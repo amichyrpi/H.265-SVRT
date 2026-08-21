@@ -36,6 +36,9 @@ typedef struct svrt_stats {
     uint64_t dropped_frames;
     uint64_t bytes_received;
     uint64_t last_pts_us;
+    uint64_t invalid_packets;
+    uint64_t fec_recovered_shards;
+    uint64_t network_dropped_frames;
 } svrt_stats;
 
 /* Open decoder, SDL KMSDRM display and listening socket. */

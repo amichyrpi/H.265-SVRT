@@ -1,6 +1,7 @@
 #include "audio.h"
 #include "direct_mode.h"
 #include "receiver_link.h"
+#include "mdns_discovery.h"
 
 #include <openvr_driver.h>
 
@@ -155,15 +156,19 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
     // state cannot be overwritten by activation defaults above.
     icons_receiver_available_ = true;
     UpdateConnectionIcons(false);
-    const std::string host = setting("receiver_host", "ROOT.local");
+    std::string host = setting("receiver_host", "auto");
+    uint16_t discovered_control_port=0;
+    if((host.empty()||host=="auto")&&
+       !stearlight_mdns_discover(host,discovered_control_port))host="ROOT.local";
     const uint16_t video_port =
         static_cast<uint16_t>(int_setting("receiver_port", 9944));
-    direct_.Start(host, video_port, fps(), int_setting("bitrate_mbps", 12),
+    direct_.Start(host, video_port, fps(), int_setting("bitrate_mbps", 8),
                   setting("ffmpeg_path", "ffmpeg.exe"),
                   setting("encoder", "hevc_nvenc"));
-    audio_.Start(host, static_cast<uint16_t>(
-                           int_setting("audio_port", video_port + 2)));
-    receiver_.Start(host,
+    if(setting("audio_enabled", "false")=="true")
+      audio_.Start(host, static_cast<uint16_t>(
+                             int_setting("audio_port", video_port + 2)));
+    receiver_.Start(host, discovered_control_port?discovered_control_port:
                     static_cast<uint16_t>(int_setting("status_port", video_port + 1)),
                     int_setting("tracking_poll_ms", 10),
                     int_setting("latency_warning_ms", 80));
@@ -291,6 +296,7 @@ class SvrtHmd final : public vr::ITrackedDeviceServerDriver,
       }
       
       direct_.SetReceiverAvailable(receiver_available);
+      direct_.SetNetworkStats(status.invalid_packets,status.fec_recovered,status.network_dropped);
       audio_.SetReceiverAvailable(receiver_available);
     }
   }

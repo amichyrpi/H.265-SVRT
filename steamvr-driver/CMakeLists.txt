@@ -20,10 +20,11 @@ add_library(driver_svrt SHARED
   driver.cpp
   audio.cpp audio.h
   direct_mode.cpp direct_mode.h
-  receiver_link.cpp receiver_link.h)
+  receiver_link.cpp receiver_link.h
+  ../common/mdns_discovery.cpp ../common/mdns_discovery.h)
 target_compile_features(driver_svrt PRIVATE cxx_std_17)
-target_include_directories(driver_svrt PRIVATE "${SVRT_OPENVR_INCLUDE}")
-target_link_libraries(driver_svrt PRIVATE d3d11 dxgi ws2_32 ole32 uuid)
+target_include_directories(driver_svrt PRIVATE "${SVRT_OPENVR_INCLUDE}" ../common)
+target_link_libraries(driver_svrt PRIVATE d3d11 dxgi ws2_32 dnsapi iphlpapi ole32 uuid stearlight::protocol)
 target_compile_definitions(driver_svrt PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
 set_target_properties(driver_svrt PROPERTIES
   PREFIX ""

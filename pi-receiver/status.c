@@ -1,9 +1,11 @@
 #include "status.h"
+#include <stearlight_protocol.h>
 
 #include <arpa/inet.h>
 #include <ctype.h>
 #include <errno.h>
 #include <netinet/in.h>
+#include <poll.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -61,8 +63,9 @@ void svrt_status_server_get_pose(svrt_status_server *server, int state,
     memset(pose, 0, sizeof(*pose));
     pose->sequence = atomic_fetch_add(&server->pose_sequence, 1) + 1;
     pose->timestamp_us = monotonic_us();
-    pose->connected = state == SVRT_RECEIVER_READY ||
-                      state == SVRT_RECEIVER_STREAMING;
+    /* Video recovery must not make SteamVR treat the physical HMD as unplugged. */
+    (void)state;
+    pose->connected = 1;
     pose->valid = pose->connected;
     pose->result = pose->valid ? 200 /* TrackingResult_Running_OK */
                                : 101 /* TrackingResult_Calibrating_OutOfRange */;
@@ -245,7 +248,8 @@ static void answer_client(svrt_status_server *server, int fd) {
         }
     }
     if (!complete) return;
-    unsigned long long nonce = 0, target_pts = 0;
+    unsigned long long nonce = 0, target_pts = 0, client_time = 0;
+    unsigned session = 0, tracking_port = 0;
     char code[8] = {0}, client[65] = {0};
     if (!strncmp(request, "SVRT/1 PAIRING", 14)) {
         char current[5];
@@ -291,6 +295,37 @@ static void answer_client(svrt_status_server *server, int fd) {
     }
     if (sscanf(request, "SVRT/1 TRACE %llu %llu", &nonce, &target_pts) == 2) {
         answer_trace(server, fd, nonce, (uint64_t)target_pts);
+        return;
+    }
+    if (sscanf(request, "SVRT/2 CONNECT %u %u %llu", &session,
+               &tracking_port, &client_time) == 3 && session && tracking_port) {
+        struct sockaddr_storage peer; socklen_t peer_size = sizeof(peer);
+        const uint64_t received_us = monotonic_us();
+        if (!getpeername(fd, (struct sockaddr *)&peer, &peer_size)) {
+            if (peer.ss_family == AF_INET)
+                ((struct sockaddr_in *)&peer)->sin_port = htons((uint16_t)tracking_port);
+            else if (peer.ss_family == AF_INET6)
+                ((struct sockaddr_in6 *)&peer)->sin6_port = htons((uint16_t)tracking_port);
+            else return;
+            pthread_mutex_lock(&server->tracking_lock);
+            server->tracking_address = peer;
+            server->tracking_address_size = peer_size;
+            server->tracking_session = session;
+            pthread_mutex_unlock(&server->tracking_lock);
+            const uint64_t sent_us = monotonic_us(); char response[256];
+            int used = snprintf(response, sizeof(response),
+                "SVRT/2 ACCEPT %u %llu %llu %llu %d %llu %llu %llu %llu %llu %llu %llu\n",
+                session, client_time, (unsigned long long)received_us,
+                (unsigned long long)sent_us, atomic_load(&server->state),
+                (unsigned long long)atomic_load(&server->decoded),
+                (unsigned long long)atomic_load(&server->presented),
+                (unsigned long long)atomic_load(&server->dropped),
+                (unsigned long long)atomic_load(&server->bytes),
+                (unsigned long long)atomic_load(&server->invalid_packets),
+                (unsigned long long)atomic_load(&server->fec_recovered),
+                (unsigned long long)atomic_load(&server->network_dropped));
+            if (used > 0 && (size_t)used < sizeof(response)) send_all(fd,response,(size_t)used);
+        }
         return;
     }
     if (sscanf(request, "SVRT/1 PING %llu", &nonce) != 1) return;
@@ -339,6 +374,27 @@ static void *status_client_thread(void *opaque) {
     free(client);
     return NULL;
 }
+
+static void *tracking_thread(void *opaque) {
+    svrt_status_server *server = opaque; int socket6 = socket(AF_INET6,SOCK_DGRAM,0);
+    if (socket6 < 0) return NULL;int off=0,one=1;setsockopt(socket6,IPPROTO_IPV6,IPV6_V6ONLY,&off,sizeof(off));setsockopt(socket6,SOL_SOCKET,SO_REUSEADDR,&one,sizeof(one));struct sockaddr_in6 bind_address={.sin6_family=AF_INET6,.sin6_addr=IN6ADDR_ANY_INIT,.sin6_port=htons(9947)};if(bind(socket6,(struct sockaddr*)&bind_address,sizeof(bind_address))){close(socket6);return NULL;}
+    while(!atomic_load(&server->stopping)) {
+        struct sockaddr_storage target; socklen_t target_size=0; uint32_t session=0;
+        pthread_mutex_lock(&server->tracking_lock);target=server->tracking_address;
+        target_size=server->tracking_address_size;session=server->tracking_session;
+        pthread_mutex_unlock(&server->tracking_lock);
+        if(session&&target_size){svrt_synthetic_pose pose;svrt_status_server_get_pose(server,atomic_load(&server->state),&pose);
+            stearlight_pose_info info={.flags=(uint16_t)((pose.valid?1:0)|(pose.connected?2:0)),.session_id=session,.sequence=(uint32_t)pose.sequence,.timestamp_us=pose.timestamp_us,.result=(uint32_t)pose.result};
+            unsigned n=0;for(unsigned i=0;i<3;i++)info.values[n++]=(float)pose.position[i];for(unsigned i=0;i<4;i++)info.values[n++]=(float)pose.quaternion[i];for(unsigned i=0;i<3;i++)info.values[n++]=(float)pose.velocity[i];for(unsigned i=0;i<3;i++)info.values[n++]=(float)pose.angular_velocity[i];
+            stearlight_pose_packet packet;
+            if(!stearlight_pose_encode(&packet,&info)&&sendto(socket6,&packet,sizeof(packet),0,(struct sockaddr *)&target,target_size)<0){static int reported;if(!reported++){fprintf(stderr,"SVRT tracking: UDP send failed: %s family=%d\n",strerror(errno),target.ss_family);}}
+        }
+        struct pollfd wait={.fd=socket6,.events=POLLIN};if(poll(&wait,1,4)>0){char hello[64]={0};struct sockaddr_storage peer;socklen_t peer_size=sizeof(peer);ssize_t size=recvfrom(socket6,hello,sizeof(hello)-1,0,(struct sockaddr*)&peer,&peer_size);unsigned hello_session=0;if(size>0&&sscanf(hello,"STEARLIGHT_TRACK %u",&hello_session)==1&&hello_session){pthread_mutex_lock(&server->tracking_lock);server->tracking_address=peer;server->tracking_address_size=peer_size;server->tracking_session=hello_session;pthread_mutex_unlock(&server->tracking_lock);}}
+    }
+    close(socket6);return NULL;
+}
+
+static void *discovery_thread(void *opaque){svrt_status_server *server=opaque;int fd=socket(AF_INET,SOCK_DGRAM,0);if(fd<0)return NULL;int one=1;setsockopt(fd,SOL_SOCKET,SO_REUSEADDR,&one,sizeof(one));setsockopt(fd,SOL_SOCKET,SO_BROADCAST,&one,sizeof(one));struct sockaddr_in address={.sin_family=AF_INET,.sin_addr.s_addr=INADDR_ANY,.sin_port=htons(9757)};if(bind(fd,(struct sockaddr*)&address,sizeof(address))){close(fd);return NULL;}while(!atomic_load(&server->stopping)){struct pollfd wait={.fd=fd,.events=POLLIN};if(poll(&wait,1,250)<=0)continue;char request[64];struct sockaddr_storage peer;socklen_t peer_size=sizeof(peer);ssize_t size=recvfrom(fd,request,sizeof(request),0,(struct sockaddr*)&peer,&peer_size);if(size==20&&!memcmp(request,"STEARLIGHT_DISCOVERY",20)){const char response[]="STEARLIGHT/2 9945 9944 9946 9947";sendto(fd,response,sizeof(response)-1,0,(struct sockaddr*)&peer,peer_size);}}close(fd);return NULL;}
 
 static void *status_thread(void *opaque) {
     svrt_status_server *server = opaque;
@@ -397,6 +453,7 @@ int svrt_status_server_start(svrt_status_server *server, uint16_t port) {
     server->port = port ? port : 9945;
     pthread_mutex_init(&server->pairing_lock, NULL);
     pthread_mutex_init(&server->clients_lock, NULL);
+    pthread_mutex_init(&server->tracking_lock, NULL);
     pthread_cond_init(&server->clients_done, NULL);
     pthread_mutex_lock(&server->pairing_lock);
     load_pairing_locked(server);
@@ -408,10 +465,15 @@ int svrt_status_server_start(svrt_status_server *server, uint16_t port) {
         free(thread);
         pthread_cond_destroy(&server->clients_done);
         pthread_mutex_destroy(&server->clients_lock);
+        pthread_mutex_destroy(&server->tracking_lock);
         pthread_mutex_destroy(&server->pairing_lock);
         return -1;
     }
     server->thread = thread;
+    if (!pthread_create(&server->tracking_thread,NULL,tracking_thread,server))
+        server->tracking_started=1;
+    if (!pthread_create(&server->discovery_thread,NULL,discovery_thread,server))
+        server->discovery_started=1;
     return 0;
 }
 
@@ -423,6 +485,9 @@ void svrt_status_server_update(svrt_status_server *server, int state,
         atomic_store(&server->presented, stats->presented_frames);
         atomic_store(&server->dropped, stats->dropped_frames);
         atomic_store(&server->bytes, stats->bytes_received);
+        atomic_store(&server->invalid_packets,stats->invalid_packets);
+        atomic_store(&server->fec_recovered,stats->fec_recovered_shards);
+        atomic_store(&server->network_dropped,stats->network_dropped_frames);
     }
     atomic_store(&server->state, state);
 }
@@ -480,6 +545,8 @@ void svrt_status_server_stop(svrt_status_server *server) {
     atomic_store(&server->stopping, 1);
     pthread_t *thread = server->thread;
     pthread_join(*thread, NULL);
+    if(server->tracking_started)pthread_join(server->tracking_thread,NULL);
+    if(server->discovery_started)pthread_join(server->discovery_thread,NULL);
     free(thread);
     server->thread = NULL;
     pthread_mutex_lock(&server->clients_lock);
@@ -488,5 +555,6 @@ void svrt_status_server_stop(svrt_status_server *server) {
     pthread_mutex_unlock(&server->clients_lock);
     pthread_cond_destroy(&server->clients_done);
     pthread_mutex_destroy(&server->clients_lock);
+    pthread_mutex_destroy(&server->tracking_lock);
     pthread_mutex_destroy(&server->pairing_lock);
 }

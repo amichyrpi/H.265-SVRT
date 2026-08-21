@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <stdint.h>
 #include <time.h>
+#include <sys/socket.h>
 #include <svrt.h>
 
 enum svrt_receiver_state {
@@ -37,6 +38,9 @@ typedef struct svrt_status_server {
     atomic_uint_fast64_t presented;
     atomic_uint_fast64_t dropped;
     atomic_uint_fast64_t bytes;
+    atomic_uint_fast64_t invalid_packets;
+    atomic_uint_fast64_t fec_recovered;
+    atomic_uint_fast64_t network_dropped;
     atomic_uint_fast64_t received_pts_us;
     atomic_uint_fast64_t received_time_us;
     atomic_uint_fast64_t processed_pts_us;
@@ -52,6 +56,14 @@ typedef struct svrt_status_server {
     pthread_cond_t clients_done;
     unsigned active_clients;
     void *thread;
+    pthread_t tracking_thread;
+    int tracking_started;
+    pthread_t discovery_thread;
+    int discovery_started;
+    pthread_mutex_t tracking_lock;
+    struct sockaddr_storage tracking_address;
+    socklen_t tracking_address_size;
+    uint32_t tracking_session;
 } svrt_status_server;
 
 int svrt_status_server_start(svrt_status_server *server, uint16_t port);
