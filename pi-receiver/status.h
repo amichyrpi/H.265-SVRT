@@ -61,6 +61,7 @@ typedef struct svrt_status_server {
     struct sockaddr_storage tracking_address;
     socklen_t tracking_address_size;
     uint32_t tracking_session;
+    char paired_address[64];
 } svrt_status_server;
 
 int svrt_status_server_start(svrt_status_server *server, uint16_t port);
@@ -73,6 +74,8 @@ void svrt_status_server_packet_event(void *opaque, svrt_packet_event event,
 void svrt_status_server_reset_trace(svrt_status_server *server);
 void svrt_status_server_set_steam_device_id(svrt_status_server *server,
                                             uint64_t device_id);
+void svrt_status_server_set_paired_host(svrt_status_server *server,
+                                        const char *address);
 void svrt_status_server_reset_authorization(svrt_status_server *server);
 int svrt_status_server_authorization_revoked(svrt_status_server *server);
 void svrt_status_server_stop(svrt_status_server *server);

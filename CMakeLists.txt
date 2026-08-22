@@ -36,8 +36,7 @@ if(SVRT_BUILD_RECEIVER AND UNIX)
   set(BUILD_SHARED_LIBS ON)
   FetchContent_Declare(ihslib
     GIT_REPOSITORY https://github.com/mariotaku/ihslib.git
-    GIT_TAG 560908104b1f884792f90d8f98e33ec8c61106f5
-    GIT_SHALLOW TRUE)
+    GIT_TAG 560908104b1f884792f90d8f98e33ec8c61106f5)
   FetchContent_MakeAvailable(ihslib)
   set(BUILD_SHARED_LIBS ${_svrt_build_shared_libs})
   set_target_properties(ihslib ihs-protobuf ihs-platforms PROPERTIES

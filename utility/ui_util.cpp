@@ -21,7 +21,12 @@ void ui_fonts_destroy(const UtilityFonts &fonts) {
 
 void ui_text(HDC dc, const wchar_t *value, RECT rect, COLORREF color, HFONT font, UINT align) {
   SetTextColor(dc, color); SetBkMode(dc, TRANSPARENT); SelectObject(dc, font);
-  DrawTextW(dc, value, -1, &rect, align | DT_VCENTER | DT_SINGLELINE);
+  UINT flags = align;
+  if (flags & DT_WORDBREAK)
+    flags |= DT_NOPREFIX;
+  else
+    flags |= DT_VCENTER | DT_SINGLELINE;
+  DrawTextW(dc, value, -1, &rect, flags);
 }
 
 void ui_rule(HDC dc, int y) {

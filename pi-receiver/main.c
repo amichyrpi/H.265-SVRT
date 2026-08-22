@@ -84,6 +84,11 @@ static int authorize_steam_link(int headless, svrt_status_server *status) {
                                      &device_id);
     svrt_steam_link_pairing_stop(&pairing);
     svrt_status_server_set_steam_device_id(status, device_id);
+    if (paired) {
+        char address[64] = {0};
+        if (svrt_steam_link_pairing_host_address(address, sizeof(address)))
+            svrt_status_server_set_paired_host(status, address);
+    }
     return paired;
 }
 
@@ -130,6 +135,7 @@ int main(int argc, char **argv) {
             nanosleep(&retry, NULL);
             continue;
         }
+        exit_code = 0;
         svrt_status_server_reset_authorization(&status);
         svrt_status_server_update(&status, SVRT_RECEIVER_STARTING, NULL);
         svrt_audio_receiver audio;
@@ -154,6 +160,7 @@ int main(int argc, char **argv) {
                 nanosleep(&retry, NULL);
                 continue;
             }
+            exit_code = 0;
 
             svrt_status_server_update(&status, SVRT_RECEIVER_READY, NULL);
             monitor_args monitor = {.context = running, .server = &status};
@@ -200,6 +207,7 @@ int main(int argc, char **argv) {
                 exit_code = 1;
             } else {
                 svrt_status_server_update(&status, SVRT_RECEIVER_READY, &stats);
+                exit_code = 0;
             }
             fprintf(stderr, "SVRT: %llu decoded, %llu shown, %llu dropped\n",
                     (unsigned long long)stats.decoded_frames,
@@ -217,6 +225,7 @@ int main(int argc, char **argv) {
         if (svrt_status_server_authorization_revoked(&status)) {
             fprintf(stderr, "SVRT Steam Link: host revoked this headset; returning to pairing\n");
             svrt_steam_link_pairing_forget_host();
+            svrt_status_server_set_paired_host(&status, NULL);
             svrt_status_server_update(&status, SVRT_RECEIVER_UNAUTHORIZED, NULL);
         }
     }

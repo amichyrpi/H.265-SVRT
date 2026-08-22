@@ -29,7 +29,7 @@ void ui_paint(HWND window, HDC dc, const UtilityFonts &fonts) {
   ui_text(dc, L"1440 x 1600 per eye", {260, 144, 544, 174}, RGB(232, 232, 236), fonts.text, DT_CENTER);
   ui_rule(dc, 184);
   ui_text(dc, L"STEAM LINK PAIRING", {15, 199, 360, 224}, RGB(232, 232, 236), fonts.title);
-  ui_text(dc, L"The headset discovers the closest Steam PC automatically. Enter its PIN in Steam's Remote Play authorization window.", {15, 220, 555, 270}, RGB(190, 190, 196), fonts.small);
+  ui_text(dc, L"The headset selects a Steam PC on the network. Enter its PIN in Steam's Remote Play authorization window.", {15, 228, 555, 282}, RGB(190, 190, 196), fonts.small, DT_WORDBREAK);
   ui_rule(dc, 288);
   ui_text(dc, L"SESSION", {15, 304, 285, 328}, RGB(232, 232, 236), fonts.title);
   ui_text(dc, L"Usage time:\nnot yet recorded", {15, 340, 270, 382}, RGB(232, 232, 236), fonts.text);

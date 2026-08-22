@@ -38,9 +38,6 @@ SteamAuthorization steam_authorization(uint64_t device_id) {
   for (char *p = steam_path; *p; ++p) if (*p == '/') *p = '\\';
   char pattern[MAX_PATH * 4]{};
   std::snprintf(pattern, sizeof(pattern), "%s\\userdata\\*", steam_path);
-  WIN32_FIND_DATAA entry{};
-  HANDLE find = FindFirstFileA(pattern, &entry);
-  if (find == INVALID_HANDLE_VALUE) return SteamAuthorization::Unknown;
   char raw_id[32]{}, wire_id[32]{};
   std::snprintf(raw_id, sizeof(raw_id), "\"%016llx\"",
                 static_cast<unsigned long long>(device_id));
@@ -62,6 +59,9 @@ SteamAuthorization steam_authorization(uint64_t device_id) {
                ? SteamAuthorization::Authorized
                : SteamAuthorization::Revoked;
   }
+  WIN32_FIND_DATAA entry{};
+  HANDLE find = FindFirstFileA(pattern, &entry);
+  if (find == INVALID_HANDLE_VALUE) return SteamAuthorization::Unknown;
   bool read_config = false, found = false;
   do {
     if (!(entry.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) ||

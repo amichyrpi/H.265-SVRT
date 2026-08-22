@@ -2,6 +2,7 @@
 #define SVRT_STEAM_LINK_PAIRING_H
 
 #include <pthread.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <stdatomic.h>
 
@@ -32,5 +33,6 @@ void svrt_steam_link_pairing_snapshot(svrt_steam_link_pairing *pairing,
 int svrt_steam_link_pairing_is_paired(svrt_steam_link_pairing *pairing);
 void svrt_steam_link_pairing_stop(svrt_steam_link_pairing *pairing);
 void svrt_steam_link_pairing_forget_host(void);
+int svrt_steam_link_pairing_host_address(char *address, size_t size);
 
 #endif

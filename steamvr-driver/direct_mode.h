@@ -72,7 +72,7 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   // provider is being cleaned up, so checking a raw ComPtr without this gate
   // is a use-after-reset race.
   mutable std::mutex lifecycle_mutex_;
-  std::mutex mutex_,d3d_mutex_; std::condition_variable ready_; std::thread worker_;
+  std::mutex mutex_,d3d_mutex_,packet_mutex_; std::condition_variable ready_; std::thread worker_;
   std::vector<uint8_t> frame_;
   bool gpu_nv12_=false;
   std::atomic<bool> running_{false},accepting_{false},encoder_failed_{false},receiver_available_{false},disconnect_requested_{false};

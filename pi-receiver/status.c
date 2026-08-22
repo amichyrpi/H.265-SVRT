@@ -107,6 +107,34 @@ static int send_all(int fd, const char *data, size_t size) {
     return 0;
 }
 
+static int format_peer_ip(const struct sockaddr_storage *peer, char *out,
+                          size_t out_size) {
+    if (peer->ss_family == AF_INET)
+        return inet_ntop(AF_INET, &((const struct sockaddr_in *)peer)->sin_addr,
+                         out, (socklen_t)out_size) != NULL;
+    if (peer->ss_family == AF_INET6) {
+        const struct in6_addr *addr =
+            &((const struct sockaddr_in6 *)peer)->sin6_addr;
+        if (IN6_IS_ADDR_V4MAPPED(addr))
+            return inet_ntop(AF_INET, &addr->s6_addr[12], out,
+                             (socklen_t)out_size) != NULL;
+        return inet_ntop(AF_INET6, addr, out, (socklen_t)out_size) != NULL;
+    }
+    return 0;
+}
+
+static int request_from_paired_host(svrt_status_server *server,
+                                    const struct sockaddr_storage *peer) {
+    char expected[64];
+    pthread_mutex_lock(&server->tracking_lock);
+    snprintf(expected, sizeof(expected), "%s", server->paired_address);
+    pthread_mutex_unlock(&server->tracking_lock);
+    if (!expected[0]) return 0;
+    char actual[INET6_ADDRSTRLEN] = {0};
+    if (!format_peer_ip(peer, actual, sizeof(actual))) return 0;
+    return strcmp(expected, actual) == 0;
+}
+
 static int send_ack(int fd, unsigned long long nonce, const char *stage,
                     uint64_t pts_us, uint64_t receiver_time_us) {
     char response[192];
@@ -196,7 +224,8 @@ static void answer_client(svrt_status_server *server, int fd) {
                 ((struct sockaddr_in6 *)&peer)->sin6_port = htons((uint16_t)tracking_port);
             else return;
             const uint64_t device_id = atomic_load(&server->steam_device_id);
-            if (connect_fields == 5 && device_id &&
+            const int proven = request_from_paired_host(server, &peer);
+            if (proven && connect_fields == 5 && device_id &&
                 auth_device_id == device_id && !client_authorized) {
                 atomic_store(&server->authorization_revoked, 1);
                 atomic_store(&server->state, SVRT_RECEIVER_UNAUTHORIZED);
@@ -210,18 +239,33 @@ static void answer_client(svrt_status_server *server, int fd) {
                 pthread_mutex_unlock(&server->tracking_lock);
             }
             const uint64_t sent_us = monotonic_us(); char response[288];
-            int used = snprintf(response, sizeof(response),
-                "SVRT/2 ACCEPT %u %llu %llu %llu %d %llu %llu %llu %llu %llu %llu %llu %016llx\n",
-                session, client_time, (unsigned long long)received_us,
-                (unsigned long long)sent_us, receiver_state,
-                (unsigned long long)atomic_load(&server->decoded),
-                (unsigned long long)atomic_load(&server->presented),
-                (unsigned long long)atomic_load(&server->dropped),
-                (unsigned long long)atomic_load(&server->bytes),
-                (unsigned long long)atomic_load(&server->invalid_packets),
-                (unsigned long long)atomic_load(&server->fec_recovered),
-                (unsigned long long)atomic_load(&server->network_dropped),
-                (unsigned long long)device_id);
+            int used;
+            if (proven && receiver_state != SVRT_RECEIVER_UNAUTHORIZED) {
+                used = snprintf(response, sizeof(response),
+                    "SVRT/2 ACCEPT %u %llu %llu %llu %d %llu %llu %llu %llu %llu %llu %llu %016llx\n",
+                    session, client_time, (unsigned long long)received_us,
+                    (unsigned long long)sent_us, receiver_state,
+                    (unsigned long long)atomic_load(&server->decoded),
+                    (unsigned long long)atomic_load(&server->presented),
+                    (unsigned long long)atomic_load(&server->dropped),
+                    (unsigned long long)atomic_load(&server->bytes),
+                    (unsigned long long)atomic_load(&server->invalid_packets),
+                    (unsigned long long)atomic_load(&server->fec_recovered),
+                    (unsigned long long)atomic_load(&server->network_dropped),
+                    (unsigned long long)device_id);
+            } else {
+                used = snprintf(response, sizeof(response),
+                    "SVRT/2 ACCEPT %u %llu %llu %llu %d %llu %llu %llu %llu %llu %llu %llu\n",
+                    session, client_time, (unsigned long long)received_us,
+                    (unsigned long long)sent_us, receiver_state,
+                    (unsigned long long)atomic_load(&server->decoded),
+                    (unsigned long long)atomic_load(&server->presented),
+                    (unsigned long long)atomic_load(&server->dropped),
+                    (unsigned long long)atomic_load(&server->bytes),
+                    (unsigned long long)atomic_load(&server->invalid_packets),
+                    (unsigned long long)atomic_load(&server->fec_recovered),
+                    (unsigned long long)atomic_load(&server->network_dropped));
+            }
             if (used > 0 && (size_t)used < sizeof(response)) send_all(fd,response,(size_t)used);
         }
         return;
@@ -434,6 +478,18 @@ void svrt_status_server_stop(svrt_status_server *server) {
 void svrt_status_server_set_steam_device_id(svrt_status_server *server,
                                             uint64_t device_id) {
     if (server) atomic_store(&server->steam_device_id, device_id);
+}
+
+void svrt_status_server_set_paired_host(svrt_status_server *server,
+                                        const char *address) {
+    if (!server) return;
+    pthread_mutex_lock(&server->tracking_lock);
+    if (address && address[0])
+        snprintf(server->paired_address, sizeof(server->paired_address), "%s",
+                 address);
+    else
+        server->paired_address[0] = 0;
+    pthread_mutex_unlock(&server->tracking_lock);
 }
 
 void svrt_status_server_reset_authorization(svrt_status_server *server) {

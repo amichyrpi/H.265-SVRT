@@ -56,17 +56,33 @@ static void set_state(svrt_steam_link_pairing *pairing,
     pthread_mutex_unlock(&pairing->lock);
 }
 
+static FILE *open_private_temp(const char *temporary) {
+    int fd = open(temporary, O_WRONLY | O_CREAT | O_TRUNC | O_CLOEXEC,
+                  S_IRUSR | S_IWUSR);
+    if (fd < 0) return NULL;
+    if (fchmod(fd, S_IRUSR | S_IWUSR)) {
+        close(fd);
+        unlink(temporary);
+        return NULL;
+    }
+    FILE *file = fdopen(fd, "w");
+    if (!file) {
+        close(fd);
+        unlink(temporary);
+    }
+    return file;
+}
+
 static int save_identity(uint64_t id, const uint8_t key[32]) {
     char temporary[256];
     snprintf(temporary, sizeof(temporary), "%s.tmp", IDENTITY_PATH);
-    FILE *file = fopen(temporary, "w");
+    FILE *file = open_private_temp(temporary);
     if (!file) return -1;
     int ok = fprintf(file, "%016llx\n", (unsigned long long)id) > 0;
     for (unsigned i = 0; ok && i < 32; ++i) ok = fprintf(file, "%02x", key[i]) == 2;
     ok = ok && fputc('\n', file) != EOF && fflush(file) == 0 && fsync(fileno(file)) == 0;
     if (fclose(file)) ok = 0;
     if (!ok || rename(temporary, IDENTITY_PATH)) { unlink(temporary); return -1; }
-    chmod(IDENTITY_PATH, S_IRUSR | S_IWUSR);
     return 0;
 }
 
@@ -108,7 +124,7 @@ static int load_paired_host(char hostname[64]) {
 static int save_paired_host(const pairing_worker *worker) {
     char temporary[256];
     snprintf(temporary, sizeof(temporary), "%s.tmp", PAIRED_PATH);
-    FILE *file = fopen(temporary, "w");
+    FILE *file = open_private_temp(temporary);
     if (!file) return -1;
     char *address = IHS_IPAddressToString(&worker->host.address.ip);
     int ok = fprintf(file, "%s\n%llu\n%llu\n%s\n%llu\n",
@@ -121,7 +137,6 @@ static int save_paired_host(const pairing_worker *worker) {
     ok = ok && fflush(file) == 0 && fsync(fileno(file)) == 0;
     if (fclose(file)) ok = 0;
     if (!ok || rename(temporary, PAIRED_PATH)) { unlink(temporary); return -1; }
-    chmod(PAIRED_PATH, S_IRUSR | S_IWUSR);
     return 0;
 }
 
@@ -181,10 +196,22 @@ static void *pairing_thread(void *opaque) {
     pthread_mutex_lock(&pairing->lock);
     pairing->device_id = device_id;
     pthread_mutex_unlock(&pairing->lock);
-    uint16_t pin_value = 0;
-    if (random_bytes(&pin_value, sizeof(pin_value))) pin_value = (uint16_t)getpid();
+    char generated_pin[5] = {0};
+    for (;;) {
+        uint16_t pin_value = 0;
+        if (random_bytes(&pin_value, sizeof(pin_value))) {
+            set_state(pairing, SVRT_STEAM_LINK_FAILED, NULL,
+                      "Cannot generate pairing PIN");
+            return NULL;
+        }
+        if (pin_value < 60000u) {
+            snprintf(generated_pin, sizeof(generated_pin), "%04u",
+                     (unsigned)(pin_value % 10000u));
+            break;
+        }
+    }
     pthread_mutex_lock(&pairing->lock);
-    snprintf(pairing->pin, sizeof(pairing->pin), "%04u", pin_value % 10000u);
+    memcpy(pairing->pin, generated_pin, sizeof(pairing->pin));
     const char *log_pin = getenv("SVRT_LOG_STEAM_LINK_PIN");
     if (log_pin && log_pin[0] && strcmp(log_pin, "0"))
         fprintf(stderr, "SVRT Steam Link test PIN: %s\n", pairing->pin);
@@ -293,6 +320,24 @@ int svrt_steam_link_pairing_is_paired(svrt_steam_link_pairing *pairing) {
 }
 
 void svrt_steam_link_pairing_forget_host(void) { unlink(PAIRED_PATH); }
+
+int svrt_steam_link_pairing_host_address(char *address, size_t size) {
+    if (!address || size < 2) return 0;
+    FILE *file = fopen(PAIRED_PATH, "r");
+    if (!file) return 0;
+    char hostname[64] = {0}, client[64] = {0}, instance[64] = {0},
+         stored[64] = {0};
+    int ok = fgets(hostname, sizeof(hostname), file) &&
+             fgets(client, sizeof(client), file) &&
+             fgets(instance, sizeof(instance), file) &&
+             fgets(stored, sizeof(stored), file);
+    fclose(file);
+    if (!ok) return 0;
+    stored[strcspn(stored, "\r\n")] = 0;
+    if (!stored[0]) return 0;
+    snprintf(address, size, "%s", stored);
+    return 1;
+}
 
 void svrt_steam_link_pairing_stop(svrt_steam_link_pairing *pairing) {
     if (!pairing) return;
