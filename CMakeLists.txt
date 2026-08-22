@@ -28,6 +28,33 @@ endif()
 if(SVRT_BUILD_UTILITY AND WIN32)
   add_subdirectory(utility)
 endif()
+if(SVRT_BUILD_RECEIVER AND UNIX)
+  include(FetchContent)
+  set(IHSLIB_SAMPLES OFF CACHE BOOL "" FORCE)
+  set(IHSLIB_CODEGEN OFF CACHE BOOL "" FORCE)
+  set(_svrt_build_shared_libs ${BUILD_SHARED_LIBS})
+  set(BUILD_SHARED_LIBS ON)
+  FetchContent_Declare(ihslib
+    GIT_REPOSITORY https://github.com/mariotaku/ihslib.git
+    GIT_TAG 560908104b1f884792f90d8f98e33ec8c61106f5
+    GIT_SHALLOW TRUE)
+  FetchContent_MakeAvailable(ihslib)
+  set(BUILD_SHARED_LIBS ${_svrt_build_shared_libs})
+  set_target_properties(ihslib ihs-protobuf ihs-platforms PROPERTIES
+    POSITION_INDEPENDENT_CODE ON)
+  # IHSlib commit 5609081 calls sqrt() from its video statistics module
+  # without including math.h. Inject the standard declaration without
+  # carrying a modified LGPL source fork.
+  target_compile_options(ihslib PRIVATE -include math.h)
+  if(TARGET OpenSSL::Crypto)
+    target_link_libraries(ihslib PRIVATE OpenSSL::Crypto)
+  endif()
+  install(FILES "${ihslib_SOURCE_DIR}/LICENSE"
+    DESTINATION "share/licenses/svrt"
+    RENAME "IHSlib-LICENSE")
+  install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/THIRD_PARTY_NOTICES.md"
+    DESTINATION "share/doc/svrt")
+endif()
 if(SVRT_BUILD_RECEIVER)
   add_subdirectory(pi-receiver)
 endif()

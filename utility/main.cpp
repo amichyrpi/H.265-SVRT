@@ -1,7 +1,6 @@
 #include <windows.h>
 
 #include "config.h"
-#include "pairing.h"
 #include "steamvr.h"
 #include "ui.h"
 
@@ -19,8 +18,6 @@ LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM w, LPARAM l) {
       switch (LOWORD(w)) {
         case ID_REFRESH_60: ui_select(window, ID_REFRESH_60, ID_REFRESH_30); break;
         case ID_REFRESH_30: ui_select(window, ID_REFRESH_30, ID_REFRESH_60); break;
-        case ID_PAIR: pairing_pair(window, settings); break;
-        case ID_UNPAIR: pairing_unpair(window, settings); break;
         case ID_SAVE: steamvr_save(window, settings, false); break;
         case ID_START: steamvr_save(window, settings, true); break;
         case ID_VERBOSE: ui_toggle_verbose(window); break;

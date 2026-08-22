@@ -194,8 +194,21 @@ static video_frame *ready_frame(svrt_pipe *pipe, uint64_t now) {
         if (pipe->have_newest && newer(pipe->newest_frame, pipe->next_frame) &&
             now - (expected ? expected->first_packet_us : pipe->next_wait_us) >=
                 FRAME_DEADLINE_US) {
-            if (expected) free_frame(expected);
-            ++pipe->expired_frames; ++pipe->next_frame; pipe->next_wait_us = now;
+            /* Do not spend another full deadline on every frame behind the
+               live edge. At 60/90 Hz that lets the backlog grow faster than
+               it can be expired, fills all FRAME_SLOTS, and makes every new
+               datagram look invalid. Drop the stale run in one operation and
+               resume reassembly at the newest frame. */
+            const uint32_t resume = pipe->newest_frame;
+            uint32_t skipped = resume - pipe->next_frame;
+            if (!skipped) skipped = 1;
+            for (unsigned i = 0; i < FRAME_SLOTS; ++i)
+                if (pipe->frames[i].data &&
+                    newer(resume, pipe->frames[i].frame_id))
+                    free_frame(&pipe->frames[i]);
+            pipe->expired_frames += skipped;
+            pipe->next_frame = resume;
+            pipe->next_wait_us = now;
             pipe->need_keyframe = 1; pipe->discontinuity = 1; continue;
         }
         return NULL;

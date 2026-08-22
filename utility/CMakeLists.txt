@@ -2,7 +2,6 @@ add_executable(svrt-utility WIN32
   main.cpp
   ui.cpp ui.h
   ui_util.cpp ui_util.h
-  pairing.cpp pairing.h
   steamvr.cpp steamvr.h
   network.cpp network.h
   config.cpp config.h

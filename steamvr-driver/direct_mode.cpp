@@ -45,7 +45,6 @@ bool SvrtDirectMode::Start(const std::string &host,uint16_t port,unsigned fps,un
   encoder_failed_=false; accepting_=false;if(!EnsureDeviceLocked()){encoder_failed_=true;return false;}debugf("direct mode ready: receiver=%s:%u fps=%u bitrate=%uM encoder=%s",host_.c_str(),port_,fps_,bitrate_,encoder_.c_str());running_=true;accepting_=true;worker_=std::thread(&SvrtDirectMode::EncoderThread,this);return true;
 }
 void SvrtDirectMode::SetReceiverAvailable(bool available){
-  std::lock_guard<std::mutex> lifecycle(lifecycle_mutex_);
   const bool was_available=receiver_available_.exchange(available);
   if(available&&!was_available)encoder_failed_=false;
   if(!available){
@@ -118,7 +117,7 @@ bool SvrtDirectMode::ConvertSlot(Slot &slot){
   context_->CopyResource(slot.staging.Get(),slot.converted.Get());return true;
 }
 void SvrtDirectMode::SetNetworkStats(uint64_t invalid,uint64_t recovered,uint64_t dropped){
-  std::lock_guard<std::mutex> lifecycle(lifecycle_mutex_);const auto now=std::chrono::steady_clock::now();
+  const auto now=std::chrono::steady_clock::now();
   if(last_network_adjust_.time_since_epoch().count()==0){last_network_adjust_=now;last_invalid_=invalid;last_recovered_=recovered;last_network_dropped_=dropped;return;}
   if(now-last_network_adjust_<std::chrono::seconds(2))return;
   const uint64_t new_invalid=invalid>=last_invalid_?invalid-last_invalid_:invalid,new_recovered=recovered>=last_recovered_?recovered-last_recovered_:recovered,new_dropped=dropped>=last_network_dropped_?dropped-last_network_dropped_:dropped;
@@ -302,14 +301,14 @@ void SvrtDirectMode::PacketizerThread(){
   std::vector<uint8_t> encoded;encoded.reserve(2*1024*1024);uint8_t chunk[65536];
   auto is_keyframe=[](const uint8_t *bytes,size_t size){for(size_t i=0;i+5<size;++i){size_t nal=0;if(bytes[i]==0&&bytes[i+1]==0&&bytes[i+2]==1)nal=i+3;else if(i+4<size&&bytes[i]==0&&bytes[i+1]==0&&bytes[i+2]==0&&bytes[i+3]==1)nal=i+4;if(nal){unsigned type=(bytes[nal]>>1)&0x3f;if(type>=16&&type<=21)return true;}}return false;};
   auto send_frame=[&](const uint8_t *bytes,size_t size){
-    if(!size||size>STEARLIGHT_MAX_FRAME_SIZE||video_socket_==~uintptr_t{0})return false;
-    const uint32_t frame_id=++encoded_frame_;const uint16_t frame_flags=is_keyframe(bytes,size)?STEARLIGHT_FLAG_KEYFRAME:0;auto next_datagram=std::chrono::steady_clock::now();auto pace=[&]{next_datagram+=std::chrono::microseconds(250);while(std::chrono::steady_clock::now()<next_datagram)SwitchToThread();};auto send_redundant=[&](const uint8_t *packet,int length){for(unsigned copy=0;copy<2;++copy){if(send(static_cast<SOCKET>(video_socket_),reinterpret_cast<const char*>(packet),length,0)==SOCKET_ERROR)return false;pace();}return true;};const uint64_t timestamp_us=static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch()).count());
+    const uintptr_t socket_value=video_socket_.load();if(!size||size>STEARLIGHT_MAX_FRAME_SIZE||socket_value==~uintptr_t{0})return false;
+    const SOCKET target_socket=static_cast<SOCKET>(socket_value);const uint32_t frame_id=++encoded_frame_;const uint16_t frame_flags=is_keyframe(bytes,size)?STEARLIGHT_FLAG_KEYFRAME:0;auto next_datagram=std::chrono::steady_clock::now();auto pace=[&]{next_datagram+=std::chrono::microseconds(250);while(std::chrono::steady_clock::now()<next_datagram)YieldProcessor();};auto send_packet=[&](const uint8_t *packet,int length){if(send(target_socket,reinterpret_cast<const char*>(packet),length,0)==SOCKET_ERROR)return false;pace();return true;};const uint64_t timestamp_us=static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch()).count());
     const unsigned shards=static_cast<unsigned>((size+STEARLIGHT_VIDEO_SHARD_SIZE-1)/STEARLIGHT_VIDEO_SHARD_SIZE);uint8_t datagram[STEARLIGHT_DATAGRAM_SIZE];
     for(unsigned group=0,first=0;first<shards;++group,first+=STEARLIGHT_FEC_DATA_SHARDS){
       const unsigned count=std::min<unsigned>(STEARLIGHT_FEC_DATA_SHARDS,shards-first);uint8_t storage[STEARLIGHT_FEC_DATA_SHARDS][STEARLIGHT_VIDEO_SHARD_SIZE]{};const uint8_t *data[STEARLIGHT_FEC_DATA_SHARDS];
-      for(unsigned i=0;i<count;++i){const size_t offset=static_cast<size_t>(first+i)*STEARLIGHT_VIDEO_SHARD_SIZE;const size_t payload=std::min<size_t>(STEARLIGHT_VIDEO_SHARD_SIZE,size-offset);std::memcpy(storage[i],bytes+offset,payload);data[i]=storage[i];stearlight_video_info info{};info.flags=frame_flags;info.session_id=session_id_;info.frame_id=frame_id;info.timestamp_us=timestamp_us;info.frame_size=static_cast<uint32_t>(size);info.fec_group=static_cast<uint16_t>(group);info.shard_id=static_cast<uint8_t>(i);info.data_shards=static_cast<uint8_t>(count);info.parity_shards=STEARLIGHT_FEC_PARITY_SHARDS;info.payload_size=static_cast<uint16_t>(payload);stearlight_video_header header;if(stearlight_video_header_encode(&header,&info))return false;std::memcpy(datagram,&header,sizeof(header));std::memcpy(datagram+sizeof(header),storage[i],payload);if(!send_redundant(datagram,static_cast<int>(sizeof(header)+payload)))return false;}
+      for(unsigned i=0;i<count;++i){const size_t offset=static_cast<size_t>(first+i)*STEARLIGHT_VIDEO_SHARD_SIZE;const size_t payload=std::min<size_t>(STEARLIGHT_VIDEO_SHARD_SIZE,size-offset);std::memcpy(storage[i],bytes+offset,payload);data[i]=storage[i];stearlight_video_info info{};info.flags=frame_flags;info.session_id=session_id_;info.frame_id=frame_id;info.timestamp_us=timestamp_us;info.frame_size=static_cast<uint32_t>(size);info.fec_group=static_cast<uint16_t>(group);info.shard_id=static_cast<uint8_t>(i);info.data_shards=static_cast<uint8_t>(count);info.parity_shards=STEARLIGHT_FEC_PARITY_SHARDS;info.payload_size=static_cast<uint16_t>(payload);stearlight_video_header header;if(stearlight_video_header_encode(&header,&info))return false;std::memcpy(datagram,&header,sizeof(header));std::memcpy(datagram+sizeof(header),storage[i],payload);if(!send_packet(datagram,static_cast<int>(sizeof(header)+payload)))return false;}
       uint8_t parity[2][STEARLIGHT_VIDEO_SHARD_SIZE];stearlight_fec_encode(data,count,STEARLIGHT_VIDEO_SHARD_SIZE,parity[0],parity[1]);
-      for(unsigned p=0;p<2;++p){stearlight_video_info info{};info.flags=frame_flags|STEARLIGHT_FLAG_FEC;info.session_id=session_id_;info.frame_id=frame_id;info.timestamp_us=timestamp_us;info.frame_size=static_cast<uint32_t>(size);info.fec_group=static_cast<uint16_t>(group);info.shard_id=static_cast<uint8_t>(count+p);info.data_shards=static_cast<uint8_t>(count);info.parity_shards=2;info.payload_size=STEARLIGHT_VIDEO_SHARD_SIZE;stearlight_video_header header;if(stearlight_video_header_encode(&header,&info))return false;std::memcpy(datagram,&header,sizeof(header));std::memcpy(datagram+sizeof(header),parity[p],STEARLIGHT_VIDEO_SHARD_SIZE);if(!send_redundant(datagram,sizeof(datagram)))return false;}
+      for(unsigned p=0;p<2;++p){stearlight_video_info info{};info.flags=frame_flags|STEARLIGHT_FLAG_FEC;info.session_id=session_id_;info.frame_id=frame_id;info.timestamp_us=timestamp_us;info.frame_size=static_cast<uint32_t>(size);info.fec_group=static_cast<uint16_t>(group);info.shard_id=static_cast<uint8_t>(count+p);info.data_shards=static_cast<uint8_t>(count);info.parity_shards=2;info.payload_size=STEARLIGHT_VIDEO_SHARD_SIZE;stearlight_video_header header;if(stearlight_video_header_encode(&header,&info))return false;std::memcpy(datagram,&header,sizeof(header));std::memcpy(datagram+sizeof(header),parity[p],STEARLIGHT_VIDEO_SHARD_SIZE);if(!send_packet(datagram,sizeof(datagram)))return false;}
     }
     if(frame_id==1||frame_id%fps_==0)debugf("UDP video frame=%u bytes=%zu data_shards=%u fec=10+2",frame_id,size,shards);return true;
   };
@@ -317,11 +316,16 @@ void SvrtDirectMode::PacketizerThread(){
   if(!encoded.empty()&&!encoder_failed_)send_frame(encoded.data(),encoded.size());
 }
 void SvrtDirectMode::CloseEncoder(){
+  // Revoke network access first. FFmpeg may take up to two seconds to drain
+  // after stdin closes; leaving UDP open during that drain forwarded stale
+  // video after the headset had already been disconnected.
+  const uintptr_t socket_value=video_socket_.exchange(~uintptr_t{0});
+  if(socket_value!=~uintptr_t{0}){const SOCKET socket_fd=static_cast<SOCKET>(socket_value);shutdown(socket_fd,SD_BOTH);closesocket(socket_fd);}
   if(pipe_!=INVALID_HANDLE_VALUE){CloseHandle(pipe_);pipe_=INVALID_HANDLE_VALUE;}
-  if(process_){if(WaitForSingleObject(process_,2000)==WAIT_TIMEOUT)TerminateProcess(process_,0);WaitForSingleObject(process_,500);CloseHandle(process_);process_=nullptr;}
+  if(process_){TerminateProcess(process_,0);WaitForSingleObject(process_,500);CloseHandle(process_);process_=nullptr;}
   if(packetizer_.joinable())packetizer_.join();
   if(output_pipe_!=INVALID_HANDLE_VALUE){CloseHandle(output_pipe_);output_pipe_=INVALID_HANDLE_VALUE;}
-  if(video_socket_!=~uintptr_t{0}){closesocket(static_cast<SOCKET>(video_socket_));video_socket_=~uintptr_t{0};WSACleanup();}
+  if(socket_value!=~uintptr_t{0})WSACleanup();
 }
 void SvrtDirectMode::EncoderThread(){uint64_t transmitted=0;while(running_){std::unique_lock<std::mutex> l(mutex_);ready_.wait(l,[this]{return !running_||disconnect_requested_||std::any_of(slots_.begin(),slots_.end(),[](const Slot&s){return s.pending;});});if(!running_)break;if(disconnect_requested_.exchange(false)||!receiver_available_){for(auto &slot:slots_)slot.pending=false;next_capture_={};l.unlock();CloseEncoder();l.lock();slots_.clear();encoder_failed_=false;continue;}auto it=std::max_element(slots_.begin(),slots_.end(),[](const Slot&a,const Slot&b){return (!a.pending?0:a.sequence)<(!b.pending?0:b.sequence);});if(it==slots_.end()||!it->pending)continue;Slot *slot=&*it;for(auto &queued:slots_)if(&queued!=slot&&queued.pending&&queued.sequence<slot->sequence)queued.pending=false;unsigned w=width_,h=height_;uint64_t frame=slot->sequence;l.unlock();D3D11_MAPPED_SUBRESOURCE map{};bool ok=false;bool gpu_busy=false;const auto started=std::chrono::steady_clock::now();
   // The immediate context must be serialized, but the CPU copy itself does

@@ -5,7 +5,8 @@ include(GNUInstallDirs)
 add_executable(svrt-receiver
   main.c
   status.c status.h
-  audio.c audio.h)
+  audio.c audio.h
+  steam_link_pairing.c steam_link_pairing.h)
 target_sources(svrt-receiver PRIVATE
   ../gui/pairing.c ../gui/pairing.h
   ../gui/ui.c ../gui/ui.h
@@ -21,7 +22,7 @@ find_package(ALSA REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SVRT_SDL_TTF REQUIRED IMPORTED_TARGET SDL2_ttf)
 pkg_check_modules(SVRT_SDL_IMAGE REQUIRED IMPORTED_TARGET SDL2_image)
-target_link_libraries(svrt-receiver PRIVATE svrt::svrt Threads::Threads ALSA::ALSA PkgConfig::SVRT_SDL_TTF PkgConfig::SVRT_SDL_IMAGE m)
+target_link_libraries(svrt-receiver PRIVATE svrt::svrt Threads::Threads ALSA::ALSA PkgConfig::SVRT_SDL_TTF PkgConfig::SVRT_SDL_IMAGE ihslib m)
 if(SVRT_BUILD_TESTS)
   pkg_check_modules(SVRT_SDL REQUIRED IMPORTED_TARGET sdl2)
   add_executable(svrt-gui-loadtest ../gui/tests/loadtest.c)
@@ -34,6 +35,7 @@ if(SVRT_BUILD_TESTS)
   add_test(NAME svrt-gui-loadtest COMMAND svrt-gui-loadtest)
 endif()
 install(TARGETS svrt-receiver RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS ihslib LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/svrt-receiver.service.in
   ${CMAKE_CURRENT_BINARY_DIR}/svrt-receiver.service

@@ -2,7 +2,6 @@
 #include <stearlight_protocol.h>
 
 #include <arpa/inet.h>
-#include <ctype.h>
 #include <errno.h>
 #include <netinet/in.h>
 #include <poll.h>
@@ -12,43 +11,9 @@
 #include <string.h>
 #include <sys/select.h>
 #include <sys/socket.h>
-#include <fcntl.h>
-#include <limits.h>
 #include <math.h>
 #include <time.h>
 #include <unistd.h>
-
-static const char *pairing_file(void) {
-    const char *path = getenv("SVRT_PAIRING_FILE");
-    return path && path[0] ? path : "/var/lib/svrt-receiver/pairing";
-}
-
-static void refresh_pairing_code_locked(svrt_status_server *server) {
-    time_t now = time(NULL);
-    if (server->paired_client[0] || now - server->pairing_code_started < 30)
-        return;
-    uint32_t random_value = 0;
-    size_t received = 0;
-    int random_fd = open("/dev/urandom", O_RDONLY | O_CLOEXEC);
-    if (random_fd >= 0) {
-        while (received < sizeof(random_value)) {
-            ssize_t count = read(random_fd, (char *)&random_value + received,
-                                 sizeof(random_value) - received);
-            if (count > 0) received += (size_t)count;
-            else if (count < 0 && errno == EINTR) continue;
-            else break;
-        }
-        close(random_fd);
-    }
-    if (received != sizeof(random_value)) {
-        server->pairing_code[0] = '\0';
-        return;
-    }
-    unsigned value = random_value % 10000;
-    snprintf(server->pairing_code, sizeof(server->pairing_code), "%04u", value);
-    server->pairing_code_started = now;
-    server->pairing_failures = 0;
-}
 
 static uint64_t monotonic_us(void) {
     struct timespec now;
@@ -63,9 +28,9 @@ void svrt_status_server_get_pose(svrt_status_server *server, int state,
     memset(pose, 0, sizeof(*pose));
     pose->sequence = atomic_fetch_add(&server->pose_sequence, 1) + 1;
     pose->timestamp_us = monotonic_us();
-    /* Video recovery must not make SteamVR treat the physical HMD as unplugged. */
-    (void)state;
-    pose->connected = 1;
+    /* Video recovery must not make SteamVR treat the physical HMD as
+       unplugged, but an unapproved Steam device must publish no pose. */
+    pose->connected = state != SVRT_RECEIVER_UNAUTHORIZED;
     pose->valid = pose->connected;
     pose->result = pose->valid ? 200 /* TrackingResult_Running_OK */
                                : 101 /* TrackingResult_Calibrating_OutOfRange */;
@@ -130,46 +95,6 @@ void svrt_status_server_get_pose(svrt_status_server *server, int state,
     pose->quaternion[1] = cr * sp * cy + sr * cp * sy;
     pose->quaternion[2] = cr * cp * sy - sr * sp * cy;
     pose->quaternion[3] = cr * cp * cy + sr * sp * sy;
-}
-
-static int save_pairing_locked(const svrt_status_server *server) {
-    char temporary[PATH_MAX];
-    int used = snprintf(temporary, sizeof(temporary), "%s.tmp.XXXXXX",
-                        pairing_file());
-    if (used < 0 || (size_t)used >= sizeof(temporary)) return -1;
-    int fd = mkstemp(temporary);
-    if (fd < 0) return -1;
-    FILE *file = fdopen(fd, "w");
-    if (!file) {
-        close(fd);
-        unlink(temporary);
-        return -1;
-    }
-    int ok = fputs(server->paired_client, file) >= 0 && fputc('\n', file) != EOF;
-    if (ok) ok = fflush(file) == 0;
-    if (ok) ok = fsync(fileno(file)) == 0;
-    if (fclose(file) != 0) ok = 0;
-    if (!ok || rename(temporary, pairing_file()) != 0) {
-        unlink(temporary);
-        return -1;
-    }
-    return 0;
-}
-
-static void load_pairing_locked(svrt_status_server *server) {
-    FILE *file = fopen(pairing_file(), "r");
-    if (!file) return;
-    if (!fgets(server->paired_client, sizeof(server->paired_client), file))
-        server->paired_client[0] = '\0';
-    server->paired_client[strcspn(server->paired_client, "\r\n")] = '\0';
-    fclose(file);
-}
-
-static int valid_client_id(const char *id) {
-    if (!id || !id[0]) return 0;
-    for (; *id; ++id)
-        if (!isalnum((unsigned char)*id) && *id != '-' && *id != '_') return 0;
-    return 1;
 }
 
 static int send_all(int fd, const char *data, size_t size) {
@@ -249,56 +174,19 @@ static void answer_client(svrt_status_server *server, int fd) {
     }
     if (!complete) return;
     unsigned long long nonce = 0, target_pts = 0, client_time = 0;
-    unsigned session = 0, tracking_port = 0;
-    char code[8] = {0}, client[65] = {0};
-    if (!strncmp(request, "SVRT/1 PAIRING", 14)) {
-        char current[5];
-        svrt_status_server_pairing_code(server, current);
-        char response[96];
-        int used = snprintf(response, sizeof(response), "SVRT/1 PAIRING %s\n",
-                            current[0] ? current : "PAIRED");
-        if (used > 0 && (size_t)used < sizeof(response)) send_all(fd, response, (size_t)used);
-        return;
-    }
-    if (sscanf(request, "SVRT/1 PAIR %7s %64s", code, client) == 2) {
-        int accepted = 0;
-        pthread_mutex_lock(&server->pairing_lock);
-        server->pairing_started = time(NULL);
-        refresh_pairing_code_locked(server);
-        if (!server->paired_client[0] && valid_client_id(client) && !strcmp(code, server->pairing_code)) {
-            snprintf(server->paired_client, sizeof(server->paired_client), "%s", client);
-            if (save_pairing_locked(server) == 0) accepted = 1;
-            else server->paired_client[0] = '\0';
-        } else if (!server->paired_client[0] && server->pairing_code[0]) {
-            if (++server->pairing_failures >= 5) {
-                server->pairing_code_started = 0;
-                server->pairing_code[0] = '\0';
-                refresh_pairing_code_locked(server);
-            }
-        }
-        pthread_mutex_unlock(&server->pairing_lock);
-        send_all(fd, accepted ? "SVRT/1 PAIRED\n" : "SVRT/1 PAIR_FAILED\n",
-                 accepted ? 14 : 19);
-        return;
-    }
-    if (sscanf(request, "SVRT/1 UNPAIR %64s", client) == 1) {
-        int accepted = 0;
-        pthread_mutex_lock(&server->pairing_lock);
-        if (client[0] && !strcmp(client, server->paired_client)) {
-            server->paired_client[0] = '\0'; save_pairing_locked(server);
-            server->pairing_code_started = 0; server->pairing_started = 0; refresh_pairing_code_locked(server); accepted = 1;
-        }
-        pthread_mutex_unlock(&server->pairing_lock);
-        send_all(fd, accepted ? "SVRT/1 UNPAIRED\n" : "SVRT/1 UNPAIR_FAILED\n",
-                 accepted ? 16 : 21);
-        return;
-    }
+    unsigned long long auth_device_id = 0;
+    unsigned session = 0, tracking_port = 0, client_authorized = 1;
     if (sscanf(request, "SVRT/1 TRACE %llu %llu", &nonce, &target_pts) == 2) {
         answer_trace(server, fd, nonce, (uint64_t)target_pts);
         return;
     }
-    if (sscanf(request, "SVRT/2 CONNECT %u %u %llu", &session,
-               &tracking_port, &client_time) == 3 && session && tracking_port) {
+    int connect_fields = sscanf(request, "SVRT/3 CONNECT %u %u %llu %llx %u",
+                                &session, &tracking_port, &client_time,
+                                &auth_device_id, &client_authorized);
+    if (connect_fields != 5)
+        connect_fields = sscanf(request, "SVRT/2 CONNECT %u %u %llu", &session,
+                                &tracking_port, &client_time);
+    if ((connect_fields == 3 || connect_fields == 5) && session && tracking_port) {
         struct sockaddr_storage peer; socklen_t peer_size = sizeof(peer);
         const uint64_t received_us = monotonic_us();
         if (!getpeername(fd, (struct sockaddr *)&peer, &peer_size)) {
@@ -307,23 +195,33 @@ static void answer_client(svrt_status_server *server, int fd) {
             else if (peer.ss_family == AF_INET6)
                 ((struct sockaddr_in6 *)&peer)->sin6_port = htons((uint16_t)tracking_port);
             else return;
-            pthread_mutex_lock(&server->tracking_lock);
-            server->tracking_address = peer;
-            server->tracking_address_size = peer_size;
-            server->tracking_session = session;
-            pthread_mutex_unlock(&server->tracking_lock);
-            const uint64_t sent_us = monotonic_us(); char response[256];
+            const uint64_t device_id = atomic_load(&server->steam_device_id);
+            if (connect_fields == 5 && device_id &&
+                auth_device_id == device_id && !client_authorized) {
+                atomic_store(&server->authorization_revoked, 1);
+                atomic_store(&server->state, SVRT_RECEIVER_UNAUTHORIZED);
+            }
+            const int receiver_state = atomic_load(&server->state);
+            if (receiver_state != SVRT_RECEIVER_UNAUTHORIZED) {
+                pthread_mutex_lock(&server->tracking_lock);
+                server->tracking_address = peer;
+                server->tracking_address_size = peer_size;
+                server->tracking_session = session;
+                pthread_mutex_unlock(&server->tracking_lock);
+            }
+            const uint64_t sent_us = monotonic_us(); char response[288];
             int used = snprintf(response, sizeof(response),
-                "SVRT/2 ACCEPT %u %llu %llu %llu %d %llu %llu %llu %llu %llu %llu %llu\n",
+                "SVRT/2 ACCEPT %u %llu %llu %llu %d %llu %llu %llu %llu %llu %llu %llu %016llx\n",
                 session, client_time, (unsigned long long)received_us,
-                (unsigned long long)sent_us, atomic_load(&server->state),
+                (unsigned long long)sent_us, receiver_state,
                 (unsigned long long)atomic_load(&server->decoded),
                 (unsigned long long)atomic_load(&server->presented),
                 (unsigned long long)atomic_load(&server->dropped),
                 (unsigned long long)atomic_load(&server->bytes),
                 (unsigned long long)atomic_load(&server->invalid_packets),
                 (unsigned long long)atomic_load(&server->fec_recovered),
-                (unsigned long long)atomic_load(&server->network_dropped));
+                (unsigned long long)atomic_load(&server->network_dropped),
+                (unsigned long long)device_id);
             if (used > 0 && (size_t)used < sizeof(response)) send_all(fd,response,(size_t)used);
         }
         return;
@@ -380,21 +278,26 @@ static void *tracking_thread(void *opaque) {
     if (socket6 < 0) return NULL;int off=0,one=1;setsockopt(socket6,IPPROTO_IPV6,IPV6_V6ONLY,&off,sizeof(off));setsockopt(socket6,SOL_SOCKET,SO_REUSEADDR,&one,sizeof(one));struct sockaddr_in6 bind_address={.sin6_family=AF_INET6,.sin6_addr=IN6ADDR_ANY_INIT,.sin6_port=htons(9947)};if(bind(socket6,(struct sockaddr*)&bind_address,sizeof(bind_address))){close(socket6);return NULL;}
     while(!atomic_load(&server->stopping)) {
         struct sockaddr_storage target; socklen_t target_size=0; uint32_t session=0;
-        pthread_mutex_lock(&server->tracking_lock);target=server->tracking_address;
-        target_size=server->tracking_address_size;session=server->tracking_session;
-        pthread_mutex_unlock(&server->tracking_lock);
+        const int authorized = atomic_load(&server->state) != SVRT_RECEIVER_UNAUTHORIZED;
+        pthread_mutex_lock(&server->tracking_lock);
+        if (!authorized) {
+            memset(&server->tracking_address,0,sizeof(server->tracking_address));
+            server->tracking_address_size=0;server->tracking_session=0;
+        }
+        target=server->tracking_address;target_size=server->tracking_address_size;
+        session=server->tracking_session;pthread_mutex_unlock(&server->tracking_lock);
         if(session&&target_size){svrt_synthetic_pose pose;svrt_status_server_get_pose(server,atomic_load(&server->state),&pose);
             stearlight_pose_info info={.flags=(uint16_t)((pose.valid?1:0)|(pose.connected?2:0)),.session_id=session,.sequence=(uint32_t)pose.sequence,.timestamp_us=pose.timestamp_us,.result=(uint32_t)pose.result};
             unsigned n=0;for(unsigned i=0;i<3;i++)info.values[n++]=(float)pose.position[i];for(unsigned i=0;i<4;i++)info.values[n++]=(float)pose.quaternion[i];for(unsigned i=0;i<3;i++)info.values[n++]=(float)pose.velocity[i];for(unsigned i=0;i<3;i++)info.values[n++]=(float)pose.angular_velocity[i];
             stearlight_pose_packet packet;
             if(!stearlight_pose_encode(&packet,&info)&&sendto(socket6,&packet,sizeof(packet),0,(struct sockaddr *)&target,target_size)<0){static int reported;if(!reported++){fprintf(stderr,"SVRT tracking: UDP send failed: %s family=%d\n",strerror(errno),target.ss_family);}}
         }
-        struct pollfd wait={.fd=socket6,.events=POLLIN};if(poll(&wait,1,4)>0){char hello[64]={0};struct sockaddr_storage peer;socklen_t peer_size=sizeof(peer);ssize_t size=recvfrom(socket6,hello,sizeof(hello)-1,0,(struct sockaddr*)&peer,&peer_size);unsigned hello_session=0;if(size>0&&sscanf(hello,"STEARLIGHT_TRACK %u",&hello_session)==1&&hello_session){pthread_mutex_lock(&server->tracking_lock);server->tracking_address=peer;server->tracking_address_size=peer_size;server->tracking_session=hello_session;pthread_mutex_unlock(&server->tracking_lock);}}
+        struct pollfd wait={.fd=socket6,.events=POLLIN};if(poll(&wait,1,4)>0){char hello[64]={0};struct sockaddr_storage peer;socklen_t peer_size=sizeof(peer);ssize_t size=recvfrom(socket6,hello,sizeof(hello)-1,0,(struct sockaddr*)&peer,&peer_size);unsigned hello_session=0;if(authorized&&size>0&&sscanf(hello,"STEARLIGHT_TRACK %u",&hello_session)==1&&hello_session){pthread_mutex_lock(&server->tracking_lock);server->tracking_address=peer;server->tracking_address_size=peer_size;server->tracking_session=hello_session;pthread_mutex_unlock(&server->tracking_lock);}}
     }
     close(socket6);return NULL;
 }
 
-static void *discovery_thread(void *opaque){svrt_status_server *server=opaque;int fd=socket(AF_INET,SOCK_DGRAM,0);if(fd<0)return NULL;int one=1;setsockopt(fd,SOL_SOCKET,SO_REUSEADDR,&one,sizeof(one));setsockopt(fd,SOL_SOCKET,SO_BROADCAST,&one,sizeof(one));struct sockaddr_in address={.sin_family=AF_INET,.sin_addr.s_addr=INADDR_ANY,.sin_port=htons(9757)};if(bind(fd,(struct sockaddr*)&address,sizeof(address))){close(fd);return NULL;}while(!atomic_load(&server->stopping)){struct pollfd wait={.fd=fd,.events=POLLIN};if(poll(&wait,1,250)<=0)continue;char request[64];struct sockaddr_storage peer;socklen_t peer_size=sizeof(peer);ssize_t size=recvfrom(fd,request,sizeof(request),0,(struct sockaddr*)&peer,&peer_size);if(size==20&&!memcmp(request,"STEARLIGHT_DISCOVERY",20)){const char response[]="STEARLIGHT/2 9945 9944 9946 9947";sendto(fd,response,sizeof(response)-1,0,(struct sockaddr*)&peer,peer_size);}}close(fd);return NULL;}
+static void *discovery_thread(void *opaque){svrt_status_server *server=opaque;int fd=socket(AF_INET,SOCK_DGRAM,0);if(fd<0)return NULL;int one=1;setsockopt(fd,SOL_SOCKET,SO_REUSEADDR,&one,sizeof(one));setsockopt(fd,SOL_SOCKET,SO_BROADCAST,&one,sizeof(one));struct sockaddr_in address={.sin_family=AF_INET,.sin_addr.s_addr=INADDR_ANY,.sin_port=htons(9757)};if(bind(fd,(struct sockaddr*)&address,sizeof(address))){close(fd);return NULL;}while(!atomic_load(&server->stopping)){struct pollfd wait={.fd=fd,.events=POLLIN};if(poll(&wait,1,250)<=0)continue;char request[64];struct sockaddr_storage peer;socklen_t peer_size=sizeof(peer);ssize_t size=recvfrom(fd,request,sizeof(request),0,(struct sockaddr*)&peer,&peer_size);if(atomic_load(&server->state)!=SVRT_RECEIVER_UNAUTHORIZED&&size==20&&!memcmp(request,"STEARLIGHT_DISCOVERY",20)){const char response[]="STEARLIGHT/2 9945 9944 9946 9947";sendto(fd,response,sizeof(response)-1,0,(struct sockaddr*)&peer,peer_size);}}close(fd);return NULL;}
 
 static void *status_thread(void *opaque) {
     svrt_status_server *server = opaque;
@@ -451,22 +354,16 @@ int svrt_status_server_start(svrt_status_server *server, uint16_t port) {
     if (!server) return -1;
     memset(server, 0, sizeof(*server));
     server->port = port ? port : 9945;
-    pthread_mutex_init(&server->pairing_lock, NULL);
     pthread_mutex_init(&server->clients_lock, NULL);
     pthread_mutex_init(&server->tracking_lock, NULL);
     pthread_cond_init(&server->clients_done, NULL);
-    pthread_mutex_lock(&server->pairing_lock);
-    load_pairing_locked(server);
-    refresh_pairing_code_locked(server);
-    pthread_mutex_unlock(&server->pairing_lock);
-    atomic_store(&server->state, SVRT_RECEIVER_STARTING);
+    atomic_store(&server->state, SVRT_RECEIVER_UNAUTHORIZED);
     pthread_t *thread = malloc(sizeof(*thread));
     if (!thread || pthread_create(thread, NULL, status_thread, server)) {
         free(thread);
         pthread_cond_destroy(&server->clients_done);
         pthread_mutex_destroy(&server->clients_lock);
         pthread_mutex_destroy(&server->tracking_lock);
-        pthread_mutex_destroy(&server->pairing_lock);
         return -1;
     }
     server->thread = thread;
@@ -489,6 +386,9 @@ void svrt_status_server_update(svrt_status_server *server, int state,
         atomic_store(&server->fec_recovered,stats->fec_recovered_shards);
         atomic_store(&server->network_dropped,stats->network_dropped_frames);
     }
+    if (atomic_load(&server->authorization_revoked) &&
+        state != SVRT_RECEIVER_UNAUTHORIZED)
+        state = SVRT_RECEIVER_UNAUTHORIZED;
     atomic_store(&server->state, state);
 }
 
@@ -513,33 +413,6 @@ void svrt_status_server_reset_trace(svrt_status_server *server) {
     atomic_store(&server->processed_time_us, 0);
 }
 
-void svrt_status_server_pairing_code(svrt_status_server *server, char out[5]) {
-    if (!out) return;
-    out[0] = '\0';
-    if (!server) return;
-    pthread_mutex_lock(&server->pairing_lock);
-    refresh_pairing_code_locked(server);
-    if (!server->paired_client[0]) memcpy(out, server->pairing_code, sizeof(server->pairing_code));
-    pthread_mutex_unlock(&server->pairing_lock);
-}
-
-int svrt_status_server_is_paired(svrt_status_server *server) {
-    if (!server) return 0;
-    pthread_mutex_lock(&server->pairing_lock);
-    int paired = server->paired_client[0] != '\0';
-    pthread_mutex_unlock(&server->pairing_lock);
-    return paired;
-}
-
-int svrt_status_server_pairing_in_progress(svrt_status_server *server) {
-    if (!server) return 0;
-    const time_t now = time(NULL);
-    pthread_mutex_lock(&server->pairing_lock);
-    const int pairing = server->pairing_started && now - server->pairing_started < 2;
-    pthread_mutex_unlock(&server->pairing_lock);
-    return pairing;
-}
-
 void svrt_status_server_stop(svrt_status_server *server) {
     if (!server || !server->thread) return;
     atomic_store(&server->stopping, 1);
@@ -556,5 +429,18 @@ void svrt_status_server_stop(svrt_status_server *server) {
     pthread_cond_destroy(&server->clients_done);
     pthread_mutex_destroy(&server->clients_lock);
     pthread_mutex_destroy(&server->tracking_lock);
-    pthread_mutex_destroy(&server->pairing_lock);
+}
+
+void svrt_status_server_set_steam_device_id(svrt_status_server *server,
+                                            uint64_t device_id) {
+    if (server) atomic_store(&server->steam_device_id, device_id);
+}
+
+void svrt_status_server_reset_authorization(svrt_status_server *server) {
+    if (!server) return;
+    atomic_store(&server->authorization_revoked, 0);
+}
+
+int svrt_status_server_authorization_revoked(svrt_status_server *server) {
+    return server && atomic_load(&server->authorization_revoked);
 }

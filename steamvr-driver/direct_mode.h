@@ -87,7 +87,7 @@ class SvrtDirectMode final : public vr::IVRDriverDirectModeComponent {
   DXGI_FORMAT logged_virtual_format_=DXGI_FORMAT_UNKNOWN;
   std::string host_,ffmpeg_,encoder_,pixel_format_="bgra"; uint16_t port_=9944;
   HANDLE pipe_=INVALID_HANDLE_VALUE,output_pipe_=INVALID_HANDLE_VALUE,process_=nullptr;
-  uintptr_t video_socket_=~uintptr_t{0};
+  std::atomic<uintptr_t> video_socket_{~uintptr_t{0}};
   std::thread packetizer_;
   uint32_t session_id_=0;
   std::atomic<uint32_t> encoded_frame_{0};

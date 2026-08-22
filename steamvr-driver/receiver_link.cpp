@@ -8,12 +8,82 @@
 #include <atomic>
 #include <chrono>
 #include <cstdio>
+#include <fstream>
+#include <iterator>
 #include <string>
 #include <windows.h>
 #include <random>
 
 namespace {
 using Clock = std::chrono::steady_clock;
+
+enum class SteamAuthorization { Unknown, Authorized, Revoked };
+
+uint64_t reverse_bytes(uint64_t value) {
+  uint64_t result = 0;
+  for (unsigned i = 0; i < 8; ++i) {
+    result = (result << 8) | (value & 0xffu);
+    value >>= 8;
+  }
+  return result;
+}
+
+SteamAuthorization steam_authorization(uint64_t device_id) {
+  if (!device_id) return SteamAuthorization::Unknown;
+  char steam_path[MAX_PATH * 4]{};
+  DWORD bytes = sizeof(steam_path);
+  if (RegGetValueA(HKEY_CURRENT_USER, "Software\\Valve\\Steam", "SteamPath",
+                   RRF_RT_REG_SZ, nullptr, steam_path, &bytes) != ERROR_SUCCESS)
+    return SteamAuthorization::Unknown;
+  for (char *p = steam_path; *p; ++p) if (*p == '/') *p = '\\';
+  char pattern[MAX_PATH * 4]{};
+  std::snprintf(pattern, sizeof(pattern), "%s\\userdata\\*", steam_path);
+  WIN32_FIND_DATAA entry{};
+  HANDLE find = FindFirstFileA(pattern, &entry);
+  if (find == INVALID_HANDLE_VALUE) return SteamAuthorization::Unknown;
+  char raw_id[32]{}, wire_id[32]{};
+  std::snprintf(raw_id, sizeof(raw_id), "\"%016llx\"",
+                static_cast<unsigned long long>(device_id));
+  std::snprintf(wire_id, sizeof(wire_id), "\"%016llx\"",
+                static_cast<unsigned long long>(reverse_bytes(device_id)));
+  DWORD active_user = 0, active_user_size = sizeof(active_user);
+  if (RegGetValueA(HKEY_CURRENT_USER, "Software\\Valve\\Steam", "ActiveUser",
+                   RRF_RT_REG_DWORD, nullptr, &active_user,
+                   &active_user_size) == ERROR_SUCCESS && active_user) {
+    char path[MAX_PATH * 4]{};
+    std::snprintf(path, sizeof(path), "%s\\userdata\\%lu\\config\\localconfig.vdf",
+                  steam_path, static_cast<unsigned long>(active_user));
+    std::ifstream file(path, std::ios::binary);
+    if (!file) return SteamAuthorization::Unknown;
+    std::string contents((std::istreambuf_iterator<char>(file)),
+                         std::istreambuf_iterator<char>());
+    return contents.find(raw_id) != std::string::npos ||
+                   contents.find(wire_id) != std::string::npos
+               ? SteamAuthorization::Authorized
+               : SteamAuthorization::Revoked;
+  }
+  bool read_config = false, found = false;
+  do {
+    if (!(entry.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) ||
+        entry.cFileName[0] == '.') continue;
+    char path[MAX_PATH * 4]{};
+    std::snprintf(path, sizeof(path), "%s\\userdata\\%s\\config\\localconfig.vdf",
+                  steam_path, entry.cFileName);
+    std::ifstream file(path, std::ios::binary);
+    if (!file) continue;
+    std::string contents((std::istreambuf_iterator<char>(file)),
+                         std::istreambuf_iterator<char>());
+    read_config = true;
+    if (contents.find(raw_id) != std::string::npos ||
+        contents.find(wire_id) != std::string::npos) {
+      found = true;
+      break;
+    }
+  } while (FindNextFileA(find, &entry));
+  FindClose(find);
+  if (found) return SteamAuthorization::Authorized;
+  return read_config ? SteamAuthorization::Revoked : SteamAuthorization::Unknown;
+}
 
 bool connect_with_timeout(SOCKET socket, const sockaddr *address, int size) {
   u_long nonblocking = 1;
@@ -161,7 +231,10 @@ bool SvrtReceiverLink::Start(std::string host, uint16_t port, unsigned poll_ms,
   // This request carries the tracking pose as well as receiver statistics.
   // A health-style one second cadence makes SteamVR hold each pose for a
   // second and then jump to the next one.  Permit a tracking-rate cadence.
-  poll_ms_ = std::max(1000u, poll_ms);
+  /* Authorization is part of this control reply. Poll it frequently enough
+     that a revoked or restarting headset cannot receive a visible burst of
+     frames before the driver observes UNAUTHORIZED. */
+  poll_ms_ = std::clamp(poll_ms, 100u, 1000u);
   // A pose arrives in the status reply, so it cannot be fresher than the
   // health-poll cadence. Keep it valid across ordinary scheduling jitter and
   // one delayed poll; disconnect handling still uses consecutive failures.
@@ -171,6 +244,9 @@ bool SvrtReceiverLink::Start(std::string host, uint16_t port, unsigned poll_ms,
   pose_freshness_ms_ = 3000;
   latency_warning_ms_ = std::max(1u, latency_warning_ms);
   state_ = static_cast<int>(SvrtLinkState::Starting);
+  steam_device_id_ = 0;
+  steam_authorized_ = true;
+  last_steam_auth_check_ms_ = 0;
   std::random_device random;session_id_=static_cast<uint32_t>(random())^static_cast<uint32_t>(GetTickCount64());if(!session_id_)session_id_=1;
   running_ = true;
   tracking_thread_ = std::thread(&SvrtReceiverLink::TrackingRun, this);
@@ -352,8 +428,17 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
 
   const uint16_t tracking_port=tracking_port_.load();if(!tracking_port){closesocket(socket);return false;}
   const uint64_t t1=static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::microseconds>(Clock::now().time_since_epoch()).count());
-  char request[128];
-  int request_size = std::snprintf(request, sizeof(request), "SVRT/2 CONNECT %u %u %llu\n",session_id_,tracking_port,static_cast<unsigned long long>(t1));
+  char request[160];
+  const uint64_t known_device_id = steam_device_id_.load();
+  int request_size = known_device_id
+      ? std::snprintf(request, sizeof(request), "SVRT/3 CONNECT %u %u %llu %016llx %u\n",
+                      session_id_, tracking_port,
+                      static_cast<unsigned long long>(t1),
+                      static_cast<unsigned long long>(known_device_id),
+                      steam_authorized_.load() ? 1u : 0u)
+      : std::snprintf(request, sizeof(request), "SVRT/2 CONNECT %u %u %llu\n",
+                      session_id_, tracking_port,
+                      static_cast<unsigned long long>(t1));
   bool ok = send_all(socket, request, static_cast<size_t>(request_size));
   char response[768]{};
   const bool received = ok && receive_line(socket, response, sizeof(response));
@@ -361,15 +446,27 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
   if (!received) return false;
 
   unsigned long long decoded = 0, presented = 0, dropped = 0,
-                     bytes = 0, invalid=0,recovered=0,network_dropped=0,reply_t1=0,t2=0,t3=0;
+                     bytes = 0, invalid=0,recovered=0,network_dropped=0,reply_t1=0,t2=0,t3=0,
+                     reply_device_id=0;
   unsigned reply_session=0;
   int receiver_state = 0;
   const int fields = std::sscanf(
       response,
-      "SVRT/2 ACCEPT %u %llu %llu %llu %d %llu %llu %llu %llu %llu %llu %llu",
-      &reply_session,&reply_t1,&t2,&t3,&receiver_state,&decoded,&presented,&dropped,&bytes,&invalid,&recovered,&network_dropped);
-  if(fields!=12||reply_session!=session_id_||reply_t1!=t1)
+      "SVRT/2 ACCEPT %u %llu %llu %llu %d %llu %llu %llu %llu %llu %llu %llu %llx",
+      &reply_session,&reply_t1,&t2,&t3,&receiver_state,&decoded,&presented,&dropped,&bytes,&invalid,&recovered,&network_dropped,&reply_device_id);
+  if((fields!=12&&fields!=13)||reply_session!=session_id_||reply_t1!=t1)
     return false;
+  if (fields == 13 && reply_device_id) steam_device_id_ = reply_device_id;
+  const uint64_t now_ms = static_cast<uint64_t>(
+      std::chrono::duration_cast<std::chrono::milliseconds>(
+          Clock::now().time_since_epoch()).count());
+  if (steam_device_id_.load() &&
+      (!last_steam_auth_check_ms_ || now_ms - last_steam_auth_check_ms_ >= 500)) {
+    last_steam_auth_check_ms_ = now_ms;
+    const SteamAuthorization auth = steam_authorization(steam_device_id_.load());
+    if (auth == SteamAuthorization::Authorized) steam_authorized_ = true;
+    else if (auth == SteamAuthorization::Revoked) steam_authorized_ = false;
+  }
   const uint64_t t4=static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::microseconds>(Clock::now().time_since_epoch()).count());
   clock_offset_us_=static_cast<int64_t>((static_cast<int64_t>(t2)-static_cast<int64_t>(t1)+static_cast<int64_t>(t3)-static_cast<int64_t>(t4))/2);
   status.latency_ms = static_cast<unsigned>(
@@ -380,7 +477,9 @@ bool SvrtReceiverLink::Poll(uint64_t nonce, SvrtLinkStatus &status) {
   status.dropped = dropped;
   status.bytes = bytes;
   status.invalid_packets=invalid;status.fec_recovered=recovered;status.network_dropped=network_dropped;
-  if (receiver_state == 3)
+  if (!steam_authorized_.load() || receiver_state == 4)
+    status.state = SvrtLinkState::Searching;
+  else if (receiver_state == 3)
     status.state = SvrtLinkState::ReceiverError;
   else if (receiver_state == 0)
     status.state = SvrtLinkState::Starting;

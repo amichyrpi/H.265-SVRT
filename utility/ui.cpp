@@ -13,10 +13,6 @@ HWND button(HWND parent, const wchar_t *label, int id, int x, int y, int width, 
 void ui_create_controls(HWND window, HINSTANCE instance) {
   button(window, L"60 Hz", ID_REFRESH_60, 260, 86, 137, 37);
   button(window, L"30 Hz", ID_REFRESH_30, 407, 86, 137, 37);
-  CreateWindowW(L"EDIT", L"", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_CENTER | ES_NUMBER,
-                15, 243, 168, 30, window, reinterpret_cast<HMENU>(ID_CODE), instance, nullptr);
-  button(window, L"Pair", ID_PAIR, 192, 243, 170, 30);
-  button(window, L"Unpair", ID_UNPAIR, 371, 243, 173, 30);
   button(window, L"Verbose measurements", ID_VERBOSE, 15, 490, 255, 32);
   button(window, L"Save changes", ID_SAVE, 15, 548, 262, 38);
   button(window, L"Start SteamVR", ID_START, 282, 548, 262, 38);
@@ -32,8 +28,8 @@ void ui_paint(HWND window, HDC dc, const UtilityFonts &fonts) {
   ui_text(dc, L"Resolution", {15, 144, 240, 174}, RGB(232, 232, 236), fonts.text);
   ui_text(dc, L"1440 x 1600 per eye", {260, 144, 544, 174}, RGB(232, 232, 236), fonts.text, DT_CENTER);
   ui_rule(dc, 184);
-  ui_text(dc, L"PAIR HEADSET", {15, 199, 300, 224}, RGB(232, 232, 236), fonts.title);
-  ui_text(dc, L"Enter the four-digit code shown in the headset.", {15, 220, 500, 241}, RGB(190, 190, 196), fonts.small);
+  ui_text(dc, L"STEAM LINK PAIRING", {15, 199, 360, 224}, RGB(232, 232, 236), fonts.title);
+  ui_text(dc, L"The headset discovers the closest Steam PC automatically. Enter its PIN in Steam's Remote Play authorization window.", {15, 220, 555, 270}, RGB(190, 190, 196), fonts.small);
   ui_rule(dc, 288);
   ui_text(dc, L"SESSION", {15, 304, 285, 328}, RGB(232, 232, 236), fonts.title);
   ui_text(dc, L"Usage time:\nnot yet recorded", {15, 340, 270, 382}, RGB(232, 232, 236), fonts.text);
@@ -48,8 +44,8 @@ void ui_paint(HWND window, HDC dc, const UtilityFonts &fonts) {
 void ui_draw_button(const DRAWITEMSTRUCT *item, const UtilityFonts &fonts) {
   const bool selected = ui_is_selected(item->CtlID);
   const bool pressed = (item->itemState & ODS_SELECTED) != 0;
-  const bool destructive = item->CtlID == ID_UNPAIR;
-  const bool primary = item->CtlID == ID_SAVE || item->CtlID == ID_START || item->CtlID == ID_PAIR;
+  const bool destructive = false;
+  const bool primary = item->CtlID == ID_SAVE || item->CtlID == ID_START;
   COLORREF fill = selected ? RGB(0, 0, 255) : RGB(54, 54, 58);
   if (primary) fill = pressed ? RGB(0, 0, 200) : RGB(66, 66, 71);
   if (destructive) fill = pressed ? RGB(0, 0, 200) : RGB(92, 38, 54);

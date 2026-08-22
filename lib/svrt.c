@@ -177,7 +177,35 @@ static void *present_worker(void *opaque){
     }
     return NULL;
 }
-static int decode(svrt_context *c,AVRational time_base,uint64_t packet_pts_us,int flush){int rc=avcodec_send_packet(c->decoder,flush?NULL:c->packet);if(rc<0&&rc!=AVERROR(EAGAIN)){set_error(c,"avcodec_send_packet failed: %d",rc);return -1;}while((rc=avcodec_receive_frame(c->decoder,c->frame))>=0){uint64_t decoded=atomic_fetch_add(&c->stats.decoded_frames,1)+1;int64_t pts_id=frame_id(c->frame,time_base,packet_pts_us);int shown;if(c->frame->format!=AV_PIX_FMT_DRM_PRIME&&(c->cfg.require_hardware||c->cfg.require_zero_copy))shown=-1;else if(c->cfg.headless)shown=0;else if(c->frame->format==AV_PIX_FMT_DRM_PRIME&&c->drm)shown=svrt_drm_present(c->drm,c->frame,c->error,sizeof(c->error));else if(!c->cfg.require_hardware&&!c->cfg.require_zero_copy&&c->renderer)shown=software_present(c,c->frame);else shown=-1;if(shown<0&&!c->error[0])set_error(c,"decoder returned %s instead of DRM PRIME",av_get_pix_fmt_name(c->frame->format));if(shown)atomic_fetch_add(&c->stats.dropped_frames,1);else atomic_fetch_add(&c->stats.presented_frames,1);uint64_t now=monotonic_us();if(decoded==1){c->first_frame_us=c->last_report_us=now;c->last_report_frame=decoded;}if(decoded==1||decoded%60==0){double fps=0.0,average=0.0;if(now>c->last_report_us)fps=(double)(decoded-c->last_report_frame)*1000000.0/(double)(now-c->last_report_us);if(now>c->first_frame_us)average=(double)(decoded-1)*1000000.0/(double)(now-c->first_frame_us);fprintf(stderr,"SVRT: frame_id=%llu pts_id=%lld format=%s queued=%llu dropped=%llu decode_fps=%.2f average_fps=%.2f\n",(unsigned long long)decoded,(long long)pts_id,av_get_pix_fmt_name(c->frame->format),(unsigned long long)atomic_load(&c->stats.presented_frames),(unsigned long long)atomic_load(&c->stats.dropped_frames),fps,average);c->last_report_us=now;c->last_report_frame=decoded;}av_frame_unref(c->frame);if(shown<0)return -1;}return rc==AVERROR(EAGAIN)||rc==AVERROR_EOF?0:-1;}
+static int decode(svrt_context *c,AVRational time_base,uint64_t packet_pts_us,int flush){
+    int rc=avcodec_send_packet(c->decoder,flush?NULL:c->packet);
+    if(rc<0&&rc!=AVERROR(EAGAIN)){set_error(c,"avcodec_send_packet failed: %d",rc);return -1;}
+    while((rc=avcodec_receive_frame(c->decoder,c->frame))>=0){
+        /* Authorization can be revoked while the hardware decoder owns a
+           backlog. Never display those already-decoded frames after stop. */
+        if(atomic_load(&c->stopping)){av_frame_unref(c->frame);return 0;}
+        uint64_t decoded=atomic_fetch_add(&c->stats.decoded_frames,1)+1;
+        int64_t pts_id=frame_id(c->frame,time_base,packet_pts_us);int shown;
+        if(c->frame->format!=AV_PIX_FMT_DRM_PRIME&&(c->cfg.require_hardware||c->cfg.require_zero_copy))shown=-1;
+        else if(c->cfg.headless)shown=0;
+        else if(c->frame->format==AV_PIX_FMT_DRM_PRIME&&c->drm)shown=svrt_drm_present(c->drm,c->frame,c->error,sizeof(c->error));
+        else if(!c->cfg.require_hardware&&!c->cfg.require_zero_copy&&c->renderer)shown=software_present(c,c->frame);
+        else shown=-1;
+        if(shown<0&&!c->error[0])set_error(c,"decoder returned %s instead of DRM PRIME",av_get_pix_fmt_name(c->frame->format));
+        if(shown)atomic_fetch_add(&c->stats.dropped_frames,1);else atomic_fetch_add(&c->stats.presented_frames,1);
+        uint64_t now=monotonic_us();
+        if(decoded==1){c->first_frame_us=c->last_report_us=now;c->last_report_frame=decoded;}
+        if(decoded==1||decoded%60==0){
+            double fps=0.0,average=0.0;
+            if(now>c->last_report_us)fps=(double)(decoded-c->last_report_frame)*1000000.0/(double)(now-c->last_report_us);
+            if(now>c->first_frame_us)average=(double)(decoded-1)*1000000.0/(double)(now-c->first_frame_us);
+            fprintf(stderr,"SVRT: frame_id=%llu pts_id=%lld format=%s queued=%llu dropped=%llu decode_fps=%.2f average_fps=%.2f\n",(unsigned long long)decoded,(long long)pts_id,av_get_pix_fmt_name(c->frame->format),(unsigned long long)atomic_load(&c->stats.presented_frames),(unsigned long long)atomic_load(&c->stats.dropped_frames),fps,average);
+            c->last_report_us=now;c->last_report_frame=decoded;
+        }
+        av_frame_unref(c->frame);if(shown<0)return -1;
+    }
+    return rc==AVERROR(EAGAIN)||rc==AVERROR_EOF?0:-1;
+}
 int svrt_run(svrt_context *c){
     if(!c)return -1;
     svrt_pipe_config pc={.bind_address=c->cfg.bind_address,.port=c->cfg.port,.interrupt=interrupted,.opaque=c};

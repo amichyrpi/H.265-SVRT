@@ -67,6 +67,9 @@ class SvrtReceiverLink {
   std::atomic<uint64_t> invalid_packets_{0},fec_recovered_{0},network_dropped_{0};
   std::atomic<uint16_t> tracking_port_{0};
   std::atomic<int64_t> clock_offset_us_{0};
+  std::atomic<uint64_t> steam_device_id_{0};
+  std::atomic<bool> steam_authorized_{true};
+  uint64_t last_steam_auth_check_ms_ = 0;
   uint32_t session_id_=0;
   mutable std::mutex pose_mutex_;
   SvrtPose pose_;

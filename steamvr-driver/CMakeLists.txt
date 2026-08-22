@@ -24,7 +24,7 @@ add_library(driver_svrt SHARED
   ../common/mdns_discovery.cpp ../common/mdns_discovery.h)
 target_compile_features(driver_svrt PRIVATE cxx_std_17)
 target_include_directories(driver_svrt PRIVATE "${SVRT_OPENVR_INCLUDE}" ../common)
-target_link_libraries(driver_svrt PRIVATE d3d11 dxgi ws2_32 dnsapi iphlpapi ole32 uuid stearlight::protocol)
+target_link_libraries(driver_svrt PRIVATE d3d11 dxgi ws2_32 dnsapi iphlpapi ole32 uuid advapi32 stearlight::protocol)
 target_compile_definitions(driver_svrt PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
 set_target_properties(driver_svrt PROPERTIES
   PREFIX ""
